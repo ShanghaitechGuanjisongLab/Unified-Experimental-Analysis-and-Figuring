@@ -1,9 +1,11 @@
 classdef OirRegisterStream<ParallelComputing.BlockRWStream
 	methods(Access=protected)
 		function NextObject(obj)
-			obj.NextObject@ParallelComputing.BlockRWStream;
 			Index=obj.ObjectsRead+1;
-			fprintf('文件%u/%u：%s\n',Index,obj.NumObjects,obj.RWObjects{Index}(1));
+			if Index<=obj.NumObjects
+				fprintf('文件%u/%u：%s\n',Index,obj.NumObjects,obj.RWObjects{Index}(1));
+				obj.NextObject@ParallelComputing.BlockRWStream;
+			end
 		end
 	end
 	methods

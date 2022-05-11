@@ -52,11 +52,11 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.Writer=OmeBigTiff5D.Create(TiffPath,CreationDisposition.Overwrite,SizeX=Reader.SizeX,SizeY=Reader.SizeY,SizeT=Reader.SizeT,SizeC=NumChannels,SizeZ=Reader.SizeZ,DimensionOrder=DimensionOrder.XYTCZ,PixelType=obj.Metadata.PixelType,ChannelColors=obj.Metadata.ChannelColors(ChannelIndex));
 		end
 		function Data=Read(obj,Start,End)
-% 			Debug=Start<=933&&End>=933;
-			Data={obj.Reader.ReadArray(X=0,Y=0,T=Start:End,C=0,Z=0),obj.TagLogical,obj.FileFixed,obj.Transforms};
+			Debug=false;
+			Data={obj.Reader.ReadArray(X=0,Y=0,T=Start:End,C=0,Z=0),obj.TagLogical,obj.FileFixed,obj.Transforms,Debug};
 		end		
 		function Data=Write(obj,Data,Start,End)
-			obj.Writer.WritePixels5D(Data{1},[],[],Start:End);
+			obj.Writer.WritePixels5D(Data{1},[],[],Start-1:End-1);%OBT5的索引是从0开始的！
 			Data(1)=[];
 		end
 	end

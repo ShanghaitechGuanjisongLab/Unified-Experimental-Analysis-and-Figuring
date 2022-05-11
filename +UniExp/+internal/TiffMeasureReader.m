@@ -12,7 +12,7 @@ classdef TiffMeasureReader<ParallelComputing.IBlockRWer&OBT5.OmeBigTiff5D
 			obj.Metadata=obj.SizeZ;
 		end
 		function Data=Read(obj,Start,End)
-			Data={obj.ReadPixels5D(T=Start:End,C=[],Z=[],Y=[],X=[])};
+			Data={obj.ReadPixels5D(T=Start-1:End-1,C=[],Z=[],Y=[],X=[])};%OBT5索引从0开始
 		end
 	end
 end
