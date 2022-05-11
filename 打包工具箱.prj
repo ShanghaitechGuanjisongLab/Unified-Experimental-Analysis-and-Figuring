@@ -9,9 +9,18 @@
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.png</param.screenshot>
     <param.version>1.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
-    <param.products.name />
-    <param.products.id />
-    <param.products.version />
+    <param.products.name>
+      <item>Image Processing Toolbox</item>
+      <item>Parallel Computing Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>17</item>
+      <item>80</item>
+    </param.products.id>
+    <param.products.version>
+      <item>11.5</item>
+      <item>7.6</item>
+    </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
     <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
@@ -52,7 +61,7 @@ resources/project
     </param.required.addons>
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start>R2021b</param.release.start>
+    <param.release.start>R2022a</param.release.start>
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
@@ -68,9 +77,6 @@ resources/project
     <unset>
       <param.description />
       <param.output />
-      <param.products.name />
-      <param.products.id />
-      <param.products.version />
       <param.platforms />
       <param.exclude.pcodedmfiles />
       <param.examples />
