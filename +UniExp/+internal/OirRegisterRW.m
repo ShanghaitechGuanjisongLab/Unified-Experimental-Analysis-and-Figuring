@@ -33,20 +33,20 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.PieceSize=SizePXYZ*double(Reader.SizeC);
 			obj.NumPieces=Reader.SizeT;
 			NumChannels=numel(ChannelIndex);
-			Sample=mean(Reader.ReadArray(X=0,Y=0,C=ChannelIndex,Z=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),Reader.SizeT)),5,"native");
-			SizeC=min(size(FixedImage,3),size(Sample,3));
-			SizeZ=min(size(FixedImage,4),size(Sample,4));
+			Sample=mean(Reader.ReadArray(X=0,Y=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),Reader.SizeT),C=ChannelIndex,Z=0),3,"native");
+			SizeC=min(size(FixedImage,3),size(Sample,4));
+			SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,SizeZ);
 			RefObj=imref2d(size(Sample,[1 2]));
 			%不可以用CZ，因为尺寸不一定全覆盖
 			for Z=1:SizeZ
 				for C=1:SizeC
-					tforms{C,Z}=imregtform(Sample(:,:,C,Z),FixedImage(:,:,C,Z),'affine',optimizer,metric);
-					Sample(:,:,C,Z)=imwarp(Sample(:,:,C,Z),tforms{C,Z},OutputView=RefObj);
+					tforms{C,Z}=imregtform(Sample(:,:,1,C,Z),FixedImage(:,:,C,Z),'affine',optimizer,metric);
+					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
 				end
 			end
 			Sample(Sample<mean(Sample,[1 2]))=0;
-			obj.FileFixed=Sample;
+			obj.FileFixed=rot90(Sample,2);
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			import OBT5.*
 			obj.Writer=OmeBigTiff5D.Create(TiffPath,CreationDisposition.Overwrite,SizeX=Reader.SizeX,SizeY=Reader.SizeY,SizeT=Reader.SizeT,SizeC=NumChannels,SizeZ=Reader.SizeZ,DimensionOrder=DimensionOrder.XYTCZ,PixelType=obj.Metadata.PixelType,ChannelColors=obj.Metadata.ChannelColors(ChannelIndex));
