@@ -105,7 +105,13 @@ resources/project
       <file>${PROJECT_ROOT}\resources</file>
       <file>${PROJECT_ROOT}\工具箱图像.png</file>
     </fileset.rootfiles>
-    <fileset.depfun.included />
+    <fileset.depfun.included>
+      <file>C:\Users\vhtmf\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\并行计算\+ParallelComputing\@BlockRWStream\BlockRWStream.m</file>
+      <file>C:\Users\vhtmf\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\并行计算\+ParallelComputing\@BlockRWStream\SpmdRun.mlx</file>
+      <file>C:\Users\vhtmf\Documents\MATLAB\并行计算\+ParallelComputing\@BlockRWStream\BlockRWStream.m</file>
+      <file>C:\Users\vhtmf\Documents\MATLAB\并行计算\+ParallelComputing\@BlockRWStream\SpmdRun.mlx</file>
+      <file>C:\Users\vhtmf\Documents\MATLAB\并行计算\+ParallelComputing\IBlockRWer.m</file>
+    </fileset.depfun.included>
     <fileset.depfun.excluded>
       <file>${MATLAB_ROOT}\toolbox\local\userpath.m</file>
     </fileset.depfun.excluded>
