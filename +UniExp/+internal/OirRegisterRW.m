@@ -42,18 +42,21 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			for Z=1:SizeZ
 				for C=1:SizeC
 					tforms{C,Z}=imregtform(Sample(:,:,1,C,Z),FixedImage(:,:,C,Z),'affine',optimizer,metric);
+				end
+			end
+			Sample=gpuArray(Sample);
+			for Z=1:SizeZ
+				for C=1:SizeC
 					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
 				end
 			end
-			Sample(Sample<mean(Sample,[1 2]))=0;
-			obj.FileFixed=rot90(Sample,2);
+			obj.FileFixed=fft2(rot90(Sample,2),Reader.SizeY*2-1,Reader.SizeX*2-1);
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			import OBT5.*
 			obj.Writer=OmeBigTiff5D.Create(TiffPath,CreationDisposition.Overwrite,SizeX=Reader.SizeX,SizeY=Reader.SizeY,SizeT=Reader.SizeT,SizeC=NumChannels,SizeZ=Reader.SizeZ,DimensionOrder=DimensionOrder.XYTCZ,PixelType=obj.Metadata.PixelType,ChannelColors=obj.Metadata.ChannelColors(ChannelIndex));
 		end
 		function Data=Read(obj,Start,End)
-			Debug=false;
-			Data={obj.Reader.ReadArray(X=0,Y=0,T=Start:End,C=0,Z=0),obj.TagLogical,obj.FileFixed,obj.Transforms,Debug};
+			Data={obj.Reader.ReadArray(X=0,Y=0,T=Start:End,C=0,Z=0),obj.TagLogical,obj.FileFixed,obj.Transforms};
 		end		
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels5D(Data{1},[],[],Start-1:End-1);%OBT5的索引是从0开始的！
