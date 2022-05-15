@@ -33,7 +33,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.PieceSize=SizePXYZ*double(Reader.SizeC);
 			obj.NumPieces=Reader.SizeT;
 			NumChannels=numel(ChannelIndex);
-			Sample=mean(Reader.ReadArray(X=0,Y=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),Reader.SizeT),C=ChannelIndex,Z=0),3,"native");
+			Sample=mean(Reader.ReadArray(X=0,Y=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),obj.NumPieces),C=ChannelIndex,Z=0),3,"native");
 			SizeC=min(size(FixedImage,3),size(Sample,4));
 			SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,SizeZ);
