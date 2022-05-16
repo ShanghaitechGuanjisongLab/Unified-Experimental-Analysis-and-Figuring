@@ -10,6 +10,11 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		TagLogical
 		FileFixed
 		Transforms
+		BufferCapacity
+	end
+	properties(Access=private)
+		Buffer
+		BufferConsumed
 	end
 	methods
 		function obj = OirRegisterRW(OirPath,TiffPath,FixedImage,Memory)
@@ -31,10 +36,14 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			ChannelIndex=find(~obj.TagLogical);
 			SizePXYZ=prod([uint32(Reader.SizeP) Reader.SizeX Reader.SizeY Reader.SizeZ]);
 			obj.PieceSize=SizePXYZ*double(Reader.SizeC);
-			obj.NumPieces=Reader.SizeT;
+			obj.NumPieces=Reader.SizeT/100;
 			NumChannels=numel(ChannelIndex);
-			Sample=mean(Reader.ReadArray(X=0,Y=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),obj.NumPieces),C=ChannelIndex,Z=0),3,"native");
-			SizeC=min(size(FixedImage,3),size(Sample,4));
+			obj.Buffer=Reader.ReadArray(X=0,Y=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),obj.NumPieces),C=ChannelIndex,Z=0);
+			obj.BufferCapacity=floor(size(obj.Buffer,3)*numel(ChannelIndex)/double(Reader.SizeC));
+			obj.BufferConsumed=obj.BufferCapacity;
+			Sample=mean(obj.Buffer,3,"native");
+			obj.Buffer=zeros(Reader.SizeX,Reader.SizeY,0,Reader.SizeC,Reader.SizeZ);
+            SizeC=min(size(FixedImage,3),size(Sample,4));
 			SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,SizeZ);
 			RefObj=imref2d(size(Sample,[1 2]));
@@ -50,13 +59,26 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
 				end
 			end
-			obj.FileFixed=fft2(rot90(Sample,2),Reader.SizeY*2-1,Reader.SizeX*2-1);
+			obj.FileFixed=gather(fft2(rot90(Sample,2),Reader.SizeY*2-1,Reader.SizeX*2-1));
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			import OBT5.*
 			obj.Writer=OmeBigTiff5D.Create(TiffPath,CreationDisposition.Overwrite,SizeX=Reader.SizeX,SizeY=Reader.SizeY,SizeT=Reader.SizeT,SizeC=NumChannels,SizeZ=Reader.SizeZ,DimensionOrder=DimensionOrder.XYTCZ,PixelType=obj.Metadata.PixelType,ChannelColors=obj.Metadata.ChannelColors(ChannelIndex));
 		end
 		function Data=Read(obj,Start,End)
-			Data={obj.Reader.ReadArray(X=0,Y=0,T=Start:End,C=0,Z=0),obj.TagLogical,obj.FileFixed,obj.Transforms};
+			OutBuffer=Start-obj.BufferConsumed-1;
+			InBufferEnd=obj.BufferCapacity+OutBuffer;
+			MoreRequest=End-InBufferEnd;
+			if MoreRequest>0
+				New=obj.Reader.ReadArray(X=0,Y=0,T=InBufferEnd+1:min(End+obj.BufferCapacity,obj.NumPieces),C=0,Z=0);
+				Data=cat(3,obj.Buffer(:,:,obj.BufferConsumed+1:obj.BufferCapacity,:,:),New(:,:,1:MoreRequest,:,:));
+				obj.Buffer=New(:,:,MoreRequest+1:end,:,:);
+				obj.BufferConsumed=0;
+			else
+				ReadTo=End-OutBuffer;
+				Data=obj.Buffer(:,:,obj.BufferConsumed+1:ReadTo,:,:);
+				obj.BufferConsumed=ReadTo;
+			end
+			Data={Data,obj.TagLogical,obj.FileFixed,obj.Transforms};
 		end		
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels5D(Data{1},[],[],Start-1:End-1);%OBT5的索引是从0开始的！
