@@ -5,8 +5,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Metadata
 	end
 	properties(SetAccess=immutable,GetAccess=private)
-		Reader OmeBioformats5D.OirReader5D
-		Writer OBT5.OmeBigTiff5D
+		Reader Image5D.OirReader
+		Writer Image5D.OmeTiffRWer
 		TagLogical
 		FileFixed
 		Transforms
@@ -27,16 +27,21 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 				optimizer.InitialRadius = 6.25000e-03;
 				optimizer.MaximumIterations = 100;
 			end
-			Reader=OmeBioformats5D.OirReader5D(OirPath);
+			import Image5D.*
+			Reader=OirReader(OirPath);
 			obj.Reader=Reader;
-			obj.Metadata=UniExp.internal.GetMetadata(Reader);
+			[Devices,Colors]=Reader.DeviceColors;
+			obj.Metadata=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=Reader.SeriesInterval);
 			obj.TagLogical=startsWith(obj.Metadata.DeviceNames,'CD');
 			ChannelIndex=find(~obj.TagLogical);
-			SizePXYZ=prod([uint32(Reader.SizeP) Reader.SizeX Reader.SizeY Reader.SizeZ]);
-			obj.PieceSize=SizePXYZ*double(Reader.SizeC);
+			SizeX=Reader.SizeX;
+			SizeY=Reader.SizeY;
+			SizePXYZ=prod([uint32(2) SizeX SizeY Reader.SizeZ]);
+			SizeC=Reader.SizeC;
+			obj.PieceSize=SizePXYZ*double(SizeC);
 			obj.NumPieces=Reader.SizeT;
-			NumChannels=numel(ChannelIndex);
-			obj.Buffer=Reader.ReadArray(X=0,Y=0,T=1:min(floor(Memory/(SizePXYZ*NumChannels)),Reader.SizeT),C=ChannelIndex,Z=0);
+			obj.Buffer=Reader.ReadPixels(0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
+			obj.Buffer=permute(obj.Buffer(:,:,ChannelIndex,:,:),[1 2 5 3 4]);
 			obj.BufferCapacity=size(obj.Buffer,3);
 			Sample=mean(obj.Buffer,3,"native");
 			SizeC=min(size(FixedImage,3),size(Sample,4));
@@ -55,10 +60,11 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
 				end
 			end
-			obj.FileFixed=fft2(rot90(Sample,2),Reader.SizeY*2-1,Reader.SizeX*2-1);
+			obj.FileFixed=fft2(rot90(Sample,2),SizeY*2-1,SizeX*2-1);
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
-			import OBT5.*
-			obj.Writer=OmeBigTiff5D.Create(TiffPath,CreationDisposition.Overwrite,SizeX=Reader.SizeX,SizeY=Reader.SizeY,SizeT=Reader.SizeT,SizeC=NumChannels,SizeZ=Reader.SizeZ,DimensionOrder=DimensionOrder.XYTCZ,PixelType=obj.Metadata.PixelType,ChannelColors=obj.Metadata.ChannelColors(ChannelIndex));
+			Colors=Colors(:,ChannelIndex);
+			Colors(4,:)=1;
+			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYTZC);
 		end
 		function Data=Read(obj,Start,End)
 			OutBuffer=Start-obj.BufferConsumed;
