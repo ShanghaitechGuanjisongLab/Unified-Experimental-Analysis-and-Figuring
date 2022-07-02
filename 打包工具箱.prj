@@ -19,7 +19,7 @@
     </param.products.id>
     <param.products.version>
       <item>11.5</item>
-      <item>7.6</item>
+      <item>7.7</item>
     </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
@@ -51,7 +51,9 @@ resources/project
     <param.registered.apps />
     <param.docs />
     <param.getting.started.guide>${PROJECT_ROOT}\doc\GettingStarted.mlx</param.getting.started.guide>
-    <param.matlabpath.excludes />
+    <param.matlabpath.excludes>
+      <item>/C__/Users/vhtmf/AppData/Roaming/MathWorks/MATLAB Add-Ons/Toolboxes/并行计算</item>
+    </param.matlabpath.excludes>
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
@@ -84,7 +86,6 @@ resources/project
       <param.apps />
       <param.registered.apps />
       <param.docs />
-      <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
       <param.matlab.project.id />
@@ -111,13 +112,7 @@ resources/project
       <file>${PROJECT_ROOT}\resources</file>
       <file>${PROJECT_ROOT}\工具箱图像.png</file>
     </fileset.rootfiles>
-    <fileset.depfun.included>
-      <file>C:\Users\vhtmf\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\并行计算\+ParallelComputing\@BlockRWStream\BlockRWStream.m</file>
-      <file>C:\Users\vhtmf\AppData\Roaming\MathWorks\MATLAB Add-Ons\Toolboxes\并行计算\+ParallelComputing\@BlockRWStream\SpmdRun.mlx</file>
-      <file>C:\Users\vhtmf\Documents\MATLAB\并行计算\+ParallelComputing\@BlockRWStream\BlockRWStream.m</file>
-      <file>C:\Users\vhtmf\Documents\MATLAB\并行计算\+ParallelComputing\@BlockRWStream\SpmdRun.mlx</file>
-      <file>C:\Users\vhtmf\Documents\MATLAB\并行计算\+ParallelComputing\IBlockRWer.m</file>
-    </fileset.depfun.included>
+    <fileset.depfun.included />
     <fileset.depfun.excluded>
       <file>${MATLAB_ROOT}\toolbox\local\userpath.m</file>
     </fileset.depfun.excluded>
@@ -127,7 +122,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>C:\Program Files\MATLAB\R2022b</root>
       <toolboxes />
     </matlab>
     <platform>

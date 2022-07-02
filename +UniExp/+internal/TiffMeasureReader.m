@@ -3,18 +3,19 @@ classdef TiffMeasureReader<ParallelComputing.IBlockRWer
 		PieceSize double
 		NumPieces double
 		Metadata
-		Reader OBT5.OmeBigTiff5D
+		Reader Image5D.OmeTiffRWer
 	end
 	methods
 		function obj=TiffMeasureReader(TiffPath)
-			Reader=OBT5.OmeBigTiff5D.Create(TiffPath,OBT5.CreationDisposition.OpenExisting);
+			Reader=Image5D.OmeTiffRWer.OpenRead(TiffPath);
 			obj.Reader=Reader;
-			obj.PieceSize=prod([uint32(Reader.SizeP),Reader.SizeX,Reader.SizeY,Reader.SizeZ,Reader.SizeC]);
+			SizeZ=Reader.SizeZ;
+			obj.PieceSize=prod([uint32(Reader.SizeP),Reader.SizeX,Reader.SizeY,SizeZ,Reader.SizeC]);
 			obj.NumPieces=Reader.SizeT;
-			obj.Metadata=Reader.SizeZ;
+			obj.Metadata=SizeZ;
 		end
 		function Data=Read(obj,Start,End)
-			Data={obj.Reader.ReadPixels5D(T=Start-1:End-1,C=[],Z=[],Y=[],X=[])};%OBT5索引从0开始
+			Data={obj.Reader.ReadPixels(Start-1,End-Start+1)};
 		end
 	end
 end

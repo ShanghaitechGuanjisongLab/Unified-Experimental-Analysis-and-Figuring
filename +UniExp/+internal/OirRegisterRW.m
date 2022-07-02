@@ -10,9 +10,6 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		TagLogical
 		FileFixed
 		Transforms
-		Buffer
-		BufferConsumed=0;
-		BufferCapacity
 	end
 	methods
 		function obj = OirRegisterRW(OirPath,TiffPath,FixedImage,Memory)
@@ -44,7 +41,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.Buffer=permute(obj.Buffer(:,:,ChannelIndex,:,:),[1 2 5 3 4]);
 			obj.BufferCapacity=size(obj.Buffer,3);
 			Sample=mean(obj.Buffer,3,"native");
-			SizeC=min(size(FixedImage,3),size(Sample,4));
+			obj.Buffer=zeros(Reader.SizeX,Reader.SizeY,0,Reader.SizeC,Reader.SizeZ);
+            SizeC=min(size(FixedImage,3),size(Sample,4));
 			SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,SizeZ);
 			RefObj=imref2d(size(Sample,[1 2]));
@@ -60,30 +58,17 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
 				end
 			end
-			obj.FileFixed=fft2(rot90(Sample,2),SizeY*2-1,SizeX*2-1);
+			obj.FileFixed=gather(fft2(rot90(Sample,2),SizeY*2-1,SizeX*2-1));
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			Colors=Colors(:,ChannelIndex);
 			Colors(4,:)=1;
 			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYTZC);
 		end
 		function Data=Read(obj,Start,End)
-			OutBuffer=Start-obj.BufferConsumed;
-			InBufferEnd=obj.BufferCapacity+OutBuffer;
-			MoreRequest=End-InBufferEnd;
-			if MoreRequest>0
-				New=obj.Reader.ReadArray(X=0,Y=0,T=InBufferEnd+1:min(End+obj.BufferCapacity,obj.NumPieces),C=0,Z=0);
-				Data=cat(3,obj.Buffer(:,:,obj.BufferConsumed+1:end,:,:),New(:,:,1:MoreRequest,:,:));
-				obj.Buffer=New(:,:,MoreRequest+1:end,:,:);
-				obj.BufferConsumed=0;
-			else
-				ReadTo=End-OutBuffer;
-				Data=obj.Buffer(:,:,obj.BufferConsumed+1:ReadTo,:,:);
-				obj.BufferConsumed=ReadTo;
-			end
-			Data={Data,obj.TagLogical,obj.FileFixed,obj.Transforms};
+			Data={permute(obj.Reader.ReadPixels(Start-1,End-Start+1),[1 2 5 3 4]),obj.TagLogical,obj.FileFixed,obj.Transforms};
 		end		
 		function Data=Write(obj,Data,Start,End)
-			obj.Writer.WritePixels5D(Data{1},[],[],Start-1:End-1);%OBT5的索引是从0开始的！
+			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
 			Data(1)=[];
 		end
 	end
