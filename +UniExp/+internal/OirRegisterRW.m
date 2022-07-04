@@ -25,23 +25,19 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 				optimizer.MaximumIterations = 100;
 			end
 			import Image5D.*
-			Reader=OirReader(OirPath);
-			obj.Reader=Reader;
-			[Devices,Colors]=Reader.DeviceColors;
-			obj.Metadata=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=Reader.SeriesInterval);
+			obj.Reader=OirReader(OirPath);
+			[Devices,Colors]=obj.Reader.DeviceColors;
+			obj.Metadata=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
 			obj.TagLogical=startsWith(obj.Metadata.DeviceNames,'CD');
 			ChannelIndex=find(~obj.TagLogical);
-			SizeX=Reader.SizeX;
-			SizeY=Reader.SizeY;
-			SizePXYZ=prod([uint32(2) SizeX SizeY Reader.SizeZ]);
-			SizeC=Reader.SizeC;
-			obj.PieceSize=SizePXYZ*double(SizeC);
-			obj.NumPieces=Reader.SizeT;
-			obj.Buffer=Reader.ReadPixels(0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
-			obj.Buffer=permute(obj.Buffer(:,:,ChannelIndex,:,:),[1 2 5 3 4]);
-			obj.BufferCapacity=size(obj.Buffer,3);
-			Sample=mean(obj.Buffer,3,"native");
-			obj.Buffer=zeros(Reader.SizeX,Reader.SizeY,0,Reader.SizeC,Reader.SizeZ);
+			SizeX=obj.Reader.SizeX;
+			SizeY=obj.Reader.SizeY;
+			SizePXYZ=prod([uint32(2) SizeX SizeY obj.Reader.SizeZ]);
+			SizeC=double(obj.Reader.SizeC);
+			obj.PieceSize=SizePXYZ*SizeC;
+			obj.NumPieces=obj.Reader.SizeT;
+			Sample=obj.Reader.ReadPixels(0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
+			Sample=mean(permute(Sample(:,:,ChannelIndex,:,:),[1 2 5 3 4]),3,"native");
             SizeC=min(size(FixedImage,3),size(Sample,4));
 			SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,SizeZ);
