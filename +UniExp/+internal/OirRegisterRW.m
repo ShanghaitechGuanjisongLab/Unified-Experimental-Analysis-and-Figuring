@@ -11,6 +11,28 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		FileFixed
 		Transforms
 	end
+	methods(Access=private,Static)
+		function Data=TryRead(Reader,Start,End)
+			Wait=0x001;
+			TryCount=0x1;
+			while true
+				try
+					Data=Reader.ReadPixels(Start,End);
+					break;
+				catch ME
+					if ME.identifier=="Image5D:Memory_copy_failed"
+						warning('文件读入失败，可能是持有文件的设备断开了连接，请检查设备。将在%u秒后重试。',Wait);
+						pause(Wait);
+						Wait=bitshift(Wait,1);
+						TryCount=TryCount+1;
+						warning('第%u次尝试读入：',TryCount);
+					else
+						throw(ME);
+					end
+				end
+			end
+		end
+	end
 	methods
 		function obj = OirRegisterRW(OirPath,TiffPath,FixedImage,Memory)
 			persistent optimizer metric
@@ -36,7 +58,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			SizeC=double(obj.Reader.SizeC);
 			obj.PieceSize=SizePXYZ*SizeC;
 			obj.NumPieces=obj.Reader.SizeT;
-			Sample=obj.Reader.ReadPixels(0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
+			Sample=UniExp.internal.OirRegisterRW.TryRead(obj.Reader,0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
 			Sample=mean(permute(Sample(:,:,ChannelIndex,:,:),[1 2 5 3 4]),3,"native");
             SizeC=min(size(FixedImage,3),size(Sample,4));
 			SizeZ=min(size(FixedImage,4),size(Sample,5));
@@ -61,7 +83,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYTZC);
 		end
 		function Data=Read(obj,Start,End)
-			Data={permute(obj.Reader.ReadPixels(Start-1,End-Start+1),[1 2 5 3 4]),obj.TagLogical,obj.FileFixed,obj.Transforms};
+			Data={permute(UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),[1 2 5 3 4]),obj.TagLogical,obj.FileFixed,obj.Transforms};
 		end		
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
