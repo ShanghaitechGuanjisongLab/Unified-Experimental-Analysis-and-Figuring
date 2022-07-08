@@ -10,14 +10,15 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		TagLogical
 		FileFixed
 		Transforms
+		SizeZ
 	end
 	methods(Access=private,Static)
-		function Data=TryRead(Reader,Start,End)
+		function Data=TryRead(Reader,TStart,TSize,varargin)
 			Wait=0x001;
 			TryCount=0x1;
 			while true
 				try
-					Data=Reader.ReadPixels(Start,End);
+					Data=Reader.ReadPixels(TStart,TSize,varargin{:});
 					break;
 				catch ME
 					if ME.identifier=="Image5D:Memory_copy_failed"
@@ -54,6 +55,9 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			ChannelIndex=find(~obj.TagLogical);
 			SizeX=obj.Reader.SizeX;
 			SizeY=obj.Reader.SizeY;
+			if ~all([SizeX,SizeY]==size(FixedImage,[1,2]))
+				UniExp.UniExpException.Image_size_does_not_match.Throw;
+			end
 			SizePXYZ=prod([uint32(2) SizeX SizeY obj.Reader.SizeZ]);
 			SizeC=double(obj.Reader.SizeC);
 			obj.PieceSize=SizePXYZ*SizeC;
@@ -61,17 +65,17 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			Sample=UniExp.internal.OirRegisterRW.TryRead(obj.Reader,0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
 			Sample=mean(permute(Sample(:,:,ChannelIndex,:,:),[1 2 5 3 4]),3,"native");
             SizeC=min(size(FixedImage,3),size(Sample,4));
-			SizeZ=min(size(FixedImage,4),size(Sample,5));
-			tforms=cell(SizeC,SizeZ);
+			obj.SizeZ=min(size(FixedImage,4),size(Sample,5));
+			tforms=cell(SizeC,obj.SizeZ);
 			RefObj=imref2d(size(Sample,[1 2]));
 			%不可以用CZ，因为尺寸不一定全覆盖
-			for Z=1:SizeZ
+			for Z=1:obj.SizeZ
 				for C=1:SizeC
 					tforms{C,Z}=imregtform(Sample(:,:,1,C,Z),FixedImage(:,:,C,Z),'affine',optimizer,metric);
 				end
 			end
 			Sample=gpuArray(Sample);
-			for Z=1:SizeZ
+			for Z=1:obj.SizeZ
 				for C=1:SizeC
 					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
 				end
@@ -80,10 +84,10 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			Colors=Colors(:,ChannelIndex);
 			Colors(4,:)=1;
-			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYTZC);
+			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),obj.SizeZ,obj.NumPieces,DimensionOrder.XYTCZ);
 		end
 		function Data=Read(obj,Start,End)
-			Data={permute(UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),[1 2 5 3 4]),obj.TagLogical,obj.FileFixed,obj.Transforms};
+			Data={permute(UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1,0,obj.SizeZ),[1 2 5 3 4]),obj.TagLogical,obj.FileFixed,obj.Transforms};
 		end		
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
