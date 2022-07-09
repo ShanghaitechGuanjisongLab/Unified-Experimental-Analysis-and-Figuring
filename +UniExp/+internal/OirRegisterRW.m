@@ -8,31 +8,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Reader Image5D.OirReader
 		Writer Image5D.OmeTiffRWer
 		TagLogical
-		FileFixed
 		Transforms
 		SizeZ
-	end
-	methods(Access=private,Static)
-		function Data=TryRead(Reader,TStart,TSize,varargin)
-			Wait=0x001;
-			TryCount=0x1;
-			while true
-				try
-					Data=Reader.ReadPixels(TStart,TSize,varargin{:});
-					break;
-				catch ME
-					if ME.identifier=="Image5D:Memory_copy_failed"
-						warning('文件读入失败，可能是持有文件的设备断开了连接，请检查设备。将在%u秒后重试。',Wait);
-						pause(Wait);
-						Wait=bitshift(Wait,1);
-						TryCount=TryCount+1;
-						warning('第%u次尝试读入：',TryCount);
-					else
-						throw(ME);
-					end
-				end
-			end
-		end
 	end
 	methods
 		function obj = OirRegisterRW(OirPath,TiffPath,FixedImage,Memory)
@@ -62,8 +39,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			SizeC=double(obj.Reader.SizeC);
 			obj.PieceSize=SizePXYZ*SizeC;
 			obj.NumPieces=obj.Reader.SizeT;
-			Sample=UniExp.internal.OirRegisterRW.TryRead(obj.Reader,0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
-			Sample=mean(permute(Sample(:,:,ChannelIndex,:,:),[1 2 5 3 4]),3,"native");
+			Sample=TryRead(obj.Reader,0,min(floor(Memory/(SizePXYZ*SizeC)),obj.NumPieces));
+			Sample=mean(permute(Sample(:,:,ChannelIndex,:,:),[1 2 5 3 4]),3);
             SizeC=min(size(FixedImage,3),size(Sample,4));
 			obj.SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,obj.SizeZ);
@@ -73,14 +50,13 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 					tforms{C,Z}=imregtform(Sample(:,:,1,C,Z),FixedImage(:,:,C,Z),'affine',optimizer,metric);
 				end
 			end
-			obj.FileFixed=fft2(rot90(permute(FixedImage,[1 2 5 3 4]),2),SizeY*2-1,SizeX*2-1);
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			Colors=Colors(:,ChannelIndex);
 			Colors(4,:)=1;
 			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),obj.SizeZ,obj.NumPieces,DimensionOrder.XYTCZ);
 		end
 		function Data=Read(obj,Start,End)
-			Data={permute(UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1,0,obj.SizeZ),[1 2 5 3 4]),obj.TagLogical,obj.FileFixed,obj.Transforms};
+			Data={permute(TryRead(obj.Reader,Start-1,End-Start+1,0,obj.SizeZ),[1 2 5 3 4]),obj.TagLogical,obj.Transforms};
 		end		
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
