@@ -67,7 +67,8 @@ MergeCommits，合并多个UniExp数据库</param.description>
 % **/*.bak
 %
 resources/project
-.git*</param.exclude.filters>
+.git*
+**/*.asv</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
