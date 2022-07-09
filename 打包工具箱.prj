@@ -38,12 +38,15 @@ MergeCommits，合并多个UniExp数据库</param.description>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
+      <item>Parallel Computing Toolbox</item>
     </param.products.name>
     <param.products.id>
       <item>17</item>
+      <item>80</item>
     </param.products.id>
     <param.products.version>
       <item>11.5</item>
+      <item>7.6</item>
     </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
