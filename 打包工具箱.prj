@@ -34,19 +34,16 @@ LearningCurve，生成带有平均值和标准误的学习曲线数据（不作�
 
 MergeCommits，合并多个UniExp数据库</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.png</param.screenshot>
-    <param.version>1.0.0</param.version>
+    <param.version>1.0.1</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
-      <item>Parallel Computing Toolbox</item>
     </param.products.name>
     <param.products.id>
       <item>17</item>
-      <item>80</item>
     </param.products.id>
     <param.products.version>
-      <item>11.6</item>
-      <item>7.7</item>
+      <item>11.5</item>
     </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
@@ -85,18 +82,20 @@ resources/project
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="7.5.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱的 MATLAB 扩展 Extension</requiredAddOn>
+        <requiredAddOn earliest="2.1.2" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="7.5.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension</requiredAddOn>
+        <requiredAddOn earliest="1.1.0" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start>R2022a</param.release.start>
+    <param.release.start>R2021a</param.release.start>
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
-    <param.compatiblity.macos>true</param.compatiblity.macos>
-    <param.compatiblity.linux>true</param.compatiblity.linux>
-    <param.compatiblity.matlabonline>true</param.compatiblity.matlabonline>
+    <param.compatiblity.macos>false</param.compatiblity.macos>
+    <param.compatiblity.linux>false</param.compatiblity.linux>
+    <param.compatiblity.matlabonline>false</param.compatiblity.matlabonline>
     <param.installation.map />
     <param.additional.sw.names />
     <param.additional.sw.licenses />
@@ -118,9 +117,6 @@ resources/project
       <param.matlab.project.name />
       <param.release.current.only />
       <param.compatiblity.windows />
-      <param.compatiblity.macos />
-      <param.compatiblity.linux />
-      <param.compatiblity.matlabonline />
       <param.installation.map />
       <param.additional.sw.names />
       <param.additional.sw.licenses />
@@ -148,7 +144,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022b</root>
+      <root>C:\Program Files\MATLAB\R2022a</root>
       <toolboxes />
     </matlab>
     <platform>

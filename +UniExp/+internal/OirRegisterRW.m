@@ -67,20 +67,13 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
             SizeC=min(size(FixedImage,3),size(Sample,4));
 			obj.SizeZ=min(size(FixedImage,4),size(Sample,5));
 			tforms=cell(SizeC,obj.SizeZ);
-			RefObj=imref2d(size(Sample,[1 2]));
 			%不可以用CZ，因为尺寸不一定全覆盖
 			for Z=1:obj.SizeZ
 				for C=1:SizeC
 					tforms{C,Z}=imregtform(Sample(:,:,1,C,Z),FixedImage(:,:,C,Z),'affine',optimizer,metric);
 				end
 			end
-			Sample=gpuArray(Sample);
-			for Z=1:obj.SizeZ
-				for C=1:SizeC
-					Sample(:,:,1,C,Z)=imwarp(Sample(:,:,1,C,Z),tforms{C,Z},OutputView=RefObj);
-				end
-			end
-			obj.FileFixed=gather(fft2(rot90(Sample,2),SizeY*2-1,SizeX*2-1));
+			obj.FileFixed=fft2(rot90(permute(FixedImage,[1 2 5 3 4]),2),SizeY*2-1,SizeX*2-1);
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			Colors=Colors(:,ChannelIndex);
 			Colors(4,:)=1;
