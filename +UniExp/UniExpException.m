@@ -4,7 +4,8 @@ classdef UniExpException
 		Image_size_does_not_match
 	end
 	methods
-		function Throw(obj)
+		function Throw(obj,Message)
+			Identifier=sprintf('UniExp:%s',obj);
 			error(sprintf('UniExp:%s',obj),string(obj));
 		end
 	end
