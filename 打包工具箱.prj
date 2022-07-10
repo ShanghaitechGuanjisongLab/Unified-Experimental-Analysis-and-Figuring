@@ -34,7 +34,7 @@ LearningCurve，生成带有平均值和标准误的学习曲线数据（不作�
 
 MergeCommits，合并多个UniExp数据库</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.png</param.screenshot>
-    <param.version>1.0.1</param.version>
+    <param.version>1.0.2</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
@@ -45,8 +45,8 @@ MergeCommits，合并多个UniExp数据库</param.description>
       <item>80</item>
     </param.products.id>
     <param.products.version>
-      <item>11.5</item>
-      <item>7.6</item>
+      <item>11.6</item>
+      <item>7.7</item>
     </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
@@ -148,7 +148,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>C:\Program Files\MATLAB\R2022b</root>
       <toolboxes />
     </matlab>
     <platform>

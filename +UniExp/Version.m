@@ -1,5 +1,5 @@
 function V = Version
-V.Me='1.0.1';
-V.MatlabExtension=MATLAB.Version;
+V.Me='1.0.2';
+V.ParallelComputing=ParallelComputing.Version;
 V.Image5D=Image5D.Version;
-V.MATLAB='R2020a';
+V.MATLAB='R2022b';
