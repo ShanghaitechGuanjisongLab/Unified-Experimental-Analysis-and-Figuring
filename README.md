@@ -21,10 +21,16 @@ import UniExp.*
 ```
 每个函数代码文件内都有详尽文档，可用`doc UniExp.函数名`查询。函数的使用示例可在快速入门文档GettingStarted.mlx中查看。下方仅列出这些函数的简介。
 ## 从其它数据文件格式取得UniExp
-BatchOirRegisterTiff，批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道。
+```MATLAB
+%批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
+function BatchOirRegisterTiff(OirPaths,ReferencePath,OutputDirectory,options)
+```
 ## UniExp内部处理
-EventLog2HitRate，从事件记录取得命中率
-
-LearningCurve，生成带有平均值和标准误的学习曲线数据（不作图）
-
-MergeCommits，合并多个UniExp数据库
+```MATLAB
+%从事件记录取得命中率
+function HitRates = EventLog2HitRate(EventLogs,Tags)
+%生成带有平均值和标准误的学习曲线数据（不作图）
+function [Design,Mean,Sem]=LearningCurve(DataTable)
+%合并多个UniExp数据库
+function Merged = MergeCommits(Commits,ChangeUID)
+```
