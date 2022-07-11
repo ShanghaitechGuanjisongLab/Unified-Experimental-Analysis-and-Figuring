@@ -9,8 +9,8 @@ classdef OirRegisterStream<ParallelComputing.BlockRWStream
 		end
 	end
 	methods
-		function obj = OirRegisterStream(OirPaths,TiffPaths,FixedImage,Memory)
-			obj@ParallelComputing.BlockRWStream(num2cell([OirPaths,TiffPaths],2),@(RWPath)UniExp.internal.OirRegisterRW(RWPath{1}(1),RWPath{1}(2),FixedImage,Memory))
+		function obj = OirRegisterStream(OirPaths,TiffPaths,FixedImage,Memory,MaxTranslationStep,MovingChannel)
+			obj@ParallelComputing.BlockRWStream(num2cell([OirPaths,TiffPaths],2),@(RWPath)UniExp.internal.OirRegisterRW(RWPath{1}(1),RWPath{1}(2),FixedImage,Memory,MaxTranslationStep,MovingChannel))
 		end
 	end
 end
