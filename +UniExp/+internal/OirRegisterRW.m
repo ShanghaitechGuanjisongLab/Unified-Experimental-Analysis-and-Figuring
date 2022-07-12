@@ -83,7 +83,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 				Sample(:,:,:,Z)=imwarp(Sample(:,:,:,Z),tforms{Z},OutputView=RefObj);
 			end
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
-			Colors=Colors(:,obj.TagLogical);
+			Colors=Colors(:,~obj.TagLogical);
 			Colors(4,:)=1;
 			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			Sample=double(Sample);
