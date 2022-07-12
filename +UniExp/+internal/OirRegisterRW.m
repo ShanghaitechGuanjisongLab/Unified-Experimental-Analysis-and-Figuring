@@ -91,7 +91,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			XRange=SizeX-MaxTranslationStep:SizeX+MaxTranslationStep;
 			YRange=SizeY-MaxTranslationStep:SizeY+MaxTranslationStep;
 			obj.Numerator=obj.Numerator(XRange,YRange,:,:);
-			obj.Denominator=LocalSum(Sample.*Sample);
+			obj.Denominator=OirRegisterRW.LocalSum(Sample.*Sample);
 			obj.Denominator=sqrt(max(obj.Denominator(XRange,YRange,:,:)*SizeX*SizeY-obj.Numerator.*obj.Numerator,0));
 			obj.Denominator(obj.Denominator<sqrt(eps(max(obj.Denominator,[],[1,2]))))=Inf;
 			obj.XCorrs=gather(fft2(rot90(Sample,2),SizeY*2-1,SizeX*2-1));
@@ -100,7 +100,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.MovingChannel=MovingChannel;
 		end
 		function Data=Read(obj,Start,End)
-			Data={TryRead(obj.Reader,Start-1,End-Start+1),obj.TagLogical,obj.Transforms,obj.XCorrs,obj.Numerator,obj.Denominator,obj.MovingChannel};
+			Data={UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),obj.TagLogical,obj.Transforms,obj.XCorrs,obj.Numerator,obj.Denominator,obj.MovingChannel};
 		end		
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
