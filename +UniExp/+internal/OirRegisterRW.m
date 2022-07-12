@@ -78,7 +78,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 				Sample(:,:,:,Z)=imwarp(Sample(:,:,:,Z),tforms{Z},OutputView=RefObj);
 			end
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
-			Colors=Colors(:,~obj.TagLogical);
+			ColorLogical=~obj.TagLogical;
+			Colors=Colors(:,ColorLogical);
 			Colors(4,:)=1;
 			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			Sample=double(Sample);
@@ -89,10 +90,10 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.Denominator=OirRegisterRW.LocalSum(Sample.*Sample);
 			obj.Denominator=sqrt(max(obj.Denominator(XRange,YRange,:,:)*SizeX*SizeY-obj.Numerator.*obj.Numerator,0));
 			obj.Denominator(obj.Denominator<sqrt(eps(max(obj.Denominator,[],[1,2]))))=Inf;
-			obj.XCorrs=gather(fft2(rot90(Sample,2),SizeY*2-1,SizeX*2-1));
+			obj.XCorrs=gather(fft2(rot90(Sample,2),SizeX*2-1,SizeY*2-1));
 			obj.Numerator=gather(obj.Numerator);
 			obj.Denominator=gather(obj.Denominator);
-			obj.MovingChannel=MovingChannel;
+			obj.MovingChannel=nnz(ColorLogical(1:MovingChannel));
 		end
 		function Data=Read(obj,Start,End)
 			Data={UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),obj.TagLogical,obj.Transforms,obj.XCorrs,obj.Numerator,obj.Denominator,obj.MovingChannel};
