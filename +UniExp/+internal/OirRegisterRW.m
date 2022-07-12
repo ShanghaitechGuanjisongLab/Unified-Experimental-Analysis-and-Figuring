@@ -61,14 +61,9 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			[Devices,Colors]=obj.Reader.DeviceColors;
 			obj.Metadata=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
 			obj.TagLogical=startsWith(obj.Metadata.DeviceNames,'CD');
-			SizeX=obj.Reader.SizeX;
-			SizeY=obj.Reader.SizeY;
-			if ~all([SizeX,SizeY]==size(FixedImage,[1,2]))
-				UniExp.UniExpException.Image_size_does_not_match.Throw;
-			end
-			SizePXYZ=prod([uint32(2) SizeX SizeY obj.Reader.SizeZ]);
-			SizeC=double(obj.Reader.SizeC);
-			obj.PieceSize=SizePXYZ*SizeC;
+			[SizeX,SizeY,SizeZ]=size(FixedImage,1,2,4);
+			SizePXYZ=2*SizeX*SizeY*SizeZ;
+			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
 			obj.NumPieces=obj.Reader.SizeT;
 			Sample=mean(OirRegisterRW.TryRead(obj.Reader,0,min(floor(Memory/SizePXYZ),obj.NumPieces),MovingChannel-1),5);
 			SizeZ=min(size(FixedImage,4),size(Sample,4));
