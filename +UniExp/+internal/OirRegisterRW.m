@@ -14,7 +14,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Denominator
 		MovingChannel
 	end
-	methods(Static,Access=private)
+	methods(Static,Access=public)
 		function A = LocalSum(A)
 			[m,n]=size(A,1,2);
 			A = cumsum(padarray(A,[m n]),1);
@@ -77,6 +77,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			for Z=1:SizeZ
 				Sample(:,:,:,Z)=imwarp(Sample(:,:,:,Z),tforms{Z},OutputView=RefObj);
 			end
+			save('Sample.mat',"Sample");
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			ColorLogical=~obj.TagLogical;
 			Colors=Colors(:,ColorLogical);
