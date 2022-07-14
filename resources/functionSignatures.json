@@ -1,0 +1,144 @@
+{
+    "UniExp.BatchOirRegisterTiff": {
+        "inputs": [
+            {
+                "name": "OirPaths",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.oir"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ],
+                    [
+                        "char",
+                        "row"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ]
+                ],
+                "purpose": "所有要配准的OIR头文件路径"
+            },
+            {
+                "name": "ReferencePath",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.oir"
+                    ],
+                    [
+                        "string",
+                        "scalar"
+                    ],
+                    [
+                        "char",
+                        "row"
+                    ]
+                ],
+                "purpose": "参照OIR文件路径"
+            },
+            {
+                "name": "OutputDirectory",
+                "kind": "required",
+                "type": [
+                    [
+                        "folder"
+                    ],
+                    [
+                        "string",
+                        "scalar"
+                    ],
+                    [
+                        "char",
+                        "row"
+                    ]
+                ],
+                "purpose": "输出目录路径"
+            },
+            {
+                "name": "MaxTranslationStep",
+                "kind": "namevalue",
+                "type": "positive",
+                "purpose": "平移变换最多移动多少像素",
+                "default": 10
+            },
+            {
+                "name": "FixedImage",
+                "kind": "namevalue",
+                "type": [
+                    "uint16",
+                    "size=:,:,:,:"
+                ],
+                "purpose": "处理后的参照图"
+            },
+            {
+                "name": "MovingChannel",
+                "kind": "namevalue",
+                "type": "positive",
+                "purpose": "要选择晃动图的哪个通道与固定图匹配"
+            },
+            {
+                "name": "FixedChannel",
+                "kind": "namevalue",
+                "type": "positive",
+                "purpose": "要选择固定图的哪个通道作为配准参照"
+            }
+        ]
+    },
+    "UniExp.EventLog2HitRate": {
+        "inputs": [
+            {
+                "name": "EventLogs",
+                "kind": "required",
+                "type": "cell",
+                "purpose": "事件记录"
+            },
+            {
+                "name": "HitTag",
+                "kind": "namevalue",
+                "type": "scalar",
+                "purpose": "命中标签值"
+            },
+            {
+                "name": "MissTag",
+                "kind": "namevalue",
+                "type": "scalar",
+                "purpose": "错失标签值"
+            }
+        ]
+    },
+    "UniExp.LearningCurve": {
+        "inputs": [
+            {
+                "name": "DataTable",
+                "kind": "required",
+                "type": "tabular",
+                "purpose": "输入数据表"
+            }
+        ]
+    },
+    "UniExp.MergeCommits": {
+        "inputs": [
+            {
+                "name": "Commits",
+                "kind": "required",
+                "type": "cell",
+                "purpose": "要合并的数据库提交"
+            },
+            {
+                "name": "ChangeUID",
+                "kind": "ordered",
+                "type": [
+                    "logical",
+                    "scalar"
+                ],
+                "purpose": "是否允许修改UID",
+                "default": "true"
+            }
+        ]
+    }
+}
