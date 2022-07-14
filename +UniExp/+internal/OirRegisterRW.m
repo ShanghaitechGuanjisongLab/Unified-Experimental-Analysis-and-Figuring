@@ -77,7 +77,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			for Z=1:SizeZ
 				Sample(:,:,:,Z)=imwarp(Sample(:,:,:,Z),tforms{Z},OutputView=RefObj);
 			end
-			save('Sample.mat',"Sample");
+			Sample=Sample-mean2(Sample);
+			Sample(Sample<0)=0;
 			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
 			ColorLogical=~obj.TagLogical;
 			Colors=Colors(:,ColorLogical);
