@@ -89,6 +89,34 @@
             }
         ]
     },
+    "UniExp.BatchTiffMeasure":{
+        "inputs":[
+            {
+                "name":"TiffPaths",
+                "kind":"required",
+                "type":[["file=*.tif,*.tiff"],["cell","vector"],["string","vector"]],
+                "purpose":"要测量的TIFF文件路径"
+            },
+            {
+                "name":"ImageJRoiPaths",
+                "kind":"required",
+                "type":["table","2d"],
+                "purpose":"存储RoiSet路径的表格"
+            },
+            {
+                "name":"ScatterRadius",
+                "kind":"ordered",
+                "type":"positive",
+                "purpose":"散射光半径"
+            },
+            {
+                "name":"MeanTiff",
+                "kind":"ordered",
+                "type":[["file=*.tif,*.tiff"],["char","row"],["string","vector"]],
+                "purpose":"平均值TIFF路径"
+            }
+        ]
+    },
     "UniExp.EventLog2HitRate": {
         "inputs": [
             {

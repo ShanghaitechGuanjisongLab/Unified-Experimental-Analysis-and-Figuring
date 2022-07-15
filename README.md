@@ -14,6 +14,13 @@ UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符�
 上述数据表以 MATLAB table 格式存储在.mat文件中。建议扩展名使用.UniExp.mat表示该文件为UniExp数据表。
 
 这些表格可以使用【埃博拉酱的MATLAB扩展】中的MATLAB.DataTypes.Select方法进行基本的连接查询。有些 UniExp API 会要求以查询结果作为输入。
+# UniExp数据文件名
+为了支持从数据文件中直接提取基本元数据的功能，请以UniExp标准格式命名数据文件：
+`<鼠名>.<日期时间>.<会话设计名>[.<其它可选字段>].UniExp.mat`
+例如
+`0040.202207151026.BlueAudioWater.UniExp.mat`
+`0040.202207151026.BlueAudioWater.行为.UniExp.mat`
+许多API都能自动检测标准文件名，自动生成元数据。如果文件名不合标准，将发出警告，但程序仍可运行，只是会缺少部分元数据。
 # UniExp API
 为了获取、处理和使用UniExp格式文件，本工具箱包含一系列数据处理函数，都在UniExp包内，使用前需导入：
 ```MATLAB
@@ -24,6 +31,8 @@ import UniExp.*
 ```MATLAB
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,ReferencePath,OutputDirectory,options)
+%批量测量OME-TIFF，以UniExp格式存储测量结果
+function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff)
 ```
 ## UniExp内部处理
 ```MATLAB
