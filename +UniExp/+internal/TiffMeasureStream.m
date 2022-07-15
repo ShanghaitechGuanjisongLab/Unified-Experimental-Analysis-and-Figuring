@@ -10,7 +10,7 @@ classdef TiffMeasureStream<ParallelComputing.BlockRWStream
 	end
 	methods
 		function obj = TiffMeasureStream(TiffPaths)
-			obj@ParallelComputing.BlockRWStream(TiffPaths,UniExp.internal.TiffMeasureReader);
+			obj@ParallelComputing.BlockRWStream(TiffPaths,@UniExp.internal.TiffMeasureReader);
 		end
 	end
 end
