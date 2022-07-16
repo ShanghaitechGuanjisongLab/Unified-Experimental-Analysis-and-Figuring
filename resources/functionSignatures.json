@@ -89,31 +89,58 @@
             }
         ]
     },
-    "UniExp.BatchTiffMeasure":{
-        "inputs":[
+    "UniExp.BatchTiffMeasure": {
+        "inputs": [
             {
-                "name":"TiffPaths",
-                "kind":"required",
-                "type":[["file=*.tif,*.tiff"],["cell","vector"],["string","vector"]],
-                "purpose":"要测量的TIFF文件路径"
+                "name": "TiffPaths",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.tif,*.tiff"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "要测量的TIFF文件路径"
             },
             {
-                "name":"ImageJRoiPaths",
-                "kind":"required",
-                "type":["table","2d"],
-                "purpose":"存储RoiSet路径的表格"
+                "name": "ImageJRoiPaths",
+                "kind": "required",
+                "type": [
+                    "table",
+                    "2d"
+                ],
+                "purpose": "存储RoiSet路径的表格"
             },
             {
-                "name":"ScatterRadius",
-                "kind":"ordered",
-                "type":"positive",
-                "purpose":"散射光半径"
+                "name": "ScatterRadius",
+                "kind": "ordered",
+                "type": "positive",
+                "purpose": "散射光半径"
             },
             {
-                "name":"MeanTiff",
-                "kind":"ordered",
-                "type":[["file=*.tif,*.tiff"],["char","row"],["string","vector"]],
-                "purpose":"平均值TIFF路径"
+                "name": "MeanTiff",
+                "kind": "ordered",
+                "type": [
+                    [
+                        "file=*.tif,*.tiff"
+                    ],
+                    [
+                        "char",
+                        "row"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "平均值TIFF路径"
             }
         ]
     },
@@ -166,6 +193,141 @@
                 ],
                 "purpose": "是否允许修改UID",
                 "default": "true"
+            }
+        ]
+    },
+    "UniExp.MergeFiles": {
+        "inputs": [
+            {
+                "name": "Inputs",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.UniExp.mat"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "要合并的文件路径"
+            },
+            {
+                "name": "Outputs",
+                "kind": "ordered",
+                "type": [
+                    [
+                        "file=*.UniExp.mat"
+                    ],
+                    [
+                        "char",
+                        "row"
+                    ],
+                    [
+                        "string",
+                        "scalar"
+                    ]
+                ],
+                "purpose": "输出文件路径"
+            }
+        ]
+    },
+    "UniExp.MergeIntoFile": {
+        "inputs": [
+            {
+                "name": "FilePath",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.UniExp.mat"
+                    ],
+                    [
+                        "char",
+                        "row"
+                    ],
+                    [
+                        "string",
+                        "scalar"
+                    ]
+                ],
+                "purpose": "UniExp文件路径"
+            },
+            {
+                "name": "Commit",
+                "kind": "required",
+                "type": [
+                    "struct",
+                    "scalar"
+                ],
+                "purpose": "UniExp数据库结构体"
+            },
+            {
+                "name": "ChangeUID",
+                "kind": "ordered",
+                "type": [
+                    "logical",
+                    "scalar"
+                ],
+                "purpose": "是否允许修改UID"
+            }
+        ]
+    },
+    "UniExp.TagSplitTrial": {
+        "inputs": [
+            {
+                "name": "DateTimes",
+                "kind": "required",
+                "type": "tabular",
+                "purpose": "UniExp DateTimes 表"
+            },
+            {
+                "name": "Blocks",
+                "kind": "required",
+                "type": "tabular",
+                "purpose": "UniExp Blocks 表"
+            },
+            {
+                "name": "BlockSignals",
+                "kind": "required",
+                "type": "tabular",
+                "purpose": "UniExp BlockSignals 表"
+            },
+            {
+                "name": "TagChannel",
+                "kind": "namevalue",
+                "type": [
+                    [
+                        "char",
+                        "row"
+                    ],
+                    [
+                        "string",
+                        "scalar"
+                    ]
+                ],
+                "purpose": "用于拆分的标通道名称",
+                "default": "\"CD1\""
+            },
+            {
+                "name": "TimeRange",
+                "kind": "namevalue",
+                "type": [
+                    "size=1,2",
+                    "real"
+                ],
+                "purpose": "每个回合相对于刺激时点的起始时间和终止时间",
+                "default": "[-2,8]"
+            },
+            {
+                "name": "StdCutoff",
+                "kind": "namevalue",
+                "type": "positive",
+                "purpose": "阈值的标准差倍率",
+                "default": 1
             }
         ]
     }

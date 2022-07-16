@@ -11,7 +11,7 @@ UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符�
 - BlockSignals，主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
 - TrialSignals，主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
 
-上述数据表以 MATLAB table 格式存储在.mat文件中。建议扩展名使用.UniExp.mat表示该文件为UniExp数据表。
+上述数据表以 MATLAB table 变量格式存储在.mat文件中。建议扩展名使用.UniExp.mat表示该文件为UniExp数据表。
 
 这些表格可以使用【埃博拉酱的MATLAB扩展】中的MATLAB.DataTypes.Select方法进行基本的连接查询。有些 UniExp API 会要求以查询结果作为输入。
 # UniExp数据文件名
@@ -42,4 +42,10 @@ function HitRates = EventLog2HitRate(EventLogs,Tags)
 function [Design,Mean,Sem]=LearningCurve(DataTable)
 %合并多个UniExp数据库
 function Merged = MergeCommits(Commits,ChangeUID)
+%将多个UniExp数据库文件合并成一个，UID可能改变
+function MergeFiles(Inputs,Output)
+%将单个UniExp数据库添加到现有文件，或创建新文件
+function MergeIntoFile(FilePath,Commit,ChangeUID)
+%根据标通道将模块拆分成回合
+function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,options)
 ```

@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="667912129" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="2435460363" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -49,7 +49,7 @@ function [Design,Mean,Sem]=LearningCurve(DataTable)
 %合并多个UniExp数据库
 function Merged = MergeCommits(Commits,ChangeUID)</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.png</param.screenshot>
-    <param.version>1.1.0</param.version>
+    <param.version>1.2.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
@@ -98,9 +98,9 @@ resources/project
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="1.1.2" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D - OIR, TIFF(2)</requiredAddOn>
-        <requiredAddOn earliest="8.0.1" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
+        <requiredAddOn earliest="8.0.1" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="3.0.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="1.1.4" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
