@@ -3,5 +3,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Wrong_number_of_arguments
 		Image_size_does_not_match
 		DateTime_primary_key_has_duplicate_values
+		Some_commits_are_missing_UID_definitions
 	end
 end
