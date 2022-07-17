@@ -86,6 +86,12 @@
                 "kind": "namevalue",
                 "type": "positive",
                 "purpose": "要选择固定图的哪个通道作为配准参照"
+            },
+            {
+                "name":"MemoryPreserve",
+                "kind":"namevalue",
+                "type":"positive",
+                "purpose":"内存保留系数"
             }
         ]
     },
