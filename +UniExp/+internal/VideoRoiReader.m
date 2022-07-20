@@ -33,4 +33,3 @@ classdef VideoRoiReader<ParallelComputing.IBlockReader&VideoReader
 		end
 	end
 end
-

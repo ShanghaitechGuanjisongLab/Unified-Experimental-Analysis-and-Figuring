@@ -150,6 +150,38 @@
             }
         ]
     },
+    "UniExp.BatchVideoMean":{
+        "inputs":[
+            {
+                "name":"VideoPaths",
+                "kind":"required",
+                "type":[["file=*.mp4"],["cell","vector"],["string","vector"]],
+                "purpose":"视频路径"
+            }
+        ]
+    },
+    "UniExp.BatchVideoMeasure":{
+        "inputs":[
+            {
+                "name":"VideoPaths",
+                "kind":"required",
+                "type":[["file=*.mp4"],["cell","vector"],["string","vector"]],
+                "purpose":"视频文件路径"
+            },
+            {
+                "name":"ImageJRoiPaths",
+                "kind":"required",
+                "type":[["file=*.zip,*.roi"],["cell","vector"],["string","vector"]],
+                "purpose":"ROI文件路径"
+            },
+            {
+                "name":"RoiName",
+                "kind":"required",
+                "type":[["cell","vector"],["string","vector"]],
+                "purpose":"每个ROI的名称"
+            }
+        ]
+    },
     "UniExp.EventLog2HitRate": {
         "inputs": [
             {
