@@ -1,4 +1,4 @@
-classdef VideoRoiReader<ParallelComputing.IBlockReader&VideoReader
+classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
@@ -29,7 +29,7 @@ classdef VideoRoiReader<ParallelComputing.IBlockReader&VideoReader
 			obj.Metadata={obj.FrameRate,PixelYX};
 		end
 		function Data = Read(obj,Start,End)
-			Data={obj.read(Start:End),obj.PixelIndex};
+			Data={obj.read([Start,End]),obj.PixelIndex};
 		end
 	end
 end

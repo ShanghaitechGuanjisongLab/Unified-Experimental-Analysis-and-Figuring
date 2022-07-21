@@ -12,7 +12,7 @@ classdef BlockVideoReader<ParallelComputing.IBlockRWer&VideoReader
 			obj.NumPieces=obj.NumFrames;
 		end
 		function Data = Read(obj,Start,End)
-			Data={obj.read(Start:End)};
+			Data={obj.read([Start,End])};
 		end
 	end
 end
