@@ -88,10 +88,10 @@
                 "purpose": "要选择固定图的哪个通道作为配准参照"
             },
             {
-                "name":"MemoryPreserve",
-                "kind":"namevalue",
-                "type":"positive",
-                "purpose":"内存保留系数"
+                "name": "MemoryPreserve",
+                "kind": "namevalue",
+                "type": "positive",
+                "purpose": "内存保留系数"
             }
         ]
     },
@@ -150,35 +150,80 @@
             }
         ]
     },
-    "UniExp.BatchVideoMean":{
-        "inputs":[
+    "UniExp.BatchVideoMean": {
+        "inputs": [
             {
-                "name":"VideoPaths",
-                "kind":"required",
-                "type":[["file=*.mp4"],["cell","vector"],["string","vector"]],
-                "purpose":"视频路径"
+                "name": "VideoPaths",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.mp4"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "视频路径"
             }
         ]
     },
-    "UniExp.BatchVideoMeasure":{
-        "inputs":[
+    "UniExp.BatchVideoMeasure": {
+        "inputs": [
             {
-                "name":"VideoPaths",
-                "kind":"required",
-                "type":[["file=*.mp4"],["cell","vector"],["string","vector"]],
-                "purpose":"视频文件路径"
+                "name": "VideoPaths",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.mp4"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "视频文件路径"
             },
             {
-                "name":"ImageJRoiPaths",
-                "kind":"required",
-                "type":[["file=*.zip,*.roi"],["cell","vector"],["string","vector"]],
-                "purpose":"ROI文件路径"
+                "name": "ImageJRoiPaths",
+                "kind": "required",
+                "type": [
+                    [
+                        "file=*.zip,*.roi"
+                    ],
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "ROI文件路径"
             },
             {
-                "name":"RoiName",
-                "kind":"required",
-                "type":[["cell","vector"],["string","vector"]],
-                "purpose":"每个ROI的名称"
+                "name": "RoiName",
+                "kind": "required",
+                "type": [
+                    [
+                        "cell",
+                        "vector"
+                    ],
+                    [
+                        "string",
+                        "vector"
+                    ]
+                ],
+                "purpose": "每个ROI的名称"
             }
         ]
     },
@@ -314,6 +359,46 @@
             }
         ]
     },
+    "UniExp.SignalSplitTrial": {
+        "inputs": [
+            {
+                "name": "Query",
+                "kind": "required",
+                "type": "tabular",
+                "purpose": "数据表"
+            },
+            {
+                "name": "TimeRange",
+                "kind": "required",
+                "type": [
+                    "size=1,2",
+                    "real"
+                ],
+                "purpose": "回合偏移秒数"
+            },
+            {
+                "name": "SplitType",
+                "kind": "namevalue",
+                "type": [
+                    [
+                        "char",
+                        "row"
+                    ],
+                    [
+                        "string",
+                        "scalar"
+                    ]
+                ],
+                "purpose": "用于拆分的细胞类型"
+            },
+            {
+                "name": "StdCutoff",
+                "kind": "namevalue",
+                "type": "positive",
+                "purpose": "阈值标准差倍率"
+            }
+        ]
+    },
     "UniExp.TagSplitTrial": {
         "inputs": [
             {
@@ -335,9 +420,9 @@
                 "purpose": "UniExp BlockSignals 表"
             },
             {
-                "name":"TimeRange",
-                "kind":"required",
-                "type":[
+                "name": "TimeRange",
+                "kind": "required",
+                "type": [
                     "size=1,2",
                     "real"
                 ],
@@ -365,6 +450,34 @@
                 "type": "positive",
                 "purpose": "阈值的标准差倍率",
                 "default": 1
+            }
+        ]
+    },
+    "UniExp.TrialSignal2Behavior": {
+        "inputs": [
+            {
+                "name": "TrialSignal",
+                "kind": "required",
+                "type": "cell",
+                "purpose": "每个回合的信号值"
+            },
+            {
+                "name": "SampleRate",
+                "kind": "required",
+                "type": "positive",
+                "purpose": "信号采样率"
+            },
+            {
+                "name": "CsTime",
+                "kind": "required",
+                "type": "positive",
+                "purpose": "从回合开始到条件刺激的秒数"
+            },
+            {
+                "name": "UsTime",
+                "kind": "required",
+                "type": "positive",
+                "purpose": "从回合开始到非条件刺激的秒数"
             }
         ]
     }

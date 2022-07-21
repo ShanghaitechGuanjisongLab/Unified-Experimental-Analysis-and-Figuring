@@ -50,6 +50,10 @@ function Merged = MergeCommits(Commits,ChangeUID)
 function MergeFiles(Inputs,Output)
 %将单个UniExp数据库添加到现有文件，或创建新文件
 function MergeIntoFile(FilePath,Commit,ChangeUID)
+%根据信号拆分回合
+function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,options)
 %根据标通道将模块拆分成回合
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
+%根据回合信号判断行为
+function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CsTime,UsTime)
 ```
