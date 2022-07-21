@@ -335,6 +335,15 @@
                 "purpose": "UniExp BlockSignals 表"
             },
             {
+                "name":"TimeRange",
+                "kind":"required",
+                "type":[
+                    "size=1,2",
+                    "real"
+                ],
+                "purpose": "每个回合相对于刺激时点的起始时间和终止时间"
+            },
+            {
                 "name": "TagChannel",
                 "kind": "namevalue",
                 "type": [
@@ -349,16 +358,6 @@
                 ],
                 "purpose": "用于拆分的标通道名称",
                 "default": "\"CD1\""
-            },
-            {
-                "name": "TimeRange",
-                "kind": "namevalue",
-                "type": [
-                    "size=1,2",
-                    "real"
-                ],
-                "purpose": "每个回合相对于刺激时点的起始时间和终止时间",
-                "default": "[-2,8]"
             },
             {
                 "name": "StdCutoff",

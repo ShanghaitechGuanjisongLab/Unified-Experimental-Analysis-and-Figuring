@@ -51,5 +51,5 @@ function MergeFiles(Inputs,Output)
 %将单个UniExp数据库添加到现有文件，或创建新文件
 function MergeIntoFile(FilePath,Commit,ChangeUID)
 %根据标通道将模块拆分成回合
-function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,options)
+function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 ```
