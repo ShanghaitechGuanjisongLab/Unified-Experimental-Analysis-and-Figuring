@@ -389,13 +389,15 @@
                         "scalar"
                     ]
                 ],
-                "purpose": "用于拆分的细胞类型"
+                "purpose": "用于拆分的细胞类型",
+                "default":"Light"
             },
             {
                 "name": "StdCutoff",
                 "kind": "namevalue",
                 "type": "positive",
-                "purpose": "阈值标准差倍率"
+                "purpose": "阈值标准差倍率",
+                "default":2
             }
         ]
     },
