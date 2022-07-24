@@ -454,6 +454,25 @@
 			}
 		]
 	},
+	"UniExp.SampleNormalize": {
+		"inputs": [
+			{
+				"name": "Signals",
+				"kind": "required",
+				"type": [
+					"cell",
+					"vector"
+				],
+				"purpose": "输入信号"
+			},
+			{
+				"name": "Length",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "归一化信号长度"
+			}
+		]
+	},
 	"UniExp.SignalSplitTrial": {
 		"inputs": [
 			{

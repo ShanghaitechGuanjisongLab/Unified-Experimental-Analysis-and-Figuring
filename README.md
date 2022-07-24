@@ -52,6 +52,8 @@ function Merged = MergeCommits(Commits,ChangeUID)
 function MergeFiles(Inputs,Output)
 %将单个UniExp数据库添加到现有文件，或创建新文件
 function MergeIntoFile(FilePath,Commit,ChangeUID)
+%将不同长度信号序列归一化
+function Signals = SampleNormalize(Signals,Length)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,options)
 %根据标通道将模块拆分成回合

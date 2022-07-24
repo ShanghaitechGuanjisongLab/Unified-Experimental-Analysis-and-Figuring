@@ -5,5 +5,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		DateTime_primary_key_has_duplicate_values
 		Some_commits_are_missing_UID_definitions
 		Inconsistent_cells_per_line
+		Wrong_array_size
 	end
 end
