@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="2435460363" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="1778442600" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -57,16 +57,19 @@ function MergeIntoFile(FilePath,Commit,ChangeUID)
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,options)
 ```</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.png</param.screenshot>
-    <param.version>1.3.2</param.version>
+    <param.version>1.4.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
+      <item>Statistics and Machine Learning Toolbox</item>
     </param.products.name>
     <param.products.id>
       <item>17</item>
+      <item>19</item>
     </param.products.id>
     <param.products.version>
       <item>11.6</item>
+      <item>12.4</item>
     </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
