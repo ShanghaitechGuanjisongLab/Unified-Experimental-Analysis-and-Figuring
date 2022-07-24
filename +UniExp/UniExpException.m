@@ -4,5 +4,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Image_size_does_not_match
 		DateTime_primary_key_has_duplicate_values
 		Some_commits_are_missing_UID_definitions
+		Inconsistent_cells_per_line
 	end
 end

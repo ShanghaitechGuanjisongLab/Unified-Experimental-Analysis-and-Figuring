@@ -44,6 +44,8 @@ function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName)
 function HitRates = EventLog2HitRate(EventLogs,Tags)
 %生成带有平均值和标准误的学习曲线数据（不作图）
 function [Design,Mean,Sem]=LearningCurve(DataTable)
+%为多个特定类型的回合，将所有参与细胞的信号主成分分析，生成主成分空间中的典型曲线图。同类型回合会平均掉，主成分是细胞的加权和。
+function [PcaLines,Explained,Coeff,CellUID] = LinearPca(UETables,LineConditions,Normalize,F0Samples,options)
 %合并多个UniExp数据库
 function Merged = MergeCommits(Commits,ChangeUID)
 %将多个UniExp数据库文件合并成一个，UID可能改变
