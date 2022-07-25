@@ -473,6 +473,60 @@
 			}
 		]
 	},
+	"UniExp.SegmentFadePlot": {
+		"inputs": [
+			{
+				"name": "Points",
+				"kind": "required",
+				"type": [
+					"size=:,:,2:3",
+					"real"
+				],
+				"purpose": "线上采样点的坐标"
+			},
+			{
+				"name": "LineColors",
+				"kind": "required",
+				"type": [
+					"size=:,3",
+					"real"
+				],
+				"purpose": "线条颜色"
+			},
+			{
+				"name": "KeyIndex",
+				"kind": "ordered",
+				"type": "real",
+				"purpose": "关键时点位置"
+			},
+			{
+				"name": "KeyMarkers",
+				"kind": "ordered",
+				"type": [
+					[
+						"char"
+					],
+					[
+						"string",
+						"scalar"
+					]
+				],
+				"purpose": "符号标注"
+			},
+			{
+				"name": "PatchArguments",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "额外传递给patch的名称值参数"
+			},
+			{
+				"name": "ScatterArguments",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "额外传递给scatter或scatter3的名称值参数"
+			}
+		]
+	},
 	"UniExp.SignalSplitTrial": {
 		"inputs": [
 			{

@@ -54,6 +54,8 @@ function MergeFiles(Inputs,Output)
 function MergeIntoFile(FilePath,Commit,ChangeUID)
 %将不同长度信号序列归一化
 function Signals = SampleNormalize(Signals,Length)
+%绘制带有关键时点标识的渐淡线图
+function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,options)
 %根据标通道将模块拆分成回合

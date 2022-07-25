@@ -6,5 +6,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Some_commits_are_missing_UID_definitions
 		Inconsistent_cells_per_line
 		Wrong_array_size
+		NaN_appears_after_normalization
 	end
 end
