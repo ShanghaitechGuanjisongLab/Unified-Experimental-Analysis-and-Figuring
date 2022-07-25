@@ -7,5 +7,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Inconsistent_cells_per_line
 		Wrong_array_size
 		NaN_appears_after_normalization
+		No_data_matching_the_filter_criteria
 	end
 end
