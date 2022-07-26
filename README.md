@@ -61,5 +61,5 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,options)
 %根据标通道将模块拆分成回合
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 %根据回合信号判断行为
-function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CsTime,UsTime)
+function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime)
 ```

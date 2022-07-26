@@ -638,16 +638,22 @@
 				"purpose": "信号采样率"
 			},
 			{
-				"name": "CsTime",
+				"name": "CStartTime",
 				"kind": "required",
 				"type": "positive",
-				"purpose": "从回合开始到条件刺激的秒数"
+				"purpose": "条件刺激开始时间"
 			},
 			{
-				"name": "UsTime",
+				"name": "CEndTime",
 				"kind": "required",
 				"type": "positive",
-				"purpose": "从回合开始到非条件刺激的秒数"
+				"purpose": "条件刺激结束时间"
+			},
+			{
+				"name": "UStartTime",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "非条件刺激开始时间"
 			}
 		]
 	}
