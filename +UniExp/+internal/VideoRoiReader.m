@@ -12,7 +12,9 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 			obj.PieceSize=numel(typecast(Data(:),'uint8'));
 			obj.NumPieces=obj.NumFrames;
 			[SizeY,SizeX]=size(Data,1,2);
-			[Cx,Cy,Rx,Ry] = UniExp.internal.ImageJRoiReadout(VideoRoiPath{1}(2));
+			RoiPath=VideoRoiPath{1}(2);
+			[Cx,Cy,Rx,Ry] = UniExp.internal.ImageJRoiReadout(RoiPath);
+			[~,RoiPath]=fileparts(RoiPath);
 			Cx=reshape(Cx,1,1,[]);
 			Cy=reshape(Cy,1,1,[]);
 			Rx=reshape(Rx,1,1,[]);
@@ -26,7 +28,7 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 				PixelYX{R}=[Y,X];
 				obj.PixelIndex{R}=Index;
 			end
-			obj.Metadata={obj.FrameRate,PixelYX};
+			obj.Metadata={obj.FrameRate,PixelYX,RoiPath};
 		end
 		function Data = Read(obj,Start,End)
 			Data={obj.read([Start,End]),obj.PixelIndex};

@@ -52,14 +52,16 @@ function Merged = MergeCommits(Commits,ChangeUID)
 function MergeFiles(Inputs,Output)
 %将单个UniExp数据库添加到现有文件，或创建新文件
 function MergeIntoFile(FilePath,Commit,ChangeUID)
+%从数据库中移除一群细胞的一切关联数据
+function DataSet = RemoveCells(DataSet,CellUIDs)
 %将不同长度信号序列归一化
 function Signals = SampleNormalize(Signals,Length)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
 %根据信号拆分回合
-function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,options)
+function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据标通道将模块拆分成回合
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 %根据回合信号判断行为
-function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime)
+function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType)
 ```

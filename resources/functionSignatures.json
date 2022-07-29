@@ -454,6 +454,25 @@
 			}
 		]
 	},
+	"UniExp.RemoveCells": {
+		"inputs": [
+			{
+				"name": "DataSet",
+				"kind": "required",
+				"type": [
+					"struct",
+					"scalar"
+				],
+				"purpose": "要从中移除细胞的UniExp数据集"
+			},
+			{
+				"name": "CellUIDs",
+				"kind": "required",
+				"type": "real",
+				"purpose": "要移除的细胞UID"
+			}
+		]
+	},
 	"UniExp.SampleNormalize": {
 		"inputs": [
 			{
@@ -546,7 +565,7 @@
 			},
 			{
 				"name": "SplitType",
-				"kind": "namevalue",
+				"kind": "required",
 				"type": [
 					[
 						"char",
@@ -557,15 +576,14 @@
 						"scalar"
 					]
 				],
-				"purpose": "用于拆分的细胞类型",
-				"default": "Light"
+				"purpose": "用于拆分的细胞类型"
 			},
 			{
 				"name": "StdCutoff",
-				"kind": "namevalue",
+				"kind": "ordered",
 				"type": "positive",
 				"purpose": "阈值标准差倍率",
-				"default": 2
+				"default": 1
 			}
 		]
 	},
@@ -626,34 +644,102 @@
 	"UniExp.TrialSignal2Behavior": {
 		"inputs": [
 			{
-				"name": "TrialSignal",
-				"kind": "required",
-				"type": "cell",
-				"purpose": "每个回合的信号值"
-			},
-			{
-				"name": "SampleRate",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "信号采样率"
-			},
-			{
-				"name": "CStartTime",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "条件刺激开始时间"
-			},
-			{
-				"name": "CEndTime",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "条件刺激结束时间"
-			},
-			{
-				"name": "UStartTime",
-				"kind": "required",
-				"type": "positive",
-				"purpose": "非条件刺激开始时间"
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "TrialSignal",
+							"kind": "required",
+							"type": "cell",
+							"purpose": "每个回合的信号值"
+						},
+						{
+							"name": "SampleRate",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "信号采样率"
+						},
+						{
+							"name": "CStartTime",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "条件刺激开始时间"
+						},
+						{
+							"name": "CEndTime",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "条件刺激结束时间"
+						},
+						{
+							"name": "UStartTime",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "非条件刺激开始时间"
+						}
+					],
+					[
+						{
+							"name": "SignalTable",
+							"kind": "required",
+							"type": "tabular",
+							"purpose": "包含测量和参考信号的表"
+						},
+						{
+							"name": "SampleRate",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "信号采样率"
+						},
+						{
+							"name": "CStartTime",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "条件刺激开始时间"
+						},
+						{
+							"name": "CEndTime",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "条件刺激结束时间"
+						},
+						{
+							"name": "UStartTime",
+							"kind": "required",
+							"type": "positive",
+							"purpose": "非条件刺激开始时间"
+						},
+						{
+							"name": "SignalType",
+							"kind": "required",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "标识测量信号的细胞类型"
+						},
+						{
+							"name": "Reference",
+							"kind": "required",
+							"type": [
+								[
+									"char",
+									"row"
+								],
+								[
+									"string",
+									"scalar"
+								]
+							],
+							"purpose": "标识参考信号的细胞类型"
+						}
+					]
+				]
 			}
 		]
 	}
