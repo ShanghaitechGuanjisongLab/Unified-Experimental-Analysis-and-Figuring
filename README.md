@@ -47,14 +47,14 @@ function HitRates = EventLog2HitRate(EventLogs,Tags)
 function [Design,Mean,Sem]=LearningCurve(DataTable)
 %为多个特定类型的回合，将所有参与细胞的信号主成分分析，生成主成分空间中的典型曲线图。同类型回合会平均掉，主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff,CellUID] = LinearPca(UETables,LineConditions,Normalize,F0Samples,options)
-%合并多个UniExp数据库
-function Merged = MergeCommits(Commits,ChangeUID)
-%将多个UniExp数据库文件合并成一个，UID可能改变
-function MergeFiles(Inputs,Output)
-%将单个UniExp数据库添加到现有文件，或创建新文件
-function MergeIntoFile(FilePath,Commit,ChangeUID)
+%合并内存或文件中的多个UniExp数据库
+function Merged = Merge(Inputs,options)
 %从数据库中移除一群细胞的一切关联数据
 function DataSet = RemoveCells(DataSet,CellUIDs)
+%从数据库中移除一群小鼠的一切关联数据
+function DataSet = RemoveMice(DataSet,Mice)
+%将UniExp表格、数据库或文件中的小鼠批量重命名
+function varargout=RenameMice(Old,New,varargin)
 %将不同长度信号序列归一化
 function Signals = SampleNormalize(Signals,Length)
 %绘制带有关键时点标识的渐淡线图
