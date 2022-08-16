@@ -1,10 +1,10 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1778442600" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="139893947" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
     <param.company>上海科技大学</param.company>
-    <param.summary>本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。依赖埃博拉酱的MATLAB扩展、埃博拉酱的并行计算工具箱、Image5D</param.summary>
+    <param.summary>本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。依赖埃博拉酱的全局优化工具箱、埃博拉酱的并行计算工具箱、Image5D</param.summary>
     <param.description>本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。
 
 依赖埃博拉酱的MATLAB扩展、埃博拉酱的并行计算工具箱、Image5D
@@ -24,7 +24,12 @@ TrialSignals，主键(CellUID,TrialUID)，用回合和细胞的组合唯一标�
 这些表格可以使用【埃博拉酱的MATLAB扩展】中的MATLAB.DataTypes.Select方法进行基本的连接查询。有些 UniExp API 会要求以查询结果作为输入。
 
 UniExp数据文件名
-为了支持从数据文件中直接提取基本元数据的功能，请以UniExp标准格式命名数据文件： &lt;鼠名&gt;.&lt;日期时间&gt;.&lt;会话设计名&gt;[.&lt;其它可选字段&gt;].UniExp.mat 例如 0040.202207151026.BlueAudioWater.UniExp.mat 0040.202207151026.BlueAudioWater.行为.UniExp.mat 许多API都能自动检测标准文件名，自动生成元数据。如果文件名不合标准，将发出警告，但程序仍可运行，只是会缺少部分元数据。
+为了支持从数据文件中直接提取基本元数据的功能，请以UniExp标准格式命名数据文件：
+&lt;鼠名&gt;.&lt;日期时间&gt;.&lt;会话设计名&gt;[.&lt;其它可选字段&gt;].UniExp.mat
+例如
+0040.202207151026.BlueAudioWater.UniExp.mat
+0040.202207151026.BlueAudioWater.行为.UniExp.mat
+许多API都能自动检测标准文件名，自动生成元数据。如果文件名不合标准，将发出警告，但程序仍可运行，只是会缺少部分元数据。
 
 UniExp API
 为了获取、处理和使用UniExp格式文件，本工具箱包含一系列数据处理函数，都在UniExp包内，使用前需导入：
@@ -42,10 +47,12 @@ function BatchVideoMean(VideoPaths)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName)
 UniExp内部处理
+%用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
+function BarScatterCompare(DataA,DataB,varargin)
 %从事件记录取得命中率
 function HitRates = EventLog2HitRate(EventLogs,Tags)
-%生成带有平均值和标准误的学习曲线数据（不作图）
-function [Design,Mean,Sem]=LearningCurve(DataTable)
+%生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
+function Summary=LearningSummarize(Group,Mouse,DateTime,Performance,LearnedP)
 %为多个特定类型的回合，将所有参与细胞的信号主成分分析，生成主成分空间中的典型曲线图。同类型回合会平均掉，主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff,CellUID] = LinearPca(UETables,LineConditions,Normalize,F0Samples,options)
 %合并内存或文件中的多个UniExp数据库
@@ -66,8 +73,8 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdC
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType)</param.description>
-    <param.screenshot>${PROJECT_ROOT}\工具箱图像.png</param.screenshot>
-    <param.version>2.0.0</param.version>
+    <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
+    <param.version>3.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
@@ -119,8 +126,8 @@ resources/project
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="8.0.2" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(3)</requiredAddOn>
         <requiredAddOn earliest="3.1.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="9.0.1" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension</requiredAddOn>
         <requiredAddOn earliest="1.1.4" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
@@ -169,7 +176,6 @@ resources/project
       <file>${PROJECT_ROOT}\doc</file>
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
-      <file>${PROJECT_ROOT}\工具箱图像.png</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded>

@@ -41,10 +41,12 @@ function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName)
 ```
 ## UniExp内部处理
 ```MATLAB
+%用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
+function BarScatterCompare(DataA,DataB,varargin)
 %从事件记录取得命中率
 function HitRates = EventLog2HitRate(EventLogs,Tags)
-%生成带有平均值和标准误的学习曲线数据（不作图）
-function [Design,Mean,Sem]=LearningCurve(DataTable)
+%生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
+function Summary=LearningSummarize(Group,Mouse,DateTime,Performance,LearnedP)
 %为多个特定类型的回合，将所有参与细胞的信号主成分分析，生成主成分空间中的典型曲线图。同类型回合会平均掉，主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff,CellUID] = LinearPca(UETables,LineConditions,Normalize,F0Samples,options)
 %合并内存或文件中的多个UniExp数据库

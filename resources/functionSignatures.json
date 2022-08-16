@@ -1,4 +1,58 @@
 {
+	"UniExp.BarScatterCompare": {
+		"inputs": [
+			{
+				"name": "DataA",
+				"kind": "required",
+				"type": "real",
+				"purpose": "用于比较的数据采样点集合A"
+			},
+			{
+				"name": "DataB",
+				"kind": "required",
+				"type": "real",
+				"purpose": "用于比较的数据采样点集合B"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "ScatterLink",
+							"kind": "ordered",
+							"type": ["scalar","UniExp.Flags"],
+							"purpose": "连接两集合中配对的样本点"
+						},
+						{
+							"name": "Colors",
+							"kind": "ordered",
+							"type": [
+								"real",
+								"size=2,3"
+							],
+							"purpose": "指定条形和散点的RGB颜色"
+						}
+					],
+					[
+						{
+							"name": "Colors",
+							"kind": "ordered",
+							"type": [
+								"real",
+								"size=2,3"
+							],
+							"purpose": "指定条形和散点的RGB颜色"
+						},
+						{
+							"name": "ScatterLink",
+							"kind": "ordered",
+							"type": "choices={UniExp.Flags.ScatterLink}",
+							"purpose": "连接两集合中配对的样本点"
+						}
+					]
+				]
+			}
+		]
+	},
 	"UniExp.BatchOirRegisterTiff": {
 		"inputs": [
 			{
@@ -249,13 +303,43 @@
 			}
 		]
 	},
-	"UniExp.LearningCurve": {
+	"UniExp.LearningSummarize": {
 		"inputs": [
 			{
-				"name": "DataTable",
+				"name": "Group",
 				"kind": "required",
-				"type": "tabular",
-				"purpose": "输入数据表"
+				"type": "column",
+				"purpose": "会话分组名"
+			},
+			{
+				"name": "Mouse",
+				"kind": "required",
+				"type": "column",
+				"purpose": "每个会话的鼠名"
+			},
+			{
+				"name": "DateTime",
+				"kind": "required",
+				"type": [
+					"datetime",
+					"column"
+				],
+				"purpose": "每个会话的日期时间"
+			},
+			{
+				"name": "Performance",
+				"kind": "required",
+				"type": [
+					"real",
+					"column"
+				],
+				"purpose": "每个会话的表现分数"
+			},
+			{
+				"name": "LearnedP",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "表示学会的表现分阈值"
 			}
 		]
 	},
