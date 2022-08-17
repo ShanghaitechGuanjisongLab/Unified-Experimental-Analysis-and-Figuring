@@ -9,5 +9,7 @@ classdef UniExpException<MATLAB.IEnumerableException
 		NaN_appears_after_normalization
 		No_data_matching_the_filter_criteria
 		No_trials_identified
+		Undefined_UID_found
+		Table_is_missing_key_column
 	end
 end
