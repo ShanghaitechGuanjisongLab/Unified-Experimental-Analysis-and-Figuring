@@ -597,7 +597,7 @@
 				"name": "Points",
 				"kind": "required",
 				"type": [
-					"size=:,:,2:3",
+					"3d",
 					"real"
 				],
 				"purpose": "线上采样点的坐标"
