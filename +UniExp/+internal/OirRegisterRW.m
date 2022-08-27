@@ -14,7 +14,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Denominator
 		MovingChannel
 	end
-	methods(Static,Access=public)
+	methods(Static,Access=private)
 		function A = LocalSum(A)
 			[m,n]=size(A,1,2);
 			A = cumsum(padarray(A,[m n]),1);
@@ -29,14 +29,14 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 					Data=Reader.ReadPixels(TStart,TSize,varargin{:});
 					break;
 				catch ME
-					if ME.identifier=="Image5D:Memory_copy_failed"
+					if ME.identifier=="Image5D:Image5DException:Memory_copy_failed"
 						warning('文件读入失败，可能是持有文件的设备断开了连接，请检查设备。将在%u秒后重试。',Wait);
 						pause(Wait);
 						Wait=bitshift(Wait,1);
 						TryCount=TryCount+1;
 						warning('第%u次尝试读入：',TryCount);
 					else
-						throw(ME);
+						rethrow(ME);
 					end
 				end
 			end
@@ -79,7 +79,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			end
 			Sample=Sample-mean2(Sample);
 			Sample(Sample<0)=0;
-			obj.Transforms=MATLAB.DataTypes.Cell2Mat(tforms);
+			obj.Transforms=vertcat(tforms{:});
 			ColorLogical=~obj.TagLogical;
 			Colors=Colors(:,ColorLogical);
 			Colors(4,:)=1;
@@ -99,7 +99,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		end
 		function Data=Read(obj,Start,End)
 			Data={UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),obj.TagLogical,obj.Transforms,obj.XCorrs,obj.Numerator,obj.Denominator,obj.MovingChannel};
-		end		
+		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
 			Data(1)=[];

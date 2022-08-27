@@ -11,5 +11,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		No_trials_identified
 		Undefined_UID_found
 		Table_is_missing_key_column
+		Table_is_missing_required_column
 	end
 end
