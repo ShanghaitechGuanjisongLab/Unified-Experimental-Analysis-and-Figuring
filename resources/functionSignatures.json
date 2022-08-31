@@ -146,6 +146,12 @@
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "内存保留系数"
+			},
+			{
+				"name":"UniExpOutput",
+				"kind":"namevalue",
+				"type":[["string","scalar"],["char","row"]],
+				"purpose":"输出UniExp数据库文件名"
 			}
 		]
 	},
@@ -201,6 +207,12 @@
 					]
 				],
 				"purpose": "平均值TIFF路径"
+			},
+			{
+				"name":"UniExpOutput",
+				"kind":"namevalue",
+				"type":[["string","scalar"],["char","row"]],
+				"purpose":"输出UniExp数据库文件名"
 			}
 		]
 	},
@@ -278,6 +290,12 @@
 					]
 				],
 				"purpose": "每个ROI的名称"
+			},
+			{
+				"name":"UniExpOutput",
+				"kind":"namevalue",
+				"type":[["string","scalar"],["char","row"]],
+				"purpose":"输出UniExp数据库文件名"
 			}
 		]
 	},

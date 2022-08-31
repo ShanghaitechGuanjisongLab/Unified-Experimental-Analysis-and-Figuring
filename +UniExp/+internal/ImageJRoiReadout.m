@@ -1,4 +1,5 @@
 function [Cx,Cy,Rx,Ry] = ImageJRoiReadout(RoiSetPath)
+%此函数不能在线程并行池中运行，请务必使用进程并行池
 [~,~,Extension]=fileparts(RoiSetPath);
 if Extension==".zip"
 	NET.addAssembly("System.IO.Compression");

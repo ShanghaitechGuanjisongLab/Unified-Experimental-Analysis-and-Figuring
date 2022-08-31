@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1295829310" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="1295829310" file="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -24,12 +24,7 @@ TrialSignals，主键(CellUID,TrialUID)，用回合和细胞的组合唯一标�
 这些表格可以使用【埃博拉酱的MATLAB扩展】中的MATLAB.DataTypes.Select方法进行基本的连接查询。有些 UniExp API 会要求以查询结果作为输入。
 
 UniExp数据文件名
-为了支持从数据文件中直接提取基本元数据的功能，请以UniExp标准格式命名数据文件：
-&lt;鼠名&gt;.&lt;日期时间&gt;.&lt;会话设计名&gt;[.&lt;其它可选字段&gt;].UniExp.mat
-例如
-0040.202207151026.BlueAudioWater.UniExp.mat
-0040.202207151026.BlueAudioWater.行为.UniExp.mat
-许多API都能自动检测标准文件名，自动生成元数据。如果文件名不合标准，将发出警告，但程序仍可运行，只是会缺少部分元数据。
+为了支持从数据文件中直接提取基本元数据的功能，请以UniExp标准格式命名数据文件： &lt;鼠名&gt;.&lt;日期时间&gt;.&lt;会话设计名&gt;[.&lt;其它可选字段&gt;].UniExp.mat 例如 0040.202207151026.BlueAudioWater.UniExp.mat 0040.202207151026.BlueAudioWater.行为.UniExp.mat 许多API都能自动检测标准文件名，自动生成元数据。如果文件名不合标准，将发出警告，但程序仍可运行，只是会缺少部分元数据。
 
 UniExp API
 为了获取、处理和使用UniExp格式文件，本工具箱包含一系列数据处理函数，都在UniExp包内，使用前需导入：
@@ -41,11 +36,11 @@ import UniExp.*
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,ReferencePath,OutputDirectory,options)
 %批量测量OME-TIFF，以UniExp格式存储测量结果
-function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff)
+function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,options)
 %为多个视频批量输出平均图
 function BatchVideoMean(VideoPaths)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
-function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName)
+function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,options)
 UniExp内部处理
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
@@ -85,8 +80,8 @@ function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndT
       <item>19</item>
     </param.products.id>
     <param.products.version>
-      <item>11.6</item>
-      <item>12.4</item>
+      <item>11.5</item>
+      <item>12.3</item>
     </param.products.version>
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
@@ -184,11 +179,11 @@ resources/project
     </fileset.depfun.excluded>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022b</root>
+      <root>C:\Program Files\MATLAB\R2022a</root>
       <toolboxes />
     </matlab>
     <platform>

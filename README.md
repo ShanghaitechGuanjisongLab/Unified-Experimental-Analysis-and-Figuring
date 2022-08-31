@@ -33,11 +33,11 @@ import UniExp.*
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,ReferencePath,OutputDirectory,options)
 %批量测量OME-TIFF，以UniExp格式存储测量结果
-function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff)
+function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,options)
 %为多个视频批量输出平均图
 function BatchVideoMean(VideoPaths)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
-function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName)
+function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,options)
 ```
 ## UniExp内部处理
 ```MATLAB
