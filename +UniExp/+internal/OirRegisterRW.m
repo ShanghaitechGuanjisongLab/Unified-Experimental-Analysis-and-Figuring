@@ -65,7 +65,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
 			obj.NumPieces=obj.Reader.SizeT;
-			Sample=mean(OirRegisterRW.TryRead(obj.Reader,0,min(floor(Memory/SizePXYZ),obj.NumPieces),MovingChannel-1),5);
+			SampleHalf=floor(min(Memory/SizePXYZ,obj.NumPieces)/2);
+			Sample=mean(cat(5,OirRegisterRW.TryRead(obj.Reader,0,SampleHalf,MovingChannel-1),OirRegisterRW.TryRead(obj.Reader,obj.NumPieces-SampleHalf,SampleHalf,MovingChannel-1)),5);
 			SizeZ=min(size(FixedImage,4),size(Sample,4));
 			tforms=cell(SizeZ,1);
 			RefObj=imref2d([SizeX,SizeY]);
