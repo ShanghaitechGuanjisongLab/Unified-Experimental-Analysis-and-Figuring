@@ -862,13 +862,13 @@
 							"purpose": "标识参考信号的细胞类型"
 						}
 					]
-				],
-				{
-					"name":"JudgementAlgorithm",
-					"kind":"namevalue",
-					"type":["scalar","UniExp.Flags"],
-					"purpose":"判断行为是否发生的算法"
-				}
+				]
+			},
+			{
+				"name":"JudgementAlgorithm",
+				"kind":"namevalue",
+				"type":["scalar","UniExp.Flags"],
+				"purpose":"判断行为是否发生的算法"
 			}
 		]
 	}
