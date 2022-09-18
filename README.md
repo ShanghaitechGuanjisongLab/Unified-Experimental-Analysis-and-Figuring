@@ -37,7 +37,7 @@ function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,option
 %为多个视频批量输出平均图
 function BatchVideoMean(VideoPaths)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
-function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,options)
+function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 ```
 ## UniExp内部处理
 ```MATLAB
@@ -66,5 +66,5 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdC
 %根据标通道将模块拆分成回合
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 %根据回合信号判断行为
-function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType)
+function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
 ```

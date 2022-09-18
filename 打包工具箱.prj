@@ -40,7 +40,7 @@ function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,option
 %为多个视频批量输出平均图
 function BatchVideoMean(VideoPaths)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
-function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,options)
+function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 UniExp内部处理
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
@@ -67,9 +67,9 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdC
 %根据标通道将模块拆分成回合
 function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 %根据回合信号判断行为
-function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType)</param.description>
+function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
-    <param.version>3.0.5</param.version>
+    <param.version>4.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
@@ -123,7 +123,7 @@ resources/project
       <requiredaddons>
         <requiredAddOn earliest="3.0.0" fromRepository="true" id="4d05e210-f73f-4916-9076-1c9b15718b36" include="true" latest="latest">全局优化</requiredAddOn>
         <requiredAddOn earliest="3.1.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
-        <requiredAddOn earliest="9.0.2" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension</requiredAddOn>
+        <requiredAddOn earliest="9.4.1" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension</requiredAddOn>
         <requiredAddOn earliest="1.2.0" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
       </requiredaddons>
     </param.required.addons>

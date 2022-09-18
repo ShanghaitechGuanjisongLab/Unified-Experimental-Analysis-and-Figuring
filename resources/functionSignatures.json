@@ -17,9 +17,9 @@
 				"mutuallyExclusiveGroup": [
 					[
 						{
-							"name": "ScatterLink",
+							"name": "Connect_scatters",
 							"kind": "ordered",
-							"type": ["scalar","UniExp.Flags"],
+							"type": "choices={UniExp.Flags.Connect_scatters}",
 							"purpose": "连接两集合中配对的样本点"
 						},
 						{
@@ -43,9 +43,9 @@
 							"purpose": "指定条形和散点的RGB颜色"
 						},
 						{
-							"name": "ScatterLink",
+							"name": "Connect_scatters",
 							"kind": "ordered",
-							"type": "choices={UniExp.Flags.ScatterLink}",
+							"type": "choices={UniExp.Flags.Connect_scatters}",
 							"purpose": "连接两集合中配对的样本点"
 						}
 					]
@@ -292,6 +292,12 @@
 				"purpose": "每个ROI的名称"
 			},
 			{
+				"name":"Algorithm",
+				"kind":"ordered",
+				"type":["vector","UniExp.Flags"],
+				"purpose":"指定测量算法"
+			},
+			{
 				"name":"UniExpOutput",
 				"kind":"namevalue",
 				"type":[["string","scalar"],["char","row"]],
@@ -385,7 +391,7 @@
 							"name": "Normalize",
 							"kind": "required",
 							"type": [
-								"UniExp.Normalize",
+								"UniExp.Flags",
 								"scalar"
 							],
 							"purpose": "可选指定归一化算法"
@@ -856,7 +862,13 @@
 							"purpose": "标识参考信号的细胞类型"
 						}
 					]
-				]
+				],
+				{
+					"name":"JudgementAlgorithm",
+					"kind":"namevalue",
+					"type":["scalar","UniExp.Flags"],
+					"purpose":"判断行为是否发生的算法"
+				}
 			}
 		]
 	}
