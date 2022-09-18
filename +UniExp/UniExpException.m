@@ -12,7 +12,7 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Undefined_UID_found
 		Table_is_missing_key_column
 		Table_is_missing_required_column
-        Unknown_algorithm
-        Video_and_ROI_file_numbers_do_not_match
+		Unknown_algorithm
+		Video_and_ROI_file_numbers_do_not_match
 	end
 end
