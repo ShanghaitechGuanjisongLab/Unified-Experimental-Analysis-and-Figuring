@@ -14,7 +14,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Denominator
 		MovingChannel
 	end
-	methods(Static,Access=private)
+	methods(Static,Access=public)
 		function Data=TryRead(Reader,TStart,TSize,varargin)
 			Wait=0x001;
 			TryCount=0x1;
@@ -58,42 +58,41 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			[SizeX,SizeY,SizeZ]=size(FixedImage,1,2,4);
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
-			obj.NumPieces=obj.Reader.SizeT;
+			obj.NumPieces=obj.Reader.SizeT/4;%Debug
 			SampleHalf=floor(min(Memory/SizePXYZ,obj.NumPieces)/2);
-			Sample=mean(cat(5,OirRegisterRW.TryRead(obj.Reader,0,SampleHalf,MovingChannel-1),OirRegisterRW.TryRead(obj.Reader,obj.NumPieces-SampleHalf,SampleHalf,MovingChannel-1)),5);		
-			SizeZ=min(size(FixedImage,4),size(Sample,4));
-			FixedImage=FixedImage(:,:,:,1:SizeZ);
-			Sample=Sample(:,:,:,1:SizeZ);
+			MovingImage=gpuArray(mean(cat(5,OirRegisterRW.TryRead(obj.Reader,0,SampleHalf,MovingChannel-1),OirRegisterRW.TryRead(obj.Reader,obj.NumPieces-SampleHalf,SampleHalf,MovingChannel-1)),5));		
+			SizeZ=min(size(FixedImage,4),size(MovingImage,4));
+			FixedImage=gpuArray(FixedImage(:,:,:,1:SizeZ));
+			MovingImage=MovingImage(:,:,:,1:SizeZ);
 			tforms=cell(SizeZ,1);
 			RefObj=imref2d([SizeX,SizeY]);
 			%不可以用CZ，因为尺寸不一定全覆盖
-			%% 策略测试：对齐中心、高斯模糊
+			%% 策略测试：对齐质心、去细胞
+			FixedImage=UniExp.internal.Decell(double(FixedImage));
+			MovingImage=UniExp.internal.Decell(MovingImage);
 			[Ys,Xs] = meshgrid(1:SizeY,1:SizeX);
 			sumFixedIntensity = sum(FixedImage,[1 2 3]);
-			sumMovingIntensity = sum(Sample,[1 2 3]);
+			sumMovingIntensity = sum(MovingImage,[1 2 3]);
 			FIRow=double(reshape(FixedImage,1,[],1,SizeZ));
-			SampleRow=double(reshape(Sample,1,[],1,SizeZ));
-			Translation=permute([pagemtimes(FIRow,Ys(:))./sumFixedIntensity-pagemtimes(SampleRow,Ys(:))./sumMovingIntensity,pagemtimes(FIRow,Xs(:))./sumFixedIntensity-pagemtimes(SampleRow,Xs(:))./sumMovingIntensity],[2 4 1 3]);
-			FixedImage = imgaussfilt(FixedImage,2);
-			MovingImage = imgaussfilt(Sample,2);
+			MIRow=double(reshape(MovingImage,1,[],1,SizeZ));
+			Translation=permute([pagemtimes(FIRow,Ys(:))./sumFixedIntensity-pagemtimes(MIRow,Ys(:))./sumMovingIntensity,pagemtimes(FIRow,Xs(:))./sumFixedIntensity-pagemtimes(MIRow,Xs(:))./sumMovingIntensity],[2 4 1 3]);
 			initTform = affinetform2d;
+			FixedImage=gather(FixedImage);
+			MovingGather=gather(MovingImage);
 			for Z=1:SizeZ
 				initTform.A(1:2,3) = Translation(:,Z);
-				tforms{Z}=imregtform(MovingImage(:,:,:,Z),FixedImage(:,:,:,Z),'rigid',optimizer,metric,InitialTransformation=initTform);
+				tforms{Z}=imregtform(MovingGather(:,:,:,Z),FixedImage(:,:,:,Z),'rigid',optimizer,metric,InitialTransformation=initTform);
 			end
 			%%
-			Sample=gpuArray(Sample);
-			for Z=1:SizeZ
-				Sample(:,:,:,Z)=imwarp(Sample(:,:,:,Z),tforms{Z},OutputView=RefObj);
-			end
-			Sample=Sample-mean2(Sample);
-			Sample(Sample<0)=0;
+% 			for Z=1:SizeZ
+% 				MovingImage(:,:,:,Z)=imwarp(MovingImage(:,:,:,Z),tforms{Z},OutputView=RefObj);
+% 			end
 			obj.Transforms=vertcat(tforms{:});
 			ColorLogical=~obj.TagLogical;
 			Colors=Colors(:,ColorLogical);
 			Colors(4,:)=1;
 			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
-			[Numerator,Denominator,XCorrs]=UniExp.internal.NxcInvariant(Sample,MaxTranslationStep);
+			[Numerator,Denominator,XCorrs]=UniExp.internal.NxcInvariant(MovingImage,MaxTranslationStep);
 			obj.Numerator=gather(Numerator);
 			obj.Denominator=gather(Denominator);
 			obj.XCorrs=gather(XCorrs);
