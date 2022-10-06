@@ -2,17 +2,12 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
-		Metadata
+		CollectData
+		ProcessData
 	end
 	properties(SetAccess=immutable,GetAccess=private)
 		Reader Image5D.OirReader
 		Writer Image5D.OmeTiffRWer
-		TagLogical
-		Transforms
-		XCorrs
-		Numerator
-		Denominator
-		MovingChannel
 	end
 	methods(Static,Access=public)
 		function Data=TryRead(Reader,TStart,TSize,varargin)
@@ -37,7 +32,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		end
 	end
 	methods
-		function obj = OirRegisterRW(OirPath,TiffPath,FixedImage,Memory,MaxTranslationStep,MovingChannel)
+		function obj = OirRegisterRW(OirPath,TiffPath,MovingChannel,ClearGpu,FIOrTM,MemoryOrSampleSize)
 			persistent optimizer metric
 			if isempty(optimizer)
 				[optimizer, metric] = imregconfig('multimodal');
@@ -53,57 +48,76 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			import UniExp.internal.OirRegisterRW
 			obj.Reader=OirReader(OirPath);
 			[Devices,Colors]=obj.Reader.DeviceColors;
-			obj.Metadata=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
-			obj.TagLogical=startsWith(obj.Metadata.DeviceNames,'CD');
-			[SizeX,SizeY,SizeZ]=size(FixedImage,1,2,4);
+			obj.CollectData=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
+			TagLogical=startsWith(obj.CollectData.DeviceNames,'CD');
+			FIMode=isnumeric(FIOrTM);
+			if FIMode
+				[SizeX,SizeY,SizeZ]=size(FIOrTM,1,2,4);
+			else
+				SizeX=double(obj.Reader.SizeX);
+				SizeY=double(obj.Reader.SizeY);
+				SizeZ=numel(FIOrTM);
+			end
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
-			obj.NumPieces=obj.Reader.SizeT/4;%Debug
-			SampleHalf=floor(min(Memory/SizePXYZ,obj.NumPieces)/2);
-			MovingImage=gpuArray(mean(cat(5,OirRegisterRW.TryRead(obj.Reader,0,SampleHalf,MovingChannel-1),OirRegisterRW.TryRead(obj.Reader,obj.NumPieces-SampleHalf,SampleHalf,MovingChannel-1)),5));		
-			SizeZ=min(size(FixedImage,4),size(MovingImage,4));
-			FixedImage=gpuArray(FixedImage(:,:,:,1:SizeZ));
-			MovingImage=MovingImage(:,:,:,1:SizeZ);
-			tforms=cell(SizeZ,1);
-			RefObj=imref2d([SizeX,SizeY]);
-			%不可以用CZ，因为尺寸不一定全覆盖
-			%% 策略测试：对齐质心、去细胞
-			FixedImage=UniExp.internal.Decell(double(FixedImage));
-			MovingImage=UniExp.internal.Decell(MovingImage);
-			[Ys,Xs] = meshgrid(1:SizeY,1:SizeX);
-			sumFixedIntensity = sum(FixedImage,[1 2 3]);
-			sumMovingIntensity = sum(MovingImage,[1 2 3]);
-			FIRow=double(reshape(FixedImage,1,[],1,SizeZ));
-			MIRow=double(reshape(MovingImage,1,[],1,SizeZ));
-			Translation=permute([pagemtimes(FIRow,Ys(:))./sumFixedIntensity-pagemtimes(MIRow,Ys(:))./sumMovingIntensity,pagemtimes(FIRow,Xs(:))./sumFixedIntensity-pagemtimes(MIRow,Xs(:))./sumMovingIntensity],[2 4 1 3]);
-			initTform = affinetform2d;
-			FixedImage=gather(FixedImage);
-			MovingGather=gather(MovingImage);
-			for Z=1:SizeZ
-				initTform.A(1:2,3) = Translation(:,Z);
-				tforms{Z}=imregtform(MovingGather(:,:,:,Z),FixedImage(:,:,:,Z),'rigid',optimizer,metric,InitialTransformation=initTform);
+			%DebugStart
+			obj.NumPieces=obj.Reader.SizeT/90;%20
+			fprintf('测试：%u帧\n',obj.NumPieces);
+			%DebugEnd
+			if ClearGpu
+				gpuDevice().reset;
 			end
-			%%
-% 			for Z=1:SizeZ
-% 				MovingImage(:,:,:,Z)=imwarp(MovingImage(:,:,:,Z),tforms{Z},OutputView=RefObj);
-% 			end
-			obj.Transforms=vertcat(tforms{:});
-			ColorLogical=~obj.TagLogical;
-			Colors=Colors(:,ColorLogical);
-			Colors(4,:)=1;
-			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.New(flipud(Colors)),SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
-			[Numerator,Denominator,XCorrs]=UniExp.internal.NxcInvariant(MovingImage,MaxTranslationStep);
-			obj.Numerator=gather(Numerator);
-			obj.Denominator=gather(Denominator);
-			obj.XCorrs=gather(XCorrs);
-			obj.MovingChannel=nnz(ColorLogical(1:MovingChannel));
+			if FIMode
+				SampleHalf=floor(min(MemoryOrSampleSize/SizePXYZ,obj.NumPieces)/2);
+				MovingImage=gpuArray(mean(cat(5,OirRegisterRW.TryRead(obj.Reader,0,SampleHalf,MovingChannel-1),OirRegisterRW.TryRead(obj.Reader,obj.NumPieces-SampleHalf,SampleHalf,MovingChannel-1)),5));
+				SizeZ=min(size(FIOrTM,4),size(MovingImage,4));
+				FIOrTM=gpuArray(FIOrTM(:,:,:,1:SizeZ));
+				MovingImage=MovingImage(:,:,:,1:SizeZ);
+				tforms=cell(SizeZ,1);
+				%不可以用CZ，因为尺寸不一定全覆盖
+				%% 策略测试：对齐质心、去细胞
+				FIOrTM=imgaussfilt(double(FIOrTM),20);
+				MovingImage=imgaussfilt(MovingImage,20);
+				[Ys,Xs] = meshgrid(1:SizeY,1:SizeX);
+				sumFixedIntensity = sum(FIOrTM,[1 2 3]);
+				sumMovingIntensity = sum(MovingImage,[1 2 3]);
+				FIRow=double(reshape(FIOrTM,1,[],1,SizeZ));
+				MIRow=double(reshape(MovingImage,1,[],1,SizeZ));
+				Translation=permute([pagemtimes(FIRow,Ys(:))./sumFixedIntensity-pagemtimes(MIRow,Ys(:))./sumMovingIntensity,pagemtimes(FIRow,Xs(:))./sumFixedIntensity-pagemtimes(MIRow,Xs(:))./sumMovingIntensity],[2 4 1 3]);
+				initTform = affinetform2d;
+				FIOrTM=gather(FIOrTM);
+				MovingGathered=gather(MovingImage);
+				for Z=1:SizeZ
+					initTform.A(1:2,3) = Translation(:,Z);
+					tforms{Z}=imregtform(MovingGathered(:,:,:,Z),FIOrTM(:,:,:,Z),'rigid',optimizer,metric,InitialTransformation=initTform);
+				end
+				%%
+				% 			for Z=1:SizeZ
+				% 				MovingImage(:,:,:,Z)=imwarp(MovingImage(:,:,:,Z),tforms{Z},OutputView=imref2d(size(MovingImage,[1 2])));
+				% 			end
+				Transforms=vertcat(tforms{:});
+			else
+				SampleIndex=uint16(linspace(0,double(obj.NumPieces-1),MemoryOrSampleSize));
+				MovingImage=zeros(SizeX,SizeY,1,SizeZ,MemoryOrSampleSize,'gpuArray');
+				for T=1:MemoryOrSampleSize
+					MovingImage(:,:,:,:,T)=OirRegisterRW.TryRead(obj.Reader,SampleIndex(T),1,MovingChannel-1);
+				end
+				Transforms=FIOrTM;
+			end
+			ColorLogical=~TagLogical;
+			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.FromOirColors(Colors(:,ColorLogical)),SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
+			obj.ProcessData={TagLogical,Transforms,structfun(@gather,ImageProcessing.Nxc2TPreprocess(permute(MovingImage-imgaussfilt(MovingImage,20)+mean(MovingImage,1:2),[1,2,3,4,6,5]),[SizeX,SizeY]),UniformOutput=false),nnz(ColorLogical(1:MovingChannel)),SampleIndex+1};
+			%GPU内存不会自动清理，必须手动清理
+			gpuDevice([]);
 		end
 		function Data=Read(obj,Start,End)
-			Data={UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),obj.TagLogical,obj.Transforms,obj.XCorrs,obj.Numerator,obj.Denominator,obj.MovingChannel};
+			%DebugStart
+			fprintf('%u/%u\n',End,obj.NumPieces);
+			%DebugEnd
+			Data={UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),Start,End};
 		end
-		function Data=Write(obj,Data,Start,End)
-			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
-			Data(1)=[];
+		function Write(obj,Data,Start,End)
+			obj.Writer.WritePixels(Data,Start-1,End-Start+1);
 		end
 	end
 end
