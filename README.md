@@ -1,6 +1,6 @@
 本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。
 
-依赖[埃博拉酱的MATLAB扩展](https://ww2.mathworks.cn/matlabcentral/fileexchange/96344-matlab-extension)、[埃博拉酱的并行计算工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/99194-parallel-computing)、[Image5D](https://ww2.mathworks.cn/matlabcentral/fileexchange/114435-image5d-oir-tiff)
+依赖[埃博拉酱的全局优化工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/101368-plot-color-allocate-optimization)、[埃博拉酱的并行计算工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/99194-parallel-computing)、[埃博拉酱的图像处理工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/117015-image-processing-toolbox)、[Image5D](https://ww2.mathworks.cn/matlabcentral/fileexchange/114435-image5d-oir-tiff)、[ReadImageJROI](https://ww2.mathworks.cn/matlabcentral/fileexchange/32479-readimagejroi)
 
 # UniExp文件格式 
 UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符合BC范式的数据表组成，每张表包含主键和必选列，可以额外添加可选列：
@@ -28,6 +28,13 @@ UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符�
 import UniExp.*
 ```
 每个函数代码文件内都有详尽文档，可用`doc UniExp.函数名`查询。函数的使用示例可在快速入门文档GettingStarted.mlx中查看。下方仅列出这些函数的简介。
+## 原始数据预处理
+```MATLAB
+%对OIR文件进行等时距采样然后输出平均TIFF
+function OirSampleMean(OirPath,options)
+%根据 ImageJ RoiSet 配准图像
+function TransMatrix = RoiRegister(FixedRoi,MovingRois,MovingSamples,UseAffine)
+```
 ## 从其它数据文件格式取得UniExp
 ```MATLAB
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道

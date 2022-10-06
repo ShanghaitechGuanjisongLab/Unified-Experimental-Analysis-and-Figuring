@@ -4,10 +4,10 @@
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
     <param.company>上海科技大学</param.company>
-    <param.summary>本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。依赖埃博拉酱的全局优化工具箱、埃博拉酱的并行计算工具箱、Image5D</param.summary>
+    <param.summary>本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。依赖埃博拉酱的全局优化工具箱、埃博拉酱的并行计算工具箱、埃博拉酱的图像处理工具箱、Image5D、ReadImageJROI</param.summary>
     <param.description>本工具箱立志收集管吉松实验室所有数据分析作图代码，并使用统一的UniExp格式。
 
-依赖埃博拉酱的MATLAB扩展、埃博拉酱的并行计算工具箱、Image5D
+依赖埃博拉酱的全局优化工具箱、埃博拉酱的并行计算工具箱、埃博拉酱的图像处理工具箱、Image5D、ReadImageJROI
 
 UniExp文件格式
 UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符合BC范式的数据表组成，每张表包含主键和必选列，可以额外添加可选列：
@@ -32,6 +32,11 @@ UniExp API
 import UniExp.*
 每个函数代码文件内都有详尽文档，可用doc UniExp.函数名查询。函数的使用示例可在快速入门文档GettingStarted.mlx中查看。下方仅列出这些函数的简介。
 
+原始数据预处理
+%对OIR文件进行等时距采样然后输出平均TIFF
+function OirSampleMean(OirPath,options)
+%根据 ImageJ RoiSet 配准图像
+function TransMatrix = RoiRegister(FixedRoi,MovingRois,MovingSamples,UseAffine)
 从其它数据文件格式取得UniExp
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,ReferencePath,OutputDirectory,options)
@@ -69,7 +74,7 @@ function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeR
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
-    <param.version>4.0.1</param.version>
+    <param.version>4.1.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Image Processing Toolbox</item>
@@ -184,7 +189,14 @@ resources/project
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2022b</root>
-      <toolboxes />
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
     </matlab>
     <platform>
       <unix>false</unix>

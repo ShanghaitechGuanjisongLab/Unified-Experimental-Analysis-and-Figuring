@@ -118,7 +118,7 @@
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "平移变换最多移动多少像素",
-				"default": 10
+				"default": 20
 			},
 			{
 				"name": "FixedImage",
@@ -133,25 +133,73 @@
 				"name": "MovingChannel",
 				"kind": "namevalue",
 				"type": "positive",
-				"purpose": "要选择晃动图的哪个通道与固定图匹配"
+				"purpose": "要选择晃动图的哪个通道与固定图匹配",
+				"default": 1
 			},
 			{
 				"name": "FixedChannel",
 				"kind": "namevalue",
 				"type": "positive",
-				"purpose": "要选择固定图的哪个通道作为配准参照"
+				"purpose": "要选择固定图的哪个通道作为配准参照",
+				"default": 1
 			},
 			{
 				"name": "MemoryPreserve",
 				"kind": "namevalue",
 				"type": "positive",
-				"purpose": "内存保留系数"
+				"purpose": "内存保留系数",
+				"default": 1
 			},
 			{
-				"name":"UniExpOutput",
-				"kind":"namevalue",
-				"type":[["string","scalar"],["char","row"]],
-				"purpose":"输出UniExp数据库文件名"
+				"name": "UniExpOutput",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "输出UniExp数据库文件名"
+			},
+			{
+				"name": "TransMatrix",
+				"kind": "namevalue",
+				"type": [
+					"2d",
+					"images.geotrans.internal.GeometricTransformation"
+				],
+				"purpose": "每个文件每个Z层的变换矩阵"
+			},
+			{
+				"name": "SampleSize",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "文件内平移配准的采样样本量",
+				"default": 30
+			},
+			{
+				"name": "UseGpu",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "是否使用GPU计算",
+				"default": true
+			},
+			{
+				"name": "Parallel",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "是否启用并行池计算",
+				"default": true
 			}
 		]
 	},
@@ -209,10 +257,19 @@
 				"purpose": "平均值TIFF路径"
 			},
 			{
-				"name":"UniExpOutput",
-				"kind":"namevalue",
-				"type":[["string","scalar"],["char","row"]],
-				"purpose":"输出UniExp数据库文件名"
+				"name": "UniExpOutput",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "输出UniExp数据库文件名"
 			}
 		]
 	},
@@ -292,16 +349,28 @@
 				"purpose": "每个ROI的名称"
 			},
 			{
-				"name":"Algorithm",
-				"kind":"ordered",
-				"type":["vector","UniExp.Flags"],
-				"purpose":"指定测量算法"
+				"name": "Algorithm",
+				"kind": "ordered",
+				"type": [
+					"vector",
+					"UniExp.Flags"
+				],
+				"purpose": "指定测量算法"
 			},
 			{
-				"name":"UniExpOutput",
-				"kind":"namevalue",
-				"type":[["string","scalar"],["char","row"]],
-				"purpose":"输出UniExp数据库文件名"
+				"name": "UniExpOutput",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "输出UniExp数据库文件名"
 			}
 		]
 	},
@@ -528,6 +597,60 @@
 			}
 		]
 	},
+	"UniExp.OirSampleMean": {
+		"inputs": [
+			{
+				"name": "OirPath",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.oir"
+					],
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "OIR文件路径"
+			},
+			{
+				"name": "Channel",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "要采样的通道",
+				"default": 1
+			},
+			{
+				"name": "OutputDirectory",
+				"kind": "namevalue",
+				"type": [
+					[
+						"folder"
+					],
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "输出目录"
+			},
+			{
+				"name": "SampleSize",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "采样样本量",
+				"default": 50
+			}
+		]
+	},
 	"UniExp.RemoveCells": {
 		"inputs": [
 			{
@@ -593,6 +716,60 @@
 				"kind": "required",
 				"purpose": "包含鼠名的数据容器",
 				"repeating": true
+			}
+		]
+	},
+	"UniExp.RoiRegister": {
+		"inputs": [
+			{
+				"name": "FixedRoi",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.zip"
+					],
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "从固定图圈出的 ImageJ RoiSet.zip 文件"
+			},
+			{
+				"name": "MovingRois",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.zip"
+					],
+					[
+						"string"
+					]
+				],
+				"purpose": "从采样平均图圈出的RoiSet"
+			},
+			{
+				"name": "MovingSamples",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.tif"
+					],
+					[
+						"string"
+					]
+				],
+				"purpose": "采样平均图文件路径"
+			},
+			{
+				"name": "Method",
+				"kind": "ordered",
+				"type": ["choices={'rigid','affine'"],
+				"purpose": "变换方法"
 			}
 		]
 	},
@@ -865,10 +1042,13 @@
 				]
 			},
 			{
-				"name":"JudgementAlgorithm",
-				"kind":"namevalue",
-				"type":["scalar","UniExp.Flags"],
-				"purpose":"判断行为是否发生的算法"
+				"name": "JudgementAlgorithm",
+				"kind": "namevalue",
+				"type": [
+					"scalar",
+					"UniExp.Flags"
+				],
+				"purpose": "判断行为是否发生的算法"
 			}
 		]
 	}
