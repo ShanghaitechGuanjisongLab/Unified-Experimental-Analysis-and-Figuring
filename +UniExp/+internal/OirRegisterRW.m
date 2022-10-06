@@ -61,7 +61,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
 			%DebugStart
-			obj.NumPieces=obj.Reader.SizeT/90;%20
+			obj.NumPieces=obj.Reader.SizeT;%20
 			fprintf('测试：%u帧\n',obj.NumPieces);
 			%DebugEnd
 			if ClearGpu
