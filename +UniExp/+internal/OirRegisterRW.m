@@ -10,7 +10,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Writer Image5D.OmeTiffRWer
 	end
 	properties(Access=private)
-		Progress(1,1)uint8
+		Progress(1,1)uint16
 	end
 	methods(Static,Access=public)
 		function Data=TryRead(Reader,TStart,TSize,varargin)
@@ -63,8 +63,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			end
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
-			obj.NumPieces=obj.Reader.SizeT;%20
-			fprintf('共%u帧：\n|----------------------------------------------------------------------------------------------------|\n|',obj.NumPieces);
+			obj.NumPieces=obj.Reader.SizeT/5;%20
+			fprintf('共%u帧：\n|————————————————————————————————————————————————————————————————————————————————————————————————————|\n|',obj.NumPieces);
 			obj.Progress=0;
 			if ClearGpu
 				gpuDevice().reset;
@@ -117,11 +117,13 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		end
 		function Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data,Start-1,End-Start+1);
-			ProgressAdd=End*50/obj.NumPieces-obj.Progress;
-			fprintf(repmat('🐭',1,ProgressAdd));
-			obj.Progress=obj.Progress+ProgressAdd;
-			if obj.Progress>=50
-				fprintf('|\n');
+			ProgressAdd=End*40/obj.NumPieces-obj.Progress;
+			if ProgressAdd
+				fprintf(repmat('🐭',1,ProgressAdd));
+				obj.Progress=obj.Progress+ProgressAdd;
+				if obj.Progress>=40
+					fprintf('|\n');
+				end
 			end
 		end
 	end

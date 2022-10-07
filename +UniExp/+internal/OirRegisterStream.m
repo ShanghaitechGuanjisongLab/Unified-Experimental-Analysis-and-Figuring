@@ -14,7 +14,7 @@ classdef OirRegisterStream<ParallelComputing.BlockRWStream
 		function NextObject(obj)
 			Index=obj.ObjectsRead+1;
 			if Index<=obj.NumObjects
-				fprintf('文件%u/%u：%s\n',Index,obj.NumObjects,obj.RWObjects(Index).OirPaths);
+				fprintf('%s 文件%u/%u：%s\n',datetime,Index,obj.NumObjects,obj.RWObjects(Index).OirPaths);
 				if obj.ClearGpuForEachObject
 					gpuDevice().reset;
 				end
