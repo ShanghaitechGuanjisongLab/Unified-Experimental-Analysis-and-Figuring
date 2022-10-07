@@ -63,7 +63,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			end
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
-			obj.NumPieces=obj.Reader.SizeT/5;%20
+			obj.NumPieces=obj.Reader.SizeT;%20
 			fprintf('共%u帧：\n|————————————————————————————————————————————————————————————————————————————————————————————————————|\n|',obj.NumPieces);
 			obj.Progress=0;
 			if ClearGpu
