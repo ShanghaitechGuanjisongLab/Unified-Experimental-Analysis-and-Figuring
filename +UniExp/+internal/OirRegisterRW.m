@@ -6,19 +6,20 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		ProcessData
 	end
 	properties(SetAccess=immutable,GetAccess=private)
-		Reader Image5D.OirReader
 		Writer Image5D.OmeTiffRWer
+		OirPath
 	end
 	properties(Access=private)
 		Progress(1,1)uint16
+		Reader Image5D.OirReader
 	end
-	methods(Static,Access=public)
-		function Data=TryRead(Reader,TStart,TSize,varargin)
+	methods(Access=private)
+		function Data=TryRead(obj,TStart,TSize,varargin)
 			Wait=0x001;
 			TryCount=0x1;
 			while true
 				try
-					Data=Reader.ReadPixels(TStart,TSize,varargin{:});
+					Data=obj.Reader.ReadPixels(TStart,TSize,varargin{:});
 					break;
 				catch ME
 					if ME.identifier=="Image5D:Image5DException:Memory_copy_failed"
@@ -27,6 +28,8 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 						Wait=bitshift(Wait,1);
 						TryCount=TryCount+1;
 						warning('第%u次尝试读入：',TryCount);
+						delete(obj.OirReader);
+						obj.Reader=Image5D.OirReader(obj.OirPath);
 					else
 						rethrow(ME);
 					end
@@ -49,6 +52,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			end
 			import Image5D.*
 			import UniExp.internal.OirRegisterRW
+			obj.OirPath=OirPath;
 			obj.Reader=OirReader(OirPath);
 			[Devices,Colors]=obj.Reader.DeviceColors;
 			obj.CollectData=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
@@ -63,7 +67,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			end
 			SizePXYZ=2*SizeX*SizeY*SizeZ;
 			obj.PieceSize=SizePXYZ*double(obj.Reader.SizeC);
-			obj.NumPieces=obj.Reader.SizeT/5;%20
+			obj.NumPieces=obj.Reader.SizeT;%20
 			fprintf('共%u帧：\n|————————————————————————————————————————————————————————————————————————————————————————————————————|\n|',obj.NumPieces);
 			obj.Progress=0;
 			if ClearGpu
@@ -102,7 +106,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 				SampleIndex=uint16(linspace(0,double(obj.NumPieces-1),MemoryOrSampleSize));
 				MovingImage=zeros(SizeX,SizeY,1,SizeZ,MemoryOrSampleSize,'gpuArray');
 				for T=1:MemoryOrSampleSize
-					MovingImage(:,:,:,:,T)=OirRegisterRW.TryRead(obj.Reader,SampleIndex(T),1,MovingChannel-1);
+					MovingImage(:,:,:,:,T)=obj.TryRead(SampleIndex(T),1,MovingChannel-1);
 				end
 				Transforms=FIOrTM;
 			end
@@ -113,7 +117,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			gpuDevice([]);
 		end
 		function Data=Read(obj,Start,End)
-			Data={UniExp.internal.OirRegisterRW.TryRead(obj.Reader,Start-1,End-Start+1),Start,End};
+			Data={obj.TryRead(Start-1,End-Start+1),Start,End};
 		end
 		function Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data,Start-1,End-Start+1);
