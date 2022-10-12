@@ -14,5 +14,7 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Table_is_missing_required_column
 		Unknown_algorithm
 		Video_and_ROI_file_numbers_do_not_match
+		More_than_one_SplitType_Cell_was_found_in_Block
+		The_Block_for_the_specified_Design_could_not_be_found
 	end
 end
