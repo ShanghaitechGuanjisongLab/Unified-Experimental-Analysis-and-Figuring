@@ -1,9 +1,9 @@
-function [Data,Reader] = TryRead(Reader,Start,Size,OirPath)
+function [Data,Reader] = TryRead(Reader,OirPath,Start,Size,varargin)
 Wait=0x001;
 TryCount=0x1;
 while true
 	try
-		Data=Reader.ReadPixels(Start,Size);
+		Data=Reader.ReadPixels(Start,Size,varargin{:});
 		break;
 	catch ME
 		if ME.identifier=="Image5D:Image5DException:Memory_copy_failed"
