@@ -9,6 +9,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		Writer Image5D.OmeTiffRWer
 		OirPath
 		Translation
+		NontagChannels
 	end
 	properties(Access=private)
 		Reader Image5D.OirReader
@@ -25,13 +26,15 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			SizeZ=obj.Reader.SizeZ;
 			obj.NumPieces=obj.Reader.SizeT;
 			obj.PieceSize=2*prod([uint32(SizeX),SizeY,SizeC,SizeZ]);
-			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,ChannelColor.FromOirColors(Colors(:,~startsWith(Device,'CD'))),obj.Reader.SizeZ,obj.Reader.SizeT,DimensionOrder.XYCZT);
+			obj.NontagChannels=find(~startsWith(Device,'CD'));
+			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,SizeX,SizeY,ChannelColor.FromOirColors(Colors(:,obj.NontagChannels)),SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
+			obj.NontagChannels=obj.NontagChannels-1;
 			obj.Translation=Translation;
 			obj.ProcessData=Transform;
 		end
 		function Data=Read(obj,Start,End)
-			[Data,obj.Reader]=TryRead(obj.Reader,Start-1,End-Start+1,obj.OirPath);
-			Data={Data,obj.Translation(Start:End,:)};
+			[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,Start-1,End-Start+1,obj.NontagChannels);
+			Data={Data,obj.Translation(Start:End,:,:)};
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
