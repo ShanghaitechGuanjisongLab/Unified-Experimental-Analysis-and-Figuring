@@ -38,11 +38,11 @@ function TransMatrix = RoiRegister(FixedRoi,MovingRois,MovingSamples,UseAffine)
 ## 从其它数据文件格式取得UniExp
 ```MATLAB
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
-function BatchOirRegisterTiff(OirPaths,ReferencePath,OutputDirectory,options)
+function BatchOirRegisterTiff(OirPaths,FixedPath,OutputDirectory,TransMatrix,options)
 %批量测量OME-TIFF，以UniExp格式存储测量结果
 function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,options)
 %为多个视频批量输出平均图
-function BatchVideoMean(VideoPaths)
+function BatchVideoMean(VideoPaths,Output)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 ```
@@ -50,10 +50,12 @@ function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 ```MATLAB
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
-%从事件记录取得命中率
-function HitRates = EventLog2HitRate(EventLogs,Tags)
+%清除数据库中所有包含未定义实体的数据条目
+function [DataSet,TablesCleared] = ClearUndefined(DataSet)
+%从事件记录取得表现分数
+function Performance = EventLog2Performance(EventLogs,Tags)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
-function Summary=LearningSummarize(Group,Mouse,DateTime,Performance,LearnedP)
+function Summary=LearningSummarize(SessionTable,LearnedP)
 %为多个特定类型的回合，将所有参与细胞的信号主成分分析，生成主成分空间中的典型曲线图。同类型回合会平均掉，主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff,CellUID] = LinearPca(UETables,LineConditions,Normalize,F0Samples,options)
 %合并内存或文件中的多个UniExp数据库

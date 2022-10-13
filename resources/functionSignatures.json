@@ -78,7 +78,7 @@
 				"purpose": "所有要配准的OIR头文件路径"
 			},
 			{
-				"name": "ReferencePath",
+				"name": "FixedPath",
 				"kind": "required",
 				"type": [
 					[
@@ -93,7 +93,7 @@
 						"row"
 					]
 				],
-				"purpose": "参照OIR文件路径"
+				"purpose": "固定OIR文件路径"
 			},
 			{
 				"name": "OutputDirectory",
@@ -112,6 +112,15 @@
 					]
 				],
 				"purpose": "输出目录路径"
+			},
+			{
+				"name": "TransMatrix",
+				"kind": "required",
+				"type": [
+					"images.geotrans.internal.GeometricTransformation",
+					"2d"
+				],
+				"purpose": "要对每个OIR的每个Z层应用的变换矩阵"
 			},
 			{
 				"name": "MaxTranslationStep",
@@ -151,7 +160,7 @@
 				"default": 1
 			},
 			{
-				"name": "UniExpOutput",
+				"name": "UniExpFilename",
 				"kind": "namevalue",
 				"type": [
 					[
@@ -166,20 +175,11 @@
 				"purpose": "输出UniExp数据库文件名"
 			},
 			{
-				"name": "TransMatrix",
-				"kind": "namevalue",
-				"type": [
-					"2d",
-					"images.geotrans.internal.GeometricTransformation"
-				],
-				"purpose": "每个文件每个Z层的变换矩阵"
-			},
-			{
-				"name": "SampleSize",
+				"name": "BlockSize",
 				"kind": "namevalue",
 				"type": "positive",
-				"purpose": "文件内平移配准的采样样本量",
-				"default": 30
+				"purpose": "平移配准金字塔每层的块尺寸",
+				"default": 10
 			},
 			{
 				"name": "UseGpu",
@@ -292,6 +292,12 @@
 					]
 				],
 				"purpose": "视频路径"
+			},
+			{
+				"name":"Output",
+				"kind":"ordered",
+				"type":[["folder"],["file=*.png"],["string"],["char","row"],["cell"]],
+				"purpose":"输出到的位置"
 			}
 		]
 	},
@@ -358,23 +364,68 @@
 				"purpose": "指定测量算法"
 			},
 			{
-				"name": "UniExpOutput",
-				"kind": "namevalue",
-				"type": [
+				"mutuallyExclusiveGroup":[
 					[
-						"string",
-						"scalar"
-					],
+						{
+							"name":"OutputDirectory",
+							"kind":"namevalue",
+							"type":[["folder"],["string","scalar"],["char","row"]],
+							"purpose":"输出UniExp数据库到哪个目录"
+						},
+						{
+							"name":"OutputFilename",
+							"kind":"namevalue",
+							"type":[["string","scalar"],["char","row"]],
+							"purpose":"输出文件的文件名"
+						},
+						{
+							"name":"Parallel",
+							"kind":"namevalue",
+							"type":["logical","scalar"],
+							"purpose":"是否使用并行池"
+						},
+						{
+							"name":"UseGpu",
+							"kind":"namevalue",
+							"type":["logical","scalar"],
+							"purpose":"是否使用GPU"
+						}
+					],					
 					[
-						"char",
-						"row"
+						{
+							"name":"OutputPath",
+							"kind":"namevalue",
+							"type":[["file"],["string","scalar"],["char","row"]],
+							"purpose":"输出文件的完整路径"
+						},
+						{
+							"name":"Parallel",
+							"kind":"namevalue",
+							"type":["logical","scalar"],
+							"purpose":"是否使用并行池"
+						},
+						{
+							"name":"UseGpu",
+							"kind":"namevalue",
+							"type":["logical","scalar"],
+							"purpose":"是否使用GPU"
+						}
 					]
-				],
-				"purpose": "输出UniExp数据库文件名"
+				]
 			}
 		]
 	},
-	"UniExp.EventLog2HitRate": {
+	"UniExp.ClearUndefined":{
+		"inputs":[
+			{
+				"name":"DataSet",
+				"kind":"required",
+				"type":["struct","scalar"],
+				"purpose":"待清理的数据集"
+			}
+		]
+	},
+	"UniExp.EventLog2Performance": {
 		"inputs": [
 			{
 				"name": "EventLogs",
@@ -399,34 +450,10 @@
 	"UniExp.LearningSummarize": {
 		"inputs": [
 			{
-				"name": "Group",
-				"kind": "required",
-				"type": "column",
-				"purpose": "会话分组名"
-			},
-			{
-				"name": "Mouse",
-				"kind": "required",
-				"type": "column",
-				"purpose": "每个会话的鼠名"
-			},
-			{
-				"name": "DateTime",
-				"kind": "required",
-				"type": [
-					"datetime",
-					"column"
-				],
-				"purpose": "每个会话的日期时间"
-			},
-			{
-				"name": "Performance",
-				"kind": "required",
-				"type": [
-					"real",
-					"column"
-				],
-				"purpose": "每个会话的表现分数"
+				"name":"SessionTable",
+				"kind":"required",
+				"type":["table","size=:,4"],
+				"purpose":"会话数据表"
 			},
 			{
 				"name": "LearnedP",
@@ -768,7 +795,9 @@
 			{
 				"name": "Method",
 				"kind": "ordered",
-				"type": ["choices={'rigid','affine'"],
+				"type": [
+					"choices={'rigid','affine'"
+				],
 				"purpose": "变换方法"
 			}
 		]
