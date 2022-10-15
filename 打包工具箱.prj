@@ -76,7 +76,7 @@ function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeR
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
-    <param.version>5.0.0</param.version>
+    <param.version>5.0.1</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Statistics and Machine Learning Toolbox</item>
