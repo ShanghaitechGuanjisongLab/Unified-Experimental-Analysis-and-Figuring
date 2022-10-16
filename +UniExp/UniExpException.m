@@ -16,5 +16,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Video_and_ROI_file_numbers_do_not_match
 		More_than_one_SplitType_Cell_was_found_in_Block
 		The_Block_for_the_specified_Design_could_not_be_found
+		The_MovingSamples_extension_must_be_oir_or_tif
 	end
 end

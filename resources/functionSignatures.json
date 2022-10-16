@@ -784,7 +784,7 @@
 				"kind": "required",
 				"type": [
 					[
-						"file=*.tif"
+						"file=*.tif,*.oir"
 					],
 					[
 						"string"
