@@ -2,8 +2,9 @@ classdef TiffMeasureReader<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize double
 		NumPieces double
-		Metadata
+		CollectData
 		Reader Image5D.OmeTiffRWer
+		ProcessData={}
 	end
 	methods
 		function obj=TiffMeasureReader(TiffPath)
@@ -12,10 +13,10 @@ classdef TiffMeasureReader<ParallelComputing.IBlockRWer
 			SizeZ=Reader.SizeZ;
 			obj.PieceSize=prod([uint32(Reader.SizeP),Reader.SizeX,Reader.SizeY,SizeZ,Reader.SizeC]);
 			obj.NumPieces=Reader.SizeT;
-			obj.Metadata=SizeZ;
+			obj.CollectData=SizeZ;
 		end
 		function Data=Read(obj,Start,End)
-			Data={obj.Reader.ReadPixels(Start-1,End-Start+1)};
+			Data=obj.Reader.ReadPixels(Start-1,End-Start+1);
 		end
 	end
 end
