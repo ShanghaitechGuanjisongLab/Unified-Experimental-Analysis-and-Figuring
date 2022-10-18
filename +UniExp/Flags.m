@@ -27,5 +27,10 @@ classdef Flags
 		log2FdF0
 		%将基线均值记为μ，标准差记为σ，计算(F-μ)/σ为归一化数据
 		ZScore
+
+		%% LinearPca回合累积
+		Mean
+		Median
+		Cytosis
 	end
 end

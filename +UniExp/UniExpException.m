@@ -12,10 +12,13 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Undefined_UID_found
 		Table_is_missing_key_column
 		Table_is_missing_required_column
-		Unknown_algorithm
+		Unknown_normalize_algorithm
 		Video_and_ROI_file_numbers_do_not_match
 		More_than_one_SplitType_Cell_was_found_in_Block
 		The_Block_for_the_specified_Design_could_not_be_found
 		The_MovingSamples_extension_must_be_oir_or_tif
+		Unknown_accumulate_method
+		Trials_are_inconsistent
+		The_Trials_table_is_missing_the_Stimulus_column
 	end
 end
