@@ -29,8 +29,11 @@ classdef Flags
 		ZScore
 
 		%% LinearPca回合累积
+		%取不同回合之间的平均值
 		Mean
+		%取不同回合之间的中位数
 		Median
+		%仅供内部使用，用户不应指定此选项
 		Cytosis
 	end
 end
