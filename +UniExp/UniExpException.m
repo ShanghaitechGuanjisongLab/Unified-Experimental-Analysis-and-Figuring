@@ -20,5 +20,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Unknown_accumulate_method
 		Trials_are_inconsistent
 		The_Trials_table_is_missing_the_Stimulus_column
+		Normalization_failed
 	end
 end
