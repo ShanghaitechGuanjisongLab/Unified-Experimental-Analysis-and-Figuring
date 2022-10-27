@@ -16,6 +16,7 @@ while true
 			while true
 				try
 					Reader=Image5D.OirReader(OirPath);
+					break;
 				catch ME
 					if strcmp(ME.identifier,'Image5D:Image5DException:File_open_failed')
 						warning('文件打开失败，可能是持有文件的设备断开了连接，请检查设备。将在%u秒后重试。',Wait);

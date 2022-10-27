@@ -21,5 +21,8 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Trials_are_inconsistent
 		The_Trials_table_is_missing_the_Stimulus_column
 		Normalization_failed
+		The_number_of_MovingRois_and_MovingSamples_does_not_match
+		The_number_of_split_trials_does_not_match_the_existing_record
+		ToLine_indices_of_the_LineConditions_table_are_not_continuous
 	end
 end
