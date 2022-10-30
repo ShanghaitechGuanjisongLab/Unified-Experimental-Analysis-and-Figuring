@@ -24,5 +24,7 @@ classdef UniExpException<MATLAB.IEnumerableException
 		The_number_of_MovingRois_and_MovingSamples_does_not_match
 		The_number_of_split_trials_does_not_match_the_existing_record
 		ToLine_indices_of_the_LineConditions_table_are_not_continuous
+		No_Blocks_could_be_found_that_met_the_criteria
+		Table_not_found_in_input
 	end
 end
