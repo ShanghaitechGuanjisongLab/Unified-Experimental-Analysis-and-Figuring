@@ -47,6 +47,37 @@ classdef DataSet<handle
 		end
 	end
 	methods
+		function obj=DataSet(StructOrPath)
+			%构造方法，提供包含表的结构体或mat文件路径
+			%# 语法
+			% ```
+			% obj=UniExp.DataSet(Struct);
+			% %从包含表的结构体构造对象
+			%
+			% obj=UniExp.DataSet(Path);
+			% %从包含表或对象的文件构造对象
+			% ```
+			%# 输入参数
+			% Struct(1,1)struct，包含表的结构体
+			% Path(1,1)string，包含表或对象的mat文件
+			if nargin
+				if ischar(StructOrPath)||isstring(StructOrPath)
+					StructOrPath=load(StructOrPath);
+					Cells=struct2cell(StructOrPath);
+					Logical=cellfun(@(C)isa(C,'UniExp.DataSet'),Cells);
+					if any(Logical)
+						StructOrPath=Cells{Logical};
+					end
+				end
+				Fields=string(intersect(fieldnames(StructOrPath),properties(obj)))';
+				if isempty(Fields)
+					warning('输入结构体没有任何符合UniExp规范的字段');
+				end
+				for F=Fields
+					obj.(F)=StructOrPath.(F);
+				end
+			end
+		end
 		function VT=ValidTableNames(obj)
 			%取得数据集中不为空的表名称
 			%# 语法
@@ -57,23 +88,6 @@ classdef DataSet<handle
 			% VT(:,1)cell，数据集中不为空的表名称
 			VT=properties(obj);
 			VT=VT(cellfun(@(PN)istabular(obj.(PN)),VT));
-		end
-		function obj=DataSet(Struct)
-			%构造方法，提供包含表的结构体或另一个此类对象
-			%# 语法
-			% ```
-			% obj=UniExp.DataSet(Struct);
-			% obj=UniExp.DataSet(Old);
-			% ```
-			%# 输入参数
-			% Struct(1,1)struct，包含表的结构体，字段必须具有等同于DataSet规定的属性名
-			% Old(1,1)UniExp.DataSet，另一个此类对象，可以用于拷贝构造
-			if nargin
-				Fields=string(intersect(fieldnames(Struct),properties(obj)))';
-				for F=Fields
-					obj.(F)=Struct.(F);
-				end
-			end
 		end
 		function obj=MakeCopy(obj)
 			%取得对象的一个拷贝
@@ -95,6 +109,10 @@ classdef DataSet<handle
 			% ```
 			%# 输入参数
 			% CellUIDs(:,1)uint16，要移除的细胞UID。
+			arguments
+				obj
+				CellUIDs(:,1)uint16
+			end
 			if istabular(obj.Cells)
 				obj.Cells(ismember(obj.Cells.CellUID,CellUIDs),:)=[];
 			end

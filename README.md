@@ -2,8 +2,8 @@
 
 依赖[埃博拉酱的全局优化工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/101368-plot-color-allocate-optimization)、[埃博拉酱的并行计算工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/99194-parallel-computing)、[埃博拉酱的图像处理工具箱](https://ww2.mathworks.cn/matlabcentral/fileexchange/117015-image-processing-toolbox)、[Image5D](https://ww2.mathworks.cn/matlabcentral/fileexchange/114435-image5d-oir-tiff)
 
-# UniExp文件格式 
-UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符合BC范式的数据表组成，每张表包含主键和必选列，可以额外添加可选列：
+# UniExp数据集格式 
+UniExp是一种模仿SQL数据库架构的MATLAB表格组，由6张符合BC范式的数据表组成，每张表包含主键和必选列，可以额外添加可选列：
 - Mice，主键Mouse，鼠名。本表其它列可选，但应当是与该鼠特定的信息，如实验范式等。
 - DateTimes，主键DateTime，实验进行的时间日期，本表其它列可选，但应当是与该次实验特定的信息，例如鼠、拍摄采样率、元数据等
 - Blocks，主键BlockUID，模块的唯一标识符；码(DateTime,BlockIndex)，因为“一次特定实验的第N个模块”应当可以唯一确定一个模块。主键和码应当一一对应且不能重复。其它可选列应当是特定于该模块的信息，如模块设计名称、标通道值、事件日志等
@@ -12,7 +12,7 @@ UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符�
 - BlockSignals，主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
 - TrialSignals，主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
 
-上述数据表以 MATLAB table 变量格式存储在.mat文件中。建议扩展名使用.UniExp.mat表示该文件为UniExp数据表。
+上述数据表合并为UniExp.DataSet对象。每个表均为可选留空。
 
 这些表格可以使用【埃博拉酱的MATLAB扩展】中的MATLAB.DataTypes.Select方法进行基本的连接查询。有些 UniExp API 会要求以查询结果作为输入。
 # UniExp数据文件名
@@ -28,6 +28,13 @@ UniExp是一种模仿SQL数据库架构的MATLAB表格文件格式，由6张符�
 import UniExp.*
 ```
 每个函数代码文件内都有详尽文档，可用`doc UniExp.函数名`查询。函数的使用示例可在快速入门文档GettingStarted.mlx中查看。下方仅列出这些函数的简介。
+## UniExp.DataSet类
+用于管理数据集的核心实用类：
+```MATLAB
+classdef DataSet
+	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
+end
+```
 ## 原始数据预处理
 ```MATLAB
 %对OIR文件进行等时距采样然后输出平均TIFF
@@ -51,29 +58,15 @@ function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
 %清除数据库中所有包含未定义实体的数据条目
-function [DataSet,TablesCleared] = ClearUndefined(DataSet)
-%从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Tags)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
-%为多个特定类型的回合，将所有参与细胞的信号主成分分析，生成主成分空间中的典型曲线图。同类型回合会平均掉，主成分是细胞的加权和。
-function [PcaLines,Explained,Coeff,CellUID] = LinearPca(UETables,LineConditions,Normalize,F0Samples,options)
-%合并内存或文件中的多个UniExp数据库
-function Merged = Merge(Inputs,options)
-%从数据库中移除一群细胞的一切关联数据
-function DataSet = RemoveCells(DataSet,CellUIDs)
-%从数据库中移除一群小鼠的一切关联数据
-function DataSet = RemoveMice(DataSet,Mice)
-%将UniExp表格、数据库或文件中的小鼠批量重命名
-function varargout=RenameMice(Old,New,varargin)
 %将不同长度信号序列归一化
 function Signals = SampleNormalize(Signals,Length)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
-%根据标通道将模块拆分成回合
-function [Trials,TrialSignals]=TagSplitTrial(DateTimes,Blocks,BlockSignals,TimeRange,options)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
 ```

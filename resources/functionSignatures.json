@@ -1,4 +1,294 @@
 {
+	"UniExp.DataSet": {
+		"inputs": [
+			{
+				"name": "StructOrPath",
+				"kind": "required",
+				"type": [
+					[
+						"scalar",
+						"struct"
+					],
+					[
+						"file=*.mat"
+					],
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "结构体或文件路径"
+			}
+		]
+	},
+	"UniExp.DataSet.AddBehaviorFromTrialTags": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "ResponseWindow",
+				"kind": "required",
+				"type": [
+					"real",
+					"size=1,2"
+				],
+				"purpose": "时间窗范围秒数"
+			}
+		]
+	},
+	"UniExp.DataSet.LinearPca": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "QueryTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "每条线的数据筛选条件"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Normalize",
+							"kind": "required",
+							"type": [
+								"UniExp.Flags",
+								"scalar"
+							],
+							"purpose": "可选指定归一化算法"
+						},
+						{
+							"name": "F0Samples",
+							"kind": "required",
+							"type": [
+								"real",
+								"vector"
+							],
+							"purpose": "回合中哪些采样时点作为基线"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"name": "NumComponents",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "要输出的主成分个数"
+			},
+			{
+				"name": "AccumulateMethod",
+				"kind": "namevalue",
+				"type": [
+					"UniExp.Flags",
+					"scalar"
+				],
+				"purpose": "回合累积算法"
+			}
+		]
+	},
+	"UniExp.DataSet.Merge": {
+		"inputs": [
+			{
+				"name": "Inputs",
+				"kind": "required",
+				"type": [
+					[
+						"struct"
+					],
+					[
+						"UniExp.DataSet"
+					],
+					[
+						"cell"
+					],
+					[
+						"string"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"file=*.mat"
+					]
+				],
+				"repeating": true,
+				"purpose": "要合并的UniExp数据库"
+			},
+			{
+				"name": "OutputPath",
+				"kind": "namevalue",
+				"type": [
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"file=*.mat"
+					]
+				],
+				"purpose": "输出文件路径"
+			},
+			{
+				"name": "ChangeUID",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"default": true,
+				"purpose": "是否允许修改UID"
+			},
+			{
+				"name": "MergeOutput",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"default": true,
+				"purpose": "是否合并已存在的文件"
+			}
+		]
+	},
+	"UniExp.DataSet.QueryPerformance": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "QueryTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "查询表，每组的数据筛选条件"
+			}
+		]
+	},
+	"UniExp.DataSet.RemoveCells": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "CellUIDs",
+				"kind": "required",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "要移除的细胞UID"
+			}
+		]
+	},
+	"UniExp.DataSet.RemoveDateTimes": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "DateTimes",
+				"kind": "required",
+				"type": [
+					"datetime",
+					"vector"
+				],
+				"purpose": "要移除的日期时间"
+			}
+		]
+	},
+	"UniExp.DataSet.RemoveMice": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "Mice",
+				"kind": "required",
+				"type": [
+					[
+						"char"
+					],
+					[
+						"string"
+					],
+					[
+						"cell"
+					]
+				],
+				"purpose": "要移除的小鼠"
+			}
+		]
+	},
+	"UniExp.DataSet.RenameMice": {
+		"inputs": [
+			{
+				"name": "Old",
+				"kind": "required",
+				"purpose": "旧鼠名字符串模式"
+			},
+			{
+				"name": "New",
+				"kind": "required",
+				"purpose": "新鼠名"
+			},
+			{
+				"name": "Data",
+				"kind": "required",
+				"purpose": "包含鼠名的数据容器",
+				"repeating": true
+			}
+		]
+	},
+	"UniExp.DataSet.TagSplitTrial": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "TimeRange",
+				"kind": "required",
+				"type": [
+					"size=1,2",
+					"real"
+				],
+				"purpose": "每个回合相对于刺激时点的起始时间和终止时间"
+			},
+			{
+				"name": "TagChannel",
+				"kind": "namevalue",
+				"type": [
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"scalar"
+					]
+				],
+				"purpose": "用于拆分的标通道名称"
+			},
+			{
+				"name": "StdCutoff",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "阈值的标准差倍率",
+				"default": 1
+			}
+		]
+	},
 	"UniExp.BarScatterCompare": {
 		"inputs": [
 			{
@@ -477,19 +767,6 @@
 			}
 		]
 	},
-	"UniExp.ClearUndefined": {
-		"inputs": [
-			{
-				"name": "DataSet",
-				"kind": "required",
-				"type": [
-					"struct",
-					"scalar"
-				],
-				"purpose": "待清理的数据集"
-			}
-		]
-	},
 	"UniExp.EventLog2Performance": {
 		"inputs": [
 			{
@@ -528,176 +805,6 @@
 				"kind": "ordered",
 				"type": "positive",
 				"purpose": "表示学会的表现分阈值"
-			}
-		]
-	},
-	"UniExp.LinearPca": {
-		"inputs": [
-			{
-				"name": "UETables",
-				"kind": "required",
-				"type": [
-					"struct",
-					"scalar"
-				],
-				"purpose": "UniExp数据库"
-			},
-			{
-				"name": "LineConditions",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "每条线的数据筛选条件"
-			},
-			{
-				"mutuallyExclusiveGroup": [
-					[
-						{
-							"name": "Normalize",
-							"kind": "required",
-							"type": [
-								"UniExp.Flags",
-								"scalar"
-							],
-							"purpose": "可选指定归一化算法"
-						},
-						{
-							"name": "F0Samples",
-							"kind": "required",
-							"type": [
-								"real",
-								"vector"
-							],
-							"purpose": "回合中哪些采样时点作为基线"
-						}
-					],
-					[]
-				]
-			},
-			{
-				"name": "NumComponents",
-				"kind": "namevalue",
-				"type": "positive",
-				"purpose": "要输出的主成分个数"
-			},
-			{
-				"name": "Mouse",
-				"kind": "namevalue",
-				"type": [
-					[
-						"cell",
-						"vector"
-					],
-					[
-						"string",
-						"vector"
-					]
-				],
-				"purpose": "要使用的鼠名"
-			},
-			{
-				"name": "CellType",
-				"kind": "namevalue",
-				"type": [
-					[
-						"cell",
-						"vector"
-					],
-					[
-						"string",
-						"vector"
-					]
-				],
-				"purpose": "要使用的细胞类型"
-			},
-			{
-				"name": "ZLayer",
-				"kind": "namevalue",
-				"type": [
-					[
-						"cell",
-						"vector"
-					],
-					[
-						"string",
-						"vector"
-					]
-				],
-				"purpose": "要使用的细胞Z层"
-			},
-			{
-				"name": "AccumulateMethod",
-				"kind": "namevalue",
-				"type": [
-					"UniExp.Flags",
-					"scalar"
-				],
-				"purpose": "回合累积算法"
-			}
-		]
-	},
-	"UniExp.Merge": {
-		"inputs": [
-			{
-				"name": "Inputs",
-				"kind": "required",
-				"type": [
-					[
-						"struct"
-					],
-					[
-						"cell"
-					],
-					[
-						"string"
-					],
-					[
-						"char",
-						"row"
-					],
-					[
-						"file=*.mat"
-					]
-				],
-				"repeating": true,
-				"purpose": "要合并的UniExp数据库"
-			},
-			{
-				"name": "OutputPath",
-				"kind": "namevalue",
-				"type": [
-					[
-						"char",
-						"row"
-					],
-					[
-						"string",
-						"scalar"
-					],
-					[
-						"file=*.mat"
-					]
-				],
-				"purpose": "输出文件路径"
-			},
-			{
-				"name": "ChangeUID",
-				"kind": "namevalue",
-				"type": [
-					"logical",
-					"scalar"
-				],
-				"default": true,
-				"purpose": "是否允许修改UID"
-			},
-			{
-				"name": "MergeOutput",
-				"kind": "namevalue",
-				"type": [
-					"logical",
-					"scalar"
-				],
-				"default": true,
-				"purpose": "是否合并已存在的文件"
 			}
 		]
 	},
@@ -752,74 +859,6 @@
 				"type": "positive",
 				"purpose": "采样样本量",
 				"default": 50
-			}
-		]
-	},
-	"UniExp.RemoveCells": {
-		"inputs": [
-			{
-				"name": "DataSet",
-				"kind": "required",
-				"type": [
-					"struct",
-					"scalar"
-				],
-				"purpose": "要从中移除细胞的UniExp数据集"
-			},
-			{
-				"name": "CellUIDs",
-				"kind": "required",
-				"type": "real",
-				"purpose": "要移除的细胞UID"
-			}
-		]
-	},
-	"UniExp.RemoveMice": {
-		"inputs": [
-			{
-				"name": "DataSet",
-				"kind": "required",
-				"type": [
-					"struct",
-					"scalar"
-				],
-				"purpose": "要从中移除小鼠的UniExp数据集"
-			},
-			{
-				"name": "Mice",
-				"kind": "required",
-				"type": [
-					[
-						"char"
-					],
-					[
-						"string"
-					],
-					[
-						"cell"
-					]
-				],
-				"purpose": "要移除的小鼠"
-			}
-		]
-	},
-	"UniExp.RenameMice": {
-		"inputs": [
-			{
-				"name": "Old",
-				"kind": "required",
-				"purpose": "旧鼠名字符串模式"
-			},
-			{
-				"name": "New",
-				"kind": "required",
-				"purpose": "新鼠名"
-			},
-			{
-				"name": "Data",
-				"kind": "required",
-				"purpose": "包含鼠名的数据容器",
-				"repeating": true
 			}
 		]
 	},
@@ -989,60 +1028,6 @@
 				"kind": "ordered",
 				"type": "positive",
 				"purpose": "阈值标准差倍率",
-				"default": 1
-			}
-		]
-	},
-	"UniExp.TagSplitTrial": {
-		"inputs": [
-			{
-				"name": "DateTimes",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "UniExp DateTimes 表"
-			},
-			{
-				"name": "Blocks",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "UniExp Blocks 表"
-			},
-			{
-				"name": "BlockSignals",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "UniExp BlockSignals 表"
-			},
-			{
-				"name": "TimeRange",
-				"kind": "required",
-				"type": [
-					"size=1,2",
-					"real"
-				],
-				"purpose": "每个回合相对于刺激时点的起始时间和终止时间"
-			},
-			{
-				"name": "TagChannel",
-				"kind": "namevalue",
-				"type": [
-					[
-						"char",
-						"row"
-					],
-					[
-						"string",
-						"scalar"
-					]
-				],
-				"purpose": "用于拆分的标通道名称",
-				"default": "\"CD1\""
-			},
-			{
-				"name": "StdCutoff",
-				"kind": "namevalue",
-				"type": "positive",
-				"purpose": "阈值的标准差倍率",
 				"default": 1
 			}
 		]
