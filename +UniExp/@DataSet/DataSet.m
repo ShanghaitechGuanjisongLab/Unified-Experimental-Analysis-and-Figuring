@@ -1,13 +1,33 @@
 classdef DataSet<handle
-	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型
+	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
+	%此类的属性，除Version外，是按照BC范式设计的数据库表。可以从包含这些表的结构体或另一个此类对象构造对象。每个表都可以留空。
+	%注意此类是句柄类，必须使用MakeCopy成员函数才能复制对象，直接赋值给其它变量只能取得数据集的一个引用。
 	properties
-		Mice		%主键Mouse，鼠名。本表其它列可选，但应当是与该鼠特定的信息，如实验范式等。
-		DateTimes	%主键DateTime，实验进行的时间日期，本表其它列可选，但应当是与该次实验特定的信息，例如鼠、拍摄采样率、元数据等
+		%主键Mouse，鼠名。本表其它列可选，但应当是与该鼠特定的信息，如实验范式等。
+		Mice
+
+		%主键DateTime，实验进行的时间日期，本表其它列可选，但应当是与该次实验特定的信息，例如鼠、拍摄采样率、元数据等
+		DateTimes
+
+		%主键BlockUID，模块的唯一标识符；码(DateTime,BlockIndex)，因为“一次特定实验的第N个模块”应当可以唯一确定一个模块。主键和码应当一一对应且不能重复。其它可选列应
+		% 当是特定于该模块的信息，如模块设计名称、标通道值、事件日志等
 		Blocks
+
+		%主键TrialUID，回合的唯一标识符；码(BlockUID,TrialIndex)，因为“一个特定模块的第N回合”应当可以唯一确定一个回合。其它可选列应当是特定于该回合的信息，如刺激类
+		% 型、标通道值、采样时点、动物行为等。
 		Trials
+
+		%主键CellUID，细胞的唯一标识符；码(Mouse,ZLayer,CellType,CellIndex)，因为“一只鼠某层某种类型的第N个细胞”应当可以唯一确定一个细胞。其它可选列应当是特定于该细
+		% 胞的信息，如像素位置等。
 		Cells
+
+		%主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
 		BlockSignals
+
+		%主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
 		TrialSignals
+
+		%产生此对象的UniExp版本
 		Version=UniExp.Version
 	end
 	methods(Static)
@@ -28,10 +48,26 @@ classdef DataSet<handle
 	end
 	methods
 		function VT=ValidTableNames(obj)
+			%取得数据集中不为空的表名称
+			%# 语法
+			% ```
+			% VT=obj.ValidTableNames;
+			% ```
+			%# 返回值
+			% VT(:,1)cell，数据集中不为空的表名称
 			VT=properties(obj);
 			VT=VT(cellfun(@(PN)istabular(obj.(PN)),VT));
 		end
 		function obj=DataSet(Struct)
+			%构造方法，提供包含表的结构体或另一个此类对象
+			%# 语法
+			% ```
+			% obj=UniExp.DataSet(Struct);
+			% obj=UniExp.DataSet(Old);
+			% ```
+			%# 输入参数
+			% Struct(1,1)struct，包含表的结构体，字段必须具有等同于DataSet规定的属性名
+			% Old(1,1)UniExp.DataSet，另一个此类对象，可以用于拷贝构造
 			if nargin
 				Fields=string(intersect(fieldnames(Struct),properties(obj)))';
 				for F=Fields
@@ -40,49 +76,90 @@ classdef DataSet<handle
 			end
 		end
 		function obj=MakeCopy(obj)
+			%取得对象的一个拷贝
+			%# 语法
+			% ```
+			% New=Old.MakeCopy;
+			% ```
+			%# 返回值
+			% New(1,1)UniExp.DataSet，原对象的拷贝。修改该新对象的成员不会导致原对象被修改。
 			obj=UniExp.DataSet(obj);
 		end
-		function RemoveCells(DataSet,CellUIDs)
-			if istabular(DataSet.Cells)
-				DataSet.Cells(ismember(DataSet.Cells.CellUID,CellUIDs),:)=[];
+		function RemoveCells(obj,CellUIDs)
+			%从数据库中移除一群细胞的一切关联数据
+			%处理数据集时经常发现一些细胞的数据存在明显异常，这种异常并非实验事实，而是实验过程引入的假象。这样的异常细胞往往需要从数据集中排除。本函数从所有表中自动
+			% 删除与指定UID相关的细胞的所有数据，无需手工排查。
+			%# 语法
+			% ```
+			% obj.RemoveCells(CellUIDs);
+			% ```
+			%# 输入参数
+			% CellUIDs(:,1)uint16，要移除的细胞UID。
+			if istabular(obj.Cells)
+				obj.Cells(ismember(obj.Cells.CellUID,CellUIDs),:)=[];
 			end
-			if istabular(DataSet.BlockSignals)
-				DataSet.BlockSignals(ismember(DataSet.BlockSignals.CellUID,CellUIDs),:)=[];
+			if istabular(obj.BlockSignals)
+				obj.BlockSignals(ismember(obj.BlockSignals.CellUID,CellUIDs),:)=[];
 			end
-			if istabular(DataSet.TrialSignals)
-				DataSet.TrialSignals(ismember(DataSet.TrialSignals.CellUID,CellUIDs),:)=[];
+			if istabular(obj.TrialSignals)
+				obj.TrialSignals(ismember(obj.TrialSignals.CellUID,CellUIDs),:)=[];
 			end
 		end
-		function AddRepeatIndex(DataSet)
-			Query=MATLAB.DataTypes.Select({DataSet.DateTimes,DataSet.Blocks},["BlockUID","DateTime","Mouse","Design"]);
+		function AddRepeatIndex(obj)
+			%为Blocks表添加RepeatIndex列，用于查询
+			%同一只鼠，同样的设计，经常需要重复做多次。查询数据时，一个常见查询条件就是查"第N次"做该设计的数据。这个"第N次"是按照时间顺序排列的。本函数为数据集的
+			% Blocks表添加RepeatIndex列，指示该Block是该鼠、该设计的第几次重复实验。
+			%# 语法
+			% ```
+			% obj.AddRepeatIndex;
+			% ```
+			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["BlockUID","DateTime","Mouse","Design"]);
 			[BlockUID,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,Query.BlockUID,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
-			[~,Index]=ismember(vertcat(BlockUID{:}),DataSet.Blocks.BlockUID);
-			DataSet.Blocks.RepeatIndex(Index)=vertcat(RepeatIndex{:});
+			[~,Index]=ismember(vertcat(BlockUID{:}),obj.Blocks.BlockUID);
+			obj.Blocks.RepeatIndex(Index)=vertcat(RepeatIndex{:});
 		end
-		function RemoveDateTimes(DataSet,DateTimes)
-			HasTables=num2cell(ismember(["DateTimes","Blocks","Trials","BlockSignals","TrialSignals"],DataSet.ValidTableNames));
+		function RemoveDateTimes(obj,DateTimes)
+			%从数据库中移除一些日期时间的一切关联数据
+			%处理数据集时经常发现一些日期时间的数据存在明显异常，这种异常并非实验事实，而是实验过程引入的假象。这样的异常日期时间往往需要从数据集中排除。本函数从所有
+			% 表中自动删除与指定日期时间相关的所有数据，无需手工排查。
+			%# 语法
+			% ```
+			% obj.RemoveDateTimes(DateTimes);
+			% ```
+			%# 输入参数
+			% DateTimes(:,1)datetime，要移除的日期时间
+			HasTables=num2cell(ismember(["DateTimes","Blocks","Trials","BlockSignals","TrialSignals"],obj.ValidTableNames));
 			[HasDateTimes,HasBlocks,HasTrials,HasBlockSignals,HasTrialSignals]=HasTables{:};
 			if HasDateTimes
-				DataSet.DateTimes(ismember(DataSet.DateTimes.DateTime,DateTimes),:)=[];
+				obj.DateTimes(ismember(obj.DateTimes.DateTime,DateTimes),:)=[];
 			end
 			if HasBlocks
-				Logical=ismember(DataSet.Blocks.DateTime,DateTimes);
-				BlockUIDs=DataSet.Blocks.BlockUID(Logical);
-				DataSet.Blocks(Logical,:)=[];
+				Logical=ismember(obj.Blocks.DateTime,DateTimes);
+				BlockUIDs=obj.Blocks.BlockUID(Logical);
+				obj.Blocks(Logical,:)=[];
 				if HasTrials
-					Logical=ismember(DataSet.Trials.BlockUID,BlockUIDs);
-					TrialUIDs=DataSet.Trials.TrialUID(Logical);
-					DataSet.Trials(Logical,:)=[];
+					Logical=ismember(obj.Trials.BlockUID,BlockUIDs);
+					TrialUIDs=obj.Trials.TrialUID(Logical);
+					obj.Trials(Logical,:)=[];
 					if HasTrialSignals
-						DataSet.TrialSignals(ismember(DataSet.TrialSignals.TrialUID,TrialUIDs),:)=[];
+						obj.TrialSignals(ismember(obj.TrialSignals.TrialUID,TrialUIDs),:)=[];
 					end
 				end
 				if HasBlockSignals
-					DataSet.BlockSignals(ismember(DataSet.BlockSignals.BlockUID,BlockUIDs),:)=[];
+					obj.BlockSignals(ismember(obj.BlockSignals.BlockUID,BlockUIDs),:)=[];
 				end
 			end
 		end
 		function AddBehaviorFromTrialTags(obj,ResponseWindow)
+			%根据TrialTags，向数据集的Trials表添加二元行为
+			%此函数根据TrialTags在指定时间窗内的信号，是否存在比平均值高一倍标准差的尖峰，判断行为0或1。不含TrialTags的回合行为不变，默认NaN。行为值将作为Behavior列
+			% 添加到Trials表。
+			%# 语法
+			% ```
+			% obj.AddBehaviorFromTrialTags(ResponseWindow);
+			% ```
+			%# 输入参数
+			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
 			Query=MATLAB.DataTypes.Select({obj.Trials,obj.Blocks,obj.DateTimes},["TrialUID","TrialTags","SeriesInterval"]);
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
 			TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
