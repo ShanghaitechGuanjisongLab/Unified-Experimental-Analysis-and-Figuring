@@ -26,5 +26,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		ToLine_indices_of_the_LineConditions_table_are_not_continuous
 		No_Blocks_could_be_found_that_met_the_criteria
 		Table_not_found_in_input
+		Invalid_Flag
 	end
 end

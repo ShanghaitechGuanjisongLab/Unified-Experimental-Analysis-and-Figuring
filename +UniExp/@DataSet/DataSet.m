@@ -145,7 +145,7 @@ classdef DataSet<handle
 			% obj.RemoveDateTimes(DateTimes);
 			% ```
 			%# 输入参数
-			% DateTimes(:,1)datetime，要移除的日期时间
+			% DateTimes(:,1)datetime，要移除的日期时间。例如`datetime('2022-11-01 10:33:16')`
 			HasTables=num2cell(ismember(["DateTimes","Blocks","Trials","BlockSignals","TrialSignals"],obj.ValidTableNames));
 			[HasDateTimes,HasBlocks,HasTrials,HasBlockSignals,HasTrialSignals]=HasTables{:};
 			if HasDateTimes
