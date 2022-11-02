@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="2026899692" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="2026899692" file="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -68,7 +68,7 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdC
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
-    <param.version>6.0.0</param.version>
+    <param.version>7.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name>
       <item>Statistics and Machine Learning Toolbox</item>
@@ -164,6 +164,7 @@ resources/project
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\+UniExp</file>
+      <file>${PROJECT_ROOT}\Debug.mlx</file>
       <file>${PROJECT_ROOT}\doc</file>
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
@@ -174,19 +175,12 @@ resources/project
     </fileset.depfun.excluded>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2022b</root>
-      <toolboxes>
-        <toolbox name="matlabcoder" />
-      </toolboxes>
-      <toolbox>
-        <matlabcoder>
-          <enabled>true</enabled>
-        </matlabcoder>
-      </toolbox>
+      <toolboxes />
     </matlab>
     <platform>
       <unix>false</unix>
