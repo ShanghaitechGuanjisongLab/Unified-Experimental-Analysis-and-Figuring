@@ -28,7 +28,7 @@ classdef Flags
 		%将基线均值记为μ，标准差记为σ，计算(F-μ)/σ为归一化数据
 		ZScore
 
-		%% 累积算法
+		%% 累积算法和排序标准
 		Mean
 		Median
 		Min

@@ -41,59 +41,6 @@
 			}
 		]
 	},
-	"UniExp.DataSet.LinearPca": {
-		"inputs": [
-			{
-				"name": "obj"
-			},
-			{
-				"name": "QueryTable",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "每条线的数据筛选条件"
-			},
-			{
-				"mutuallyExclusiveGroup": [
-					[
-						{
-							"name": "Normalize",
-							"kind": "required",
-							"type": [
-								"UniExp.Flags",
-								"scalar"
-							],
-							"purpose": "可选指定归一化算法"
-						},
-						{
-							"name": "F0Samples",
-							"kind": "required",
-							"type": [
-								"real",
-								"vector"
-							],
-							"purpose": "回合中哪些采样时点作为基线"
-						}
-					],
-					[]
-				]
-			},
-			{
-				"name": "NumComponents",
-				"kind": "namevalue",
-				"type": "positive",
-				"purpose": "要输出的主成分个数"
-			},
-			{
-				"name": "AccumulateMethod",
-				"kind": "namevalue",
-				"type": [
-					"UniExp.Flags",
-					"scalar"
-				],
-				"purpose": "回合累积算法"
-			}
-		]
-	},
 	"UniExp.DataSet.Merge": {
 		"inputs": [
 			{
@@ -160,6 +107,19 @@
 				],
 				"default": true,
 				"purpose": "是否合并已存在的文件"
+			}
+		]
+	},
+	"UniExp.DataSet.QueryNTATS":{
+		"inputs":[
+			{
+				"name":"obj"
+			},
+			{
+				"name":"QueryTable",
+				"kind":"required",
+				"type":"tabular",
+				"purpose":""
 			}
 		]
 	},
@@ -805,6 +765,59 @@
 				"kind": "ordered",
 				"type": "positive",
 				"purpose": "表示学会的表现分阈值"
+			}
+		]
+	},
+	"UniExp.DataSet.LinearPca": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "QueryTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "每条线的数据筛选条件"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Normalize",
+							"kind": "required",
+							"type": [
+								"UniExp.Flags",
+								"scalar"
+							],
+							"purpose": "可选指定归一化算法"
+						},
+						{
+							"name": "F0Samples",
+							"kind": "required",
+							"type": [
+								"real",
+								"vector"
+							],
+							"purpose": "回合中哪些采样时点作为基线"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"name": "NumComponents",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "要输出的主成分个数"
+			},
+			{
+				"name": "AccumulateMethod",
+				"kind": "namevalue",
+				"type": [
+					"UniExp.Flags",
+					"scalar"
+				],
+				"purpose": "回合累积算法"
 			}
 		]
 	},
