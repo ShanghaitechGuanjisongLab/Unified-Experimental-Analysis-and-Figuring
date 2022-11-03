@@ -37,6 +37,8 @@ end
 ```
 ## 原始数据预处理
 ```MATLAB
+%从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
+function RoiCPath=ImageJRoiDiff(options)
 %对OIR文件进行等时距采样然后输出平均TIFF
 function OirSampleMean(OirPath,options)
 %根据 ImageJ RoiSet 配准图像
@@ -52,6 +54,8 @@ function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,option
 function BatchVideoMean(VideoPaths,Output)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
+%从Rdc2格式转换为UniExp规范DataSet格式
+function DataSet = Rdc2DataSet(Rdc2DataPaths)
 ```
 ## UniExp内部处理
 ```MATLAB
@@ -59,8 +63,14 @@ function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 function BarScatterCompare(DataA,DataB,varargin)
 %清除数据库中所有包含未定义实体的数据条目
 function Performance = EventLog2Performance(EventLogs,Tags)
+%绘制分泳道的热图
+function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
+%对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
+function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+%设置或取得Rdc2全局忽略关键词
+function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %将不同长度信号序列归一化
 function Signals = SampleNormalize(Signals,Length)
 %绘制带有关键时点标识的渐淡线图

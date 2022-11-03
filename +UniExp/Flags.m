@@ -37,7 +37,9 @@ classdef Flags
 		Std
 
 		%% LanearHeatmap旗帜
+		%隐藏X轴
 		HideXAxis
+		%隐藏Y轴
 		HideYAxis
 	end
 end

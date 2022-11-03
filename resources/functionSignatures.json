@@ -110,16 +110,50 @@
 			}
 		]
 	},
-	"UniExp.DataSet.QueryNTATS":{
-		"inputs":[
+	"UniExp.DataSet.QueryNTATS": {
+		"inputs": [
 			{
-				"name":"obj"
+				"name": "obj"
 			},
 			{
-				"name":"QueryTable",
-				"kind":"required",
-				"type":"tabular",
-				"purpose":""
+				"name": "QueryTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "查询表，列出数据筛选条件"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Normalize",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"UniExp.Flags"
+							],
+							"purpose": "归一化方法"
+						},
+						{
+							"name": "F0Samples",
+							"kind": "required",
+							"type": [
+								"vector",
+								"real"
+							],
+							"purpose": "用作基线的信号索引"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"name": "Accumulate",
+				"kind": "ordered",
+				"type": [
+					"scalar",
+					"UniExp.Flags"
+				],
+				"purpose": "回合累积方法"
 			}
 		]
 	},
@@ -768,56 +802,22 @@
 			}
 		]
 	},
-	"UniExp.DataSet.LinearPca": {
+	"UniExp.LinearPca": {
 		"inputs": [
 			{
-				"name": "obj"
-			},
-			{
-				"name": "QueryTable",
+				"name": "NTATS",
 				"kind": "required",
-				"type": "tabular",
-				"purpose": "每条线的数据筛选条件"
-			},
-			{
-				"mutuallyExclusiveGroup": [
-					[
-						{
-							"name": "Normalize",
-							"kind": "required",
-							"type": [
-								"UniExp.Flags",
-								"scalar"
-							],
-							"purpose": "可选指定归一化算法"
-						},
-						{
-							"name": "F0Samples",
-							"kind": "required",
-							"type": [
-								"real",
-								"vector"
-							],
-							"purpose": "回合中哪些采样时点作为基线"
-						}
-					],
-					[]
-				]
+				"type": [
+					"cell",
+					"vector"
+				],
+				"purpose": "分析数据"
 			},
 			{
 				"name": "NumComponents",
-				"kind": "namevalue",
+				"kind": "ordered",
 				"type": "positive",
-				"purpose": "要输出的主成分个数"
-			},
-			{
-				"name": "AccumulateMethod",
-				"kind": "namevalue",
-				"type": [
-					"UniExp.Flags",
-					"scalar"
-				],
-				"purpose": "回合累积算法"
+				"purpose": "只计算前几个成分"
 			}
 		]
 	},
@@ -872,6 +872,55 @@
 				"type": "positive",
 				"purpose": "采样样本量",
 				"default": 50
+			}
+		]
+	},
+	"UniExp.Rdc2DataSet": {
+		"inputs": [
+			{
+				"name": "Rdc2Paths",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.mat"
+					],
+					[
+						"string",
+						"vector"
+					],
+					[
+						"cell",
+						"vector"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "Rdc2文件路径"
+			}
+		]
+	},
+	"UniExp.Rdc2IgnoreKeywords": {
+		"inputs": [
+			{
+				"name": "IgnoreKeywords",
+				"kind": "ordered",
+				"type": [
+					[
+						"string",
+						"vector"
+					],
+					[
+						"cell",
+						"vector"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "新的忽略关键词表"
 			}
 		]
 	},
