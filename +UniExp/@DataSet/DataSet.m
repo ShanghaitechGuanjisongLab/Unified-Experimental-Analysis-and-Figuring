@@ -45,6 +45,19 @@ classdef DataSet<handle
 			TrialTags=TrialTags(ResponseWindow(1):ResponseWindow(2),:);
 			Behavior={any(TrialTags>mean2(TrialTags)+std2(TrialTags),1)'};
 		end
+		function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
+			Sample=TrialTags{1};
+			VariableNames=Sample.Properties.VariableNames;
+			TrialTags=cellfun(@table2array,TrialTags,UniformOutput=false);
+			TrialTags=imresize(cat(3,TrialTags{:}),[Height,width(Sample)]);
+			NumTables=size(TrialTags,3);
+			ResizedTT=cell(NumTables,1);
+			for T=1:NumTables
+				ResizedTT{T}=array2table(TrialTags(:,:,T),VariableNames=VariableNames);
+			end
+			ResizedTT={ResizedTT};
+			TrialUID={TrialUID};
+		end
 	end
 	methods
 		function obj=DataSet(StructOrPath)
@@ -189,6 +202,13 @@ classdef DataSet<handle
 				obj.Trials.Behavior(~ismember(obj.Trials.TrialUID,TrialUID))=single(NaN);
 			end
 			obj.Trials.Behavior(Index)=single(vertcat(Behavior{:}));
+		end
+		function TrialTagsNormalize(obj)
+			Heights=cellfun(@height,obj.Trials.TrialTags);
+			MinHeight=min(Heights);
+			[TrialTags,TrialUID]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,MinHeight),obj.Trials(:,["TrialTags","TrialUID"]),findgroups(Heights));
+			[~,Index]=ismember(vertcat(TrialUID{:}),obj.Trials.TrialUID);
+			obj.Trials.TrialTags(Index)=vertcat(TrialTags{:});
 		end
 	end
 end
