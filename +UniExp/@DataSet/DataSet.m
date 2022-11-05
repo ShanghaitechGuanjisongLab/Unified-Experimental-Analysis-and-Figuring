@@ -208,7 +208,11 @@ classdef DataSet<handle
 			obj.Trials.Behavior(Index)=single(vertcat(Behavior{:}));
 		end
 		function SampleNormalize(obj)
-			%d
+			%对数据集中所有回合信号和标进行归一化，重采样到最短信号的长度
+			%# 语法
+			% ```
+			% obj.SampleNormalize;
+			% ```
 			Lengths=cellfun(@numel,obj.TrialSignals.TrialSignal);
 			NormalizeSignal=Lengths>0;
 			Lengths=Lengths(NormalizeSignal);
