@@ -25,5 +25,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		The_number_of_split_trials_does_not_match_the_existing_record
 		Table_not_found_in_input
 		Invalid_Flag
+		The_first_two_dimensions_of_Points_and_LineColors_are_different
 	end
 end
