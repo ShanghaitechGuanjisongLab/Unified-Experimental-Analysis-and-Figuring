@@ -205,8 +205,10 @@ classdef DataSet<handle
 		end
 		function TrialTagsNormalize(obj)
 			Heights=cellfun(@height,obj.Trials.TrialTags);
+			NotEmpty=Heights>0;
+			Heights=Heights(NotEmpty);
 			MinHeight=min(Heights);
-			[TrialTags,TrialUID]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,MinHeight),obj.Trials(:,["TrialTags","TrialUID"]),findgroups(Heights));
+			[TrialTags,TrialUID]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,MinHeight),obj.Trials(NotEmpty,["TrialTags","TrialUID"]),findgroups(Heights));
 			[~,Index]=ismember(vertcat(TrialUID{:}),obj.Trials.TrialUID);
 			obj.Trials.TrialTags(Index)=vertcat(TrialTags{:});
 		end
