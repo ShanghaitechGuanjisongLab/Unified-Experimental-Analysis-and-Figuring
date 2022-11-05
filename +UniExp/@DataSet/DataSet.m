@@ -103,8 +103,14 @@ classdef DataSet<handle
 			% ```
 			%# 返回值
 			% VT(:,1)cell，数据集中不为空的表名称
-			VT=properties(obj);
-			VT=VT(cellfun(@(PN)istabular(obj.(PN)),VT));
+			TableNames=properties(obj);
+			NumTableNames=numel(TableNames);
+			VT=false(NumTableNames,1);
+			for T=1:NumTableNames
+				Property=obj.(TableNames{T});
+				VT(T)=istabular(Property)&&~isempty(Property);
+			end
+			VT=TableNames(VT);
 		end
 		function obj=MakeCopy(obj)
 			%取得对象的一个拷贝

@@ -1,5 +1,5 @@
 function V = Version
-V.Me='7.0.0';
+V.Me='8.0.0';
 V.ParallelComputing=ParallelComputing.Version;
 V.GlobalOptimization=GlobalOptimization.Version;
 V.ImageProcessing=ImageProcessing.Version;

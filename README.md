@@ -61,6 +61,8 @@ function DataSet = Rdc2DataSet(Rdc2DataPaths)
 ```MATLAB
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
+%作异形彩色标记线条图
+function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors)
 %清除数据库中所有包含未定义实体的数据条目
 function Performance = EventLog2Performance(EventLogs,Tags)
 %绘制分泳道的热图
@@ -71,8 +73,6 @@ function Summary=LearningSummarize(SessionTable,LearnedP)
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
-%将不同长度信号序列归一化
-function Signals = SampleNormalize(Signals,Length)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
 %根据信号拆分回合
