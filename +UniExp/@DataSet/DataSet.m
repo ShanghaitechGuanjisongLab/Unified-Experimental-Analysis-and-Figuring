@@ -58,6 +58,10 @@ classdef DataSet<handle
 			ResizedTT={ResizedTT};
 			TrialUID={TrialUID};
 		end
+		function [TrialSignals,SignalIndex]=TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo)
+			TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo]),2)};
+			SignalIndex={SignalIndex};
+		end
 	end
 	methods
 		function obj=DataSet(StructOrPath)
@@ -203,14 +207,27 @@ classdef DataSet<handle
 			end
 			obj.Trials.Behavior(Index)=single(vertcat(Behavior{:}));
 		end
-		function TrialTagsNormalize(obj)
+		function SampleNormalize(obj)
+			%d
+			Lengths=cellfun(@numel,obj.TrialSignals.TrialSignal);
+			NormalizeSignal=Lengths>0;
+			Lengths=Lengths(NormalizeSignal);
 			Heights=cellfun(@height,obj.Trials.TrialTags);
-			NotEmpty=Heights>0;
-			Heights=Heights(NotEmpty);
-			MinHeight=min(Heights);
-			[TrialTags,TrialUID]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,MinHeight),obj.Trials(NotEmpty,["TrialTags","TrialUID"]),findgroups(Heights));
-			[~,Index]=ismember(vertcat(TrialUID{:}),obj.Trials.TrialUID);
-			obj.Trials.TrialTags(Index)=vertcat(TrialTags{:});
+			NormalizeTags=Heights>0;
+			Heights=Heights(NormalizeTags);
+			NormalizeTo=min([Lengths;Heights]);
+			NormalizeSignal(NormalizeSignal)=Lengths~=NormalizeTo;
+			NormalizeTags(NormalizeTags)=Heights~=NormalizeTo;
+			if any(NormalizeSignal)
+				SignalIndex=1:height(obj.TrialSignals);
+				[TrialSignal,SignalIndex]=splitapply(@(TrialSignals,SignalIndex)UniExp.DataSet.TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),obj.TrialSignals.TrialSignal(NormalizeSignal),SignalIndex(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
+				obj.TrialSignals.TrialSignal(vertcat(SignalIndex{:}))=vertcat(TrialSignal{:});
+			end
+			if any(NormalizeTags)
+				TrialIndex=1:height(obj.Trials);
+				[TrialTags,TrialIndex]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),obj.Trials.TrialTags(NormalizeTags),TrialIndex(NormalizeTags)',findgroups(Heights(NormalizeTags)));
+				obj.Trials.TrialTags(vertcat(TrialIndex{:}))=vertcat(TrialTags{:});
+			end
 		end
 	end
 end
