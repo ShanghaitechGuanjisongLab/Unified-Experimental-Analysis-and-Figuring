@@ -35,9 +35,9 @@ classdef DataSet<handle
 		varargout=RenameMice(Old,New,varargin)
 	end
 	methods(Access=private,Static)
-		function [BlockUID,RepeatIndex]=GetRepeatIndex(BlockUID,DateTime)
-			BlockUID={BlockUID};
-			RepeatIndex={findgroups(DateTime)};
+		function [UID,Time]=GetRepeatIndex(UID,Time)
+			UID={UID};
+			Time={findgroups(Time)};
 		end
 		function [TrialUID,Behavior]=GetBehavior(TrialUID,TrialTags,ResponseWindow)
 			TrialUID={TrialUID};
@@ -147,17 +147,21 @@ classdef DataSet<handle
 			end
 		end
 		function AddRepeatIndex(obj)
-			%为Blocks表添加RepeatIndex列，用于查询
-			%同一只鼠，同样的设计，经常需要重复做多次。查询数据时，一个常见查询条件就是查"第N次"做该设计的数据。这个"第N次"是按照时间顺序排列的。本函数为数据集的
-			% Blocks表添加RepeatIndex列，指示该Block是该鼠、该设计的第几次重复实验。
+			%为Blocks和Trials添加重复序数列，便于查询
+			%同一只鼠，同样的设计，经常需要重复做个Block。查询数据时，一个常见查询条件就是查"第N次"做该设计的数据。这个"第N次"是按照时间顺序排列的，也就是所谓的重复序
+			% 数。同样，对于回合，也存在同一个Block内随机穿插不同的刺激，需要查询"第N次"重复该刺激的数据，这就是回合的重复序数。
+			%本函数为数据集的Blocks表添加BlockRI列，指示该Block是该鼠、该设计的第几次重复实验；为Trials表添加TrialRI列，指示该回合是该Block、该刺激的第几次重复。
 			%# 语法
 			% ```
 			% obj.AddRepeatIndex;
 			% ```
-			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["BlockUID","DateTime","Mouse","Design"]);
-			[BlockUID,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,Query.BlockUID,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
-			[~,Index]=ismember(vertcat(BlockUID{:}),obj.Blocks.BlockUID);
-			obj.Blocks.RepeatIndex(Index)=vertcat(RepeatIndex{:});
+			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["DateTime","Mouse","Design"]);
+			Index=(1:height(Query));
+			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,Index,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
+			obj.Blocks.BlockRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
+			Index=(1:height(obj.Trials));
+			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,Index,obj.Trials.TrialIndex,findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
+			obj.Trials.TrialRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
 		end
 		function RemoveDateTimes(obj,DateTimes)
 			%从数据库中移除一些日期时间的一切关联数据
