@@ -62,7 +62,7 @@ function DataSet = Rdc2DataSet(Rdc2DataPaths)
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
 %作异形彩色标记线条图
-function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors)
+function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors,options)
 %清除数据库中所有包含未定义实体的数据条目
 function Performance = EventLog2Performance(EventLogs,Tags)
 %绘制分泳道的热图

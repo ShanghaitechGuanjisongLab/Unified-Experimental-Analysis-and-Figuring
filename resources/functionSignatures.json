@@ -798,6 +798,18 @@
 				"kind":"required",
 				"type":["real","size=:,3"],
 				"purpose":"每条线上使用的标记颜色"
+			},
+			{
+				"name": "PatchArguments",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "额外传递给patch的名称值参数"
+			},
+			{
+				"name": "ScatterArguments",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "额外传递给scatter或scatter3的名称值参数"
 			}
 		]
 	},
