@@ -156,11 +156,9 @@ classdef DataSet<handle
 			% obj.AddRepeatIndex;
 			% ```
 			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["DateTime","Mouse","Design"]);
-			Index=(1:height(Query));
-			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,Index,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
+			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(Query))',Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
 			obj.Blocks.BlockRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
-			Index=(1:height(obj.Trials));
-			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,Index,obj.Trials.TrialIndex,findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
+			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(obj.Trials))',obj.Trials.TrialIndex,findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
 			obj.Trials.TrialRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
 		end
 		function RemoveDateTimes(obj,DateTimes)
