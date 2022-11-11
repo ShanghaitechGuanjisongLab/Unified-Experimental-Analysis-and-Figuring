@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="2026899692" file="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="2026899692" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -119,7 +119,7 @@ resources/project
         <requiredAddOn earliest="3.2.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
         <requiredAddOn earliest="9.10.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="5.0.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
-        <requiredAddOn earliest="1.3.1" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
+        <requiredAddOn earliest="1.3.2" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
@@ -175,12 +175,19 @@ resources/project
     </fileset.depfun.excluded>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2022b</root>
-      <toolboxes />
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
     </matlab>
     <platform>
       <unix>false</unix>
