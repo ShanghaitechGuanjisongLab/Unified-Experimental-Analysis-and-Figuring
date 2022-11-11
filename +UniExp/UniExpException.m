@@ -26,5 +26,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Table_not_found_in_input
 		Invalid_Flag
 		The_first_two_dimensions_of_Points_and_LineColors_are_different
+		GroupIndex_is_not_continuous
 	end
 end
