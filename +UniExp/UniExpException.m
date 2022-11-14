@@ -27,5 +27,8 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Invalid_Flag
 		The_first_two_dimensions_of_Points_and_LineColors_are_different
 		GroupIndex_is_not_continuous
+		The_number_of_LineColors_is_less_than_that_of_lines
+		TransMatrix_is_much_less_than_OirPaths
+		TransMatrix_is_more_than_OirPaths
 	end
 end
