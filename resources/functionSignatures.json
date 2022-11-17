@@ -232,22 +232,35 @@
 			}
 		]
 	},
-	"UniExp.DataSet.TableQuery":{
-		"inputs":[
+	"UniExp.DataSet.TableQuery": {
+		"inputs": [
 			{
-				"name":"obj"
+				"name": "obj"
 			},
 			{
-				"name":"Columns",
-				"kind":"required",
-				"type":[["char","row"],["string","vector"],["cell","vector"]],
-				"purpose":"要查询的列名"
+				"name": "Columns",
+				"kind": "required",
+				"type": [
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"vector"
+					],
+					[
+						"cell",
+						"vector"
+					]
+				],
+				"purpose": "要查询的列名"
 			},
 			{
-				"name":"QueryTable",
-				"kind":"required",
-				"type":"tabular",
-				"purpose":"查询表，列出数据筛选条件"
+				"name": "QueryTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "查询表，列出数据筛选条件"
 			}
 		]
 	},
@@ -766,37 +779,52 @@
 			}
 		]
 	},
-	"UniExp.ColorfulMarkerPlot":{
-		"inputs":[
+	"UniExp.ColorfulMarkerPlot": {
+		"inputs": [
 			{
-				"name":"Points",
-				"kind":"required",
-				"type":["real","size=:,:,2:3"],
-				"purpose":"线上采样点的坐标"
+				"name": "Points",
+				"kind": "required",
+				"type": [
+					"real",
+					"size=:,:,2:3"
+				],
+				"purpose": "线上采样点的坐标"
 			},
 			{
-				"name":"LineColors",
-				"kind":"required",
-				"type":["real","size=:,:,3"],
-				"purpose":"线条颜色"
+				"name": "LineColors",
+				"kind": "required",
+				"type": [
+					"real",
+					"size=:,:,3"
+				],
+				"purpose": "线条颜色"
 			},
 			{
-				"name":"MarkerIndex",
-				"kind":"required",
-				"type":["real","vector"],
-				"purpose":"标记时点位置"
+				"name": "MarkerIndex",
+				"kind": "required",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "标记时点位置"
 			},
 			{
-				"name":"MarkerShape",
-				"kind":"required",
-				"type":["char","vector"],
-				"purpose":"使用指定的符号标注"
+				"name": "MarkerShape",
+				"kind": "required",
+				"type": [
+					"char",
+					"vector"
+				],
+				"purpose": "使用指定的符号标注"
 			},
 			{
-				"name":"MarkerColors",
-				"kind":"required",
-				"type":["real","size=:,3"],
-				"purpose":"每条线上使用的标记颜色"
+				"name": "MarkerColors",
+				"kind": "required",
+				"type": [
+					"real",
+					"size=:,3"
+				],
+				"purpose": "每条线上使用的标记颜色"
 			},
 			{
 				"name": "PatchArguments",
@@ -1022,10 +1050,20 @@
 				"purpose": "采样平均图文件路径"
 			},
 			{
-				"name": "Method",
+				"name": "OutputDirectory",
 				"kind": "ordered",
 				"type": [
-					"choices={'rigid','affine'"
+					[
+						"folder"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"scalar"
+					]
 				],
 				"purpose": "变换方法"
 			}

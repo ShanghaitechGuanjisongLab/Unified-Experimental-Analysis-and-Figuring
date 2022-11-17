@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="2026899692" file="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\张天夫\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="2026899692" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -39,10 +39,12 @@ classdef DataSet
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
 end
 原始数据预处理
+%从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
+function RoiCPath=ImageJRoiDiff(options)
 %对OIR文件进行等时距采样然后输出平均TIFF
 function OirSampleMean(OirPath,options)
 %根据 ImageJ RoiSet 配准图像
-function TransMatrix = RoiRegister(FixedRoi,MovingRois,MovingSamples,UseAffine)
+function TransMatrix = RoiRegister(Fixed,Movings,MovingSamples,OutputDirectory)
 从其它数据文件格式取得UniExp
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,FixedPath,OutputDirectory,TransMatrix,options)
@@ -52,15 +54,23 @@ function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,option
 function BatchVideoMean(VideoPaths,Output)
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
+%从Rdc2格式转换为UniExp规范DataSet格式
+function DataSet = Rdc2DataSet(Rdc2DataPaths)
 UniExp内部处理
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
+%作异形彩色标记线条图
+function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors,options)
 %清除数据库中所有包含未定义实体的数据条目
 function Performance = EventLog2Performance(EventLogs,Tags)
+%绘制分泳道的热图
+function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
-%将不同长度信号序列归一化
-function Signals = SampleNormalize(Signals,Length)
+%对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
+function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+%设置或取得Rdc2全局忽略关键词
+function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
 %根据信号拆分回合
@@ -70,15 +80,9 @@ function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndT
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
     <param.version>9.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
-    <param.products.name>
-      <item>Statistics and Machine Learning Toolbox</item>
-    </param.products.name>
-    <param.products.id>
-      <item>19</item>
-    </param.products.id>
-    <param.products.version>
-      <item>12.4</item>
-    </param.products.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
     <param.platforms />
     <param.guid>c597ae20-0e6e-40e2-a521-e63cf34439c3</param.guid>
     <param.exclude.filters>% List files contained in your toolbox folder that you would like to exclude
@@ -116,10 +120,10 @@ resources/project
     <param.required.addons>
       <requiredaddons>
         <requiredAddOn earliest="3.0.0" fromRepository="true" id="4d05e210-f73f-4916-9076-1c9b15718b36" include="true" latest="latest">全局优化</requiredAddOn>
-        <requiredAddOn earliest="3.2.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
+        <requiredAddOn earliest="3.3.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
         <requiredAddOn earliest="9.10.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
-        <requiredAddOn earliest="5.0.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
-        <requiredAddOn earliest="1.3.2" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
+        <requiredAddOn earliest="6.0.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="1.3.3" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
@@ -139,6 +143,9 @@ resources/project
     <param.additional.sw.linux.url />
     <unset>
       <param.output />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
       <param.platforms />
       <param.exclude.pcodedmfiles />
       <param.examples />
@@ -175,12 +182,19 @@ resources/project
     </fileset.depfun.excluded>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\张天夫\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="统一实验分析作图.mltbx" optional="false">C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\统一实验分析作图.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
       <root>C:\Program Files\MATLAB\R2022b</root>
-      <toolboxes />
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
     </matlab>
     <platform>
       <unix>false</unix>
