@@ -786,7 +786,7 @@
 				"kind": "required",
 				"type": [
 					"real",
-					"size=:,:,2:3"
+					"size=:,:,:"
 				],
 				"purpose": "线上采样点的坐标"
 			},
