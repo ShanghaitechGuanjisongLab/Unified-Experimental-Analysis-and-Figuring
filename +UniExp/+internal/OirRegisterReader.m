@@ -23,9 +23,9 @@ classdef OirRegisterReader<ParallelComputing.IBlockRWer
 			obj.NumPieces=double(obj.Reader.SizeT);%20
 			obj.ProcessData=TagLogical;
 			NumBlocks=ceil(obj.NumPieces/BlockSize);
-			obj.BlockSizes=linspace(0,obj.NumPieces,NumBlocks+1);
-			obj.BlockStarts=obj.BlockSizes(1:end-1);
-			obj.BlockSizes=obj.BlockSizes(2:end)-obj.BlockStarts;
+			BlockSplit=uint32(linspace(0,obj.NumPieces,NumBlocks+1));
+			obj.BlockStarts=BlockSplit(1:end-1);
+			obj.BlockSizes=BlockSplit(2:end)-obj.BlockStarts;
 			obj.CollectData=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
 		end
 		function Data=Read(obj,~,~)
