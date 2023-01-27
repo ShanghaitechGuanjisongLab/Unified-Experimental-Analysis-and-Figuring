@@ -33,6 +33,7 @@ classdef DataSet<handle
 	methods(Static)
 		Merged = Merge(Inputs,options)
 		varargout=RenameMice(Old,New,varargin)
+		varargout=Rename(Column,Old,New,varargin)
 	end
 	methods(Access=private,Static)
 		function [UID,Time]=GetRepeatIndex(UID,Time)
