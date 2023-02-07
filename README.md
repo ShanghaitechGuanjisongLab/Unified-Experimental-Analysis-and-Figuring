@@ -63,8 +63,8 @@ function DataSet = Rdc2DataSet(Rdc2DataPaths)
 function BarScatterCompare(DataA,DataB,varargin)
 %作异形彩色标记线条图
 function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors,options)
-%清除数据库中所有包含未定义实体的数据条目
-function Performance = EventLog2Performance(EventLogs,Tags)
+%从事件记录取得表现分数
+function Performance = EventLog2Performance(EventLogs,Events)
 %绘制分泳道的热图
 function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表

@@ -849,16 +849,16 @@
 				"purpose": "事件记录"
 			},
 			{
-				"name": "HitTag",
+				"name": "HitEvent",
 				"kind": "namevalue",
 				"type": "scalar",
-				"purpose": "命中标签值"
+				"purpose": "命中事件"
 			},
 			{
-				"name": "MissTag",
+				"name": "MissEvent",
 				"kind": "namevalue",
 				"type": "scalar",
-				"purpose": "错失标签值"
+				"purpose": "错失事件"
 			}
 		]
 	},
