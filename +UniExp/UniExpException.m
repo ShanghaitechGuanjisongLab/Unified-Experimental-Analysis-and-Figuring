@@ -30,5 +30,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		The_number_of_LineColors_is_less_than_that_of_lines
 		TransMatrix_is_much_less_than_OirPaths
 		TransMatrix_is_more_than_OirPaths
+		ZLayers_of_the_moving_ROI_and_file_do_not_match
 	end
 end

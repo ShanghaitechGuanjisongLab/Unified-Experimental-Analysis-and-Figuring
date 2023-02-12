@@ -42,7 +42,7 @@ function RoiCPath=ImageJRoiDiff(options)
 %对OIR文件进行等时距采样然后输出平均TIFF
 function OirSampleMean(OirPath,options)
 %根据 ImageJ RoiSet 配准图像
-function TransMatrix = RoiRegister(Fixed,Movings,MovingSamples,OutputDirectory)
+function TransMatrix = RoiRegister(PathArray,varargin)
 ```
 ## 从其它数据文件格式取得UniExp
 ```MATLAB

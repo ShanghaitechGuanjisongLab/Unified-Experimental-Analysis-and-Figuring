@@ -420,10 +420,10 @@
 				"name": "TransMatrix",
 				"kind": "required",
 				"type": [
-					"images.geotrans.internal.GeometricTransformation",
-					"2d"
+					"cell",
+					"column"
 				],
-				"purpose": "要对每个OIR的每个Z层应用的变换矩阵"
+				"purpose": "要对每个OIR应用的变换矩阵"
 			},
 			{
 				"name": "MaxTranslationStep",
@@ -1006,66 +1006,42 @@
 	"UniExp.RoiRegister": {
 		"inputs": [
 			{
-				"name": "FixedRoi",
-				"kind": "required",
-				"type": [
-					[
-						"file=*.zip"
-					],
-					[
-						"string",
-						"scalar"
-					],
-					[
-						"char",
-						"row"
-					]
-				],
-				"purpose": "从固定图圈出的 ImageJ RoiSet.zip 文件"
+				"name":"PathArray",
+				"kind":"required",
+				"type":["string","2d"],
+				"purpose":"路径矩阵"
 			},
 			{
-				"name": "MovingRois",
-				"kind": "required",
-				"type": [
+				"mutuallyExclusiveGroup":[
 					[
-						"file=*.zip"
+						{
+							"name":"FixedRoi",
+							"kind":"ordered",
+							"type":[["string","scalar"],["char","row"],["file"]],
+							"purpose":"固定图的ROI路径"
+						},
+						{
+							"name":"OutputDirectory",
+							"kind":"ordered",
+							"type":[["string","scalar"],["char","row"],["folder"]],
+							"purpose":"输出目录"
+						}
 					],
 					[
-						"string"
+						{
+							"name":"OutputDirectory",
+							"kind":"ordered",
+							"type":[["string","scalar"],["char","row"],["folder"]],
+							"purpose":"输出目录"
+						},
+						{
+							"name":"FixedRoi",
+							"kind":"ordered",
+							"type":[["string","scalar"],["char","row"],["file"]],
+							"purpose":"固定图的ROI路径"
+						}
 					]
-				],
-				"purpose": "从采样平均图圈出的RoiSet"
-			},
-			{
-				"name": "MovingSamples",
-				"kind": "required",
-				"type": [
-					[
-						"file=*.tif,*.oir"
-					],
-					[
-						"string"
-					]
-				],
-				"purpose": "采样平均图文件路径"
-			},
-			{
-				"name": "OutputDirectory",
-				"kind": "ordered",
-				"type": [
-					[
-						"folder"
-					],
-					[
-						"char",
-						"row"
-					],
-					[
-						"string",
-						"scalar"
-					]
-				],
-				"purpose": "变换方法"
+				]
 			}
 		]
 	},
