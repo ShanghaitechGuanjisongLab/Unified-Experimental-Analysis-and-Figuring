@@ -38,7 +38,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.ProcessData=Transform;
 			if exist('CacheDirectory','var')
 				[~,Filename]=fileparts(OirPath);
-				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".cache"));
+				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"));
 				obj.SizeC=numel(obj.NontagChannels);
 			else
 				obj.CacheFid=0;

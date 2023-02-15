@@ -33,7 +33,7 @@ classdef OirRegisterReader<ParallelComputing.IBlockRWer
 			obj.CollectData=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
 			if exist('CacheDirectory','var')
 				[~,Filename]=fileparts(OirPath);
-				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".cache"),"w");
+				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"),"w");
 				obj.NonTagChannel=find(~TagLogical);
 				obj.CacheDirectory=CacheDirectory;
 			else
@@ -50,7 +50,7 @@ classdef OirRegisterReader<ParallelComputing.IBlockRWer
 		end
 		function Data=Write(obj,Data,~,~)
 			if obj.WriteToCache
-				CachePath=fullfile(obj.CacheDirectory,matlab.lang.internal.uuid+".cache");
+				CachePath=fullfile(obj.CacheDirectory,matlab.lang.internal.uuid+".缓存");
 				Fid=fopen(CachePath,'w');
 				fwrite(Fid,Data{3},"uint16");
 				fclose(Fid);
