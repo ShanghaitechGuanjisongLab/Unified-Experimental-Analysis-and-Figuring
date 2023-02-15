@@ -502,6 +502,18 @@
 				],
 				"purpose": "是否启用并行池计算",
 				"default": true
+			},
+			{
+				"name":"CacheDirectory",
+				"kind":"namevalue",
+				"type":[["string","scalar"],["char","row"],["folder"]],
+				"purpose":"缓存文件目录"
+			},
+			{
+				"name":"BaseRegisterToDisk",
+				"kind":"namevalue",
+				"type":["logical","scalar"],
+				"purpose":"是否将金字塔配准底层结果输出到缓存文件"
 			}
 		]
 	},

@@ -9,13 +9,17 @@ classdef OirRegisterReader<ParallelComputing.IBlockRWer
 		OirPath
 		BlockStarts
 		BlockSizes uint16
+		CacheFid
+		NonTagChannel
+		CacheDirectory
+		WriteToCache
 	end
 	properties(Access=private)
 		Reader Image5D.OirReader
 		BlocksRead=0
 	end
 	methods
-		function obj = OirRegisterReader(OirPath,BlockSize)
+		function obj = OirRegisterReader(OirPath,BlockSize,WriteToCache,CacheDirectory)
 			obj.OirPath=OirPath;
 			obj.Reader=Image5D.OirReader(OirPath);
 			[Devices,Colors]=obj.Reader.DeviceColors;
@@ -27,10 +31,36 @@ classdef OirRegisterReader<ParallelComputing.IBlockRWer
 			obj.BlockStarts=BlockSplit(1:end-1);
 			obj.BlockSizes=BlockSplit(2:end)-obj.BlockStarts;
 			obj.CollectData=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
+			if exist('CacheDirectory','var')
+				[~,Filename]=fileparts(OirPath);
+				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".cache"),"w");
+				obj.NonTagChannel=find(~TagLogical);
+				obj.CacheDirectory=CacheDirectory;
+			else
+				obj.CacheFid=0;
+			end
+			obj.WriteToCache=WriteToCache;
 		end
 		function Data=Read(obj,~,~)
 			obj.BlocksRead=obj.BlocksRead+1;
 			[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,obj.BlockStarts(obj.BlocksRead),obj.BlockSizes(obj.BlocksRead));
+			if obj.CacheFid
+				fwrite(obj.CacheFid,Data(:,:,obj.NonTagChannel,:,:),'uint16');
+			end
+		end
+		function Data=Write(obj,Data,~,~)
+			if obj.WriteToCache
+				CachePath=fullfile(obj.CacheDirectory,matlab.lang.internal.uuid+".cache");
+				Fid=fopen(CachePath,'w');
+				fwrite(Fid,Data{3},"uint16");
+				fclose(Fid);
+				Data{3}=CachePath;
+			end
+		end
+		function delete(obj)
+			if obj.CacheFid
+				fclose(obj.CacheFid);
+			end
 		end
 	end
 end

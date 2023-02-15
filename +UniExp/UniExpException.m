@@ -31,5 +31,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		TransMatrix_is_much_less_than_OirPaths
 		TransMatrix_is_more_than_OirPaths
 		ZLayers_of_the_moving_ROI_and_file_do_not_match
+		Must_specify_CacheDirectory_if_BaseRegisterToCache
 	end
 end
