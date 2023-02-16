@@ -417,15 +417,6 @@
 				"purpose": "输出目录路径"
 			},
 			{
-				"name": "TransMatrix",
-				"kind": "required",
-				"type": [
-					"cell",
-					"column"
-				],
-				"purpose": "要对每个OIR应用的变换矩阵"
-			},
-			{
 				"name": "MaxTranslationStep",
 				"kind": "namevalue",
 				"type": "positive",
@@ -584,6 +575,28 @@
 					]
 				],
 				"purpose": "输出UniExp数据库文件名"
+			}
+		]
+	},
+	"UniExp.BatchTiffTransform":{
+		"inputs":[
+			{
+				"name":"TiffPaths",
+				"kind":"required",
+				"type":["string","column"],
+				"purpose":"要变换的TIFF文件路径"
+			},
+			{
+				"name":"TransMatrix",
+				"kind":"required",
+				"type":["cell","column"],
+				"purpose":"变换矩阵"
+			},
+			{
+				"name":"OutputDirectory",
+				"kind":"ordered",
+				"type":[["string","scalar"],["char","row"],["folder"]],
+				"purpose":"输出目录"
 			}
 		]
 	},
