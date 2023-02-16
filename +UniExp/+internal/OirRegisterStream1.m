@@ -1,4 +1,4 @@
-classdef OirRegisterStream<ParallelComputing.BlockRWStream
+classdef OirRegisterStream1<ParallelComputing.BlockRWStream
 	methods(Access=protected)
 		function NextObject(obj)
 			Index=obj.ObjectsRead+1;
@@ -57,8 +57,8 @@ classdef OirRegisterStream<ParallelComputing.BlockRWStream
 		end
 	end
 	methods
-		function obj = OirRegisterStream(Paths,GetRWer)
-			obj@ParallelComputing.BlockRWStream(Paths,GetRWer);
+		function obj = OirRegisterStream1(OirPaths,varargin)
+			obj@ParallelComputing.BlockRWStream(OirPaths,@(Path)UniExp.internal.OirRegisterRW1);
 		end
 	end
 end

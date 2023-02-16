@@ -32,5 +32,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		TransMatrix_is_more_than_OirPaths
 		ZLayers_of_the_moving_ROI_and_file_do_not_match
 		Must_specify_CacheDirectory_if_BaseRegisterToCache
+		PathArray_must_have_2_or_3_columns
 	end
 end

@@ -1,4 +1,4 @@
-classdef OirRegisterReader<ParallelComputing.IBlockRWer
+classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
@@ -19,7 +19,7 @@ classdef OirRegisterReader<ParallelComputing.IBlockRWer
 		BlocksRead=0
 	end
 	methods
-		function obj = OirRegisterReader(OirPath,BlockSize,WriteToCache,CacheDirectory)
+		function obj = OirRegisterRW1(OirPath,BlockSize,WriteToCache,CacheDirectory)
 			obj.OirPath=OirPath;
 			obj.Reader=Image5D.OirReader(OirPath);
 			[Devices,Colors]=obj.Reader.DeviceColors;
