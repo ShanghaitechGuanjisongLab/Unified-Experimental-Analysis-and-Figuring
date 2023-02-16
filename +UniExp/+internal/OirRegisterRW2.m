@@ -1,9 +1,9 @@
-classdef OirRegisterRW<ParallelComputing.IBlockRWer
+classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
 		CollectData
-		ProcessData
+		ProcessData={}
 	end
 	properties(SetAccess=immutable,GetAccess=private)
 		Writer Image5D.OmeTiffRWer
@@ -15,12 +15,14 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		SizeY
 		SizeC
 		SizeZ
+		MeanWriter Image5D.OmeTiffRWer
 	end
 	properties(Access=private)
 		Reader Image5D.OirReader
+		Sum
 	end
 	methods
-		function obj = OirRegisterRW(OirPath,TiffPath,Translation,Transform,CacheDirectory)
+		function obj = OirRegisterRW2(OirPath,Translation,OutputDirectory,CacheDirectory)
 			import Image5D.*
 			obj.OirPath=OirPath;
 			obj.Reader=OirReader(OirPath);
@@ -32,10 +34,11 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			obj.NumPieces=obj.Reader.SizeT;
 			obj.PieceSize=2*prod([uint32(obj.SizeX),obj.SizeY,obj.SizeC,obj.SizeZ]);
 			obj.NontagChannels=find(~startsWith(Device,'CD'));
-			obj.Writer=OmeTiffRWer.Create(TiffPath,PixelType.UINT16,obj.SizeX,obj.SizeY,ChannelColor.FromOirColors(Colors(:,obj.NontagChannels)),obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
+			[~,Filename]=fileparts(OirPath);
+			Colors=ChannelColor.FromOirColors(Colors(:,obj.NontagChannels));
+			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			obj.NontagChannels=obj.NontagChannels-1;
 			obj.Translation=Translation;
-			obj.ProcessData=Transform;
 			if exist('CacheDirectory','var')
 				[~,Filename]=fileparts(OirPath);
 				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"));
@@ -43,6 +46,7 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 			else
 				obj.CacheFid=0;
 			end
+			obj.MeanWriter=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".平均值.tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,1,DimensionOrder.XYCZT);
 		end
 		function Data=Read(obj,Start,End)
 			if obj.CacheFid
@@ -55,7 +59,15 @@ classdef OirRegisterRW<ParallelComputing.IBlockRWer
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
-			Data(1)=[];
+			if isempty(obj.Sum)
+				obj.Sum=Data{2};
+			else
+				obj.Sum=obj.Sum+Data{2};
+			end
+			Data={};
+			if End==obj.NumPieces
+				obj.MeanWriter.WritePixels(uint16(obj.Sum/double(End)));
+			end
 		end
 		function delete(obj)
 			if obj.CacheFid

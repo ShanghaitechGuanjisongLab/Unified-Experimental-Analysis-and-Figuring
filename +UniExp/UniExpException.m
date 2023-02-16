@@ -33,5 +33,7 @@ classdef UniExpException<MATLAB.IEnumerableException
 		ZLayers_of_the_moving_ROI_and_file_do_not_match
 		Must_specify_CacheDirectory_if_BaseRegisterToCache
 		PathArray_must_have_2_or_3_columns
+		Mean_Tiff_exist_under_OutputDirectory
+		Std_Tiff_exist_under_OutputDirectory
 	end
 end
