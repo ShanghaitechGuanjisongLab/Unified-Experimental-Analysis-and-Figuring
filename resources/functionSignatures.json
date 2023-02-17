@@ -575,6 +575,30 @@
 					]
 				],
 				"purpose": "输出UniExp数据库文件名"
+			},
+			{
+				"name":"MemoryPreserve",
+				"kind":"namevalue",
+				"type":"positive",
+				"purpose":"内存保留系数"
+			},
+			{
+				"name": "UseGpu",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "指定要使用的GPU"
+			},
+			{
+				"name": "Parallel",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "是否启用并行池计算"
 			}
 		]
 	},
