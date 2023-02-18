@@ -35,5 +35,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		PathArray_must_have_2_or_3_columns
 		Mean_Tiff_exist_under_OutputDirectory
 		Std_Tiff_exist_under_OutputDirectory
+		Numbers_of_fixed_and_moving_ROIs_vary
 	end
 end
