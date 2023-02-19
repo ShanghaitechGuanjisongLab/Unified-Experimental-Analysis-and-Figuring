@@ -63,6 +63,15 @@ classdef DataSet<handle
 			TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo]),2)};
 			SignalIndex={SignalIndex};
 		end
+		function Design=StimulusToDesign(Stimulus,DSTable)
+			for D=1:height(DSTable)
+				if isempty(setxor(Stimulus,DSTable.Stimuli{D}))
+					Design=DSTable.Design(D);
+					return
+				end
+			end
+			Design=missing;
+		end
 	end
 	methods
 		function obj=DataSet(StructOrPath)
@@ -241,6 +250,12 @@ classdef DataSet<handle
 				[TrialTags,TrialIndex]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),obj.Trials.TrialTags(NormalizeTags),TrialIndex(NormalizeTags)',findgroups(Heights(NormalizeTags)));
 				obj.Trials.TrialTags(vertcat(TrialIndex{:}))=vertcat(TrialTags{:});
 			end
+		end
+		function SetDesignByStimulus(obj,DSTable)
+			BlockDesign=groupsummary(obj.Trials,"BlockUID",@(Stimulus)UniExp.DataSet.StimulusToDesign(Stimulus,DSTable),"Stimulus");
+			BlockDesign(ismissing(BlockDesign.fun1_Stimulus),:)=[];
+			[~,Index]=ismember(BlockDesign.BlockUID,obj.Blocks.BlockUID);
+			obj.Blocks.Design(Index)=BlockDesign.fun1_Stimulus;
 		end
 	end
 end

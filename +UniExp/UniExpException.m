@@ -35,5 +35,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		PathArray_must_have_2_or_3_columns
 		Mean_Tiff_exist_under_OutputDirectory
 		Std_Tiff_exist_under_OutputDirectory
+		Lengths_of_TrialSignals_within_the_query_group_is_different
 	end
 end
