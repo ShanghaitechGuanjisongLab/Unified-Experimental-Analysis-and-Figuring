@@ -80,7 +80,7 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdC
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
-    <param.version>12.0.0</param.version>
+    <param.version>12.1.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -124,7 +124,7 @@ resources/project
         <requiredAddOn earliest="3.1.0.0" fromRepository="true" id="4d05e210-f73f-4916-9076-1c9b15718b36" include="true" latest="latest">作图 颜色 分配 优化 Plot Color Allocate Optimization</requiredAddOn>
         <requiredAddOn earliest="10.1.3.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="3.3.2.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
-        <requiredAddOn earliest="7.0.1.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="7.0.2.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
         <requiredAddOn earliest="1.4.4.0" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D(5)</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
