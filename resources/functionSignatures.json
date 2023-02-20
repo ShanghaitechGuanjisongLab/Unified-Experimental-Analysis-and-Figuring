@@ -628,22 +628,10 @@
 	"UniExp.BatchTiffTransform": {
 		"inputs": [
 			{
-				"name": "TiffPaths",
+				"name": "TiffTransTable",
 				"kind": "required",
-				"type": [
-					"string",
-					"column"
-				],
-				"purpose": "要变换的TIFF文件路径"
-			},
-			{
-				"name": "TransMatrix",
-				"kind": "required",
-				"type": [
-					"cell",
-					"column"
-				],
-				"purpose": "变换矩阵"
+				"type": "tabular",
+				"purpose": "TIFF文件变换表"
 			},
 			{
 				"name": "OutputDirectory",
@@ -1097,7 +1085,7 @@
 		"inputs":[
 			{
 				"name":"TablePath",
-				"kind":"requried",
+				"kind":"required",
 				"type":[["file"],["char","row"],["string","scalar"]],
 				"purpose":"电子表文件路径"
 			}

@@ -46,7 +46,7 @@ function TransMatrix = RoiRegister(PathArray,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,FixedPath,OutputDirectory,TransMatrix,options)
 对Tiff图像批量应用变换矩阵
-function BatchTiffTransform(TiffPath,TransMatrix,OutputDirectory)
+function BatchTiffTransform(TiffTransTable,OutputDirectory)
 ```
 ## 从其它数据文件格式取得UniExp
 ```MATLAB
