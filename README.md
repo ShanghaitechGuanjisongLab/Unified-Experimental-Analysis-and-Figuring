@@ -58,6 +58,8 @@ function BatchVideoMean(VideoPaths,Output)
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 %从Rdc2格式转换为UniExp规范DataSet格式
 function DataSet = Rdc2DataSet(Rdc2DataPaths)
+从表格文件读入查询表
+function QueryTable = ReadQueryTable(TablePath)
 ```
 ## UniExp内部处理
 ```MATLAB

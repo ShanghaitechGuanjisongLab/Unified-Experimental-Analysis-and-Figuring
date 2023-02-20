@@ -257,10 +257,18 @@
 				"purpose": "要查询的列名"
 			},
 			{
-				"name": "QueryTable",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "查询表，列出数据筛选条件"
+				"name": "Query",
+				"kind": "ordered",
+				"type": [
+					[
+						"tabular"
+					],
+					[
+						"struct",
+						"scalar"
+					]
+				],
+				"purpose": "查询条件"
 			}
 		]
 	},
@@ -495,16 +503,31 @@
 				"default": true
 			},
 			{
-				"name":"CacheDirectory",
-				"kind":"namevalue",
-				"type":[["string","scalar"],["char","row"],["folder"]],
-				"purpose":"缓存文件目录"
+				"name": "CacheDirectory",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"folder"
+					]
+				],
+				"purpose": "缓存文件目录"
 			},
 			{
-				"name":"BaseRegisterToDisk",
-				"kind":"namevalue",
-				"type":["logical","scalar"],
-				"purpose":"是否将金字塔配准底层结果输出到缓存文件"
+				"name": "BaseRegisterToDisk",
+				"kind": "namevalue",
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "是否将金字塔配准底层结果输出到缓存文件"
 			}
 		]
 	},
@@ -577,10 +600,10 @@
 				"purpose": "输出UniExp数据库文件名"
 			},
 			{
-				"name":"MemoryPreserve",
-				"kind":"namevalue",
-				"type":"positive",
-				"purpose":"内存保留系数"
+				"name": "MemoryPreserve",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "内存保留系数"
 			},
 			{
 				"name": "UseGpu",
@@ -602,25 +625,43 @@
 			}
 		]
 	},
-	"UniExp.BatchTiffTransform":{
-		"inputs":[
+	"UniExp.BatchTiffTransform": {
+		"inputs": [
 			{
-				"name":"TiffPaths",
-				"kind":"required",
-				"type":["string","column"],
-				"purpose":"要变换的TIFF文件路径"
+				"name": "TiffPaths",
+				"kind": "required",
+				"type": [
+					"string",
+					"column"
+				],
+				"purpose": "要变换的TIFF文件路径"
 			},
 			{
-				"name":"TransMatrix",
-				"kind":"required",
-				"type":["cell","column"],
-				"purpose":"变换矩阵"
+				"name": "TransMatrix",
+				"kind": "required",
+				"type": [
+					"cell",
+					"column"
+				],
+				"purpose": "变换矩阵"
 			},
 			{
-				"name":"OutputDirectory",
-				"kind":"ordered",
-				"type":[["string","scalar"],["char","row"],["folder"]],
-				"purpose":"输出目录"
+				"name": "OutputDirectory",
+				"kind": "ordered",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"folder"
+					]
+				],
+				"purpose": "输出目录"
 			}
 		]
 	},
@@ -1052,42 +1093,103 @@
 			}
 		]
 	},
+	"UniExp.ReadQueryTable":{
+		"inputs":[
+			{
+				"name":"TablePath",
+				"kind":"requried",
+				"type":[["file"],["char","row"],["string","scalar"]],
+				"purpose":"电子表文件路径"
+			}
+		]
+	},
 	"UniExp.RoiRegister": {
 		"inputs": [
 			{
-				"name":"PathArray",
-				"kind":"required",
-				"type":["string","2d"],
-				"purpose":"路径矩阵"
+				"name": "PathArray",
+				"kind": "required",
+				"type": [
+					"string",
+					"2d"
+				],
+				"purpose": "路径矩阵"
 			},
 			{
-				"mutuallyExclusiveGroup":[
+				"mutuallyExclusiveGroup": [
 					[
 						{
-							"name":"FixedRoi",
-							"kind":"ordered",
-							"type":[["string","scalar"],["char","row"],["file"]],
-							"purpose":"固定图的ROI路径"
+							"name": "FixedRoi",
+							"kind": "ordered",
+							"type": [
+								[
+									"string",
+									"scalar"
+								],
+								[
+									"char",
+									"row"
+								],
+								[
+									"file"
+								]
+							],
+							"purpose": "固定图的ROI路径"
 						},
 						{
-							"name":"OutputDirectory",
-							"kind":"ordered",
-							"type":[["string","scalar"],["char","row"],["folder"]],
-							"purpose":"输出目录"
+							"name": "OutputDirectory",
+							"kind": "ordered",
+							"type": [
+								[
+									"string",
+									"scalar"
+								],
+								[
+									"char",
+									"row"
+								],
+								[
+									"folder"
+								]
+							],
+							"purpose": "输出目录"
 						}
 					],
 					[
 						{
-							"name":"OutputDirectory",
-							"kind":"ordered",
-							"type":[["string","scalar"],["char","row"],["folder"]],
-							"purpose":"输出目录"
+							"name": "OutputDirectory",
+							"kind": "ordered",
+							"type": [
+								[
+									"string",
+									"scalar"
+								],
+								[
+									"char",
+									"row"
+								],
+								[
+									"folder"
+								]
+							],
+							"purpose": "输出目录"
 						},
 						{
-							"name":"FixedRoi",
-							"kind":"ordered",
-							"type":[["string","scalar"],["char","row"],["file"]],
-							"purpose":"固定图的ROI路径"
+							"name": "FixedRoi",
+							"kind": "ordered",
+							"type": [
+								[
+									"string",
+									"scalar"
+								],
+								[
+									"char",
+									"row"
+								],
+								[
+									"file"
+								]
+							],
+							"purpose": "固定图的ROI路径"
 						}
 					]
 				]
