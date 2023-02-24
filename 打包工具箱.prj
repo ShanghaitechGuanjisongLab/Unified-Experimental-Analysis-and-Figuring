@@ -48,7 +48,7 @@ function TransMatrix = RoiRegister(PathArray,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,FixedPath,OutputDirectory,TransMatrix,options)
 对Tiff图像批量应用变换矩阵
-function BatchTiffTransform(TiffPath,TransMatrix,OutputDirectory)
+function BatchTiffTransform(TiffTransTable,OutputDirectory)
 从其它数据文件格式取得UniExp
 %批量测量OME-TIFF，以UniExp格式存储测量结果
 function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,options)
@@ -58,6 +58,8 @@ function BatchVideoMean(VideoPaths,Output)
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 %从Rdc2格式转换为UniExp规范DataSet格式
 function DataSet = Rdc2DataSet(Rdc2DataPaths)
+从表格文件读入查询表
+function QueryTable = ReadQueryTable(TablePath)
 UniExp内部处理
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
@@ -122,7 +124,7 @@ resources/project
     <param.required.addons>
       <requiredaddons>
         <requiredAddOn earliest="3.1.0.0" fromRepository="true" id="4d05e210-f73f-4916-9076-1c9b15718b36" include="true" latest="latest">作图 颜色 分配 优化 Plot Color Allocate Optimization</requiredAddOn>
-        <requiredAddOn earliest="10.2.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
+        <requiredAddOn earliest="10.3.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="3.3.2.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
         <requiredAddOn earliest="7.0.2.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算(2)</requiredAddOn>
         <requiredAddOn earliest="1.4.4.0" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D(5)</requiredAddOn>
