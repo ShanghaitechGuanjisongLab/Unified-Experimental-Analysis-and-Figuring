@@ -37,5 +37,6 @@ classdef UniExpException<MATLAB.IEnumerableException
 		Std_Tiff_exist_under_OutputDirectory
 		Lengths_of_TrialSignals_within_the_query_group_is_different
 		Numbers_of_fixed_and_moving_ROIs_vary
+		Column_not_found
 	end
 end
