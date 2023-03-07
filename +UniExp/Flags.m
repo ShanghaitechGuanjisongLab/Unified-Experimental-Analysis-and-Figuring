@@ -20,7 +20,7 @@ classdef Flags
 		%响应值t检验显著大于基线
 		T_test_significant
 
-		%% QueryNTATS归一化
+		%% 基线归一化
 		%将基线均值记为F0，计算F/F0-1为归一化数据
 		dFdF0
 		%将基线均值记为F0，计算log2(F/F0)为归一化数据

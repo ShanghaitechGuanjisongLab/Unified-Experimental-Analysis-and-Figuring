@@ -34,6 +34,18 @@ classdef DataSet<handle
 		Merged = Merge(Inputs,options)
 		varargout=RenameMice(Old,New,varargin)
 		varargout=Rename(Column,Old,New,varargin)
+		function CM=CheckMouse(CM)
+			%设置或获取是否检查鼠名
+			persistent Value
+			if isempty(Value)
+				Value=true;
+			end
+			if nargin
+				Value=CM;
+			else
+				CM=Value;
+			end
+		end
 	end
 	methods(Access=private,Static)
 		function [UID,Time]=GetRepeatIndex(UID,Time)
@@ -88,7 +100,11 @@ classdef DataSet<handle
 			% Struct(1,1)struct，包含表的结构体
 			% Path(1,1)string，包含表或对象的mat文件
 			if nargin
-				if ischar(StructOrPath)||isstring(StructOrPath)
+				CheckMouse=ischar(StructOrPath)||isstring(StructOrPath);
+				if CheckMouse
+					[~,Filename]=fileparts(StructOrPath);
+					Filename=string(split(Filename,'.'));
+					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(Filename);
 					StructOrPath=load(StructOrPath);
 					Cells=struct2cell(StructOrPath);
 					Logical=cellfun(@(C)isa(C,'UniExp.DataSet'),Cells);
@@ -102,6 +118,14 @@ classdef DataSet<handle
 				end
 				for F=Fields
 					obj.(F)=StructOrPath.(F);
+				end
+				if CheckMouse
+					for TableName=["Mice","DateTimes","Cells"]
+						if ~isempty(obj.(TableName))&&any(obj.(TableName).Mouse~=Filename(1))
+							warning('文件“%s”中的鼠名字段似乎和数据库“%s”表内记录的不一致',Filename,TableName);
+							break;
+						end
+					end
 				end
 			end
 		end
@@ -236,10 +260,10 @@ classdef DataSet<handle
 			Lengths=Lengths(NormalizeSignal);
 			Heights=cellfun(@height,obj.Trials.TrialTags);
 			NormalizeTags=Heights>0;
-			Heights=Heights(NormalizeTags);
-			NormalizeTo=min([Lengths;Heights]);
+			ValidHeights=Heights(NormalizeTags);
+			NormalizeTo=min([Lengths;ValidHeights]);
 			NormalizeSignal(NormalizeSignal)=Lengths~=NormalizeTo;
-			NormalizeTags(NormalizeTags)=Heights~=NormalizeTo;
+			NormalizeTags(NormalizeTags)=ValidHeights~=NormalizeTo;
 			if any(NormalizeSignal)
 				SignalIndex=1:height(obj.TrialSignals);
 				[TrialSignal,SignalIndex]=splitapply(@(TrialSignals,SignalIndex)UniExp.DataSet.TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),obj.TrialSignals.TrialSignal(NormalizeSignal),SignalIndex(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
@@ -252,10 +276,11 @@ classdef DataSet<handle
 			end
 		end
 		function SetDesignByStimulus(obj,DSTable)
+			%根据刺激类型组合自动生成模块设计
 			BlockDesign=groupsummary(obj.Trials,"BlockUID",@(Stimulus)UniExp.DataSet.StimulusToDesign(Stimulus,DSTable),"Stimulus");
 			BlockDesign(ismissing(BlockDesign.fun1_Stimulus),:)=[];
 			[~,Index]=ismember(BlockDesign.BlockUID,obj.Blocks.BlockUID);
-			obj.Blocks.Design(Index)=BlockDesign.fun1_Stimulus;
+			obj.Blocks.Design(Index)=categorical(BlockDesign.fun1_Stimulus);
 		end
 	end
 end

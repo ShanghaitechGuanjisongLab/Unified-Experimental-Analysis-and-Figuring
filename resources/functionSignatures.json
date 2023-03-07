@@ -585,7 +585,7 @@
 				"purpose": "平均值TIFF路径"
 			},
 			{
-				"name": "UniExpOutput",
+				"name": "OutputPath",
 				"kind": "namevalue",
 				"type": [
 					[
@@ -595,9 +595,12 @@
 					[
 						"char",
 						"row"
+					],
+					[
+						"file=*.mat"
 					]
 				],
-				"purpose": "输出UniExp数据库文件名"
+				"purpose": "输出UniExp数据库文件路径"
 			},
 			{
 				"name": "MemoryPreserve",
@@ -940,6 +943,37 @@
 			}
 		]
 	},
+	"UniExp.F0Normalize": {
+		"inputs": [
+			{
+				"name": "Data",
+				"kind": "required",
+				"type": [
+					"2d",
+					"real"
+				],
+				"purpose": "信号数据矩阵"
+			},
+			{
+				"name": "Method",
+				"kind": "required",
+				"type": [
+					"UniExp.Flags",
+					"scalar"
+				],
+				"purpose": "归一化方法"
+			},
+			{
+				"name": "F0Index",
+				"kind": "required",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "基线时点索引"
+			}
+		]
+	},
 	"UniExp.LearningSummarize": {
 		"inputs": [
 			{
@@ -1081,13 +1115,25 @@
 			}
 		]
 	},
-	"UniExp.ReadQueryTable":{
-		"inputs":[
+	"UniExp.ReadQueryTable": {
+		"inputs": [
 			{
-				"name":"TablePath",
-				"kind":"required",
-				"type":[["file"],["char","row"],["string","scalar"]],
-				"purpose":"电子表文件路径"
+				"name": "TablePath",
+				"kind": "required",
+				"type": [
+					[
+						"file"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"scalar"
+					]
+				],
+				"purpose": "电子表文件路径"
 			}
 		]
 	},
