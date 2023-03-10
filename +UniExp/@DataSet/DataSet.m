@@ -55,8 +55,7 @@ classdef DataSet<handle
 		function [TrialUID,Behavior]=GetBehavior(TrialUID,TrialTags,ResponseWindow)
 			TrialUID={TrialUID};
 			TrialTags=[TrialTags{:}];
-			TrialTags=TrialTags(ResponseWindow(1):ResponseWindow(2),:);
-			Behavior={any(TrialTags>mean2(TrialTags)+std2(TrialTags),1)'};
+			Behavior={any(TrialTags(ResponseWindow(1):ResponseWindow(2),:)>mean2(TrialTags)+std2(TrialTags),1)'};
 		end
 		function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
 			Sample=TrialTags{1};
