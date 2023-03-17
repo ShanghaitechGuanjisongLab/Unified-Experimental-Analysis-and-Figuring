@@ -881,22 +881,10 @@
 				"purpose": "线条颜色"
 			},
 			{
-				"name": "MarkerIndex",
+				"name": "Markers",
 				"kind": "required",
-				"type": [
-					"real",
-					"vector"
-				],
-				"purpose": "标记时点位置"
-			},
-			{
-				"name": "MarkerShape",
-				"kind": "required",
-				"type": [
-					"char",
-					"vector"
-				],
-				"purpose": "使用指定的符号标注"
+				"type": "tabular",
+				"purpose": "每个标记的位置和形状"
 			},
 			{
 				"name": "MarkerColors",
@@ -1251,24 +1239,10 @@
 				"purpose": "线条颜色"
 			},
 			{
-				"name": "KeyIndex",
-				"kind": "ordered",
-				"type": "real",
-				"purpose": "关键时点位置"
-			},
-			{
 				"name": "KeyMarkers",
-				"kind": "ordered",
-				"type": [
-					[
-						"char"
-					],
-					[
-						"string",
-						"scalar"
-					]
-				],
-				"purpose": "符号标注"
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "关键减淡时点位置和符号标注"
 			},
 			{
 				"name": "PatchArguments",

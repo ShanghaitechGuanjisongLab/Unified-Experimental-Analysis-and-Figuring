@@ -66,7 +66,7 @@ function QueryTable = ReadQueryTable(TablePath)
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
 %作异形彩色标记线条图
-function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors,options)
+function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
 %绘制分泳道的热图
@@ -78,7 +78,7 @@ function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
+function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyMarkers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
