@@ -5,22 +5,26 @@ classdef Flags
 		No_special_operation
 
 		%% BarScatterCompare选项
+
 		%连接散点
 		Connect_scatters
 
 		%% BlockVideoMeasure测量算法
+
 		%平均像素值
 		Average_pixel_value
 		%高于平均的像素数占比
 		Bright_area_ratio
 
 		%% TrialSignal2Behavior命中判断算法
+
 		%响应均值大于基线最大值
 		Average_greater_than_max
 		%响应值t检验显著大于基线
 		T_test_significant
 
 		%% 基线归一化
+
 		%将基线均值记为F0，计算F/F0-1为归一化数据
 		dFdF0
 		%将基线均值记为F0，计算log2(F/F0)为归一化数据
@@ -29,6 +33,7 @@ classdef Flags
 		ZScore
 
 		%% 累积算法和排序标准
+
 		Mean
 		Median
 		Min
@@ -37,9 +42,19 @@ classdef Flags
 		Std
 
 		%% LanearHeatmap旗帜
+
 		%隐藏X轴
 		HideXAxis
 		%隐藏Y轴
 		HideYAxis
+
+		%% BatchOirRegisterTiff.Parallel
+
+		%使用MATLAB当前并行池设置
+		AsDefault
+		%按照UseGpu个数设置并行池尺寸。如果GPU个数<2，不使用并行池
+		AsGPU
+		%顺序执行，不使用并行池
+		Sequential
 	end
 end

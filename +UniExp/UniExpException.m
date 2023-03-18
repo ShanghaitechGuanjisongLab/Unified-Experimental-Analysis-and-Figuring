@@ -38,5 +38,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Lengths_of_TrialSignals_within_the_query_group_is_different
 		Numbers_of_fixed_and_moving_ROIs_vary
 		Column_not_found
+		Invalid_Parallel_option
 	end
 end
