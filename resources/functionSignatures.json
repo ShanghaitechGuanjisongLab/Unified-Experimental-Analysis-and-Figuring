@@ -232,6 +232,19 @@
 			}
 		]
 	},
+	"UniExp.DataSet.SetDesignByStimuli": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "DSTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "刺激组合与设计的映射表"
+			}
+		]
+	},
 	"UniExp.DataSet.TableQuery": {
 		"inputs": [
 			{

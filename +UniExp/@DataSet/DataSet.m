@@ -74,9 +74,9 @@ classdef DataSet<handle
 			TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo]),2)};
 			SignalIndex={SignalIndex};
 		end
-		function Design=StimulusToDesign(Stimulus,DSTable)
+		function Design=StimuliToDesign(Stimuli,DSTable)
 			for D=1:height(DSTable)
-				if isempty(setxor(Stimulus,DSTable.Stimuli{D}))
+				if isempty(setxor(Stimuli,DSTable.Stimuli{D}))
 					Design=DSTable.Design(D);
 					return
 				end
@@ -274,9 +274,30 @@ classdef DataSet<handle
 				obj.Trials.TrialTags(vertcat(TrialIndex{:}))=vertcat(TrialTags{:});
 			end
 		end
-		function SetDesignByStimulus(obj,DSTable)
+		function SetDesignByStimuli(obj,DSTable)
 			%根据刺激类型组合自动生成模块设计
-			BlockDesign=groupsummary(obj.Trials,"BlockUID",@(Stimulus)UniExp.DataSet.StimulusToDesign(Stimulus,DSTable),"Stimulus");
+			%# 语法
+			% ```
+			% obj.SetDesignByStimuli(DSTable);
+			% ```
+			%# 示例
+			% ```
+			% DataSet.SetDesignByStimuli(cell2table({ ...
+			% ["LightOnly","AudioOnly","WaterOnly"]								"LAuW"
+			% ["LightOnly","LightWater"]										"LLw"
+			% ["AudioOnly","AudioWater"]										"AuAuw"
+			% ["LightOnly","AudioOnly","WaterOnly","LightWater","AudioWater"]	"LAuWLwAuw"
+			% ["LightOnly","AudioOnly","WaterOnly","LightWater"]				"LAuWLw"
+			% "LightWater"														"LightWater"
+			% "AudioWater"														"AudioWater"
+			% "AirWater"														"AirWater"
+			% },VariableNames=["Stimuli","Design"]));
+			% ```
+			%# 输入参数
+			% DSTable table，刺激组合与设计的映射表。必须包含以下列：
+			% - Stimuli(1,1)cell，刺激组合，元胞内是(1,:)categorical，表示该组合内包含的所有刺激
+			% - Design(1,1)categorical，刺激组合对应的设计。所有恰好包含Stimuli所有刺激类型回合的模块，都会被设置为该Design。
+			BlockDesign=groupsummary(obj.Trials,"BlockUID",@(Stimuli)UniExp.DataSet.StimuliToDesign(Stimuli,DSTable),"Stimulus");
 			BlockDesign(ismissing(BlockDesign.fun1_Stimulus),:)=[];
 			[~,Index]=ismember(BlockDesign.BlockUID,obj.Blocks.BlockUID);
 			obj.Blocks.Design(Index)=categorical(BlockDesign.fun1_Stimulus);
