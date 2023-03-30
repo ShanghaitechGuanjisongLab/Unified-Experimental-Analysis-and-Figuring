@@ -28,11 +28,13 @@ UniExp是一种模仿SQL数据库架构的MATLAB表格组，由6张符合BC范�
 import UniExp.*
 ```
 每个函数代码文件内都有详尽文档，可用`doc UniExp.函数名`查询。函数的使用示例可在快速入门文档GettingStarted.mlx中查看。下方仅列出这些函数的简介。
-## UniExp.DataSet类
-用于管理数据集的核心实用类：
+## 类
 ```MATLAB
 classdef DataSet
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
+end
+classdef Query
+	%保存一个查询，以便下次快速查看
 end
 ```
 ## 原始数据预处理
