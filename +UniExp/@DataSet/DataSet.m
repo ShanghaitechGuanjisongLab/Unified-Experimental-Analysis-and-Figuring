@@ -27,9 +27,6 @@ classdef DataSet<handle
 		%主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
 		TrialSignals
 
-		%保存一些常用的查询以便快速打开
-		CommonQueries
-
 		%产生此对象的UniExp版本
 		Version=UniExp.Version
 	end

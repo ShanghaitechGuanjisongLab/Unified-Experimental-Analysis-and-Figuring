@@ -1067,43 +1067,6 @@
 			}
 		]
 	},
-	"UniExp.Query": {
-		"inputs": [
-			{
-				"name": "DataSet",
-				"kind": "required",
-				"type": [
-					"scalar",
-					"UniExp.DataSet"
-				],
-				"purpose": "此查询绑定的数据库"
-			},
-			{
-				"name": "Columns",
-				"kind": "required",
-				"type": [
-					[
-						"cell",
-						"vector"
-					],
-					[
-						"string",
-						"vector"
-					]
-				],
-				"purpose": "此查询结果表的列名"
-			},
-			{
-				"name": "Where",
-				"kind": "ordered",
-				"type": [
-					"struct",
-					"scalar"
-				],
-				"purpose": "此查询的条件结构"
-			}
-		]
-	},
 	"UniExp.Rdc2DataSet": {
 		"inputs": [
 			{

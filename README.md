@@ -33,9 +33,6 @@ import UniExp.*
 classdef DataSet
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
 end
-classdef Query
-	%保存一个查询，以便下次快速查看
-end
 ```
 ## 原始数据预处理
 ```MATLAB
