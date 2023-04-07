@@ -39,5 +39,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Numbers_of_fixed_and_moving_ROIs_vary
 		Column_not_found
 		Invalid_Parallel_option
+		Moving_image_is_a_video
 	end
 end
