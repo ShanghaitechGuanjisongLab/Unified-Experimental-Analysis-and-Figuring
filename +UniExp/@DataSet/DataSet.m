@@ -52,11 +52,6 @@ classdef DataSet<handle
 			UID={UID};
 			Time={findgroups(Time)};
 		end
-		function [TrialUID,Behavior]=GetBehavior(TrialUID,TrialTags,ResponseWindow)
-			TrialUID={TrialUID};
-			TrialTags=[TrialTags{:}];
-			Behavior={any(TrialTags(ResponseWindow(1):ResponseWindow(2),:)>mean2(TrialTags)+std2(TrialTags),1)'};
-		end
 		function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
 			Sample=TrialTags{1};
 			VariableNames=Sample.Properties.VariableNames;
@@ -238,15 +233,19 @@ classdef DataSet<handle
 			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
 			Query=MATLAB.DataTypes.Select({obj.Trials,obj.Blocks,obj.DateTimes},["TrialUID","TrialTags","SeriesInterval"]);
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
-			TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
-			Query.NumSamples=cellfun(@height,TrialTags);
-			[TrialUID,Behavior]=splitapply(@UniExp.DataSet.GetBehavior,Query.TrialUID,TrialTags,uint16(ResponseWindow*1000./Query.SeriesInterval),findgroups(Query(:,["SeriesInterval","NumSamples"])));
-			TrialUID=vertcat(TrialUID{:});
-			[~,Index]=ismember(TrialUID,obj.Trials.TrialUID);
+			Query.TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
+			Query.NumSamples=cellfun(@height,Query.TrialTags);
+			[GroupIndex,SiNs]=findgroups(Query(:,["SeriesInterval","NumSamples"]));
 			if ~ismember("Behavior",obj.Trials.Properties.VariableNames)
-				obj.Trials.Behavior(~ismember(obj.Trials.TrialUID,TrialUID))=single(NaN);
+				obj.Trials.Behavior(:)=single(NaN);
 			end
-			obj.Trials.Behavior(Index)=single(vertcat(Behavior{:}));
+			for G=1:height(SiNs)
+				Group=Query(GroupIndex==G,["TrialTags","TrialUID"]);
+				GroupRW=uint16(ResponseWindow*1000/SiNs.SeriesInterval(G));
+				TrialTags=[Group.TrialTags{:}];
+				[~,Index]=ismember(Group.TrialUID,obj.Trials.TrialUID);
+				obj.Trials.Behavior(Index)=any(TrialTags(GroupRW(1):GroupRW(2),:)>mean2(TrialTags)+std2(TrialTags),1);
+			end
 		end
 		function SampleNormalize(obj)
 			%对数据集中所有回合信号和标进行归一化，重采样到最短信号的长度
