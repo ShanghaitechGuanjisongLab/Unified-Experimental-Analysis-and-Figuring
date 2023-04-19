@@ -40,5 +40,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Column_not_found
 		Invalid_Parallel_option
 		Moving_image_is_a_video
+		Found_an_empty_signal
 	end
 end

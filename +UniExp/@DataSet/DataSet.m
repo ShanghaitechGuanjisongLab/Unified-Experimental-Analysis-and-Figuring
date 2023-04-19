@@ -97,8 +97,8 @@ classdef DataSet<handle
 				CheckMouse=ischar(StructOrPath)||isstring(StructOrPath);
 				if CheckMouse
 					[~,Filename]=fileparts(StructOrPath);
-					Filename=string(split(Filename,'.'));
-					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(Filename);
+					FileFields=string(split(Filename,'.'));
+					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(FileFields);
 					StructOrPath=load(StructOrPath);
 					Cells=struct2cell(StructOrPath);
 					Logical=cellfun(@(C)isa(C,'UniExp.DataSet'),Cells);
@@ -115,8 +115,8 @@ classdef DataSet<handle
 				end
 				if CheckMouse
 					for TableName=["Mice","DateTimes","Cells"]
-						if ~isempty(obj.(TableName))&&any(obj.(TableName).Mouse~=Filename(1))
-							warning('文件“%s”中的鼠名字段似乎和数据库“%s”表内记录的不一致',Filename,TableName);
+						if ~isempty(obj.(TableName))&&any(obj.(TableName).Mouse~=FileFields(1))
+							warning('文件“%s”中的鼠名字段似乎和数据库“%s”表内记录的不一致。如果文件名中没有鼠名字段，请忽略本条警告。',Filename,TableName);
 							break;
 						end
 					end
