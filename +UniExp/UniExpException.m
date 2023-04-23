@@ -41,5 +41,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Invalid_Parallel_option
 		Moving_image_is_a_video
 		Found_an_empty_signal
+		Struct_cannot_be_parsed_to_DataSet
 	end
 end

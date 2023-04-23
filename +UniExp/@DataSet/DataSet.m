@@ -108,7 +108,7 @@ classdef DataSet<handle
 				end
 				Fields=string(intersect(fieldnames(StructOrPath),properties(obj)))';
 				if isempty(Fields)
-					warning('输入结构体没有任何符合UniExp规范的字段');
+					UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
 				end
 				for F=Fields
 					obj.(F)=StructOrPath.(F);
