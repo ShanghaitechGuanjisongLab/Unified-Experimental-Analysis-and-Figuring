@@ -6,7 +6,7 @@ classdef OirRegisterStream<UniExp.internal.VerboseStream
 					obj.NextObject@UniExp.internal.VerboseStream
 					break
 				catch ME
-					if ME.identifier=="Image5D:Image5DException:Tiff_file_creation_failed"&&ME.Detail==MATLAB.WindowsErrorCode.ERROR_DISK_FULL
+					if ME.identifier=="Image5D:Image5DException:Tiff_file_creation_failed"&&ME.Detail==MATLAB.Lang.WindowsErrorCode.ERROR_DISK_FULL
 						NewOutput=input('输出目录磁盘已满。直接回车以选择新的输出目录，或输入c以取消本次任务。',"s");
 						if NewOutput=="c"
 							ME.rethrow;
