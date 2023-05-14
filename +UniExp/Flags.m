@@ -56,5 +56,14 @@ classdef Flags
 		AsGPU
 		%顺序执行，不使用并行池
 		Sequential
+
+		%% BatchOirRegisterTiff.LogLevel
+
+		%每个分块都输出一条日志信息
+		EachBlock
+		%输出频率线性衰减
+		LinearReduce
+		%每个文件输出一条日志信息
+		EachFile
 	end
 end

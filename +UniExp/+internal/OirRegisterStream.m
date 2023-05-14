@@ -31,8 +31,8 @@ classdef OirRegisterStream<UniExp.internal.VerboseStream
 		end
 	end
 	methods
-		function obj = OirRegisterStream(OirPath,Translation,OutputDirectory,varargin)
-			obj@UniExp.internal.VerboseStream(table2struct(table(OirPath,Translation)),@(S)UniExp.internal.OirRegisterRW2(S.OirPath,S.Translation,OutputDirectory,varargin{:}));
+		function obj = OirRegisterStream(LogLevel,OirPath,Translation,OutputDirectory,varargin)
+			obj@UniExp.internal.VerboseStream(LogLevel,table2struct(table(OirPath,Translation)),@(S)UniExp.internal.OirRegisterRW2(S.OirPath,S.Translation,OutputDirectory,varargin{:}));
 		end
 	end
 end

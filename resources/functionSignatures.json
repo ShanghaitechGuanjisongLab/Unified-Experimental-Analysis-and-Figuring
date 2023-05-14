@@ -547,6 +547,15 @@
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "并行池看门狗忍耐时长"
+			},
+			{
+				"name": "LogLevel",
+				"kind": "namevalue",
+				"type": [
+					"scalar",
+					"UniExp.Flags"
+				],
+				"purpose": "输出日志信息的频率"
 			}
 		]
 	},
