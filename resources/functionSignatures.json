@@ -543,7 +543,7 @@
 				"purpose": "是否将金字塔配准底层结果输出到缓存文件"
 			},
 			{
-				"name": "WatchDogSeconds",
+				"name": "WatchDogMinutes",
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "并行池看门狗忍耐时长"
