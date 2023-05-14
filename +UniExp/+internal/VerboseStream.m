@@ -15,7 +15,8 @@ classdef VerboseStream<ParallelComputing.BlockRWStream
 				case UniExp.Flags.EachBlock
 					fprintf('%s 文件%u/%u 帧%u/%u\n',datetime,ObjectIndex,obj.NumObjects,EndPiece,NumPieces);
 				case UniExp.Flags.LinearReduce
-					if ObjectIndex>obj.LastObject||ObjectIndex==obj.LastObject&&EndPiece>obj.LastPiece+sqrt(single(min(EndPiece,NumPieces-EndPiece)))
+					%sqrt不接受整数，必须先转double；整数不能和single一起使用，因此也只能转double
+					if ObjectIndex>obj.LastObject||ObjectIndex==obj.LastObject&&EndPiece>obj.LastPiece+sqrt(double(min(EndPiece,NumPieces-EndPiece)))
 						fprintf('%s 文件%u/%u 帧%u/%u\n',datetime,ObjectIndex,obj.NumObjects,EndPiece,NumPieces);
 						obj.LastObject=ObjectIndex;
 						obj.LastPiece=EndPiece;
