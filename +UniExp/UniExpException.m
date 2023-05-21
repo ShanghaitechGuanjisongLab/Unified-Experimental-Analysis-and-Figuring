@@ -42,5 +42,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Moving_image_is_a_video
 		Found_an_empty_signal
 		Struct_cannot_be_parsed_to_DataSet
+		QueryTable_contains_both_GroupIndex_and_GroupName
 	end
 end
