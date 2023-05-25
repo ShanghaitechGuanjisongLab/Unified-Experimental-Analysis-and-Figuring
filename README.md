@@ -68,6 +68,10 @@ function BarScatterCompare(DataA,DataB,varargin)
 function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
+%截取信号中的一段作为基线，执行归一化
+function Data = F0Normalize(Data,Method,F0Index)
+%在作热图LanearHeatmap之前对细胞进行分群排序。
+function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
 %绘制分泳道的热图
 function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
@@ -82,6 +86,6 @@ function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyMarkers,options)
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
-%截取信号中的一段作为基线，执行归一化
-function Data = F0Normalize(Data,Method,F0Index)
+%计算组间多回合细胞向量夹角余弦值
+function VC = VectorCosine(GroupNts,options)
 ```

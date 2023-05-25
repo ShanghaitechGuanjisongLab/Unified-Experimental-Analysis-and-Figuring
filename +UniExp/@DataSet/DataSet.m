@@ -225,12 +225,15 @@ classdef DataSet<handle
 			%根据TrialTags，向数据集的Trials表添加二元行为
 			%此函数根据TrialTags在指定时间窗内的信号，是否存在比平均值高一倍标准差的尖峰，判断行为0或1。不含TrialTags的回合行为不变，默认NaN。行为值将作为Behavior列
 			% 添加到Trials表。
+			%此方法已过时，请改用AddBehavior
 			%# 语法
 			% ```
 			% obj.AddBehaviorFromTrialTags(ResponseWindow);
 			% ```
 			%# 输入参数
 			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
+			%See also UniExp.DataSet.AddBehavior
+			UniExp.UniExpException.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
 			Query=MATLAB.DataTypes.Select({obj.Trials,obj.Blocks,obj.DateTimes},["TrialUID","TrialTags","SeriesInterval"]);
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
 			Query.TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
@@ -249,29 +252,34 @@ classdef DataSet<handle
 		end
 		function SampleNormalize(obj)
 			%对数据集中所有回合信号和标进行归一化，重采样到最短信号的长度
+			%归一化不会覆盖原数据，而是加一列Normalized。TrialSignals会加一列NormalizedSignal，Trials会加一列NormalizedTags
 			%# 语法
 			% ```
 			% obj.SampleNormalize;
 			% ```
-			Lengths=cellfun(@numel,obj.TrialSignals.TrialSignal);
+			TrialSignal=obj.TrialSignals.TrialSignal;
+			Lengths=cellfun(@numel,TrialSignal);
 			NormalizeSignal=Lengths>0;
 			Lengths=Lengths(NormalizeSignal);
-			Heights=cellfun(@height,obj.Trials.TrialTags);
+			Normalized=obj.Trials.TrialTags;
+			Heights=cellfun(@height,Normalized);
 			NormalizeTags=Heights>0;
 			ValidHeights=Heights(NormalizeTags);
 			NormalizeTo=min([Lengths;ValidHeights]);
 			NormalizeSignal(NormalizeSignal)=Lengths~=NormalizeTo;
 			NormalizeTags(NormalizeTags)=ValidHeights~=NormalizeTo;
 			if any(NormalizeSignal)
-				SignalIndex=1:height(obj.TrialSignals);
-				[TrialSignal,SignalIndex]=splitapply(@(TrialSignals,SignalIndex)UniExp.DataSet.TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),obj.TrialSignals.TrialSignal(NormalizeSignal),SignalIndex(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
-				obj.TrialSignals.TrialSignal(vertcat(SignalIndex{:}))=vertcat(TrialSignal{:});
+				Index=1:height(TrialSignal);
+				[Normalized,Index]=splitapply(@(TrialSignals,SignalIndex)UniExp.DataSet.TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),TrialSignal(NormalizeSignal),Index(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
+				TrialSignal(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
 			if any(NormalizeTags)
-				TrialIndex=1:height(obj.Trials);
-				[TrialTags,TrialIndex]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),obj.Trials.TrialTags(NormalizeTags),TrialIndex(NormalizeTags)',findgroups(Heights(NormalizeTags)));
-				obj.Trials.TrialTags(vertcat(TrialIndex{:}))=vertcat(TrialTags{:});
+				Index=1:height(Normalized);
+				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),Normalized(NormalizeTags),Index(NormalizeTags)',findgroups(Heights(NormalizeTags)));
+				TrialTags(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
+			obj.Trials.NormalizedTags=TrialTags;
+			obj.TrialSignals.NormalizedSignal=TrialSignal;
 		end
 		function SetDesignByStimuli(obj,DSTable)
 			%根据刺激类型组合自动生成模块设计

@@ -43,5 +43,10 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Found_an_empty_signal
 		Struct_cannot_be_parsed_to_DataSet
 		QueryTable_contains_both_GroupIndex_and_GroupName
+		Empty_group
+		Number_of_trials_inconsistent_with_EventLog
+		Function_deprecated
+		CellUIDs_differ_among_groups
+		Numbers_of_cells_differ_among_groups
 	end
 end

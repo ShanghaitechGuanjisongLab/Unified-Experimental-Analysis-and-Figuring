@@ -25,19 +25,46 @@
 			}
 		]
 	},
-	"UniExp.DataSet.AddBehaviorFromTrialTags": {
+	"UniExp.DataSet.AddBehavior": {
 		"inputs": [
 			{
 				"name": "obj"
 			},
 			{
+				"name": "HitMiss",
+				"kind": "namevalue",
+				"type": "size=1,2",
+				"purpose": "命中和错失的Event标识"
+			},
+			{
 				"name": "ResponseWindow",
-				"kind": "required",
+				"kind": "namevalue",
 				"type": [
-					"real",
-					"size=1,2"
+					"size=1,2",
+					"real"
 				],
-				"purpose": "时间窗范围秒数"
+				"purpose": "响应窗秒数"
+			},
+			{
+				"name": "TagChannel",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "标通道名称"
+			},
+			{
+				"name": "TagCutoff",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "行为阈值"
 			}
 		]
 	},
@@ -116,10 +143,27 @@
 				"name": "obj"
 			},
 			{
-				"name": "QueryTable",
-				"kind": "required",
-				"type": "tabular",
-				"purpose": "查询表，列出数据筛选条件"
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "QueryTable",
+							"kind": "required",
+							"type": "tabular",
+							"purpose": "查询表，列出数据筛选条件"
+						}
+					],
+					[
+						{
+							"name": "QueryStruct",
+							"kind": "required",
+							"type": [
+								"struct",
+								"scalar"
+							],
+							"purpose": "查询结构体，列出数据筛选条件"
+						}
+					]
+				]
 			},
 			{
 				"mutuallyExclusiveGroup": [
@@ -154,6 +198,61 @@
 					"UniExp.Flags"
 				],
 				"purpose": "回合累积方法"
+			}
+		]
+	},
+	"UniExp.DataSet.QueryNTS": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "QueryTable",
+							"kind": "required",
+							"type": "tabular",
+							"purpose": "查询表，列出数据筛选条件"
+						}
+					],
+					[
+						{
+							"name": "QueryStruct",
+							"kind": "required",
+							"type": [
+								"struct",
+								"scalar"
+							],
+							"purpose": "查询结构体，列出数据筛选条件"
+						}
+					]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Normalize",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"UniExp.Flags"
+							],
+							"purpose": "归一化方法"
+						},
+						{
+							"name": "F0Samples",
+							"kind": "required",
+							"type": [
+								"vector",
+								"real"
+							],
+							"purpose": "用作基线的信号索引"
+						}
+					],
+					[]
+				]
 			}
 		]
 	},
@@ -990,6 +1089,95 @@
 			}
 		]
 	},
+	"UniExp.HeatmapSort": {
+		"inputs": [
+			{
+				"name": "GroupNtats",
+				"kind": "required",
+				"type": "table",
+				"purpose": "NTATS分组"
+			},
+			{
+				"name": "SortCriteria",
+				"kind": "ordered",
+				"type": [
+					"scalar",
+					"UniExp.Flags"
+				],
+				"purpose": "指定排序标准"
+			}
+		]
+	},
+	"UniExp.LanearHeatmap": {
+		"inputs": [
+			{
+				"name": "NTATS",
+				"kind": "required",
+				"type": [
+					[
+						"table"
+					],
+					[
+						"3d",
+						"real"
+					]
+				],
+				"purpose": "作图数据"
+			},
+			{
+				"name": "Flags",
+				"kind": "ordered",
+				"type": [
+					"UniExp.Flags",
+					"scalar"
+				],
+				"purpose": "指定功能旗帜",
+				"repeating": true
+			},
+			{
+				"name": "ImagescStyle",
+				"kind": "namevalue",
+				"type": [
+					"cell",
+					"vector"
+				],
+				"purpose": "要传递给imagesc的其它参数"
+			},
+			{
+				"name": "LMHColor",
+				"kind": "namevalue",
+				"type": [
+					"size=3,3",
+					"real"
+				],
+				"purpose": "指定最小、0、最大三个数值大小节点的颜色"
+			},
+			{
+				"name": "SubTitles",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"vector"
+					],
+					[
+						"cell",
+						"vector"
+					]
+				],
+				"purpose": "每个泳道的小标题"
+			},
+			{
+				"name": "Layout",
+				"kind": "namevalue",
+				"type": [
+					"scalar",
+					"matlab.graphics.layout.TiledChartLayout"
+				],
+				"purpose": "指定泳道布局对象"
+			}
+		]
+	},
 	"UniExp.LearningSummarize": {
 		"inputs": [
 			{
@@ -1012,12 +1200,9 @@
 	"UniExp.LinearPca": {
 		"inputs": [
 			{
-				"name": "NTATS",
+				"name": "GroupNtats",
 				"kind": "required",
-				"type": [
-					"cell",
-					"vector"
-				],
+				"type": "table",
 				"purpose": "分析数据"
 			},
 			{
@@ -1435,6 +1620,29 @@
 					"UniExp.Flags"
 				],
 				"purpose": "判断行为是否发生的算法"
+			}
+		]
+	},
+	"UniExp.VectorCosine": {
+		"inputs": [
+			{
+				"name": "GroupNts",
+				"kind": "required",
+				"purpose": "回合信号分组"
+			},
+			{
+				"name": "Reference",
+				"kind": "namevalue",
+				"purpose": "作为参照的分组序号或名称"
+			},
+			{
+				"name": "SampleTime",
+				"kind": "namevalue",
+				"type": [
+					"vector",
+					"real"
+				],
+				"purpose": "在回合采样时点中取截取一段求平均"
 			}
 		]
 	}
