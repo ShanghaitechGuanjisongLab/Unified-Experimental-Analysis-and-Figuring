@@ -78,6 +78,8 @@ function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+%为NTS乘上PCA系数，得到逐回合的PCA分数
+function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %绘制带有关键时点标识的渐淡线图
@@ -86,6 +88,6 @@ function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyMarkers,options)
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
-%计算组间多回合细胞向量夹角余弦值
-function VC = VectorCosine(GroupNts,options)
+%计算组间多回合细胞向量的投影长度和夹角余弦
+function ProjectCosine = VectorProjectCosine(GroupCtt,options)
 ```

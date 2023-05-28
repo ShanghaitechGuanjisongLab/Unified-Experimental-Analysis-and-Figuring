@@ -253,6 +253,25 @@
 					],
 					[]
 				]
+			},
+			{
+				"name": "ExtraColumns",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"vector"
+					],
+					[
+						"cell",
+						"vector"
+					],
+					[
+						"char",
+						"row"
+					]
+				],
+				"purpose": "需要额外返回的关联信息列名"
 			}
 		]
 	},
@@ -1213,6 +1232,22 @@
 			}
 		]
 	},
+	"UniExp.NtsMultiplyPcaCoeff": {
+		"inputs": [
+			{
+				"name": "NTS",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "归一化回合信号值"
+			},
+			{
+				"name": "PcaCoeff",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "PCA系数表"
+			}
+		]
+	},
 	"UniExp.OirSampleMean": {
 		"inputs": [
 			{
@@ -1623,10 +1658,10 @@
 			}
 		]
 	},
-	"UniExp.VectorCosine": {
+	"UniExp.VectorProjectCosine": {
 		"inputs": [
 			{
-				"name": "GroupNts",
+				"name": "GroupCtt",
 				"kind": "required",
 				"purpose": "回合信号分组"
 			},

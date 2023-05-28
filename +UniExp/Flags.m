@@ -4,11 +4,6 @@ classdef Flags
 		%无特殊操作
 		No_special_operation
 
-		%% BarScatterCompare选项
-
-		%连接散点
-		Connect_scatters
-
 		%% BlockVideoMeasure测量算法
 
 		%平均像素值
@@ -65,5 +60,12 @@ classdef Flags
 		LinearReduce
 		%每个文件输出一条日志信息
 		EachFile
+
+		%% 仅限内部使用
+
+		Real
+		Table
+		Cell
+		Struct
 	end
 end

@@ -48,5 +48,7 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Function_deprecated
 		CellUIDs_differ_among_groups
 		Numbers_of_cells_differ_among_groups
+		Anonymous_groups_must_be_referenced_by_numerical_indices
+		Failed_to_parse_argument
 	end
 end
