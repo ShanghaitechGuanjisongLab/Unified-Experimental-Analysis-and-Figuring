@@ -32,9 +32,7 @@ UniExp API
 import UniExp.*
 每个函数代码文件内都有详尽文档，可用doc UniExp.函数名查询。函数的使用示例可在快速入门文档GettingStarted.mlx中查看。下方仅列出这些函数的简介。
 
-UniExp.DataSet类
-用于管理数据集的核心实用类：
-
+类
 classdef DataSet
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
 end
@@ -64,25 +62,31 @@ UniExp内部处理
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
 %作异形彩色标记线条图
-function Scatters = ColorfulMarkerPlot(Points,LineColors,MarkerIndex,MarkerShape,MarkerColors,options)
+function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
+%截取信号中的一段作为基线，执行归一化
+function Data = F0Normalize(Data,Method,F0Index)
+%在作热图LanearHeatmap之前对细胞进行分群排序。
+function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
 %绘制分泳道的热图
 function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+%为NTS乘上PCA系数，得到逐回合的PCA分数
+function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyIndex,KeyMarkers,options)
+function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyMarkers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
-%截取信号中的一段作为基线，执行归一化
-function Data = F0Normalize(Data,Method,F0Index)</param.description>
+%计算组间多回合细胞向量的投影长度和夹角余弦
+function ProjectCosine = VectorProjectCosine(GroupCtt,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\+UniExp\SegmentFadePlot.png</param.screenshot>
     <param.version>15.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
