@@ -38,8 +38,6 @@ end
 ```MATLAB
 %从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
 function RoiCPath=ImageJRoiDiff(options)
-%对OIR文件进行等时距采样然后输出平均TIFF
-function OirSampleMean(OirPath,options)
 %根据 ImageJ RoiSet 配准图像
 function TransMatrix = RoiRegister(PathArray,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
@@ -83,7 +81,7 @@ function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyMarkers,options)
+function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为

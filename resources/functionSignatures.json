@@ -444,53 +444,50 @@
 	"UniExp.BarScatterCompare": {
 		"inputs": [
 			{
-				"name": "DataA",
+				"name": "Data",
 				"kind": "required",
-				"type": "real",
-				"purpose": "用于比较的数据采样点集合A"
-			},
-			{
-				"name": "DataB",
-				"kind": "required",
-				"type": "real",
-				"purpose": "用于比较的数据采样点集合B"
+				"purpose": "分组采样数据"
 			},
 			{
 				"mutuallyExclusiveGroup": [
 					[
 						{
-							"name": "Connect_scatters",
-							"kind": "ordered",
-							"type": "choices={UniExp.Flags.Connect_scatters}",
-							"purpose": "连接两集合中配对的样本点"
-						},
-						{
-							"name": "Colors",
+							"name": "ShowScatter",
 							"kind": "ordered",
 							"type": [
-								"real",
-								"size=2,3"
+								"logical",
+								"scalar"
 							],
-							"purpose": "指定条形和散点的RGB颜色"
+							"purpose": "是否显示散点"
 						}
 					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "CompareGroup",
+							"kind": "ordered",
+							"type": "tabular",
+							"purpose": "分组配对比较表"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "Colors",
 							"kind": "ordered",
-							"type": [
-								"real",
-								"size=2,3"
-							],
+							"type": "size=2,3",
 							"purpose": "指定条形和散点的RGB颜色"
-						},
-						{
-							"name": "Connect_scatters",
-							"kind": "ordered",
-							"type": "choices={UniExp.Flags.Connect_scatters}",
-							"purpose": "连接两集合中配对的样本点"
 						}
-					]
+					],
+					[]
 				]
 			}
 		]
@@ -1248,60 +1245,6 @@
 			}
 		]
 	},
-	"UniExp.OirSampleMean": {
-		"inputs": [
-			{
-				"name": "OirPath",
-				"kind": "required",
-				"type": [
-					[
-						"file=*.oir"
-					],
-					[
-						"string",
-						"scalar"
-					],
-					[
-						"char",
-						"row"
-					]
-				],
-				"purpose": "OIR文件路径"
-			},
-			{
-				"name": "Channel",
-				"kind": "namevalue",
-				"type": "positive",
-				"purpose": "要采样的通道",
-				"default": 1
-			},
-			{
-				"name": "OutputDirectory",
-				"kind": "namevalue",
-				"type": [
-					[
-						"folder"
-					],
-					[
-						"string",
-						"scalar"
-					],
-					[
-						"char",
-						"row"
-					]
-				],
-				"purpose": "输出目录"
-			},
-			{
-				"name": "SampleSize",
-				"kind": "namevalue",
-				"type": "positive",
-				"purpose": "采样样本量",
-				"default": 50
-			}
-		]
-	},
 	"UniExp.Rdc2DataSet": {
 		"inputs": [
 			{
@@ -1469,25 +1412,13 @@
 	"UniExp.SegmentFadePlot": {
 		"inputs": [
 			{
-				"name": "Points",
+				"name": "LinesPC",
 				"kind": "required",
-				"type": [
-					"3d",
-					"real"
-				],
-				"purpose": "线上采样点的坐标"
+				"type": "tabular",
+				"purpose": "每条线的采样点坐标和线条颜色"
 			},
 			{
-				"name": "LineColors",
-				"kind": "required",
-				"type": [
-					"size=:,3",
-					"real"
-				],
-				"purpose": "线条颜色"
-			},
-			{
-				"name": "KeyMarkers",
+				"name": "Markers",
 				"kind": "required",
 				"type": "tabular",
 				"purpose": "关键减淡时点位置和符号标注"

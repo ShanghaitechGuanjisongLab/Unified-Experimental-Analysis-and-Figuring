@@ -50,5 +50,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Numbers_of_cells_differ_among_groups
 		Anonymous_groups_must_be_referenced_by_numerical_indices
 		Failed_to_parse_argument
+		Point_coordinates_must_have_2_or_3_dimensions
 	end
 end
