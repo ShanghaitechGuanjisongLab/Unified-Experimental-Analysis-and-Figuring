@@ -51,5 +51,7 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Anonymous_groups_must_be_referenced_by_numerical_indices
 		Failed_to_parse_argument
 		Point_coordinates_must_have_2_or_3_dimensions
+		Unexpected_EventLogCheckLevel_value
+		No_data_found_in_group
 	end
 end

@@ -65,6 +65,15 @@
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "行为阈值"
+			},
+			{
+				"name": "EventLogCheckLevel",
+				"kind": "namevalue",
+				"type": [
+					"UniExp.Flags",
+					"scalar"
+				],
+				"purpose": "当发现EventLog中的回合记录与Trials表中不一致时，采取的行动"
 			}
 		]
 	},

@@ -1,7 +1,14 @@
 classdef Flags
 	%为UniExp中的多个函数提供功能选项旗帜。
 	enumeration
-		%无特殊操作
+		%% 仅限内部使用
+
+		Real
+		Table
+		Cell
+		Struct
+
+		%% 无特殊操作
 		No_special_operation
 
 		%% BlockVideoMeasure测量算法
@@ -61,11 +68,13 @@ classdef Flags
 		%每个文件输出一条日志信息
 		EachFile
 
-		%% 仅限内部使用
+		%% DataSet.AddBehavior.EventLogCheckLevel
 
-		Real
-		Table
-		Cell
-		Struct
+		%抛出异常，终止程序
+		Throw
+		%发出警告，继续程序
+		Warn
+		%忽略问题，继续程序
+		Ignore
 	end
 end

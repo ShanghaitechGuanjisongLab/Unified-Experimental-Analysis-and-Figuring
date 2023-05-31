@@ -79,6 +79,15 @@ classdef DataSet<handle
 			Design=missing;
 		end
 	end
+	methods(Access=private)
+		function SC=GetSignalColumn(obj)
+			if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
+				SC="NormalizedSignal";
+			else
+				SC="TrialSignal";
+			end
+		end
+	end
 	methods
 		function obj=DataSet(StructOrPath)
 			%构造方法，提供包含表的结构体或mat文件路径
@@ -261,8 +270,8 @@ classdef DataSet<handle
 			Lengths=cellfun(@numel,TrialSignal);
 			NormalizeSignal=Lengths>0;
 			Lengths=Lengths(NormalizeSignal);
-			Normalized=obj.Trials.TrialTags;
-			Heights=cellfun(@height,Normalized);
+			TrialTags=obj.Trials.TrialTags;
+			Heights=cellfun(@height,TrialTags);
 			NormalizeTags=Heights>0;
 			ValidHeights=Heights(NormalizeTags);
 			NormalizeTo=min([Lengths;ValidHeights]);
@@ -274,8 +283,8 @@ classdef DataSet<handle
 				TrialSignal(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
 			if any(NormalizeTags)
-				Index=1:height(Normalized);
-				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),Normalized(NormalizeTags),Index(NormalizeTags)',findgroups(Heights(NormalizeTags)));
+				Index=1:height(TrialTags);
+				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),TrialTags(NormalizeTags),Index(NormalizeTags)',findgroups(Heights(NormalizeTags)));
 				TrialTags(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
 			obj.Trials.NormalizedTags=TrialTags;
