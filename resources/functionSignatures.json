@@ -1130,13 +1130,8 @@
 				"name": "NTATS",
 				"kind": "required",
 				"type": [
-					[
-						"table"
-					],
-					[
-						"3d",
-						"real"
-					]
+					"3d",
+					"MATLAB.DataTypes.NDTable"
 				],
 				"purpose": "作图数据"
 			},
@@ -1191,6 +1186,12 @@
 					"matlab.graphics.layout.TiledChartLayout"
 				],
 				"purpose": "指定泳道布局对象"
+			},
+			{
+				"name": "TitleArguments",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "用于显示泳道小标题的其它格式参数"
 			}
 		]
 	},
