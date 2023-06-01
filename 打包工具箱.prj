@@ -39,8 +39,6 @@ end
 原始数据预处理
 %从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
 function RoiCPath=ImageJRoiDiff(options)
-%对OIR文件进行等时距采样然后输出平均TIFF
-function OirSampleMean(OirPath,options)
 %根据 ImageJ RoiSet 配准图像
 function TransMatrix = RoiRegister(PathArray,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
@@ -80,7 +78,7 @@ function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(Points,LineColors,KeyMarkers,options)
+function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
@@ -132,7 +130,7 @@ resources/project
         <requiredAddOn earliest="1.5.2.0" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D(3)</requiredAddOn>
         <requiredAddOn earliest="3.1.0.0" fromRepository="true" id="4d05e210-f73f-4916-9076-1c9b15718b36" include="true" latest="latest">全局优化</requiredAddOn>
         <requiredAddOn earliest="3.4.1.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
-        <requiredAddOn earliest="14.0.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
+        <requiredAddOn earliest="15.0.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="7.1.0.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
         <requiredAddOn earliest="1.0.1.0" fromRepository="true" id="85f2e628-cb9d-426b-b596-0a88b613d14f" include="true" latest="latest">埃博拉酱的文本分析工具箱</requiredAddOn>
       </requiredaddons>
