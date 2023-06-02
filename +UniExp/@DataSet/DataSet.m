@@ -318,23 +318,6 @@ classdef DataSet<handle
 			[~,Index]=ismember(BlockDesign.BlockUID,obj.Blocks.BlockUID);
 			obj.Blocks.Design(Index)=categorical(BlockDesign.fun1_Stimulus);
 		end
-		function FixHistory(obj)
-			%修复某些旧版本与新版本数据库不兼容问题问题
-			EventLog=obj.Blocks.EventLog;
-			NumLogs=numel(EventLog);
-			ParallelComputing.ParPool(ProfileName='Threads',PoolSize=numel(NumLogs));
-			parfor B=1:NumLogs
-				EL=EventLog{B};
-				if ~isempty(EL)
-					if any(EL.Properties.VariableNames=="Tag")
-						EL.Event=EL.Tag;
-						EL.Tag=[];
-						EventLog{B}=EL;
-					end
-				end
-			end
-			obj.Blocks.EventLog=EventLog;
-		end
 		function NewTrial(obj,BlockUID,TrialIndex,varargin)
 			%手动添加一个新的回合
 			%# 语法

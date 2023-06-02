@@ -160,22 +160,22 @@
 			}
 		]
 	},
-	"UniExp.DataSet.NewTrial":{
-		"inputs":[
+	"UniExp.DataSet.NewTrial": {
+		"inputs": [
 			{
-				"name":"obj"
+				"name": "obj"
 			},
 			{
-				"name":"BlockUID",
-				"kind":"required",
-				"type":"positive",
-				"purpose":"新回合所属的BlockUID"
+				"name": "BlockUID",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "新回合所属的BlockUID"
 			},
 			{
-				"name":"TrialIndex",
-				"kind":"required",
-				"type":"positive",
-				"purpose":"新回合的序号"
+				"name": "TrialIndex",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "新回合的序号"
 			}
 		]
 	},
@@ -480,6 +480,12 @@
 				"type": "positive",
 				"purpose": "阈值的标准差倍率",
 				"default": 1
+			},
+			{
+				"name": "BlockOffset",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "对特定的BlockUID特殊处理"
 			}
 		]
 	},

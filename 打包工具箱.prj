@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="1026347061" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
+  <configuration build-checksum="97360649" file="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图\打包工具箱.prj" location="C:\Users\vhtmf\Documents\MATLAB\统一实验分析作图" name="打包工具箱" target="target.toolbox" target-name="打包为工具箱">
     <param.appname>统一实验分析作图</param.appname>
     <param.authnamewatermark>张天夫</param.authnamewatermark>
     <param.email>vhtmfu@outlook.com</param.email>
@@ -57,18 +57,12 @@ function DataSet = Rdc2DataSet(Rdc2DataPaths)
 从表格文件读入查询表
 function QueryTable = ReadQueryTable(TablePath)
 UniExp内部处理
-%用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
-function BarScatterCompare(DataA,DataB,varargin)
-%作异形彩色标记线条图
-function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
 %截取信号中的一段作为基线，执行归一化
 function Data = F0Normalize(Data,Method,F0Index)
 %在作热图LanearHeatmap之前对细胞进行分群排序。
 function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
-%绘制分泳道的热图
-function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
@@ -77,16 +71,25 @@ function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
-%绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
 %计算组间多回合细胞向量的投影长度和夹角余弦
-function ProjectCosine = VectorProjectCosine(GroupCtt,options)</param.description>
+function ProjectCosine = VectorProjectCosine(GroupCtt,options)
+作图输出
+%用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
+function BarScatterCompare(DataA,DataB,varargin)
+%作异形彩色标记线条图
+function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
+%绘制分泳道的热图
+function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
+%作多线阵列图，大批量展示多条线
+function Lines = LineArray(Data3D,options)
+%绘制带有关键时点标识的渐淡线图
+function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\图标.jpg</param.screenshot>
-    <param.version>15.0.0</param.version>
+    <param.version>15.1.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -132,7 +135,7 @@ resources/project
         <requiredAddOn earliest="3.4.1.0" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱</requiredAddOn>
         <requiredAddOn earliest="15.0.0.0" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="7.1.0.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
-        <requiredAddOn earliest="1.0.1.0" fromRepository="true" id="85f2e628-cb9d-426b-b596-0a88b613d14f" include="true" latest="latest">埃博拉酱的文本分析工具箱</requiredAddOn>
+        <requiredAddOn earliest="1.0.2.0" fromRepository="true" id="85f2e628-cb9d-426b-b596-0a88b613d14f" include="true" latest="latest">埃博拉酱的文本分析工具箱</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />

@@ -56,5 +56,9 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		EventLog_has_no_Event_columns
 		Specified_BlockUID_does_not_exist_in_the_Blocks_table
 		Specified_TrialIndex_already_exists_in_the_specified_Block
+		Number_of_split_trials_does_not_match_that_of_existing_trials
+		No_signal_to_split
+		Too_many_trials_or_broken_EventLog
+		Unexpected_trial_stimulus
 	end
 end
