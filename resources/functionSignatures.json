@@ -74,6 +74,20 @@
 					"scalar"
 				],
 				"purpose": "当发现EventLog中的回合记录与Trials表中不一致时，采取的行动"
+			},
+			{
+				"name": "TrialStartEvents",
+				"kind": "namevalue",
+				"purpose": "回合开始的事件标识"
+			},
+			{
+				"name": "BlockUIDs",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "只为指定的BlockUID添加行为"
 			}
 		]
 	},
@@ -143,6 +157,25 @@
 				],
 				"default": true,
 				"purpose": "是否合并已存在的文件"
+			}
+		]
+	},
+	"UniExp.DataSet.NewTrial":{
+		"inputs":[
+			{
+				"name":"obj"
+			},
+			{
+				"name":"BlockUID",
+				"kind":"required",
+				"type":"positive",
+				"purpose":"新回合所属的BlockUID"
+			},
+			{
+				"name":"TrialIndex",
+				"kind":"required",
+				"type":"positive",
+				"purpose":"新回合的序号"
 			}
 		]
 	},
@@ -1220,6 +1253,52 @@
 				"kind": "ordered",
 				"type": "positive",
 				"purpose": "表示学会的表现分阈值"
+			}
+		]
+	},
+	"UniExp.LineArray": {
+		"inputs": [
+			{
+				"name": "Data3D",
+				"kind": "required",
+				"type": [
+					"3d",
+					"real"
+				],
+				"purpose": "作图数据"
+			},
+			{
+				"name": "YDistance",
+				"kind": "namevalue",
+				"type": [
+					"scalar",
+					"real"
+				],
+				"purpose": "Y方向线的距离"
+			},
+			{
+				"name": "XRange",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "第1列的X范围"
+			},
+			{
+				"name": "ColorOrder",
+				"kind": "namevalue",
+				"type": [
+					"size=:,3",
+					"real"
+				],
+				"purpose": "颜色顺序"
+			},
+			{
+				"name": "PlotArguments",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "要传递给plot的其它参数"
 			}
 		]
 	},

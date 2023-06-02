@@ -60,18 +60,12 @@ function QueryTable = ReadQueryTable(TablePath)
 ```
 ## UniExp内部处理
 ```MATLAB
-%用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
-function BarScatterCompare(DataA,DataB,varargin)
-%作异形彩色标记线条图
-function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
 %截取信号中的一段作为基线，执行归一化
 function Data = F0Normalize(Data,Method,F0Index)
 %在作热图LanearHeatmap之前对细胞进行分群排序。
 function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
-%绘制分泳道的热图
-function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
@@ -80,12 +74,23 @@ function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
-%绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
 %计算组间多回合细胞向量的投影长度和夹角余弦
 function ProjectCosine = VectorProjectCosine(GroupCtt,options)
+```
+## 作图输出
+```MATLAB
+%用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
+function BarScatterCompare(DataA,DataB,varargin)
+%作异形彩色标记线条图
+function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
+%绘制分泳道的热图
+function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
+%作多线阵列图，大批量展示多条线
+function Lines = LineArray(Data3D,options)
+%绘制带有关键时点标识的渐淡线图
+function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 ```

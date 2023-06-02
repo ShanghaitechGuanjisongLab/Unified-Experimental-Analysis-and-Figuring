@@ -36,12 +36,20 @@ classdef Flags
 
 		%% 累积算法和排序标准
 
+		%平均值
 		Mean
+		%中位数
 		Median
+		%最小值
 		Min
+		%最大值
 		Max
+		%极差
 		Range
+		%标准差
 		Std
+		%峰值时点
+		PeakTime
 
 		%% LanearHeatmap旗帜
 

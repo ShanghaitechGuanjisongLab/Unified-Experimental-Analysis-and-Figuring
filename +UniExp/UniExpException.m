@@ -53,5 +53,8 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Point_coordinates_must_have_2_or_3_dimensions
 		Unexpected_EventLogCheckLevel_value
 		No_data_found_in_group
+		EventLog_has_no_Event_columns
+		Specified_BlockUID_does_not_exist_in_the_Blocks_table
+		Specified_TrialIndex_already_exists_in_the_specified_Block
 	end
 end

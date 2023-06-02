@@ -318,5 +318,53 @@ classdef DataSet<handle
 			[~,Index]=ismember(BlockDesign.BlockUID,obj.Blocks.BlockUID);
 			obj.Blocks.Design(Index)=categorical(BlockDesign.fun1_Stimulus);
 		end
+		function FixHistory(obj)
+			%修复某些旧版本与新版本数据库不兼容问题问题
+			EventLog=obj.Blocks.EventLog;
+			NumLogs=numel(EventLog);
+			ParallelComputing.ParPool(ProfileName='Threads',PoolSize=numel(NumLogs));
+			parfor B=1:NumLogs
+				EL=EventLog{B};
+				if ~isempty(EL)
+					if any(EL.Properties.VariableNames=="Tag")
+						EL.Event=EL.Tag;
+						EL.Tag=[];
+						EventLog{B}=EL;
+					end
+				end
+			end
+			obj.Blocks.EventLog=EventLog;
+		end
+		function NewTrial(obj,BlockUID,TrialIndex,varargin)
+			%手动添加一个新的回合
+			%# 语法
+			% ```
+			% obj.NewTrial(BlockUID,TrialIndex,Name=Value);
+			% ```
+			%# 输入参数
+			% BlockUID(1,1)uint16，新回合所属的BlockUID，必须已存在于Blocks表中
+			% TrialIndex(1,1)uint16，新回合的序号，不能与同BlockUID下的其它回合的序号冲突
+			% Name=Value，其它名称值参数，将添加到新建回合的对应列下。
+			if ~any(obj.Blocks.BlockUID==BlockUID)
+				UniExp.UniExpException.Specified_BlockUID_does_not_exist_in_the_Blocks_table.Throw(BlockUID);
+			end
+			TrialLogical=obj.Trials.BlockUID==BlockUID;
+			if any(obj.Trials.TrialIndex(TrialLogical)==TrialIndex)
+				UniExp.UniExpException.Specified_TrialIndex_already_exists_in_the_specified_Block.Throw(TrialIndex);
+			end
+			TrialUID=max(obj.Trials.TrialUID);
+			if TrialUID<intmax('uint16')
+				TrialUID=TrialUID+1;
+			else
+				TrialUID=find(~ismember(1:intmax('uint16'),obj.Trials.TrialUID),1);
+			end
+			warning off MATLAB:table:RowsAddedExistingVars
+			obj.Trials.TrialUID(end+1)=TrialUID;
+			obj.Trials.BlockUID(end)=BlockUID;
+			obj.Trials.TrialIndex(end)=TrialIndex;
+			for V=1:2:numel(varargin)
+				obj.Trials.(varargin{V})(end)=varargin{V+1};
+			end
+		end
 	end
 end
