@@ -60,5 +60,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		No_signal_to_split
 		Too_many_trials_or_broken_EventLog
 		Unexpected_trial_stimulus
+		Number_of_split_trials_is_less_than_that_of_existing_trials
 	end
 end

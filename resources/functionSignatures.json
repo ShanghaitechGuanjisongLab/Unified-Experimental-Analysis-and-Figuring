@@ -91,6 +91,28 @@
 			}
 		]
 	},
+	"UniExp.DataSet.FixHistory": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "StimulusEvents",
+				"kind": "namevalue",
+				"type": [
+					"scalar",
+					"dictionary"
+				],
+				"purpose": "记录每种刺激所在的回合应当对应的多个事件"
+			},
+			{
+				"name": "BlockUIDs",
+				"kind": "namevalue",
+				"type": "real",
+				"purpose": "将只修改指定的Block"
+			}
+		]
+	},
 	"UniExp.DataSet.Merge": {
 		"inputs": [
 			{
@@ -486,6 +508,12 @@
 				"kind": "namevalue",
 				"type": "tabular",
 				"purpose": "对特定的BlockUID特殊处理"
+			},
+			{
+				"name": "BlockUIDs",
+				"kind": "namevalue",
+				"type": "real",
+				"purpose": "只操作指定的BlockUID"
 			}
 		]
 	},
