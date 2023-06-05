@@ -1339,7 +1339,7 @@
 	"UniExp.LinearPca": {
 		"inputs": [
 			{
-				"name": "GroupNtats",
+				"name": "NTATS",
 				"kind": "required",
 				"type": "table",
 				"purpose": "分析数据"
