@@ -1368,6 +1368,28 @@
 			}
 		]
 	},
+	"UniExp.PointPca": {
+		"inputs": [
+			{
+				"name": "Array",
+				"kind": "required",
+				"type": "real",
+				"purpose": "输入数组"
+			},
+			{
+				"name": "Dimension",
+				"kind": "required",
+				"type": "positive",
+				"purpose": "要作为PCA观测值的维度"
+			},
+			{
+				"name": "NumComponents",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "要返回的主成分个数"
+			}
+		]
+	},
 	"UniExp.Rdc2DataSet": {
 		"inputs": [
 			{

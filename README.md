@@ -72,6 +72,8 @@ function Summary=LearningSummarize(SessionTable,LearnedP)
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 %为NTS乘上PCA系数，得到逐回合的PCA分数
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
+%对多维数组沿某个维度执行PCA分析
+function [Coeff,Score,Explained] = PointPca(Array,Dimension,NumComponents)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %根据信号拆分回合
