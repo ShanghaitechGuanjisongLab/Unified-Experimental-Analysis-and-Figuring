@@ -1184,10 +1184,24 @@
 	"UniExp.HeatmapSort": {
 		"inputs": [
 			{
-				"name": "GroupNtats",
-				"kind": "required",
-				"type": "table",
-				"purpose": "NTATS分组"
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "GroupNtats",
+							"kind": "required",
+							"type": "table",
+							"purpose": "NTATS分组"
+						}
+					],
+					[
+						{
+							"name": "Array",
+							"kind": "required",
+							"type": "3d",
+							"purpose": "原始数组"
+						}
+					]
+				]
 			},
 			{
 				"name": "SortCriteria",
@@ -1203,13 +1217,27 @@
 	"UniExp.LanearHeatmap": {
 		"inputs": [
 			{
-				"name": "NTATS",
-				"kind": "required",
-				"type": [
-					"3d",
-					"MATLAB.DataTypes.NDTable"
-				],
-				"purpose": "作图数据"
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "NTATS",
+							"kind": "required",
+							"type": [
+								"3d",
+								"MATLAB.DataTypes.NDTable"
+							],
+							"purpose": "作图数据"
+						}
+					],
+					[
+						{
+							"name": "Array",
+							"kind": "required",
+							"type": "3d",
+							"purpose": "原始数组"
+						}
+					]
+				]
 			},
 			{
 				"name": "Flags",

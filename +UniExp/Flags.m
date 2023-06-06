@@ -50,6 +50,8 @@ classdef Flags
 		Std
 		%峰值时点
 		PeakTime
+		%绝对最大值
+		AbsMax
 
 		%% LanearHeatmap旗帜
 
@@ -57,6 +59,8 @@ classdef Flags
 		HideXAxis
 		%隐藏Y轴
 		HideYAxis
+		%扭曲颜色图，使得较小数值获得较大对比度
+		ScaleColor
 
 		%% BatchOirRegisterTiff.Parallel
 
