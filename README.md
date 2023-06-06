@@ -81,7 +81,7 @@ function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndT
 %计算组间多回合细胞向量的投影长度和夹角余弦
 function ProjectCosine = VectorProjectCosine(GroupCtt,options)
 ```
-## 作图输出
+## 作图/输出
 ```MATLAB
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
@@ -93,4 +93,6 @@ function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 function Lines = LineArray(Data3D,options)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
+%截取 OME TIFF 文件的一段，输出MP4视频
+function TiffVideo(TiffPath,options)
 ```

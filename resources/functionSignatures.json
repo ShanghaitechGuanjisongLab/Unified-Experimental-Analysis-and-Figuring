@@ -1601,6 +1601,85 @@
 			}
 		]
 	},
+	"UniExp.TiffVideo": {
+		"inputs": [
+			{
+				"name": "TiffPath",
+				"kind": "required",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"file=*.tif"
+					]
+				],
+				"purpose": "Tiff文件路径"
+			},
+			{
+				"name": "SampleRate",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "采样率"
+			},
+			{
+				"name": "OutPath",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"file=*.mp4"
+					]
+				],
+				"purpose": "输出MP4路径"
+			},
+			{
+				"name": "TStart",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "要从 OME TIFF 中截取的起始T"
+			},
+			{
+				"name": "TSize",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "截取的T长度"
+			},
+			{
+				"name": "Z",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "要截取的Z层"
+			},
+			{
+				"name": "C",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "要截取的C通道"
+			}
+		]
+	},
 	"UniExp.TrialSignal2Behavior": {
 		"inputs": [
 			{
