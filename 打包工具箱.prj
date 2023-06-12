@@ -69,6 +69,8 @@ function Summary=LearningSummarize(SessionTable,LearnedP)
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 %为NTS乘上PCA系数，得到逐回合的PCA分数
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
+%对多维数组沿某个维度执行PCA分析
+function [Coeff,Score,Explained] = PointPca(Array,Dimension,NumComponents)
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %根据信号拆分回合
@@ -77,7 +79,7 @@ function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdC
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
 %计算组间多回合细胞向量的投影长度和夹角余弦
 function ProjectCosine = VectorProjectCosine(GroupCtt,options)
-作图输出
+作图/输出
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
 %作异形彩色标记线条图
@@ -87,7 +89,9 @@ function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %作多线阵列图，大批量展示多条线
 function Lines = LineArray(Data3D,options)
 %绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)</param.description>
+function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
+%截取 OME TIFF 文件的一段，输出MP4视频
+function TiffVideo(TiffPath,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\图标.jpg</param.screenshot>
     <param.version>15.1.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
