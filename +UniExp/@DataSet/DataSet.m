@@ -29,6 +29,9 @@ classdef DataSet<handle
 
 		%产生此对象的UniExp版本
 		Version=UniExp.Version
+
+		%其它额外备注信息
+		Note(:,1)string
 	end
 	methods(Static)
 		Merged = Merge(Inputs,options)
@@ -103,21 +106,28 @@ classdef DataSet<handle
 			% Struct(1,1)struct，包含表的结构体
 			% Path(1,1)string，包含表或对象的mat文件
 			if nargin
-				CheckMouse=ischar(StructOrPath)||isstring(StructOrPath);
-				if CheckMouse
-					[~,Filename]=fileparts(StructOrPath);
+				InputPath=ischar(StructOrPath)||isstring(StructOrPath);
+				if InputPath
+					Path=StructOrPath;
+					[~,Filename]=fileparts(Path);
 					FileFields=string(split(Filename,'.'));
 					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(FileFields);
-					StructOrPath=load(StructOrPath);
+					StructOrPath=load(Path);
 					Cells=struct2cell(StructOrPath);
 					Logical=cellfun(@(C)isa(C,'UniExp.DataSet'),Cells);
 					if any(Logical)
 						StructOrPath=Cells{Logical};
 					end
+				else
+					CheckMouse=false;
 				end
 				Fields=string(intersect(fieldnames(StructOrPath),properties(obj)))';
 				if isempty(Fields)
-					UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
+					if InputPath
+						UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
+					else
+						UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
+					end
 				end
 				for F=Fields
 					obj.(F)=StructOrPath.(F);
@@ -195,8 +205,10 @@ classdef DataSet<handle
 			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["DateTime","Mouse","Design"]);
 			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(Query))',Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
 			obj.Blocks.BlockRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
-			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(obj.Trials))',obj.Trials.TrialIndex,findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
-			obj.Trials.TrialRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
+			if istable(obj.Trials)
+				[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(obj.Trials))',obj.Trials.TrialIndex,findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
+				obj.Trials.TrialRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
+			end
 		end
 		function RemoveDateTimes(obj,DateTimes)
 			%从数据库中移除一些日期时间的一切关联数据
@@ -259,13 +271,19 @@ classdef DataSet<handle
 				obj.Trials.Behavior(Index)=any(TrialTags(GroupRW(1):GroupRW(2),:)>mean2(TrialTags)+std2(TrialTags),1);
 			end
 		end
-		function SampleNormalize(obj)
-			%对数据集中所有回合信号和标进行归一化，重采样到最短信号的长度
+		function SampleNormalize(obj,NormalizeTo)
+			%对数据集中所有回合信号和标进行长度归一化，重采样到相同的长度
 			%归一化不会覆盖原数据，而是加一列Normalized。TrialSignals会加一列NormalizedSignal，Trials会加一列NormalizedTags
 			%# 语法
 			% ```
 			% obj.SampleNormalize;
+			% %将所有非零长度的回合信号和标重采样到最短的非零长度
+			%
+			% obj.SampleNormalize(NormalizeTo);
+			% %将所有非零长度的回合信号和标重采样到指定长度
 			% ```
+			%# 输入参数
+			% NormalizeTo(1,1)uint16，重采样长度，默认为所有回合信号和标的最短非零长度
 			TrialSignal=obj.TrialSignals.TrialSignal;
 			Lengths=cellfun(@numel,TrialSignal);
 			NormalizeSignal=Lengths>0;
@@ -274,7 +292,9 @@ classdef DataSet<handle
 			Heights=cellfun(@height,TrialTags);
 			NormalizeTags=Heights>0;
 			ValidHeights=Heights(NormalizeTags);
-			NormalizeTo=min([Lengths;ValidHeights]);
+			if ~exist('NormalizeTo','var')
+				NormalizeTo=min([Lengths;ValidHeights]);
+			end
 			NormalizeSignal(NormalizeSignal)=Lengths~=NormalizeTo;
 			NormalizeTags(NormalizeTags)=ValidHeights~=NormalizeTo;
 			if any(NormalizeSignal)
