@@ -50,38 +50,6 @@ classdef DataSet<handle
 			end
 		end
 	end
-	methods(Access=private,Static)
-		function [UID,Time]=GetRepeatIndex(UID,Time)
-			UID={UID};
-			Time={findgroups(Time)};
-		end
-		function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
-			Sample=TrialTags{1};
-			VariableNames=Sample.Properties.VariableNames;
-			TrialTags=cellfun(@table2array,TrialTags,UniformOutput=false);
-			TrialTags=imresize(cat(3,TrialTags{:}),[Height,width(Sample)]);
-			NumTables=size(TrialTags,3);
-			ResizedTT=cell(NumTables,1);
-			for T=1:NumTables
-				ResizedTT{T}=array2table(TrialTags(:,:,T),VariableNames=VariableNames);
-			end
-			ResizedTT={ResizedTT};
-			TrialUID={TrialUID};
-		end
-		function [TrialSignals,SignalIndex]=TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo)
-			TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo]),2)};
-			SignalIndex={SignalIndex};
-		end
-		function Design=StimuliToDesign(Stimuli,DSTable)
-			for D=1:height(DSTable)
-				if isempty(setxor(Stimuli,DSTable.Stimuli{D}))
-					Design=DSTable.Design(D);
-					return
-				end
-			end
-			Design=missing;
-		end
-	end
 	methods(Access=private)
 		function SC=GetSignalColumn(obj)
 			if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
@@ -203,11 +171,13 @@ classdef DataSet<handle
 			% obj.AddRepeatIndex;
 			% ```
 			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["DateTime","Mouse","Design"]);
-			[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(Query))',Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
-			obj.Blocks.BlockRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
+			[RepeatIndex,Index]=splitapply(@GetRepeatIndex,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
+			[~,Index]=ismember(vertcat(Index{:}),obj.Blocks.DateTime);
+			obj.Blocks.BlockRI(Index)=vertcat(RepeatIndex{:});
 			if istable(obj.Trials)
-				[Index,RepeatIndex]=splitapply(@UniExp.DataSet.GetRepeatIndex,(1:height(obj.Trials))',obj.Trials.TrialIndex,findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
-				obj.Trials.TrialRI(vertcat(Index{:}))=vertcat(RepeatIndex{:});
+				[RepeatIndex,~,Index]=splitapply(@GetRepeatIndex,obj.Trials(:,["TrialIndex","TrialUID"]),findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
+				[~,Index]=ismember(vertcat(Index{:}),obj.Trials.TrialUID);
+				obj.Trials.TrialRI(Index)=vertcat(RepeatIndex{:});
 			end
 		end
 		function RemoveDateTimes(obj,DateTimes)
@@ -299,12 +269,12 @@ classdef DataSet<handle
 			NormalizeTags(NormalizeTags)=ValidHeights~=NormalizeTo;
 			if any(NormalizeSignal)
 				Index=1:height(TrialSignal);
-				[Normalized,Index]=splitapply(@(TrialSignals,SignalIndex)UniExp.DataSet.TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),TrialSignal(NormalizeSignal),Index(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
+				[Normalized,Index]=splitapply(@(TrialSignals,SignalIndex)TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),TrialSignal(NormalizeSignal),Index(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
 				TrialSignal(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
 			if any(NormalizeTags)
 				Index=1:height(TrialTags);
-				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)UniExp.DataSet.TrialTagsResize(TrialTags,TrialUID,NormalizeTo),TrialTags(NormalizeTags),Index(NormalizeTags)',findgroups(Heights(NormalizeTags)));
+				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)TrialTagsResize(TrialTags,TrialUID,NormalizeTo),TrialTags(NormalizeTags),Index(NormalizeTags)',findgroups(Heights(NormalizeTags)));
 				TrialTags(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
 			obj.Trials.NormalizedTags=TrialTags;
@@ -333,7 +303,7 @@ classdef DataSet<handle
 			% DSTable table，刺激组合与设计的映射表。必须包含以下列：
 			% - Stimuli(1,1)cell，刺激组合，元胞内是(1,:)categorical，表示该组合内包含的所有刺激
 			% - Design(1,1)categorical，刺激组合对应的设计。所有恰好包含Stimuli所有刺激类型回合的模块，都会被设置为该Design。
-			BlockDesign=groupsummary(obj.Trials,"BlockUID",@(Stimuli)UniExp.DataSet.StimuliToDesign(Stimuli,DSTable),"Stimulus");
+			BlockDesign=groupsummary(obj.Trials,"BlockUID",@(Stimuli)StimuliToDesign(Stimuli,DSTable),"Stimulus");
 			BlockDesign(ismissing(BlockDesign.fun1_Stimulus),:)=[];
 			[~,Index]=ismember(BlockDesign.BlockUID,obj.Blocks.BlockUID);
 			obj.Blocks.Design(Index)=categorical(BlockDesign.fun1_Stimulus);
@@ -370,4 +340,33 @@ classdef DataSet<handle
 			end
 		end
 	end
+end
+function varargout=GetRepeatIndex(varargin)
+varargout=[{{findgroups(varargin{1})}},num2cell(varargin)];
+end
+function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
+Sample=TrialTags{1};
+VariableNames=Sample.Properties.VariableNames;
+TrialTags=cellfun(@table2array,TrialTags,UniformOutput=false);
+TrialTags=imresize(cat(3,TrialTags{:}),[Height,width(Sample)]);
+NumTables=size(TrialTags,3);
+ResizedTT=cell(NumTables,1);
+for T=1:NumTables
+	ResizedTT{T}=array2table(TrialTags(:,:,T),VariableNames=VariableNames);
+end
+ResizedTT={ResizedTT};
+TrialUID={TrialUID};
+end
+function [TrialSignals,SignalIndex]=TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo)
+TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo]),2)};
+SignalIndex={SignalIndex};
+end
+function Design=StimuliToDesign(Stimuli,DSTable)
+for D=1:height(DSTable)
+	if isempty(setxor(Stimuli,DSTable.Stimuli{D}))
+		Design=DSTable.Design(D);
+		return
+	end
+end
+Design=missing;
 end

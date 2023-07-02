@@ -8,5 +8,6 @@ V.TextAnalytics=TextAnalytics.Version;
 V.MATLAB='R2022b';
 persistent NewVersion
 if isempty(NewVersion)
+	warning('off','TextAnalyticsException:Thread_parallelism_not_supported');
 	NewVersion=TextAnalytics.CheckUpdateFromGitHub('https://github.com/ShanghaitechGuanjisongLab/Unified-Experimental-Analysis-and-Figuring/releases','统一实验分析作图',V.Me);
 end
