@@ -52,10 +52,14 @@ classdef DataSet<handle
 	end
 	methods(Access=private)
 		function SC=GetSignalColumn(obj)
-			if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
-				SC="NormalizedSignal";
+			if istable(obj.TrialSignals)
+				if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
+					SC="NormalizedSignal";
+				else
+					SC="TrialSignal";
+				end
 			else
-				SC="TrialSignal";
+				UniExp.UniExpException.DataSet_is_missing_TrialSignals.Throw;
 			end
 		end
 	end
@@ -170,14 +174,18 @@ classdef DataSet<handle
 			% ```
 			% obj.AddRepeatIndex;
 			% ```
-			Query=MATLAB.DataTypes.Select({obj.DateTimes,obj.Blocks},["DateTime","Mouse","Design"]);
+			Query=MATLAB.DataTypes.Select(["DateTime","Mouse","Design"],obj.DateTimes,obj.Blocks);
 			[RepeatIndex,Index]=splitapply(@GetRepeatIndex,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
 			[~,Index]=ismember(vertcat(Index{:}),obj.Blocks.DateTime);
 			obj.Blocks.BlockRI(Index)=vertcat(RepeatIndex{:});
 			if istable(obj.Trials)
-				[RepeatIndex,~,Index]=splitapply(@GetRepeatIndex,obj.Trials(:,["TrialIndex","TrialUID"]),findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
-				[~,Index]=ismember(vertcat(Index{:}),obj.Trials.TrialUID);
-				obj.Trials.TrialRI(Index)=vertcat(RepeatIndex{:});
+				if any(obj.Trials.Properties.VariableNames=="Stimulus")
+					[RepeatIndex,~,Index]=splitapply(@GetRepeatIndex,obj.Trials(:,["TrialIndex","TrialUID"]),findgroups(obj.Trials(:,["BlockUID","Stimulus"])));
+					[~,Index]=ismember(vertcat(Index{:}),obj.Trials.TrialUID);
+					obj.Trials.TrialRI(Index)=vertcat(RepeatIndex{:});
+				else
+					UniExp.UniExpException.TrialRI_could_not_be_calculated_for_Trials_without_Stimulus.Warn;
+				end
 			end
 		end
 		function RemoveDateTimes(obj,DateTimes)
@@ -225,7 +233,7 @@ classdef DataSet<handle
 			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
 			%See also UniExp.DataSet.AddBehavior
 			UniExp.UniExpException.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
-			Query=MATLAB.DataTypes.Select({obj.Trials,obj.Blocks,obj.DateTimes},["TrialUID","TrialTags","SeriesInterval"]);
+			Query=MATLAB.DataTypes.Select(["TrialUID","TrialTags","SeriesInterval"],obj.Trials,obj.Blocks,obj.DateTimes);
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
 			Query.TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
 			Query.NumSamples=cellfun(@height,Query.TrialTags);

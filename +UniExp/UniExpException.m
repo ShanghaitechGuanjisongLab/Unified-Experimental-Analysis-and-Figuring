@@ -62,5 +62,7 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Unexpected_trial_stimulus
 		Number_of_split_trials_is_less_than_that_of_existing_trials
 		Cell_signals_vary_in_length
+		TrialRI_could_not_be_calculated_for_Trials_without_Stimulus
+		DataSet_is_missing_TrialSignals
 	end
 end
