@@ -88,5 +88,8 @@ classdef Flags
 		Warn
 		%忽略问题，继续程序
 		Ignore
+
+		%% DataSet.struct
+		AllProperties
 	end
 end

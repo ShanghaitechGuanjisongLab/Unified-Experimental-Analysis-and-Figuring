@@ -394,23 +394,32 @@
 			}
 		]
 	},
-	"UniExp.DataSet.RenameMice": {
+	"UniExp.DataSet.RemoveTrials": {
 		"inputs": [
 			{
-				"name": "Old",
-				"kind": "required",
-				"purpose": "旧鼠名字符串模式"
+				"name": "obj"
 			},
 			{
-				"name": "New",
+				"name": "TrialUIDs",
 				"kind": "required",
-				"purpose": "新鼠名"
+				"type": "real",
+				"purpose": "要移除的回合UID"
+			}
+		]
+	},
+	"UniExp.DataSet.struct": {
+		"inputs": [
+			{
+				"name": "obj"
 			},
 			{
-				"name": "Data",
-				"kind": "required",
-				"purpose": "包含鼠名的数据容器",
-				"repeating": true
+				"name": "Flags",
+				"kind": "ordered",
+				"type": [
+					"UniExp.Flags",
+					"scalar"
+				],
+				"purpose": "指定额外功能旗帜"
 			}
 		]
 	},

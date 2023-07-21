@@ -33,9 +33,11 @@ classdef DataSet<handle
 		%其它额外备注信息
 		Note(:,1)string
 	end
+	properties(Hidden)
+		CellSaveOptimize=true;
+	end
 	methods(Static)
 		Merged = Merge(Inputs,options)
-		varargout=RenameMice(Old,New,varargin)
 		varargout=Rename(Column,Old,New,varargin)
 		function CM=CheckMouse(CM)
 			%设置或获取是否检查鼠名
@@ -50,7 +52,33 @@ classdef DataSet<handle
 			end
 		end
 	end
-	methods(Access=private)
+	methods(Static,Access=protected)
+		function obj=loadobj(obj)
+			if obj.CellSaveOptimize
+				for StructName=["BlockSignals","TrialSignals","Trials"]
+					Struct=obj.(StructName);
+					if isstruct(Struct)
+						ColumnNames=fieldnames(Struct);
+						for C=1:numel(ColumnNames)
+							Column=Struct.(ColumnNames{C});
+							if iscell(Column)
+								Column=arrayfun(@(V,NumSplit)mat2cell(V{1},repmat(height(V{1})/NumSplit,NumSplit,1)),Column,Struct.NumSplit,UniformOutput=false);
+								Column=vertcat(Column{:});
+								Struct.(ColumnNames{C})=Column;
+							end
+						end
+						obj.(StructName)=struct2table(rmfield(Struct,'NumSplit'));
+					end
+				end
+				Struct=obj.Cells;
+				if isstruct(Struct)
+					Struct.PixelXY=mat2cell(Struct.PixelXY,Struct.NumPixels);
+					obj.Cells=struct2table(rmfield(Struct,'NumPixels'));
+				end
+			end
+		end
+	end
+	methods(Access=protected)
 		function SC=GetSignalColumn(obj)
 			if istable(obj.TrialSignals)
 				if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
@@ -60,6 +88,34 @@ classdef DataSet<handle
 				end
 			else
 				UniExp.UniExpException.DataSet_is_missing_TrialSignals.Throw;
+			end
+		end
+		function obj=saveobj(obj)
+			obj=UniExp.DataSet(obj);
+			if obj.CellSaveOptimize
+				for TableName=["BlockSignals","TrialSignals","Trials"]
+					Table=obj.(TableName);
+					if istabular(Table)
+						Logical=varfun(@iscell,Table,OutputFormat='uniform');
+						if any(Logical)
+							[~,~,Groups]=unique(cell2mat(cellfun(@size,Table{:,Logical},UniformOutput=false)),'rows');
+							StructValues=cell(1,width(Table));
+							[StructValues{:}]=splitapply(@(varargin)LogicalColumnsCat(Logical,varargin),Table,Groups);
+							Logical=~Logical;
+							StructValues(Logical)=cellfun(@(V)vertcat(V{:}),StructValues(Logical),UniformOutput=false);
+							Table=cell2struct(StructValues,Table.Properties.VariableNames,2);
+							Table.NumSplit=groupcounts(Groups);
+							obj.(TableName)=Table;
+						end
+					end
+				end
+				Table=obj.Cells;
+				if istabular(Table)
+					Table.NumPixels=cellfun(@height,Table.PixelXY);
+					Table=table2struct(Table,ToScalar=true);
+					Table.PixelXY=vertcat(Table.PixelXY{:});
+					obj.Cells=Table;
+				end
 			end
 		end
 	end
@@ -84,25 +140,38 @@ classdef DataSet<handle
 					[~,Filename]=fileparts(Path);
 					FileFields=string(split(Filename,'.'));
 					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(FileFields);
+					if startsWith(Path,'\\')
+						%Samba网络访问优化
+						FromPath=Path;
+						Path=fullfile(tempdir,Filename);
+						copyfile(FromPath,Path);
+					end
 					StructOrPath=load(Path);
 					Cells=struct2cell(StructOrPath);
 					Logical=cellfun(@(C)isa(C,'UniExp.DataSet'),Cells);
-					if any(Logical)
-						StructOrPath=Cells{Logical};
+					Already=any(Logical);
+					if Already
+						obj=Cells{Logical};
 					end
 				else
 					CheckMouse=false;
-				end
-				Fields=string(intersect(fieldnames(StructOrPath),properties(obj)))';
-				if isempty(Fields)
-					if InputPath
-						UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
-					else
-						UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
+					Already=isa(StructOrPath,'UniExp.DataSet');
+					if Already
+						obj=StructOrPath;
 					end
 				end
-				for F=Fields
-					obj.(F)=StructOrPath.(F);
+				if ~Already
+					Fields=intersect(fieldnames(StructOrPath),[properties(obj);"CellSaveOptimize"]);
+					if isempty(Fields)
+						if InputPath
+							UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
+						else
+							UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
+						end
+					end
+					for F=reshape(Fields,1,[])
+						obj.(F)=StructOrPath.(F);
+					end
 				end
 				if CheckMouse
 					for TableName=["Mice","DateTimes","Cells"]
@@ -158,7 +227,7 @@ classdef DataSet<handle
 			if istabular(obj.Cells)
 				obj.Cells(ismember(obj.Cells.CellUID,CellUIDs),:)=[];
 			end
-			if istabular(obj.BlockSignals)
+			if ~isempty(obj.BlockSignals)%空表可能缺少CellUID列
 				obj.BlockSignals(ismember(obj.BlockSignals.CellUID,CellUIDs),:)=[];
 			end
 			if istabular(obj.TrialSignals)
@@ -347,6 +416,48 @@ classdef DataSet<handle
 				obj.Trials.(varargin{V})(end)=varargin{V+1};
 			end
 		end
+		function S=struct(obj,~)
+			%数据库的各个表导出到结构体
+			%# 语法
+			% ```
+			% S=obj.struct;
+			% %将对象中的非空表导出到结构体
+			%
+			% S=obj.struct(Flags);
+			% %额外指定功能旗帜
+			% ```
+			%# 输入参数
+			% Flags(1,1)UniExp.Flags，指定额外功能旗帜。仅支持UniExp.Flags.AllProperties，指定此旗帜时，对象中的所有属性都会被导出到结构体，包括空表、Version和Note；
+			%  如不指定，仅非空表会被导出到结构体。
+			%# 返回值
+			% S(1,1)struct，包含对象中各个属性作为字段的结构体。
+			if nargin>1
+				Properties=properties(obj);
+				Properties{end+1}='CellSaveOptimize';
+			else
+				Properties=obj.ValidTableNames;
+			end
+			S=struct;
+			for P=string(Properties')
+				S.(P)=obj.(P);
+			end
+		end
+		function RemoveTrials(obj,TrialUIDs)
+			%移除数据库中的指定回合
+			%将从Trials和TrialSignals表中移除指定回合的所有记录。
+			%# 语法
+			% ```
+			% obj.RemoveTrials(TrialUIDs);
+			% ```
+			%# 输入参数
+			% TrialUIDs(:,1)uint16，要移除的回合UID
+			if ~isempty(obj.TrialSignals)
+				obj.TrialSignals(ismember(obj.TrialSignals.TrialUID,TrialUIDs),:)=[];
+			end
+			if ~isempty(obj.Trials)
+				obj.Trials(ismember(obj.Trials.TrialUID,TrialUIDs),:)=[];
+			end
+		end
 	end
 end
 function varargout=GetRepeatIndex(varargin)
@@ -377,4 +488,10 @@ for D=1:height(DSTable)
 	end
 end
 Design=missing;
+end
+function varargout=LogicalColumnsCat(Logical,Columns)
+varargout=Columns;
+varargout(Logical)=cellfun(@(V){vertcat(V{:})},Columns(Logical),UniformOutput=false);
+Logical=~Logical;
+varargout(Logical)=cellfun(@(V){V},Columns(Logical),UniformOutput=false);
 end
