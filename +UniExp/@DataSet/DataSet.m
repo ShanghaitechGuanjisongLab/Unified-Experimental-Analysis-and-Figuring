@@ -33,9 +33,6 @@ classdef DataSet<handle
 		%其它额外备注信息
 		Note(:,1)string
 	end
-	properties(Hidden)
-		CellSaveOptimize=true;
-	end
 	methods(Static)
 		Merged = Merge(Inputs,options)
 		varargout=Rename(Column,Old,New,varargin)
@@ -54,31 +51,29 @@ classdef DataSet<handle
 	end
 	methods(Static,Access=protected)
 		function obj=loadobj(obj)
-			if obj.CellSaveOptimize
-				for StructName=["BlockSignals","TrialSignals","Trials"]
-					Struct=obj.(StructName);
-					if isstruct(Struct)
-						ColumnNames=fieldnames(Struct);
-						for C=1:numel(ColumnNames)
-							Column=Struct.(ColumnNames{C});
-							if iscell(Column)
-								Column=arrayfun(@(V,NumSplit)mat2cell(V{1},repmat(height(V{1})/NumSplit,NumSplit,1)),Column,Struct.NumSplit,UniformOutput=false);
-								Column=vertcat(Column{:});
-								Struct.(ColumnNames{C})=Column;
-							end
+			for StructName=["BlockSignals","TrialSignals","Trials"]
+				Struct=obj.(StructName);
+				if isstruct(Struct)&&~isempty(Struct)
+					ColumnNames=fieldnames(Struct);
+					for C=1:numel(ColumnNames)
+						Column=Struct.(ColumnNames{C});
+						if iscell(Column)
+							Column=arrayfun(@(V,NumSplit)mat2cell(V{1},repmat(height(V{1})/NumSplit,NumSplit,1)),Column,Struct.NumSplit,UniformOutput=false);
+							Column=vertcat(Column{:});
+							Struct.(ColumnNames{C})=Column;
 						end
-						obj.(StructName)=struct2table(rmfield(Struct,'NumSplit'));
 					end
+					obj.(StructName)=struct2table(rmfield(Struct,'NumSplit'));
 				end
-				Struct=obj.Cells;
-				if isstruct(Struct)
-					Struct.PixelXY=mat2cell(Struct.PixelXY,Struct.NumPixels);
-					obj.Cells=struct2table(rmfield(Struct,'NumPixels'));
-				end
+			end
+			Struct=obj.Cells;
+			if isstruct(Struct)&&~isempty(Struct)
+				Struct.PixelXY=mat2cell(Struct.PixelXY,Struct.NumPixels);
+				obj.Cells=struct2table(rmfield(Struct,'NumPixels'));
 			end
 		end
 	end
-	methods(Access=protected)
+	methods(Access=public)
 		function SC=GetSignalColumn(obj)
 			if istable(obj.TrialSignals)
 				if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
@@ -92,30 +87,28 @@ classdef DataSet<handle
 		end
 		function obj=saveobj(obj)
 			obj=UniExp.DataSet(obj);
-			if obj.CellSaveOptimize
-				for TableName=["BlockSignals","TrialSignals","Trials"]
-					Table=obj.(TableName);
-					if istabular(Table)
-						Logical=varfun(@iscell,Table,OutputFormat='uniform');
-						if any(Logical)
-							[~,~,Groups]=unique(cell2mat(cellfun(@size,Table{:,Logical},UniformOutput=false)),'rows');
-							StructValues=cell(1,width(Table));
-							[StructValues{:}]=splitapply(@(varargin)LogicalColumnsCat(Logical,varargin),Table,Groups);
-							Logical=~Logical;
-							StructValues(Logical)=cellfun(@(V)vertcat(V{:}),StructValues(Logical),UniformOutput=false);
-							Table=cell2struct(StructValues,Table.Properties.VariableNames,2);
-							Table.NumSplit=groupcounts(Groups);
-							obj.(TableName)=Table;
-						end
+			for TableName=["BlockSignals","TrialSignals","Trials"]
+				Table=obj.(TableName);
+				if istabular(Table)&&~isempty(Table)
+					Logical=varfun(@iscell,Table,OutputFormat='uniform');
+					if any(Logical)
+						[~,~,Groups]=unique(cell2mat(cellfun(@size,Table{:,Logical},UniformOutput=false)),'rows');
+						StructValues=cell(1,width(Table));
+						[StructValues{:}]=splitapply(@(varargin)LogicalColumnsCat(Logical,varargin),Table,Groups);
+						Logical=~Logical;
+						StructValues(Logical)=cellfun(@(V)vertcat(V{:}),StructValues(Logical),UniformOutput=false);
+						Table=cell2struct(StructValues,Table.Properties.VariableNames,2);
+						Table.NumSplit=groupcounts(Groups);
+						obj.(TableName)=Table;
 					end
 				end
-				Table=obj.Cells;
-				if istabular(Table)
-					Table.NumPixels=cellfun(@height,Table.PixelXY);
-					Table=table2struct(Table,ToScalar=true);
-					Table.PixelXY=vertcat(Table.PixelXY{:});
-					obj.Cells=Table;
-				end
+			end
+			Table=obj.Cells;
+			if istabular(Table)&&~isempty(Table)
+				Table.NumPixels=cellfun(@height,Table.PixelXY);
+				Table=table2struct(Table,ToScalar=true);
+				Table.PixelXY=vertcat(Table.PixelXY{:});
+				obj.Cells=Table;
 			end
 		end
 	end
@@ -137,13 +130,13 @@ classdef DataSet<handle
 				InputPath=ischar(StructOrPath)||isstring(StructOrPath);
 				if InputPath
 					Path=StructOrPath;
-					[~,Filename]=fileparts(Path);
+					[~,Filename,Extension]=fileparts(Path);
 					FileFields=string(split(Filename,'.'));
 					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(FileFields);
 					if startsWith(Path,'\\')
 						%Samba网络访问优化
 						FromPath=Path;
-						Path=fullfile(tempdir,Filename);
+						Path=fullfile(tempdir,strcat(Filename,Extension));
 						copyfile(FromPath,Path);
 					end
 					StructOrPath=load(Path);
@@ -155,13 +148,10 @@ classdef DataSet<handle
 					end
 				else
 					CheckMouse=false;
-					Already=isa(StructOrPath,'UniExp.DataSet');
-					if Already
-						obj=StructOrPath;
-					end
+					Already=false;
 				end
 				if ~Already
-					Fields=intersect(fieldnames(StructOrPath),[properties(obj);"CellSaveOptimize"]);
+					Fields=intersect(fieldnames(StructOrPath),properties(obj));
 					if isempty(Fields)
 						if InputPath
 							UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
@@ -169,8 +159,8 @@ classdef DataSet<handle
 							UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
 						end
 					end
-					for F=reshape(Fields,1,[])
-						obj.(F)=StructOrPath.(F);
+					for F=1:numel(Fields)
+						obj.(Fields{F})=StructOrPath.(Fields{F});
 					end
 				end
 				if CheckMouse
@@ -243,7 +233,7 @@ classdef DataSet<handle
 			% ```
 			% obj.AddRepeatIndex;
 			% ```
-			Query=MATLAB.DataTypes.Select(["DateTime","Mouse","Design"],obj.DateTimes,obj.Blocks);
+			Query=MATLAB.DataTypes.Select(["DateTime","Mouse","Design"],{obj.DateTimes,obj.Blocks});
 			[RepeatIndex,Index]=splitapply(@GetRepeatIndex,Query.DateTime,findgroups(Query(:,["Mouse","Design"])));
 			[~,Index]=ismember(vertcat(Index{:}),obj.Blocks.DateTime);
 			obj.Blocks.BlockRI(Index)=vertcat(RepeatIndex{:});
@@ -302,7 +292,7 @@ classdef DataSet<handle
 			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
 			%See also UniExp.DataSet.AddBehavior
 			UniExp.UniExpException.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
-			Query=MATLAB.DataTypes.Select(["TrialUID","TrialTags","SeriesInterval"],obj.Trials,obj.Blocks,obj.DateTimes);
+			Query=MATLAB.DataTypes.Select(["TrialUID","TrialTags","SeriesInterval"],{obj.Trials,obj.Blocks,obj.DateTimes});
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
 			Query.TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
 			Query.NumSamples=cellfun(@height,Query.TrialTags);
