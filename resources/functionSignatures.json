@@ -813,6 +813,12 @@
 				"purpose": "平均值TIFF路径"
 			},
 			{
+				"name": "Quantile",
+				"kind": "ordered",
+				"type": "positive",
+				"purpose": "像素分位数"
+			},
+			{
 				"name": "OutputPath",
 				"kind": "namevalue",
 				"type": [

@@ -41,12 +41,13 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 			end
 			obj.WriteToCache=WriteToCache;
 		end
-		function Data=Read(obj,~,~)
+		function [Data,PiecesRead]=Read(obj,~,~,~)
 			obj.BlocksRead=obj.BlocksRead+1;
 			[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,obj.BlockStarts(obj.BlocksRead),obj.BlockSizes(obj.BlocksRead));
 			if obj.CacheFid
 				fwrite(obj.CacheFid,Data(:,:,obj.NonTagChannel,:,:),'uint16');
 			end
+			PiecesRead=size(Data,5);
 		end
 		function Data=Write(obj,Data,~,~)
 			if obj.WriteToCache

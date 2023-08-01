@@ -64,5 +64,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Cell_signals_vary_in_length
 		TrialRI_could_not_be_calculated_for_Trials_without_Stimulus
 		DataSet_is_missing_TrialSignals
+		Scattered_light_correction_produces_negative_measurements
 	end
 end

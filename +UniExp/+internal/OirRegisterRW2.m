@@ -5,7 +5,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 		CollectData
 		ProcessData={}
 	end
-	properties(SetAccess=immutable,GetAccess=private)
+	properties(SetAccess=immutable,GetAccess=protected)
 		Writer Image5D.OmeTiffRWer
 		OirPath
 		Translation
@@ -16,8 +16,9 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 		SizeC
 		SizeZ
 		MeanWriter Image5D.OmeTiffRWer
+		GpuLimit
 	end
-	properties(Access=private)
+	properties(Access=protected)
 		Reader Image5D.OirReader
 		Sum
 	end
@@ -32,7 +33,8 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			obj.SizeC=obj.Reader.SizeC;
 			obj.SizeZ=obj.Reader.SizeZ;
 			obj.NumPieces=obj.Reader.SizeT;
-			obj.PieceSize=2*prod([uint32(obj.SizeX),obj.SizeY,obj.SizeC,obj.SizeZ]);
+			PieceElements=prod([uint32(obj.SizeX),obj.SizeY,obj.SizeC,obj.SizeZ]);
+			obj.PieceSize=2*PieceElements;
 			obj.NontagChannels=find(~startsWith(Device,'CD'));
 			[~,Filename]=fileparts(OirPath);
 			Colors=ChannelColor.FromOirColors(Colors(:,obj.NontagChannels));
@@ -47,8 +49,12 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				obj.CacheFid=0;
 			end
 			obj.MeanWriter=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".平均值.tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,1,DimensionOrder.XYCZT);
+			obj.GpuLimit=floor(double(intmax('int32'))/double(PieceElements))-1;
 		end
-		function Data=Read(obj,Start,End)
+		function [Data,PiecesRead]=Read(obj,Start,End,~)
+			if nargin>3
+				End=min(End,Start+obj.GpuLimit);
+			end
 			if obj.CacheFid
 				Sizes=[obj.SizeX,obj.SizeY,obj.SizeC,obj.SizeZ,End-Start+1];
 				Data={reshape(fread(obj.CacheFid,prod(Sizes),'uint16=>uint16'),Sizes),obj.Translation(Start:End,:,:)};
@@ -56,6 +62,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,Start-1,End-Start+1,obj.NontagChannels);
 				Data={Data,obj.Translation(Start:End,:,:)};
 			end
+			PiecesRead=size(Data,5);
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
