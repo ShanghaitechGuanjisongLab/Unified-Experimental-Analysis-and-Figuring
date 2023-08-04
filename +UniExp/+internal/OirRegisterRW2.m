@@ -27,7 +27,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			import Image5D.*
 			obj.OirPath=OirPath;
 			obj.Reader=OirReader(OirPath);
-			[Device,Colors]=obj.Reader.DeviceColors;
+			DeviceColors=obj.Reader.DeviceColors;
 			obj.SizeX=obj.Reader.SizeX;
 			obj.SizeY=obj.Reader.SizeY;
 			obj.SizeC=obj.Reader.SizeC;
@@ -35,9 +35,9 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			obj.NumPieces=obj.Reader.SizeT;
 			PieceElements=prod([uint32(obj.SizeX),obj.SizeY,obj.SizeC,obj.SizeZ]);
 			obj.PieceSize=2*PieceElements;
-			obj.NontagChannels=find(~startsWith(Device,'CD'));
+			obj.NontagChannels=find(~startsWith(DeviceColors.Device,'CD'));
 			[~,Filename]=fileparts(OirPath);
-			Colors=ChannelColor.FromOirColors(Colors(:,obj.NontagChannels));
+			Colors=ChannelColor.FromOirColors(DeviceColors.Color(obj.NontagChannels,:));
 			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			obj.NontagChannels=obj.NontagChannels-1;
 			obj.Translation=Translation;

@@ -22,15 +22,15 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 		function obj = OirRegisterRW1(OirPath,BlockSize,WriteToCache,CacheDirectory)
 			obj.OirPath=OirPath;
 			obj.Reader=Image5D.OirReader(OirPath);
-			[Devices,Colors]=obj.Reader.DeviceColors;
-			TagLogical=startsWith(Devices,'CD');
+			DeviceColors=obj.Reader.DeviceColors;
+			TagLogical=startsWith(DeviceColors.Device,'CD');
 			obj.NumPieces=double(obj.Reader.SizeT);%20
 			obj.ProcessData=TagLogical;
 			NumBlocks=ceil(obj.NumPieces/BlockSize);
 			BlockSplit=uint32(linspace(0,obj.NumPieces,NumBlocks+1));
 			obj.BlockStarts=BlockSplit(1:end-1);
 			obj.BlockSizes=BlockSplit(2:end)-obj.BlockStarts;
-			obj.CollectData=struct(ChannelColors=Colors,DeviceNames=Devices,SeriesInterval=obj.Reader.SeriesInterval);
+			obj.CollectData=struct(DeviceColors=DeviceColors,SeriesInterval=obj.Reader.SeriesInterval,LaserTransmissivity=obj.Reader.LaserTransmissivity,PmtVoltage=obj.Reader.PmtVoltage);
 			if exist('CacheDirectory','var')
 				[~,Filename]=fileparts(OirPath);
 				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"),"w");
