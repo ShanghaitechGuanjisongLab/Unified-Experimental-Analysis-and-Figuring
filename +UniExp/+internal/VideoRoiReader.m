@@ -6,11 +6,15 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 		CollectData
 		ProcessData
 	end
+	properties(SetAccess=immutable,GetAccess=protected)
+		GpuLimit
+	end
 	methods
 		function obj = VideoRoiReader(VideoRoiPath)
 			obj@VideoReader(VideoRoiPath{1}(1));
 			Data=obj.readFrame;
 			obj.PieceSize=numel(typecast(Data(:),'uint8'));
+			obj.GpuLimit=floor(double(intmax('int32'))/numel(Data));
 			obj.NumPieces=obj.NumFrames;
 			[SizeY,SizeX]=size(Data,1,2);
 			RoiPath=VideoRoiPath{1}(2);
@@ -32,8 +36,12 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 			obj.CollectData={obj.FrameRate,PixelYX,RoiPath};
 			obj.ProcessData={obj.PixelIndex};
 		end
-		function Data = Read(obj,Start,End)
+		function [Data,PiecesRead] = Read(obj,Start,End,~)
+			if nargin>3
+				End=min(End,Start+obj.GpuLimit);
+			end
 			Data=obj.read([Start,End]);
+			PiecesRead=size(Data,5);
 		end
 	end
 end
