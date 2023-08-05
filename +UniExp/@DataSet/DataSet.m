@@ -457,7 +457,7 @@ function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
 Sample=TrialTags{1};
 VariableNames=Sample.Properties.VariableNames;
 TrialTags=cellfun(@table2array,TrialTags,UniformOutput=false);
-TrialTags=imresize(cat(3,TrialTags{:}),[Height,width(Sample)]);
+TrialTags=imresize(cat(3,TrialTags{:}),[Height,width(Sample)],'bilinear');
 NumTables=size(TrialTags,3);
 ResizedTT=cell(NumTables,1);
 for T=1:NumTables
@@ -467,7 +467,7 @@ ResizedTT={ResizedTT};
 TrialUID={TrialUID};
 end
 function [TrialSignals,SignalIndex]=TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo)
-TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo]),2)};
+TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo],'bilinear'),2)};
 SignalIndex={SignalIndex};
 end
 function Design=StimuliToDesign(Stimuli,DSTable)
