@@ -42,7 +42,7 @@ function RoiCPath=ImageJRoiDiff(options)
 function TransMatrix = RoiRegister(PathArray,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
-对Tiff图像批量应用变换矩阵
+%对Tiff图像批量应用变换矩阵
 function BatchTiffTransform(TiffTransTable,OutputDirectory)
 ```
 ## 从其它数据文件格式取得UniExp
@@ -55,8 +55,8 @@ function BatchVideoMean(VideoPaths,Output)
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
 %从Rdc2格式转换为UniExp规范DataSet格式
 function DataSet = Rdc2DataSet(Rdc2DataPaths)
-从表格文件读入查询表
-function QueryTable = ReadQueryTable(TablePath)
+%从表格文件读入查询表
+function QueryTable = ReadQueryTable(TablePath,Sheet)
 ```
 ## UniExp内部处理
 ```MATLAB

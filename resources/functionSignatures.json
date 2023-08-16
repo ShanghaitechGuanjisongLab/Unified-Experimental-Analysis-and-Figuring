@@ -1467,6 +1467,11 @@
 					]
 				],
 				"purpose": "电子表文件路径"
+			},
+			{
+				"name": "Sheet",
+				"kind": "ordered",
+				"purpose": "表序号值或名称字符串"
 			}
 		]
 	},
