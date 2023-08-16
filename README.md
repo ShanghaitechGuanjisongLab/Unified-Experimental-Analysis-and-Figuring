@@ -41,7 +41,7 @@ function RoiCPath=ImageJRoiDiff(options)
 %根据 ImageJ RoiSet 配准图像
 function TransMatrix = RoiRegister(PathArray,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
-function BatchOirRegisterTiff(OirPaths,FixedPath,OutputDirectory,TransMatrix,options)
+function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
 对Tiff图像批量应用变换矩阵
 function BatchTiffTransform(TiffTransTable,OutputDirectory)
 ```

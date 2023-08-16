@@ -602,24 +602,6 @@
 				"purpose": "所有要配准的OIR头文件路径"
 			},
 			{
-				"name": "FixedPath",
-				"kind": "required",
-				"type": [
-					[
-						"file=*.oir"
-					],
-					[
-						"string",
-						"scalar"
-					],
-					[
-						"char",
-						"row"
-					]
-				],
-				"purpose": "固定OIR文件路径"
-			},
-			{
 				"name": "OutputDirectory",
 				"kind": "required",
 				"type": [
@@ -645,26 +627,10 @@
 				"default": 20
 			},
 			{
-				"name": "FixedImage",
-				"kind": "namevalue",
-				"type": [
-					"uint16",
-					"size=:,:,:,:"
-				],
-				"purpose": "处理后的参照图"
-			},
-			{
 				"name": "MovingChannel",
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "要选择晃动图的哪个通道与固定图匹配",
-				"default": 1
-			},
-			{
-				"name": "FixedChannel",
-				"kind": "namevalue",
-				"type": "positive",
-				"purpose": "要选择固定图的哪个通道作为配准参照",
 				"default": 1
 			},
 			{
