@@ -91,5 +91,11 @@ classdef Flags
 
 		%% DataSet.struct
 		AllProperties
+
+		%% CellTrialVideo.ShowSeconds.Location
+		NorthWest
+		NorthEast
+		SouthWest
+		SouthEast
 	end
 end

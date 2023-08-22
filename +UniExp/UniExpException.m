@@ -65,5 +65,13 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		TrialRI_could_not_be_calculated_for_Trials_without_Stimulus
 		DataSet_is_missing_TrialSignals
 		Scattered_light_correction_produces_negative_measurements
+		Parameter_C_must_be_specified_for_a_multichannel_TIFF
+		Parameter_Z_must_be_specified_for_a_multi_Z_TIFF
+		Window_Center_or_ROI_must_be_specified
+		Window_Size_or_ROI_must_be_specified
+		Window_Size_larger_than_Tiff_size
+		Invalid_ShowSeconds_Location
+		Output_file_must_specify_FrameRate_or_ShowSeconds
+		ShowSeconds_Size_or_ROI_must_be_specified
 	end
 end

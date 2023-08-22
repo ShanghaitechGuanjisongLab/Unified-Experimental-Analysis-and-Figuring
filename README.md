@@ -87,6 +87,8 @@ function ProjectCosine = VectorProjectCosine(GroupCtt,options)
 ```MATLAB
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
+%从TIFF中截取一段展示细胞活动的视频
+function Video=CellTrialVideo(TiffPath,options)
 %作异形彩色标记线条图
 function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 %绘制分泳道的热图

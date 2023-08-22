@@ -1060,6 +1060,115 @@
 			}
 		]
 	},
+	"UniExp.CellTrialVideo": {
+		"inputs": [
+			{
+				"name": "TiffPath",
+				"kind": "required",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"file=*.tif,*.tiff"
+					]
+				],
+				"purpose": "TIFF文件路径"
+			},
+			{
+				"name": "C",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "要截取的通道"
+			},
+			{
+				"name": "Z",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "要截取的Z层"
+			},
+			{
+				"name": "TSS",
+				"kind": "namevalue",
+				"type": [
+					"struct",
+					"scalar"
+				],
+				"purpose": "要截取的TIFF时段"
+			},
+			{
+				"name": "ROI",
+				"kind": "namevalue",
+				"type": [
+					"tabular",
+					"size=2,:"
+				],
+				"purpose": "要标注的细胞圈"
+			},
+			{
+				"name": "Window",
+				"kind": "namevalue",
+				"type": [
+					"struct",
+					"scalar"
+				],
+				"purpose": "要在图面上截取的XY观察窗"
+			},
+			{
+				"name": "ShowSeconds",
+				"kind": "namevalue",
+				"type": [
+					"struct",
+					"scalar"
+				],
+				"purpose": "要在视频中显示的计时读秒"
+			},
+			{
+				"name": "Color",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"numel=3"
+				],
+				"purpose": "标注所使用的RGB颜色"
+			},
+			{
+				"name": "OutputPath",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string",
+						"scalar"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"file"
+					]
+				],
+				"purpose": "输出视频文件路径"
+			},
+			{
+				"name": "FrameRate",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "视频帧率FPS"
+			}
+		]
+	},
 	"UniExp.ColorfulMarkerPlot": {
 		"inputs": [
 			{

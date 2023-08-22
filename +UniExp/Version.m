@@ -5,6 +5,7 @@ V.GlobalOptimization=GlobalOptimization.Version;
 V.ImageProcessing=ImageProcessing.Version;
 V.Image5D=Image5D.Version;
 V.TextAnalytics=TextAnalytics.Version;
+V.ComputerVision=ComputerVision.Version;
 V.MATLAB='R2022b';
 persistent NewVersion
 if isempty(NewVersion)
