@@ -103,13 +103,6 @@ classdef DataSet<handle
 					end
 				end
 			end
-			Table=obj.Cells;
-			if istabular(Table)&&~isempty(Table)
-				Table.NumPixels=cellfun(@height,Table.PixelXY);
-				Table=table2struct(Table,ToScalar=true);
-				Table.PixelXY=vertcat(Table.PixelXY{:});
-				obj.Cells=Table;
-			end
 		end
 	end
 	methods
