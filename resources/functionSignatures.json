@@ -1,4 +1,24 @@
 {
+	"UniExp.BrainAP.FromBregma": {
+		"inputs": [
+			{
+				"name": "Bregma",
+				"kind": "required",
+				"type": "real",
+				"purpose": "前囟坐标"
+			}
+		]
+	},
+	"UniExp.BrainAP.FromInteraural": {
+		"inputs": [
+			{
+				"name": "Interaural",
+				"kind": "required",
+				"type": "real",
+				"purpose": "耳间坐标"
+			}
+		]
+	},
 	"UniExp.DataSet": {
 		"inputs": [
 			{
@@ -1166,6 +1186,41 @@
 				"kind": "namevalue",
 				"type": "positive",
 				"purpose": "视频帧率FPS"
+			}
+		]
+	},
+	"UniExp.CerebrumMapping": {
+		"inputs": [
+			{
+				"name": "APRange",
+				"kind": "required",
+				"type": "numel=2",
+				"purpose": "从冠状切面中查找包含目标脑区的AP范围"
+			},
+			{
+				"name": "MLRange",
+				"kind": "required",
+				"type": "numel=2",
+				"purpose": "从矢状切面中查找包含目标脑区的ML范围"
+			},
+			{
+				"name": "CoronalRanges",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "从每个冠状切片得到的ML范围"
+			},
+			{
+				"name": "SagittalRanges",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "从每个矢状切片得到的AP范围"
+			},
+			{
+				"name": "Optimize",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "额外优化等级",
+				"default": 0
 			}
 		]
 	},

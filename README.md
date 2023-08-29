@@ -33,6 +33,9 @@ import UniExp.*
 classdef DataSet
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
 end
+classdef BrainAP
+	%表示小鼠脑的AP坐标，支持前囟和耳间两个参照系，支持基本数学运算。
+end
 ```
 ## 原始数据预处理
 ```MATLAB
@@ -44,6 +47,8 @@ function TransMatrix = RoiRegister(PathArray,varargin)
 function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
 %对Tiff图像批量应用变换矩阵
 function BatchTiffTransform(TiffTransTable,OutputDirectory)
+%此函数交互式帮你找到最优的脑区注射位点！
+function [Center,CoronalRanges,SagittalRanges,Exception]=CerebrumMapping(APRange,MLRange,options)
 ```
 ## 从其它数据文件格式取得UniExp
 ```MATLAB

@@ -73,5 +73,10 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Invalid_ShowSeconds_Location
 		Output_file_must_specify_FrameRate_or_ShowSeconds
 		ShowSeconds_Size_or_ROI_must_be_specified
+		Invalid_ZeroPoint
+		Invalid_number
+		No_slices_input
+		Unexpected_subsref_type
+		Required_slice_empty
 	end
 end

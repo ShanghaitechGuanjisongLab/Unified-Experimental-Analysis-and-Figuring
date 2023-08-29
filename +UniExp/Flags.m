@@ -90,12 +90,19 @@ classdef Flags
 		Ignore
 
 		%% DataSet.struct
+
 		AllProperties
 
 		%% CellTrialVideo.ShowSeconds.Location
+
 		NorthWest
 		NorthEast
 		SouthWest
 		SouthEast
+
+		%% BrainAP.ZeroPoint
+
+		Bregma
+		Interaural
 	end
 end

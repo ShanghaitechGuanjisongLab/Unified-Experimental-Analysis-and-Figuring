@@ -1,0 +1,1167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Info>
+    <MetadataNode>
+        <path value="ProjectData:type:Info">
+            <node name="Info">
+                <entry key="Name" value="Image5D"/>
+            </node>
+        </path>
+        <path value="Root:type:Categories">
+            <path value="FileClassCategory:type:Category">
+                <node name="Info">
+                    <entry key="DataType" value="None"/>
+                    <entry key="Name" value="分类"/>
+                    <entry key="ReadOnly" value="1"/>
+                    <entry key="SingleValued" value="1"/>
+                </node>
+                <path value="artifact:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="工件"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="convenience:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="便利"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="derived:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="派生"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="design:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="设计"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="none:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="无"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="other:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="其他"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="test:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="测试"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+            </path>
+        </path>
+        <path value="Root:type:EntryPoints"/>
+        <path value="Root:type:Extensions"/>
+        <path value="Root:type:Files">
+            <path value="+Image5D:type:File">
+                <node name="Info"/>
+                <path value="+internal:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="Image5DAPI.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="private:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="Image5DMex.mexw64:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                </path>
+                <path value="1:type:DIR_SIGNIFIER">
+                    <node name="Info"/>
+                </path>
+                <path value="ChannelColor.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="DimensionOrder.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Image5DException.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="InnerExceptionType.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="OirReader.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="OmeTiffRWer.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="PixelType.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="SafePointer.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Version.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="XmlErrorCode.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+            </path>
+            <path value="Image5D工具箱.prj:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="README.md:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="doc:type:File">
+                <node name="Info"/>
+                <path value="1:type:DIR_SIGNIFIER">
+                    <node name="Info"/>
+                </path>
+                <path value="GettingStarted.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+            </path>
+            <path value="工具箱图像.png:type:File">
+                <node name="Info"/>
+            </path>
+        </path>
+        <path value="Root:type:ProjectData"/>
+        <path value="Root:type:ProjectPath">
+            <path value="04eda8e6-4855-49a6-af8b-f64c66c1224f:type:Reference">
+                <node name="Info">
+                    <entry key="Ref" value=""/>
+                    <entry key="Type" value="Relative"/>
+                </node>
+            </path>
+        </path>
+        <path value="Root:type:References"/>
+    </MetadataNode>
+    <Files>
+        <File path="+Image5D/+internal/Image5DAPI.m" value="80dd0240"/>
+        <File path="+Image5D/+internal/private/Image5DMex.exp" value="975be3a9"/>
+        <File path="+Image5D/+internal/private/Image5DMex.lib" value="753c5575"/>
+        <File path="+Image5D/+internal/private/Image5DMex.mexw64" value="c311b972"/>
+        <File path="+Image5D/+internal/private/Image5DMex.pdb" value="399b3c73"/>
+        <File path="+Image5D/+internal/private" value="-1"/>
+        <File path="+Image5D/+internal" value="-1"/>
+        <File path="+Image5D/ChannelColor.m" value="5b26537f"/>
+        <File path="+Image5D/DimensionOrder.m" value="b9ac7318"/>
+        <File path="+Image5D/Image5DException.m" value="b7f61631"/>
+        <File path="+Image5D/InnerExceptionType.m" value="3e882dbe"/>
+        <File path="+Image5D/OirReader.m" value="670693df"/>
+        <File path="+Image5D/OmeTiffRWer.m" value="435e54a1"/>
+        <File path="+Image5D/PixelType.m" value="abe57ccd"/>
+        <File path="+Image5D/SafePointer.m" value="95252114"/>
+        <File path="+Image5D/Version.m" value="ca4db299"/>
+        <File path="+Image5D/XmlErrorCode.m" value="5e19b423"/>
+        <File path="+Image5D" value="-1"/>
+        <File path=".gitattributes" value="6e958f15"/>
+        <File path=".gitignore" value="cd70ed16"/>
+        <File path=".vs/Image5D/FileContentIndex/3f39b73c-a69d-43c2-80b7-63f4a3f097c0.vsidx" value="66e20378"/>
+        <File path=".vs/Image5D/FileContentIndex/5768a776-6c45-439c-ac08-3e802c29497d.vsidx" value="b2628122"/>
+        <File path=".vs/Image5D/FileContentIndex/a90cb458-05ad-4823-bde8-00b338e58b21.vsidx" value="b2628122"/>
+        <File path=".vs/Image5D/FileContentIndex/ac451ab5-176b-4003-8308-4299f1230599.vsidx" value="44357aaf"/>
+        <File path=".vs/Image5D/FileContentIndex/cff7fef9-5919-4120-b766-8f77c06bd188.vsidx" value="b2628122"/>
+        <File path=".vs/Image5D/FileContentIndex" value="-1"/>
+        <File path=".vs/Image5D/v17/.suo" value="317e345c"/>
+        <File path=".vs/Image5D/v17/Browse.VC.db" value="854f70fe"/>
+        <File path=".vs/Image5D/v17/Preview/Browse.VC.db" value="859bd9ea"/>
+        <File path=".vs/Image5D/v17/Preview/Solution.VC.db" value="41352d25"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/18b6a015e3a498a.ipch" value="2522b2ba"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/1eaaccc8deb8d43.ipch" value="33c87f22"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/3439498475187b82.ipch" value="6ff20067"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/519076af3288a559.ipch" value="58d6d212"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/83a188dc3a4a47a.ipch" value="6835d4f6"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/85de5bac708590c.ipch" value="a15cee37"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/9456ddee5f2d8121.ipch" value="2a453b46"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/10b0a0dc2dcfcb63" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/13ef3e4f96696b71/OIR索引.ipch" value="2a674aff"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/13ef3e4f96696b71" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/1504518e83782416" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/1aea451b08b75c2b/IMAGE5D测试.ipch" value="382286fb"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/1aea451b08b75c2b" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/1dc326d29055da70" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/21071ff8384c8a02/TIFF读入器.ipch" value="867ba50f"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/21071ff8384c8a02" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/222439507956d8f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/22c0514f70007e91/OIRMEX.ipch" value="7bc4dcb2"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/22c0514f70007e91" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/25219b41c50a0bbd" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/2614c0be53e488a8" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/28b32cccde25d66f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/2aef7d5d052ba181" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/2f182c53c046ef98" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/2fabe810aa379080" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/2fdd6ef936bb02ef" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/33a1dcc7b7382b9f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/33ff8ca161bbae01" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/3467b6870d6eb04c" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/3533087a428ec231" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/382370ee21fdf701" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/3a3788fb73ed7342/字节反转.ipch" value="348de221"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/3a3788fb73ed7342" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/3b56efb8d9b8b5ba" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/43b833a746105bbf" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/45ae922a6b7a02b8" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/4819e515acee6843" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/4e46eef608358fae" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/4fd6c0c0b73fde5/MEXFUNCTION.ipch" value="62a48e22"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/4fd6c0c0b73fde5" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/52cb68dca03756a2/哈希计算器.ipch" value="caaeb489"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/52cb68dca03756a2" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/549ee99a13767306" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/5fcd24c2bd72c82a" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/607dd64d7db6259f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/60b871ed7aa7d323/OIR读入器.ipch" value="fec19126"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/60b871ed7aa7d323" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/616974dbf9ca38b0/TIFFMEX.ipch" value="f2291aea"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/616974dbf9ca38b0" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/62fce70ff686e00f/OIR索引.ipch" value="466f61b8"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/62fce70ff686e00f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/672f5c26ca563bcb" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/67d601a74829c195" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/6b3092fa19cfc24d" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/6d9dc346c3d752c1/文件映射.ipch" value="e90f9507"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/6d9dc346c3d752c1" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/6ed509e0e030383f/OIRMEX.ipch" value="370179af"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/6ed509e0e030383f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/731f35d415cb2d07" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/735efc2f5b0483d7/文件控制块.ipch" value="ae28fc62"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/735efc2f5b0483d7" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/7691a7f41f3821f0" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/775bbc64ead24fdc/TIFF读入器.ipch" value="88f12f53"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/775bbc64ead24fdc" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/7ad889269fe74989/OIR读入器.ipch" value="df259d28"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/7ad889269fe74989" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/7b81cacf3913a3be" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/7d3eb6cea7cf3e83" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/80938f37d987fffc" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/824c4e3c12b1c836" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/869006306deb03f6" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/886ab070c636d86b" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/8c3ad9e5df7d00f9" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/8ccb8128a1f116be" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/9160698e4b401c2e" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/92354c29651d34e9" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/95aac9d693ef80a3" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/98cc4d981a599817" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/998abf42c5ba738f/OMEBIGTIFF5D.ipch" value="4e2b296"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/998abf42c5ba738f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/9d031234c8b8fbf5" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/9d1554b5e3f94fe0" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/9db2bb5c4ab83669" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/9db4d6e15d6f214" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/9f6d0a8a09f74265" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/a2e95d470e94945c" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/a31cf924265dc990" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/abc567b960adca82" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/ac0346c5b1eaeb72/OMEBIGTIFF5D.ipch" value="301b81de"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/ac0346c5b1eaeb72" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/b454860919565f9d" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/b484ea844d42005e" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/b6f39913792b13e" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/b788c797483f674/IFD5D.ipch" value="4ccc2b21"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/b788c797483f674" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/b90278a3f908127e" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/bb3c4e54596cfbcc" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/bc471be7a08c9f4b" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/bcd4ce304d9941f0" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/bf40e30719617d73" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/bfbee021d997dda9" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/c171dab8eb1d5678" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/c28c7e3a60412cbc" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/c6ac42fa0b6998c4" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/c6d6104ec523fd9" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/cc364a100a95d08c" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/d0896acdd6e1f80f/MEXFUNCTION.ipch" value="33ac556b"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/d0896acdd6e1f80f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/d4a520bfdbff50cd" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/db03c1ec61faf378" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/db40475d63e9df0b" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/de69875df66c68aa" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e152544cdd079836/DLLMAIN.ipch" value="ac9a261d"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e152544cdd079836" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e456bc47be7d4c85/IMAGE5D测试.ipch" value="6dacec3f"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e456bc47be7d4c85" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e8600e34c647417b" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e9882dbe32292a92/IFD5D.ipch" value="4b6c4913"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/e9882dbe32292a92" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f14fcfdcfe794f2c/哈希计算器.ipch" value="469c0323"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f14fcfdcfe794f2c" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f310079c1c445c6c" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f537852e222eae15/IOMETIFF读写器.ipch" value="6ca728d1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f537852e222eae15" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f53da7b32a5ec0b2" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f72857621efcb0f5" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f8032151729e6d38/OMEBIGTIFF5D.ipch" value="df1ec8d1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f8032151729e6d38" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f8afe515a27ef881" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f98c09d32311073f/文件映射.ipch" value="c03560ad"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/f98c09d32311073f" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/fa707206f86203a7" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/fd330b01294c6d95" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/fe2e4cea98aa72c1/OMEBIGTIFF5D.ipch" value="6f431d02"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/fe2e4cea98aa72c1" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/fe3b8dcd2972e051" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH/fe94f6209f11a1bb" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/AutoPCH" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/a518c1b9a0860b8a.ipch" value="c0459ff2"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/a7aba1eb30bc118b.ipch" value="ce07baa5"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/b0af8c78058654a6.ipch" value="cc096830"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/f113a69ea7bc7ba9.ipch" value="9402ba3e"/>
+        <File path=".vs/Image5D/v17/Preview/ipch/f2d69af58d47fb04.ipch" value="e6a34328"/>
+        <File path=".vs/Image5D/v17/Preview/ipch" value="-1"/>
+        <File path=".vs/Image5D/v17/Preview" value="-1"/>
+        <File path=".vs/Image5D/v17/Solution.VC.db" value="c61aca04"/>
+        <File path=".vs/Image5D/v17/TestStore/0/000.testlog" value="eab1d0ff"/>
+        <File path=".vs/Image5D/v17/TestStore/0/testlog.manifest" value="193c9c19"/>
+        <File path=".vs/Image5D/v17/TestStore/0" value="-1"/>
+        <File path=".vs/Image5D/v17/TestStore" value="-1"/>
+        <File path=".vs/Image5D/v17/fileList.bin" value="f619ccf3"/>
+        <File path=".vs/Image5D/v17/ipch/5ce46867fb257afb.ipch" value="a14b384b"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/13ef3e4f96696b71" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/21071ff8384c8a02" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/22c0514f70007e91" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/2c73c10546ab3dfc" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/33a1dcc7b7382b9f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/3ffee6f4f0b896f3/TIFFMEX.ipch" value="caf0c12a"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/3ffee6f4f0b896f3" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/41eebd1c837f7c6f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/4509bc46604739bd/TIFFMEX.ipch" value="1fc43c47"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/4509bc46604739bd" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/481c5f34a15c87c8" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/4fd6c0c0b73fde5/MEXFUNCTION.ipch" value="7bf16542"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/4fd6c0c0b73fde5" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/52cb68dca03756a2" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/53de3a0517336ec0" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/5c02c197c9d68237" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/60b871ed7aa7d323/OIR读入器.ipch" value="4ad88b6e"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/60b871ed7aa7d323" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/60c508324818f8e9" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/616974dbf9ca38b0/TIFFMEX.ipch" value="9cadfd74"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/616974dbf9ca38b0" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/62fce70ff686e00f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/6a4fd31a78531576" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/6d9dc346c3d752c1" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/6ed509e0e030383f/OIRMEX.ipch" value="c1af1e26"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/6ed509e0e030383f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/735efc2f5b0483d7" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/775bbc64ead24fdc" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/7ad889269fe74989" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/7ce553b08bce9fe2/MEX实现.ipch" value="cb710752"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/7ce553b08bce9fe2" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/8582b84450c2f634" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/8a360e506bc77da7" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/8a7c82b1b257b6d9" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/8bb1c3b1e2008b19" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/8cedb577decfd32d/MEX实现.ipch" value="3a7728f1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/8cedb577decfd32d" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/94424c83016a1821" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/998abf42c5ba738f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/9a2af866cde67c52" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/a5ce27e658496e73/MEX工具.ipch" value="165dca2d"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/a5ce27e658496e73" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/ac0346c5b1eaeb72" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/b70a1b5a6e15c34d" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/b788c797483f674" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/c82bf43776bc9af7/MEX实现.ipch" value="b7f73d87"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/c82bf43776bc9af7" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/cb08540080b788d6" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/d0896acdd6e1f80f/MEXFUNCTION.ipch" value="671fec27"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/d0896acdd6e1f80f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/d8c3bce8cdc06582" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/dacfbe7a06cb4c05" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/e152544cdd079836" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/e488304be02236c8" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/e9882dbe32292a92" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f0b13003575f1c76" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f14fcfdcfe794f2c" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f1ccdf55e4c4556e/TIFFMEX.ipch" value="26792f2e"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f1ccdf55e4c4556e" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f537852e222eae15/IOMETIFF读写器.ipch" value="ab3bc0cf"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f537852e222eae15" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/f98c09d32311073f" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/fe2e4cea98aa72c1" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH/fef0aabde8c5252a" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch/AutoPCH" value="-1"/>
+        <File path=".vs/Image5D/v17/ipch" value="-1"/>
+        <File path=".vs/Image5D/v17" value="-1"/>
+        <File path=".vs/Image5D" value="-1"/>
+        <File path=".vs" value="-1"/>
+        <File path="Image5D.mltbx" value="1c879a08"/>
+        <File path="Image5D.prj" value="fe84b66d"/>
+        <File path="Image5D.sln" value="5d6f4d1e"/>
+        <File path="Image5DLib/IFD5D.cpp" value="ae517fe"/>
+        <File path="Image5DLib/IFD5D.h" value="ed603b7d"/>
+        <File path="Image5DLib/IOmeTiff读写器.cpp" value="31b01e1a"/>
+        <File path="Image5DLib/Image5DLib.vcxproj.filters" value="fb97217a"/>
+        <File path="Image5DLib/Image5DLib.vcxproj.user" value="e15cef4a"/>
+        <File path="Image5DLib/Image5DLib.vcxproj" value="f3039a6d"/>
+        <File path="Image5DLib/Oir索引.cpp" value="f7d4eadc"/>
+        <File path="Image5DLib/Oir读入器.cpp" value="fa82f8d6"/>
+        <File path="Image5DLib/OmeBigTiff5D.cpp" value="d4ab85ce"/>
+        <File path="Image5DLib/OmeBigTiff5D.h" value="5ec171b6"/>
+        <File path="Image5DLib/OmeTiff读入器.cpp" value="fdaa239"/>
+        <File path="Image5DLib/OmeTiff读入器.h" value="560a3f19"/>
+        <File path="Image5DLib/OmeXml基本解析.cpp" value="9d503efa"/>
+        <File path="Image5DLib/OmeXml基本解析.h" value="156d8645"/>
+        <File path="Image5DLib/Ome属性读入器.h" value="86d010b1"/>
+        <File path="Image5DLib/Tiff属性读入器.h" value="f989c4d8"/>
+        <File path="Image5DLib/Tiff标准.h" value="74ac9f39"/>
+        <File path="Image5DLib/Tiff读入器.cpp" value="793eca4f"/>
+        <File path="Image5DLib/Tiff读入器.h" value="790d51b6"/>
+        <File path="Image5DLib/include/IOmeTiff读写器.h" value="440821ae"/>
+        <File path="Image5DLib/include/Image5D异常.h" value="74564a7e"/>
+        <File path="Image5DLib/include/Image5D资源.h" value="4aeafff9"/>
+        <File path="Image5DLib/include/OME标准.h" value="39d169ac"/>
+        <File path="Image5DLib/include/Oir索引.h" value="b9494bac"/>
+        <File path="Image5DLib/include/Oir读入器.h" value="35628610"/>
+        <File path="Image5DLib/include/TiffData模板.xml" value="89d2d446"/>
+        <File path="Image5DLib/include/XML模板.xml" value="6bb9b076"/>
+        <File path="Image5DLib/include/哈希计算器.h" value="174bc367"/>
+        <File path="Image5DLib/include/文件控制块.h" value="460704bb"/>
+        <File path="Image5DLib/include/文件映射.h" value="ad395e14"/>
+        <File path="Image5DLib/include/资源.rc" value="c2766b2d"/>
+        <File path="Image5DLib/include" value="-1"/>
+        <File path="Image5DLib/packages.config" value="1cf2a68f"/>
+        <File path="Image5DLib/x64/Debug/CodeAnalysisResultManifest.txt" value="f49f9a02"/>
+        <File path="Image5DLib/x64/Debug/IFD5D.nativecodeanalysis.sarif" value="e75ae29"/>
+        <File path="Image5DLib/x64/Debug/IFD5D.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/IFD5D.obj" value="34fc2fdb"/>
+        <File path="Image5DLib/x64/Debug/IOmeTiff读写器.nativecodeanalysis.sarif" value="ea8897f2"/>
+        <File path="Image5DLib/x64/Debug/IOmeTiff读写器.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/IOmeTiff读写器.obj" value="7b7c385"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.Build.CppClean.log" value="b086a3df"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.lib.recipe" value="5d224978"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.log" value="b814256a"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/CL.command.1.tlog" value="ce785b27"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/CL.read.1.tlog" value="61043430"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/CL.write.1.tlog" value="1af8bc6f"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/Cl.items.tlog" value="18b27767"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/Image5DLib.lastbuildstate" value="591fdf0b"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/Lib-link.read.1.tlog" value="997088cb"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/Lib-link.write.1.tlog" value="fb3b52e2"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog/Lib.command.1.tlog" value="c5b6a0a0"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.tlog" value="-1"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib.vcxproj.FileListAbsolute.txt" value="0"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib_MD.tlog/CL.command.1.tlog" value="91c85f02"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib_MD.tlog/Microsoft.Build.CPPTasks.CL.read.1.tlog" value="86265ff4"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib_MD.tlog/Microsoft.Build.CPPTasks.CL.write.1.tlog" value="47acf257"/>
+        <File path="Image5DLib/x64/Debug/Image5DLib_MD.tlog" value="-1"/>
+        <File path="Image5DLib/x64/Debug/Oir索引.nativecodeanalysis.sarif" value="f52750a0"/>
+        <File path="Image5DLib/x64/Debug/Oir索引.nativecodeanalysis.xml" value="87cc397e"/>
+        <File path="Image5DLib/x64/Debug/Oir索引.obj" value="3e6e6a27"/>
+        <File path="Image5DLib/x64/Debug/Oir读入器.nativecodeanalysis.sarif" value="6d0fa6ec"/>
+        <File path="Image5DLib/x64/Debug/Oir读入器.nativecodeanalysis.xml" value="b127434c"/>
+        <File path="Image5DLib/x64/Debug/Oir读入器.obj" value="8fec0f47"/>
+        <File path="Image5DLib/x64/Debug/OmeBigTiff5D.nativecodeanalysis.sarif" value="40246214"/>
+        <File path="Image5DLib/x64/Debug/OmeBigTiff5D.nativecodeanalysis.xml" value="1150fbfe"/>
+        <File path="Image5DLib/x64/Debug/OmeBigTiff5D.obj" value="e864207"/>
+        <File path="Image5DLib/x64/Debug/OmeTiff读入器.nativecodeanalysis.sarif" value="3a7365b9"/>
+        <File path="Image5DLib/x64/Debug/OmeTiff读入器.nativecodeanalysis.xml" value="1d0e7b86"/>
+        <File path="Image5DLib/x64/Debug/OmeTiff读入器.obj" value="8006779d"/>
+        <File path="Image5DLib/x64/Debug/OmeXml基本解析.nativecodeanalysis.sarif" value="6efbc443"/>
+        <File path="Image5DLib/x64/Debug/OmeXml基本解析.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/OmeXml基本解析.obj" value="2f07ee65"/>
+        <File path="Image5DLib/x64/Debug/Tiff读入器.nativecodeanalysis.sarif" value="564f9e0c"/>
+        <File path="Image5DLib/x64/Debug/Tiff读入器.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/Tiff读入器.obj" value="ca554e9d"/>
+        <File path="Image5DLib/x64/Debug/_IsIncrementalBuild" value="d0c2c8e7"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.ifc.d.json" value="50803dc0"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.ifc.dt.d.json" value="b4ab427"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.ifc.dt.module.json.command" value="d43cc282"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.ifc.dt.module.json" value="27103c03"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.ifcast" value="f38f51b7"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.ifc" value="16ee228e"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.module.json" value="b9a6158f"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.nativecodeanalysis.sarif" value="716825ae"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/std.compat.ixx.obj" value="c637980b"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.ifc.d.json" value="e082e44c"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.ifc.dt.d.json" value="e082e44c"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.ifc.dt.module.json.command" value="cb922863"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.ifc.dt.module.json" value="fe039144"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.ifcast" value="fcd8989d"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.ifc" value="5fa8b085"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.module.json" value="2c2194e3"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.nativecodeanalysis.sarif" value="46809c90"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/std.ixx.obj" value="76e0b735"/>
+        <File path="Image5DLib/x64/Debug/vc.nativecodeanalysis.all.xml" value="d5d86227"/>
+        <File path="Image5DLib/x64/Debug/哈希计算器.nativecodeanalysis.sarif" value="7bfa7867"/>
+        <File path="Image5DLib/x64/Debug/哈希计算器.nativecodeanalysis.xml" value="7aa63f93"/>
+        <File path="Image5DLib/x64/Debug/哈希计算器.obj" value="2c2d7133"/>
+        <File path="Image5DLib/x64/Debug/文件控制块.nativecodeanalysis.sarif" value="421532f4"/>
+        <File path="Image5DLib/x64/Debug/文件控制块.nativecodeanalysis.xml" value="20aa1409"/>
+        <File path="Image5DLib/x64/Debug/文件控制块.obj" value="51bd7022"/>
+        <File path="Image5DLib/x64/Debug/文件映射.nativecodeanalysis.sarif" value="91a38876"/>
+        <File path="Image5DLib/x64/Debug/文件映射.nativecodeanalysis.xml" value="2fa5823f"/>
+        <File path="Image5DLib/x64/Debug/文件映射.obj" value="b51a1388"/>
+        <File path="Image5DLib/x64/Debug" value="-1"/>
+        <File path="Image5DLib/x64/Release/IFD5D.obj" value="db07c241"/>
+        <File path="Image5DLib/x64/Release/IOmeTiff读写器.obj" value="5ec9d36c"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.Build.CppClean.log" value="8ddd73c7"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.lib.recipe" value="5d224978"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.log" value="38df8547"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/CL.command.1.tlog" value="74a01567"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/CL.read.1.tlog" value="cf961f7a"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/CL.write.1.tlog" value="711cf670"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/Cl.items.tlog" value="95431f1a"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/Image5DLib.lastbuildstate" value="612dc029"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/Lib-link.read.1.tlog" value="3d70a8ef"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/Lib-link.write.1.tlog" value="8c998f74"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog/Lib.command.1.tlog" value="e4824b05"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.tlog" value="-1"/>
+        <File path="Image5DLib/x64/Release/Image5DLib.vcxproj.FileListAbsolute.txt" value="0"/>
+        <File path="Image5DLib/x64/Release/Image5DLib_MD.tlog/CL.command.1.tlog" value="a5b42433"/>
+        <File path="Image5DLib/x64/Release/Image5DLib_MD.tlog/Microsoft.Build.CPPTasks.CL.read.1.tlog" value="86265ff4"/>
+        <File path="Image5DLib/x64/Release/Image5DLib_MD.tlog/Microsoft.Build.CPPTasks.CL.write.1.tlog" value="45993d4f"/>
+        <File path="Image5DLib/x64/Release/Image5DLib_MD.tlog" value="-1"/>
+        <File path="Image5DLib/x64/Release/Oir索引.obj" value="51045e12"/>
+        <File path="Image5DLib/x64/Release/Oir读入器.obj" value="a3e30f7f"/>
+        <File path="Image5DLib/x64/Release/OmeBigTiff5D.obj" value="bc68af75"/>
+        <File path="Image5DLib/x64/Release/OmeTiff读入器.obj" value="283fd097"/>
+        <File path="Image5DLib/x64/Release/OmeXml基本解析.obj" value="d399bcec"/>
+        <File path="Image5DLib/x64/Release/Tiff读入器.obj" value="35c6eb51"/>
+        <File path="Image5DLib/x64/Release/_IsIncrementalBuild" value="9b4b3bba"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.ifc.d.json" value="7fd9284b"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.ifc.dt.d.json" value="b355cac6"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.ifc.dt.module.json.command" value="c100a4e8"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.ifc.dt.module.json" value="1f5c6a24"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.ifc" value="c2d4e7d2"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.module.json" value="3798f339"/>
+        <File path="Image5DLib/x64/Release/std.compat.ixx.obj" value="b488a3dd"/>
+        <File path="Image5DLib/x64/Release/std.ixx.ifc.d.json" value="e082e44c"/>
+        <File path="Image5DLib/x64/Release/std.ixx.ifc.dt.d.json" value="92909b1b"/>
+        <File path="Image5DLib/x64/Release/std.ixx.ifc.dt.module.json.command" value="4d380f47"/>
+        <File path="Image5DLib/x64/Release/std.ixx.ifc.dt.module.json" value="1a4464e5"/>
+        <File path="Image5DLib/x64/Release/std.ixx.ifc" value="2ffc0cc4"/>
+        <File path="Image5DLib/x64/Release/std.ixx.module.json" value="72dd177"/>
+        <File path="Image5DLib/x64/Release/std.ixx.obj" value="ccf53b95"/>
+        <File path="Image5DLib/x64/Release/哈希计算器.obj" value="25e8c9b0"/>
+        <File path="Image5DLib/x64/Release/文件控制块.obj" value="2e9c2ce2"/>
+        <File path="Image5DLib/x64/Release/文件映射.obj" value="2991abe2"/>
+        <File path="Image5DLib/x64/Release" value="-1"/>
+        <File path="Image5DLib/x64" value="-1"/>
+        <File path="Image5DLib/哈希计算器.cpp" value="73d02314"/>
+        <File path="Image5DLib/安全拷贝.h" value="a77eefc8"/>
+        <File path="Image5DLib/文件控制块.cpp" value="e9631c62"/>
+        <File path="Image5DLib/文件映射.cpp" value="5c1967c1"/>
+        <File path="Image5DLib" value="-1"/>
+        <File path="Image5DMex/Image5DMex.vcxproj.filters" value="a09514bc"/>
+        <File path="Image5DMex/Image5DMex.vcxproj.user" value="e15cef4a"/>
+        <File path="Image5DMex/Image5DMex.vcxproj" value="608bd61e"/>
+        <File path="Image5DMex/MexFunction.cpp" value="19710dbd"/>
+        <File path="Image5DMex/OirMex.cpp" value="3b83ce2"/>
+        <File path="Image5DMex/Oir索引.h" value="d3319e45"/>
+        <File path="Image5DMex/TiffMex.cpp" value="fcd266b4"/>
+        <File path="Image5DMex/dllmain.cpp" value="827de5ff"/>
+        <File path="Image5DMex/packages.config" value="1cf2a68f"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.ilk" value="cb0837a"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.log" value="c09c3783"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.mexw64.recipe" value="772f93e8"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/CL.command.1.tlog" value="f0ef358b"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/CL.read.1.tlog" value="dd748fd9"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/CL.write.1.tlog" value="9fda05a4"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/Cl.items.tlog" value="d4dbdd60"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/Image5DMex.lastbuildstate" value="7a2187d5"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/link.command.1.tlog" value="b9b05955"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/link.read.1.tlog" value="6cfcb00f"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/link.write.1.tlog" value="1a409454"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/link.write.2u.tlog" value="7ace372d"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/rc.command.1.tlog" value="98bdbae4"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/rc.read.1.tlog" value="d678ff2c"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog/rc.write.1.tlog" value="241b1e1"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/Image5DMex_MD.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/MexFunction.obj" value="b15ee55f"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/OirMex.obj" value="53787e68"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/TiffMex.obj" value="2167d427"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/dllmain.obj" value="507e75aa"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/vc143.idb" value="bf9ca84e"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/vc143.pdb" value="d1539694"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具/资源.res" value="4bb972e9"/>
+        <File path="Image5DMex/x64/Debug.本地Mex工具" value="-1"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.Build.CppClean.log" value="b587d001"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.ilk" value="55927a41"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.log" value="d764dd6c"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.mexw64.recipe" value="772f93e8"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/CL.command.1.tlog" value="af2f5e78"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/CL.read.1.tlog" value="cc02bdb1"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/CL.write.1.tlog" value="5a765942"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/Cl.items.tlog" value="a656f8c8"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/Image5DMex.lastbuildstate" value="591fdf0b"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/link.command.1.tlog" value="5bb5b795"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/link.read.1.tlog" value="643d4fe"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/link.write.1.tlog" value="6ec538c7"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/link.write.2u.tlog" value="7ace372d"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/rc.command.1.tlog" value="2e83e236"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/rc.read.1.tlog" value="2731a20b"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog/rc.write.1.tlog" value="53f5f696"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex.vcxproj.FileListAbsolute.txt" value="0"/>
+        <File path="Image5DMex/x64/Debug/Image5DMex_MD.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Debug/MexFunction.obj" value="84a076b3"/>
+        <File path="Image5DMex/x64/Debug/OirMex.obj" value="cdd5704f"/>
+        <File path="Image5DMex/x64/Debug/RCa15812" value="778cebeb"/>
+        <File path="Image5DMex/x64/Debug/TiffMex.obj" value="d0445108"/>
+        <File path="Image5DMex/x64/Debug/_IsIncrementalBuild" value="d0c2c8e7"/>
+        <File path="Image5DMex/x64/Debug/dllmain.obj" value="3c82d716"/>
+        <File path="Image5DMex/x64/Debug/std.compat.ixx.ifc.dt.d.json" value="b4ab427"/>
+        <File path="Image5DMex/x64/Debug/std.compat.ixx.ifc.dt.module.json.command" value="5939f21e"/>
+        <File path="Image5DMex/x64/Debug/std.compat.ixx.ifc.dt.module.json" value="27103c03"/>
+        <File path="Image5DMex/x64/Debug/std.ixx.ifc.dt.d.json" value="e082e44c"/>
+        <File path="Image5DMex/x64/Debug/std.ixx.ifc.dt.module.json.command" value="231932d8"/>
+        <File path="Image5DMex/x64/Debug/std.ixx.ifc.dt.module.json" value="fe039144"/>
+        <File path="Image5DMex/x64/Debug/vc143.idb" value="8a855028"/>
+        <File path="Image5DMex/x64/Debug/vc143.pdb" value="27685924"/>
+        <File path="Image5DMex/x64/Debug/资源.res" value="4bb972e9"/>
+        <File path="Image5DMex/x64/Debug" value="-1"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.iobj" value="21a71b99"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.ipdb" value="88776d09"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.log" value="ad1e590c"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.mexw64.recipe" value="772f93e8"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/CL.command.1.tlog" value="86b0d225"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/CL.read.1.tlog" value="dd748fd9"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/CL.write.1.tlog" value="ab220a6"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/Cl.items.tlog" value="86060ec4"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/Image5DMex.lastbuildstate" value="ed963b42"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/link.command.1.tlog" value="5902aece"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/link.read.1.tlog" value="a089607e"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/link.write.1.tlog" value="c8dd9800"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/link.write.2u.tlog" value="7ace372d"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/rc.command.1.tlog" value="c4e1bbd5"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/rc.read.1.tlog" value="d678ff2c"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog/rc.write.1.tlog" value="ecb2d8ea"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/Image5DMex_MD.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/MexFunction.obj" value="9a2bc854"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/OirMex.obj" value="5eea7833"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/TiffMex.obj" value="3430c902"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/dllmain.obj" value="572b8f46"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/vc143.pdb" value="497a8c63"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具/资源.res" value="4bb972e9"/>
+        <File path="Image5DMex/x64/Release.本地Mex工具" value="-1"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.Build.CppClean.log" value="570d3bf7"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.iobj" value="5a4035f3"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.ipdb" value="47b38256"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.log" value="2470999d"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.mexw64.recipe" value="772f93e8"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/CL.command.1.tlog" value="20f43e9f"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/CL.read.1.tlog" value="36e0598d"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/CL.write.1.tlog" value="d9ac6a5e"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/Cl.items.tlog" value="2ab758b3"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/Image5DMex.lastbuildstate" value="612dc029"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/link.command.1.tlog" value="67575b1c"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/link.read.1.tlog" value="794e4933"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/link.write.1.tlog" value="c01e4e40"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/link.write.2u.tlog" value="7ace372d"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/rc.command.1.tlog" value="b9bd11ff"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/rc.read.1.tlog" value="d678ff2c"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog/rc.write.1.tlog" value="3c486ab6"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Release/Image5DMex.vcxproj.FileListAbsolute.txt" value="0"/>
+        <File path="Image5DMex/x64/Release/Image5DMex_MD.tlog" value="-1"/>
+        <File path="Image5DMex/x64/Release/MexFunction.obj" value="b994f53e"/>
+        <File path="Image5DMex/x64/Release/OirMex.obj" value="b690a458"/>
+        <File path="Image5DMex/x64/Release/TiffMex.obj" value="bcdb6e55"/>
+        <File path="Image5DMex/x64/Release/_IsIncrementalBuild" value="9b4b3bba"/>
+        <File path="Image5DMex/x64/Release/dllmain.obj" value="6b65ab62"/>
+        <File path="Image5DMex/x64/Release/std.compat.ixx.ifc.dt.d.json" value="b355cac6"/>
+        <File path="Image5DMex/x64/Release/std.compat.ixx.ifc.dt.module.json.command" value="58108468"/>
+        <File path="Image5DMex/x64/Release/std.compat.ixx.ifc.dt.module.json" value="1f5c6a24"/>
+        <File path="Image5DMex/x64/Release/std.ixx.ifc.dt.d.json" value="92909b1b"/>
+        <File path="Image5DMex/x64/Release/std.ixx.ifc.dt.module.json.command" value="52ae763f"/>
+        <File path="Image5DMex/x64/Release/std.ixx.ifc.dt.module.json" value="1a4464e5"/>
+        <File path="Image5DMex/x64/Release/vc143.pdb" value="406680b8"/>
+        <File path="Image5DMex/x64/Release/资源.res" value="4bb972e9"/>
+        <File path="Image5DMex/x64/Release" value="-1"/>
+        <File path="Image5DMex/x64" value="-1"/>
+        <File path="Image5DMex" value="-1"/>
+        <File path="Image5D工具箱.prj" value="7122e55a"/>
+        <File path="Image5D测试/Image5D测试.cpp" value="f4f3e880"/>
+        <File path="Image5D测试/Image5D测试.vcxproj.filters" value="9f259209"/>
+        <File path="Image5D测试/Image5D测试.vcxproj.user" value="e15cef4a"/>
+        <File path="Image5D测试/Image5D测试.vcxproj" value="be5c5d21"/>
+        <File path="Image5D测试/packages.config" value="1cf2a68f"/>
+        <File path="Image5D测试/x64/Debug/Image5D测试.Build.CppClean.log" value="597cf8ad"/>
+        <File path="Image5D测试/x64/Debug/Image5D测试.dll.recipe" value="59cb63c4"/>
+        <File path="Image5D测试/x64/Debug/Image5D测试.log" value="11097e1"/>
+        <File path="Image5D测试/x64/Debug/Image5D测试.tlog" value="-1"/>
+        <File path="Image5D测试/x64/Debug/Image5D测试.vcxproj.FileListAbsolute.txt" value="0"/>
+        <File path="Image5D测试/x64/Debug" value="-1"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.dll.recipe" value="dd7153e3"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.iobj" value="7d44015f"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.ipdb" value="9a1e6f82"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.log" value="6fa6b4b7"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/CL.command.1.tlog" value="88f83096"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/Image5D测试.lastbuildstate" value="9879e119"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/link.command.1.tlog" value="75c61cc0"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/link.read.1.tlog" value="a668e69c"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/link.write.1.tlog" value="382f40a1"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/link.write.2u.tlog" value="9b8f4124"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/rc.command.1.tlog" value="6419394d"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/rc.read.1.tlog" value="d37b05d2"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/rc.write.1.tlog" value="4c401ce9"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog/unsuccessfulbuild" value="0"/>
+        <File path="Image5D测试/x64/Release/Image5D测试.tlog" value="-1"/>
+        <File path="Image5D测试/x64/Release/vc143.pdb" value="987f953"/>
+        <File path="Image5D测试/x64/Release/资源.res" value="46b4419d"/>
+        <File path="Image5D测试/x64/Release" value="-1"/>
+        <File path="Image5D测试/x64" value="-1"/>
+        <File path="Image5D测试" value="-1"/>
+        <File path="README.md" value="c5d24ad5"/>
+        <File path="doc/GettingStarted.mlx" value="5cf20ed4"/>
+        <File path="doc" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/.signature.p7s" value="6bd1d98f"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7.nupkg" value="2da2e465"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/ThirdPartyNotices.txt" value="67049bc"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1028/googletest.propertiesui.xml" value="ad3d88ff"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1028" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1029/googletest.propertiesui.xml" value="86e6ea7e"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1029" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1031/googletest.propertiesui.xml" value="dd4ec054"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1031" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1033/googletest.propertiesui.xml" value="f308a682"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1033" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1034/googletest.propertiesui.xml" value="c976c6d0"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1034" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1036/googletest.propertiesui.xml" value="c38527ab"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1036" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1040/googletest.propertiesui.xml" value="762f967e"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1040" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1041/googletest.propertiesui.xml" value="80b1467d"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1041" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1042/googletest.propertiesui.xml" value="ea76f327"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1042" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1045/googletest.propertiesui.xml" value="1f862ff6"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1045" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1046/googletest.propertiesui.xml" value="84d1a519"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1046" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1049/googletest.propertiesui.xml" value="e84d418e"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1049" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1055/googletest.propertiesui.xml" value="fad639bf"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/1055" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/2052/googletest.propertiesui.xml" value="ecf4b029"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/2052" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" value="233eefee"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-death-test.h" value="26248104"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-message.h" value="2b1b2331"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-param-test.h.pump" value="a48bb01a"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-param-test.h" value="2396e63b"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-printers.h" value="413a38c9"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-spi.h" value="34045202"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-test-part.h" value="38d07390"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-typed-test.h" value="ee7948c"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest.h" value="7d4f81c1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest_pred_impl.h" value="8ad49d38"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest_prod.h" value="5247250d"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/README.md" value="3a931229"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/gtest-port.h" value="165663b5"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/gtest-printers.h" value="229a1617"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/gtest.h" value="62600d0b"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-death-test-internal.h" value="a9f75617"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-filepath.h" value="e46c7217"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-internal.h" value="a13057aa"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-linked_ptr.h" value="cb42870e"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-param-util-generated.h.pump" value="147ee43a"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-param-util-generated.h" value="16a29f85"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-param-util.h" value="7af451d4"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-port-arch.h" value="397e800a"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-port.h" value="db5e1c86"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-string.h" value="ee232f87"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-tuple.h.pump" value="2de3f2eb"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-tuple.h" value="de551fb6"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-type-util.h.pump" value="750406be"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-type-util.h" value="6c54044e"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Debug/gtest.pdb" value="53e93841"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Debug/gtest_main.pdb" value="95ad74df"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Debug/gtest_maind.lib" value="a72a4ebb"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Debug/gtestd.lib" value="6ee7c503"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Debug" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Release/gtest.lib" value="b740cdf1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Release/gtest.pdb" value="b22d9e83"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Release/gtest_main.lib" value="4f5e069e"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Release/gtest_main.pdb" value="15da2a8d"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm/Release" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Debug/gtest.pdb" value="476716cc"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Debug/gtest_main.pdb" value="3850fdbe"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Debug/gtest_maind.lib" value="ff799d51"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Debug/gtestd.lib" value="7b60e01c"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Debug" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Release/gtest.lib" value="e083d870"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Release/gtest.pdb" value="4fb65ff5"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Release/gtest_main.lib" value="2f3a84e0"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Release/gtest_main.pdb" value="12caa9ec"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64/Release" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm64" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/arm" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Debug/gtest.pdb" value="27466e1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Debug/gtest_main.pdb" value="8877c059"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Debug/gtest_maind.lib" value="2204fa2b"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Debug/gtestd.lib" value="45f0e080"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Debug" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Release/gtest.lib" value="e72bbe25"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Release/gtest.pdb" value="ac4f679d"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Release/gtest_main.lib" value="f7875117"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Release/gtest_main.pdb" value="a7e41e5f"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64/Release" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x64" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Debug/gtest.pdb" value="8f4bbdde"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Debug/gtest_main.pdb" value="a406d02a"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Debug/gtest_maind.lib" value="103f5174"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Debug/gtestd.lib" value="1d15cecd"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Debug" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Release/gtest.lib" value="d43fee21"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Release/gtest.pdb" value="e57efc9"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Release/gtest_main.lib" value="734d3281"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Release/gtest_main.pdb" value="1511114a"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86/Release" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn/x86" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static/rt-dyn" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl/static" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop/msvcstl" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140/windesktop" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native/v140" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib/native" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/lib" value="-1"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/license (MIT).txt" value="9d572bae"/>
+        <File path="packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7" value="-1"/>
+        <File path="packages/pugixml.1.13.0/.signature.p7s" value="88a0460f"/>
+        <File path="packages/pugixml.1.13.0/build/native/include/pugiconfig.hpp" value="d4ffd143"/>
+        <File path="packages/pugixml.1.13.0/build/native/include/pugixml.cpp" value="8077cff2"/>
+        <File path="packages/pugixml.1.13.0/build/native/include/pugixml.hpp" value="8c349947"/>
+        <File path="packages/pugixml.1.13.0/build/native/include" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/dynamic/Debug/pugixml.lib" value="49f5bb71"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/dynamic/Release/pugixml.lib" value="72bb6dba"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/static/Debug/pugixml.lib" value="23cc4aa2"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/static/Release/pugixml.lib" value="1daacc9c"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v120" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/dynamic/Debug/pugixml.lib" value="dba21abf"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/dynamic/Release/pugixml.lib" value="b2605781"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/static/Debug/pugixml.lib" value="deb01bb5"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/static/Release/pugixml.lib" value="9f613bda"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v140" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/dynamic/Debug/pugixml.lib" value="9880082f"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/dynamic/Release/pugixml.lib" value="ee809590"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/static/Debug/pugixml.lib" value="2ebea4fc"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/static/Release/pugixml.lib" value="bd450576"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v141" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/dynamic/Debug/pugixml.lib" value="1c7d726a"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/dynamic/Release/pugixml.lib" value="8e13d00c"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/static/Debug/pugixml.lib" value="bfb3198b"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/static/Release/pugixml.lib" value="e4cf3a6"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v142" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/dynamic/Debug/pugixml.lib" value="8d3adba7"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/dynamic/Release/pugixml.lib" value="123aa68f"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/static/Debug/pugixml.lib" value="74dbf87"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/static/Release/pugixml.lib" value="70e8ca0b"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32/v143" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/Win32" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/dynamic/Debug/pugixml.lib" value="ec68823a"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/dynamic/Release/pugixml.lib" value="2e061f1b"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/static/Debug/pugixml.lib" value="b97af26b"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/static/Release/pugixml.lib" value="848afad"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v120" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/dynamic/Debug/pugixml.lib" value="f3d74ac5"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/dynamic/Release/pugixml.lib" value="6b5f90ee"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/static/Debug/pugixml.lib" value="eb4e94dd"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/static/Release/pugixml.lib" value="166bd6a"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v140" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/dynamic/Debug/pugixml.lib" value="604c836d"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/dynamic/Release/pugixml.lib" value="fb068470"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/static/Debug/pugixml.lib" value="8b888ab8"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/static/Release/pugixml.lib" value="acb4b0ee"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v141" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/dynamic/Debug/pugixml.lib" value="3c201e49"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/dynamic/Release/pugixml.lib" value="5eaf617f"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/static/Debug/pugixml.lib" value="754897bf"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/static/Release/pugixml.lib" value="48dbf0ed"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v142" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/dynamic/Debug/pugixml.lib" value="21990397"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/dynamic/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/dynamic/Release/pugixml.lib" value="d0e0219c"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/dynamic/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/dynamic" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/static/Debug/pugixml.lib" value="e7aa6927"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/static/Debug" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/static/Release/pugixml.lib" value="cb87892"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/static/Release" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143/static" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64/v143" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib/x64" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/lib" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build/native/pugixml-propertiesui.xml" value="70706cab"/>
+        <File path="packages/pugixml.1.13.0/build/native/pugixml.targets" value="add29931"/>
+        <File path="packages/pugixml.1.13.0/build/native" value="-1"/>
+        <File path="packages/pugixml.1.13.0/build" value="-1"/>
+        <File path="packages/pugixml.1.13.0/pugixml.1.13.0.nupkg" value="562e77c0"/>
+        <File path="packages/pugixml.1.13.0" value="-1"/>
+        <File path="packages" value="-1"/>
+        <File path="resources/functionSignatures.json" value="b60868ed"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ItKV4N873Ngz-G3TGOoU-sWKWoAd.xml" value="dc5b1c03"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ItKV4N873Ngz-G3TGOoU-sWKWoAp.xml" value="a2d4dc39"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ucuJ8WCPIF_joGAlmGCzuuLAqkAd.xml" value="b62b63f9"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ucuJ8WCPIF_joGAlmGCzuuLAqkAp.xml" value="60a23a3a"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU" value="-1"/>
+        <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA/SmR1X_5SFd7Jzp9ic5nS6K9ET9kd.xml" value="50727024"/>
+        <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA/SmR1X_5SFd7Jzp9ic5nS6K9ET9kp.xml" value="fafeffc0"/>
+        <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA" value="-1"/>
+        <File path="resources/project/LUgSFhI3RPozNzNcutxrczVe6f0" value="-1"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/2kj09UetkV_lru3gvSPXnY6-nM4d.xml" value="ed72fa85"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/2kj09UetkV_lru3gvSPXnY6-nM4p.xml" value="afe046a3"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/KKyDJtbdIBOlaeHmIZd5VX6vqx8d.xml" value="68910f78"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/KKyDJtbdIBOlaeHmIZd5VX6vqx8p.xml" value="3a4507bf"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/QWNDYJD5mGW1bWYvPx9DtKnxzw4d.xml" value="b740e8c7"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/QWNDYJD5mGW1bWYvPx9DtKnxzw4p.xml" value="8739a8f2"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/R1RggVhA72agIvELiuhWPRS8F0Id.xml" value="1de60347"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/R1RggVhA72agIvELiuhWPRS8F0Ip.xml" value="28d99701"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/aEHSZBIY-yve10yGis12Zr5DLZod.xml" value="9399abc8"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/aEHSZBIY-yve10yGis12Zr5DLZop.xml" value="cd91d98b"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/j4xwF_j8iFTVayUMfxLgMnTbencd.xml" value="bc13c0d9"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/j4xwF_j8iFTVayUMfxLgMnTbencp.xml" value="e8544baf"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/r8LR4nLmg9ai3oHrW1r_-KocQzkd.xml" value="597d7215"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/r8LR4nLmg9ai3oHrW1r_-KocQzkp.xml" value="45d239ae"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs" value="-1"/>
+        <File path="resources/project/Project.xml" value="1246079c"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/cSvJV8SYECwmpOUT6v1OqSH6G28d.xml" value="ea65cf7"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/cSvJV8SYECwmpOUT6v1OqSH6G28p.xml" value="68ecbdf"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/mXCVGRnnD-Nx2c1j7zCLj-Znmgod.xml" value="b62b63f9"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/mXCVGRnnD-Nx2c1j7zCLj-Znmgop.xml" value="60a23a3a"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0" value="-1"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/8uaWCVqFEYabNeq48ef7X8EmMoUd.xml" value="b62b63f9"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/8uaWCVqFEYabNeq48ef7X8EmMoUp.xml" value="bf92b065"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/PhSw57jIfoXTQLgDQmLzbcbNEiQd.xml" value="317cfbea"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/PhSw57jIfoXTQLgDQmLzbcbNEiQp.xml" value="56187fb6"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/nxwdUUWYFDB-DZ4t5P3YuOeTYMgd.xml" value="b62b63f9"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/nxwdUUWYFDB-DZ4t5P3YuOeTYMgp.xml" value="60a23a3a"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA" value="-1"/>
+        <File path="resources/project/fjRQtWiSIy7hIlj-Kmk87M7s21k/NjSPEMsIuLUyIpr2u1Js5bVPsOsd.xml" value="206f0b6"/>
+        <File path="resources/project/fjRQtWiSIy7hIlj-Kmk87M7s21k/NjSPEMsIuLUyIpr2u1Js5bVPsOsp.xml" value="9b1a20ad"/>
+        <File path="resources/project/fjRQtWiSIy7hIlj-Kmk87M7s21k" value="-1"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/4lVCghXa1JWPnWwtw_6uu-8ZW_Ud.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/4lVCghXa1JWPnWwtw_6uu-8ZW_Up.xml" value="dfd94496"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/QMJD9OLFzxcTTbPOoh-ahQ4zTRUd.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/QMJD9OLFzxcTTbPOoh-ahQ4zTRUp.xml" value="86f0ee0c"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/YhuPDDuEWIGe0C07ihHYccefon0d.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/YhuPDDuEWIGe0C07ihHYccefon0p.xml" value="2cf6b608"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/rHjyxu3W64YT9agZoZ_WZ2oLlIId.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/rHjyxu3W64YT9agZoZ_WZ2oLlIIp.xml" value="b5d6fbb5"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/zYnG3qOee3j4rCLfAMuIFKG_a6Id.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/zYnG3qOee3j4rCLfAMuIFKG_a6Ip.xml" value="2d9c98dd"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ" value="-1"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/B8CY-BgWV0DACtBWzPJ44PuBteMd.xml" value="b62b63f9"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/B8CY-BgWV0DACtBWzPJ44PuBteMp.xml" value="60a23a3a"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/HhN0gjHpiUPhOjxW-dM-bziisgYd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/HhN0gjHpiUPhOjxW-dM-bziisgYp.xml" value="e8e948bc"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/OOI2PDaCdnXr4seWWgczoe2MZMMd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/OOI2PDaCdnXr4seWWgczoe2MZMMp.xml" value="d7e17f98"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/PZ2G3rFcolGJ-HQxpAvlrH5LSPQd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/PZ2G3rFcolGJ-HQxpAvlrH5LSPQp.xml" value="7869de00"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/QK17u0RRM4SAH3myTku7irSfPa8d.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/QK17u0RRM4SAH3myTku7irSfPa8p.xml" value="c071596"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/Rf2PCmJGykrZPV2RV8Nv-p8tKp0d.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/Rf2PCmJGykrZPV2RV8Nv-p8tKp0p.xml" value="c5f72f24"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/bCsycFsV7cjz0_oCEVZGK7gRUvQd.xml" value="317cfbea"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/bCsycFsV7cjz0_oCEVZGK7gRUvQp.xml" value="e35e534c"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/fCaM-BMGhmyoAvfzSjTapkDRHvAd.xml" value="b62b63f9"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/fCaM-BMGhmyoAvfzSjTapkDRHvAp.xml" value="5cc9586f"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nkdsIcZvVSbUr7_Nza1-nwUywwod.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nkdsIcZvVSbUr7_Nza1-nwUywwop.xml" value="fc94b941"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nqfp--F3-cw8IaM37R__7ROCPVod.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nqfp--F3-cw8IaM37R__7ROCPVop.xml" value="26622e99"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/p3oFTVxKldRjrlP-kjR4m2wT-Pod.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/p3oFTVxKldRjrlP-kjR4m2wT-Pop.xml" value="bb64095f"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/piR8bEQuR1J52XnM6rJkMuzP4wgd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/piR8bEQuR1J52XnM6rJkMuzP4wgp.xml" value="cbb13f05"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII" value="-1"/>
+        <File path="resources/project/root/6x1BhZX_fLnKpcwqra0qFwv1jIgp.xml" value="aedb31da"/>
+        <File path="resources/project/root/EEtUlUb-dLAdf0KpMVivaUlztwAp.xml" value="429cb5d6"/>
+        <File path="resources/project/root/GiiBklLgTxteCEmomM8RCvWT0nQd.xml" value="18e75cd1"/>
+        <File path="resources/project/root/GiiBklLgTxteCEmomM8RCvWT0nQp.xml" value="c5cdc4a7"/>
+        <File path="resources/project/root/KAXfQgCar2Yb8zOxgvf9hdmLP1Ep.xml" value="a7c5a64c"/>
+        <File path="resources/project/root/LUgSFhI3RPozNzNcutxrczVe6f0p.xml" value="cd6ca828"/>
+        <File path="resources/project/root/NmGqIpAwUJcXFyLjFAGnU9uyN5Yp.xml" value="ac054281"/>
+        <File path="resources/project/root/fjRQtWiSIy7hIlj-Kmk87M7s21kp.xml" value="dc68b16d"/>
+        <File path="resources/project/root/qaw0eS1zuuY1ar9TdPn1GMfrjbQp.xml" value="ee2fc10d"/>
+        <File path="resources/project/rootp.xml" value="b62b63f9"/>
+        <File path="resources/project/root" value="-1"/>
+        <File path="resources/project/uuid-57655949-beb6-412d-ab68-8f1972c0061a.xml" value="b62b63f9"/>
+        <File path="resources/project" value="-1"/>
+        <File path="resources" value="-1"/>
+        <File path="x64/Debug/Image5DLib.idb" value="6ed0c9a6"/>
+        <File path="x64/Debug/Image5DLib.lib" value="51d1e0ea"/>
+        <File path="x64/Debug/Image5DLib.pdb" value="19d3ca09"/>
+        <File path="x64/Debug" value="-1"/>
+        <File path="x64/Release/Image5DLib.lib" value="b99025d1"/>
+        <File path="x64/Release/Image5DLib.pdb" value="920bda70"/>
+        <File path="x64/Release/Image5D测试.dll" value="550dccec"/>
+        <File path="x64/Release/Image5D测试.exp" value="5023db90"/>
+        <File path="x64/Release/Image5D测试.lib" value="84782da7"/>
+        <File path="x64/Release/Image5D测试.pdb" value="465db938"/>
+        <File path="x64/Release" value="-1"/>
+        <File path="x64" value="-1"/>
+        <File path="工具箱图像.png" value="49907278"/>
+    </Files>
+    <Date value="2023年8月25日 11:53:13"/>
+</Info>
