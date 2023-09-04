@@ -57,12 +57,12 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			end
 			if obj.CacheFid
 				Sizes=[obj.SizeX,obj.SizeY,obj.SizeC,obj.SizeZ,End-Start+1];
-				Data={reshape(fread(obj.CacheFid,prod(Sizes),'uint16=>uint16'),Sizes),obj.Translation(Start:End,:,:)};
+				Data=reshape(fread(obj.CacheFid,prod(Sizes),'uint16=>uint16'),Sizes);
 			else
 				[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,Start-1,End-Start+1,obj.NontagChannels);
-				Data={Data,obj.Translation(Start:End,:,:)};
 			end
 			PiecesRead=size(Data,5);
+			Data={Data,obj.Translation(Start:End,:,:)};
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
