@@ -38,7 +38,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			obj.NontagChannels=find(~startsWith(DeviceColors.Device,'CD'));
 			[~,Filename]=fileparts(OirPath);
 			Colors=ChannelColor.FromOirColors(DeviceColors.Color(obj.NontagChannels,:));
-			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
+			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			obj.NontagChannels=obj.NontagChannels-1;
 			obj.Translation=Translation;
 			if exist('CacheDirectory','var')
@@ -48,7 +48,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			else
 				obj.CacheFid=0;
 			end
-			obj.MeanWriter=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".平均值.tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,1,DimensionOrder.XYCZT);
+			obj.MeanWriter=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".平均值.tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,1,DimensionOrder.XYCZT);
 			obj.GpuLimit=floor(double(intmax('int32'))/double(PieceElements))-1;
 		end
 		function [Data,PiecesRead]=Read(obj,Start,End,~)

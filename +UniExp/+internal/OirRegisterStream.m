@@ -1,4 +1,7 @@
 classdef OirRegisterStream<UniExp.internal.VerboseStream
+	properties(Access=protected)
+		OutputDirectory
+	end
 	methods(Access=protected)
 		function NextObject(obj)
 			while true
@@ -19,10 +22,7 @@ classdef OirRegisterStream<UniExp.internal.VerboseStream
 							end
 							NewOutput=uigetdir;
 						end
-						for I=Index:obj.NumObjects
-							[~,Filename]=fileparts(obj.RWObjects(I).TiffPaths);
-							obj.RWObjects(I).TiffPaths=fullfile(NewOutput,Filename+".tif");
-						end
+						obj.OutputDirectory.Value=NewOutput;
 					else
 						ME.rethrow;
 					end
@@ -32,7 +32,11 @@ classdef OirRegisterStream<UniExp.internal.VerboseStream
 	end
 	methods
 		function obj = OirRegisterStream(LogLevel,OirPath,Translation,OutputDirectory,varargin)
-			obj@UniExp.internal.VerboseStream(LogLevel,table2struct(table(OirPath,Translation)),@(S)UniExp.internal.OirRegisterRW2(S.OirPath,S.Translation,OutputDirectory,varargin{:}));
+			Arguments=table(OirPath,Translation);
+			OutputDirectory=MATLAB.Lang.Optional(OutputDirectory);
+			Arguments.OutputDirectory(:)=OutputDirectory;
+			obj@UniExp.internal.VerboseStream(LogLevel,table2struct(Arguments),@(S)UniExp.internal.OirRegisterRW2(S.OirPath,S.Translation,S.OutputDirectory,varargin{:}));
+			obj.OutputDirectory=OutputDirectory;
 		end
 	end
 end
