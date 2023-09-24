@@ -78,5 +78,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		No_slices_input
 		Unexpected_subsref_type
 		Required_slice_empty
+		Mat_load_failed
 	end
 end

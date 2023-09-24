@@ -27,6 +27,9 @@ classdef DataSet<handle
 		%主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
 		TrialSignals
 
+		%主键(Mouse,BrainArea)，记录每只鼠操纵了哪些脑区
+		Manipulation
+
 		%产生此对象的UniExp版本
 		Version=UniExp.Version
 
@@ -126,13 +129,21 @@ classdef DataSet<handle
 					[~,Filename,Extension]=fileparts(Path);
 					FileFields=string(split(Filename,'.'));
 					CheckMouse=UniExp.DataSet.CheckMouse&&~isscalar(FileFields);
+					FromPath=Path;
 					if startsWith(Path,'\\')
 						%Samba网络访问优化
-						FromPath=Path;
 						Path=fullfile(tempdir,strcat(Filename,Extension));
 						copyfile(FromPath,Path);
 					end
-					StructOrPath=load(Path);
+					try
+						StructOrPath=load(Path);
+					catch ME
+						if ME.identifier=="MATLAB:load:notBinaryFile"
+							UniExp.UniExpException.Mat_load_failed.Throw(FromPath);
+						else
+							ME.rethrow;
+						end
+					end
 					Cells=struct2cell(StructOrPath);
 					Logical=cellfun(@(C)isa(C,'UniExp.DataSet'),Cells);
 					Already=any(Logical);
