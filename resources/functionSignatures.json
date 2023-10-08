@@ -1801,6 +1801,147 @@
 			}
 		]
 	},
+	"UniExp.TabularAnovaN": {
+		"inputs": [
+			{
+				"mutuallyExclusiveGroup":[
+					[
+						{
+							"name": "Y",
+							"kind": "required",
+							"type": [
+								[
+									"double",
+									"vector"
+								],
+								[
+									"single",
+									"vector"
+								]
+							],
+							"purpose": "同内置anovan的第一个位置参数"
+						}
+					],
+					[
+						{
+							"name": "YColumn",
+							"kind": "required",
+							"type": "scalar",
+							"purpose": "列名或列序号"
+						}
+					]
+				]
+			},
+			{
+				"name": "GroupTable",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "分组变量表"
+			},
+			{
+				"name": "alpha",
+				"kind": "namevalue",
+				"type": [
+					[
+						"double",
+						"scalar",
+						">=0",
+						"<=1"
+					],
+					[
+						"single",
+						"scalar",
+						">=0",
+						"<=1"
+					]
+				]
+			},
+			{
+				"name": "continuous",
+				"kind": "namevalue",
+				"type": [
+					[
+						"double",
+						"vector",
+						"integer",
+						">=0"
+					],
+					[
+						"single",
+						"vector",
+						"integer",
+						">=0"
+					]
+				]
+			},
+			{
+				"name": "display",
+				"kind": "namevalue",
+				"type": "choices={'off', 'on'}"
+			},
+			{
+				"name": "model",
+				"kind": "namevalue",
+				"type": [
+					[
+						"choices={'linear', 'interaction', 'full'}"
+					],
+					[
+						"numeric",
+						"integer"
+					]
+				]
+			},
+			{
+				"name": "nested",
+				"kind": "namevalue",
+				"type": [
+					[
+						"double",
+						"integer",
+						">=0",
+						"<=1"
+					],
+					[
+						"single",
+						"integer",
+						">=0",
+						"<=1"
+					]
+				]
+			},
+			{
+				"name": "random",
+				"kind": "namevalue",
+				"type": [
+					[
+						"double",
+						"vector",
+						"integer",
+						">=0"
+					],
+					[
+						"single",
+						"vector",
+						"integer",
+						">=0"
+					]
+				]
+			},
+			{
+				"name": "sstype",
+				"kind": "namevalue",
+				"type": [
+					[
+						"choices={1, 2, 3}"
+					],
+					[
+						"choices={'h'}"
+					]
+				]
+			}
+		]
+	},
 	"UniExp.TiffVideo": {
 		"inputs": [
 			{

@@ -1,1664 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <Info>
-    <MetadataNode>
-        <path value="ProjectData:type:Info">
-            <node name="Info">
-                <entry key="Name" value="MALTAB扩展"/>
-            </node>
-        </path>
-        <path value="Root:type:Categories">
-            <path value="FileClassCategory:type:Category">
-                <node name="Info">
-                    <entry key="DataType" value="None"/>
-                    <entry key="Name" value="分类"/>
-                    <entry key="ReadOnly" value="1"/>
-                    <entry key="SingleValued" value="1"/>
-                </node>
-                <path value="artifact:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="工件"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-                <path value="convenience:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="便利"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-                <path value="derived:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="派生"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-                <path value="design:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="设计"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-                <path value="none:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="无"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-                <path value="other:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="其他"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-                <path value="test:type:Label">
-                    <node name="Info">
-                        <entry key="Name" value="测试"/>
-                        <entry key="ReadOnly" value="READ_ONLY"/>
-                    </node>
-                </path>
-            </path>
-        </path>
-        <path value="Root:type:EntryPoints"/>
-        <path value="Root:type:Extensions"/>
-        <path value="Root:type:Files">
-            <path value="+MATLAB:type:File">
-                <node name="Info"/>
-                <path value="+Containers:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="IQueue.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="IndexMap.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Queue.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Stack.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="StlQueue.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Vector.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+DataFun:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="FindGroupsN.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MaxSubs.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MeanSem.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MinSubs.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Rescale.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="XCorr.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+DataTypes:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="ArrayBuilder.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ArrayFun.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ArrayType.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="CatMode.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Cell2Mat.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Cell2Mat.png:type:File">
-                        <node name="Info"/>
-                    </path>
-                    <path value="EventLogger.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="FolderFun.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MergeStructs.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MergeTables.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="NDTable.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="OptimizeQueryGraph.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="RepeatingFun.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Select.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="TypeCast.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="cell2mat.gif:type:File">
-                        <node name="Info"/>
-                    </path>
-                    <path value="数据类型尺寸.mat:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+ElFun:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="AngleND.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="IntegerAllocate.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="NDComplex.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+ElMat:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="CutCat.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Flip.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="IsEqualN.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="LinSpace.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="OrderedDimensionSize2IndexArray.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="OrderedDimensionSize2SubsVectors.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="PadCat.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Rot90.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Transpose.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="UniformSize.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+General:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="BuiltinPaths.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="CD.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="JavaAddPath.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Load.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="PathManager.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Pointer.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Restart.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Save.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="SearchNames.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="SharedPtr.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="StaticJavaPath.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Which.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="private:type:File">
-                        <node name="Info"/>
-                        <path value="1:type:DIR_SIGNIFIER">
-                            <node name="Info"/>
-                        </path>
-                        <path value="AppendJars.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                    </path>
-                </path>
-                <path value="+Graphics:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="FigureAspectRatio.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MultiShadowedLines.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Window.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+IO:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="CopyFile.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Delete.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="LibzipException.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="LnkShortcut.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MoveFile.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ZipFileReader.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ZipReader.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+IOFun:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="DelimitedStrings2Table.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="File.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MatVariableRename.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MemoryMapping.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="SendMeowAlert.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+ImageSci:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="ImRead.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="VP8StatusCode.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+Lang:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="BuiltinBugFix.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Capture.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Crash.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="DistributeVararginByValidation.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="GetNthOutputs.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="IEnumerableException.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Input.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MException.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MatlabException.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="MexException.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Optional.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Owner.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Referable.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="WindowsErrorCode.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+Ops:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="IsMemberN.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="LogicalAssign.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="SetDiffN.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="UnionN.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="UniqueN.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+Project:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="AssociatePrjExtension.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ListAllProjectPaths.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+RandFun:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="RandAnyDist.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="RandOnSphere.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Shuffle.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+SpecFun:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="LogicalExhaustion.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="Subsets.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+SupportPkg:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="Demo.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="InstallSupportPackages.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ProgressMonitor.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="SupportPackageDownloader.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+UITools:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="OpenFileDialog.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="SaveFileDialog.mlx:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                </path>
-                <path value="+internal:type:File">
-                    <node name="Info"/>
-                    <path value="1:type:DIR_SIGNIFIER">
-                        <node name="Info"/>
-                    </path>
-                    <path value="ElevatedOperation.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="InnerException.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ReferenceBase.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="ReferenceTemplate.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="UniLink.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="WindowsAPI.m:type:File">
-                        <node name="Info">
-                            <node name="Category">
-                                <entry key="UUID" value="FileClassCategory"/>
-                                <node name="Label">
-                                    <entry key="UUID" value="design"/>
-                                </node>
-                            </node>
-                        </node>
-                    </path>
-                    <path value="net7.0-windows:type:File">
-                        <node name="Info"/>
-                        <path value="1:type:DIR_SIGNIFIER">
-                            <node name="Info"/>
-                        </path>
-                        <path value="提权操作.deps.json:type:File">
-                            <node name="Info"/>
-                        </path>
-                        <path value="提权操作.dll:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="derived"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="提权操作.exe:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="derived"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="提权操作.runtimeconfig.json:type:File">
-                            <node name="Info"/>
-                        </path>
-                    </path>
-                    <path value="private:type:File">
-                        <node name="Info"/>
-                        <path value="1:type:DIR_SIGNIFIER">
-                            <node name="Info"/>
-                        </path>
-                        <path value="Microsoft.WindowsAppRuntime.Bootstrap.dll:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="derived"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="WindowsCall.mexw64:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="derived"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="libwebp.dll:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="derived"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                    </path>
-                    <path value="原文件:type:File">
-                        <node name="Info"/>
-                        <path value="1:type:DIR_SIGNIFIER">
-                            <node name="Info"/>
-                        </path>
-                        <path value="CshDocPageHandler.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="Document.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="ToolboxConfigurationReader.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="getDocumentationXML.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="getReferencePage.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="savepath.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                    </path>
-                    <path value="安装:type:File">
-                        <node name="Info"/>
-                        <path value="1:type:DIR_SIGNIFIER">
-                            <node name="Info"/>
-                        </path>
-                        <path value="OpenEditor.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="RcAddPath.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="WebSave.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="savepath.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                    </path>
-                    <path value="新文件:type:File">
-                        <node name="Info"/>
-                        <path value="1:type:DIR_SIGNIFIER">
-                            <node name="Info"/>
-                        </path>
-                        <path value="CshDocPageHandler.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="Document.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="ToolboxConfigurationReader.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="getDocumentationXML.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                        <path value="getReferencePage.m:type:File">
-                            <node name="Info">
-                                <node name="Category">
-                                    <entry key="UUID" value="FileClassCategory"/>
-                                    <node name="Label">
-                                        <entry key="UUID" value="design"/>
-                                    </node>
-                                </node>
-                            </node>
-                        </path>
-                    </path>
-                </path>
-                <path value="1:type:DIR_SIGNIFIER">
-                    <node name="Info"/>
-                </path>
-                <path value="BrowseAddonsExplorer.mlx:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="Flags.m:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="LineFollowingArrow.mat:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="LineFollowingArrow.mlx:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="Load.mat:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="Pause.mlx:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="Rgb2Gray.mlx:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="TtrtnWbgc.mlx:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="Version.m:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="internal.m:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-                <path value="示例数据集.mat:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-            </path>
-            <path value=".gitattributes:type:File">
-                <node name="Info"/>
-            </path>
-            <path value=".gitignore:type:File">
-                <node name="Info"/>
-            </path>
-            <path value="README.md:type:File">
-                <node name="Info"/>
-            </path>
-            <path value="Windows平台.sln:type:File">
-                <node name="Info"/>
-            </path>
-            <path value="doc:type:File">
-                <node name="Info"/>
-                <path value="1:type:DIR_SIGNIFIER">
-                    <node name="Info"/>
-                </path>
-                <path value="GettingStarted.mlx:type:File">
-                    <node name="Info">
-                        <node name="Category">
-                            <entry key="UUID" value="FileClassCategory"/>
-                            <node name="Label">
-                                <entry key="UUID" value="design"/>
-                            </node>
-                        </node>
-                    </node>
-                </path>
-            </path>
-            <path value="图标.png:type:File">
-                <node name="Info"/>
-            </path>
-            <path value="埃博拉酱 的 MATLAB 扩展 Extension.prj:type:File">
-                <node name="Info"/>
-            </path>
-        </path>
-        <path value="Root:type:ProjectData"/>
-        <path value="Root:type:ProjectPath">
-            <path value="05332b89-261d-49d3-a886-ed08c22e90f3:type:Reference">
-                <node name="Info">
-                    <entry key="Ref" value=""/>
-                    <entry key="Type" value="Relative"/>
-                </node>
-            </path>
-        </path>
-        <path value="Root:type:References"/>
-    </MetadataNode>
     <Files>
         <File path="+MATLAB/+Containers/IQueue.m" value="8dbfee3c"/>
         <File path="+MATLAB/+Containers/IndexMap.m" value="7944dbc3"/>
@@ -1666,7 +7,7 @@
         <File path="+MATLAB/+Containers/Stack.m" value="5413aebc"/>
         <File path="+MATLAB/+Containers/StlQueue.asv" value="3385a08a"/>
         <File path="+MATLAB/+Containers/StlQueue.m" value="668ab57b"/>
-        <File path="+MATLAB/+Containers/Vector.m" value="f76f49c8"/>
+        <File path="+MATLAB/+Containers/Vector.m" value="4c8cbc40"/>
         <File path="+MATLAB/+Containers" value="-1"/>
         <File path="+MATLAB/+DataFun/FindGroupsN.mlx" value="ebea1ac5"/>
         <File path="+MATLAB/+DataFun/MaxSubs.mlx" value="3912868b"/>
@@ -1682,14 +23,14 @@
         <File path="+MATLAB/+DataTypes/CatMode.m" value="49073f9a"/>
         <File path="+MATLAB/+DataTypes/Cell2Mat.mlx" value="d6d888e3"/>
         <File path="+MATLAB/+DataTypes/Cell2Mat.png" value="31d3e03e"/>
-        <File path="+MATLAB/+DataTypes/EventLogger.m" value="6659af4e"/>
+        <File path="+MATLAB/+DataTypes/EventLogger.m" value="deb91b39"/>
         <File path="+MATLAB/+DataTypes/FolderFun.mlx" value="7cc4b524"/>
         <File path="+MATLAB/+DataTypes/MergeStructs.mlx" value="b8301a75"/>
-        <File path="+MATLAB/+DataTypes/MergeTables.mlx" value="6b058c77"/>
+        <File path="+MATLAB/+DataTypes/MergeTables.mlx" value="aaa645c7"/>
         <File path="+MATLAB/+DataTypes/NDTable.m" value="466b0f00"/>
         <File path="+MATLAB/+DataTypes/OptimizeQueryGraph.mlx" value="195604c9"/>
         <File path="+MATLAB/+DataTypes/RepeatingFun.mlx" value="a8176e3"/>
-        <File path="+MATLAB/+DataTypes/Select.mlx" value="f403501f"/>
+        <File path="+MATLAB/+DataTypes/Select.mlx" value="8da5e0e0"/>
         <File path="+MATLAB/+DataTypes/TypeCast.mlx" value="b4d35b02"/>
         <File path="+MATLAB/+DataTypes/cell2mat.gif" value="96084378"/>
         <File path="+MATLAB/+DataTypes/数据类型尺寸.mat" value="4f2ddb5a"/>
@@ -1750,21 +91,22 @@
         <File path="+MATLAB/+ImageSci/VP8StatusCode.m" value="980c0e0d"/>
         <File path="+MATLAB/+ImageSci" value="-1"/>
         <File path="+MATLAB/+Lang/BuiltinBugFix.mlx" value="e06675a2"/>
-        <File path="+MATLAB/+Lang/Capture.mlx" value="a676af7c"/>
+        <File path="+MATLAB/+Lang/Capture.mlx" value="6ea6c2c0"/>
         <File path="+MATLAB/+Lang/Crash.mlx" value="cea5956a"/>
         <File path="+MATLAB/+Lang/DistributeVararginByValidation.mlx" value="a91534ef"/>
         <File path="+MATLAB/+Lang/GetNthOutputs.mlx" value="72e88389"/>
         <File path="+MATLAB/+Lang/IEnumerableException.m" value="214e298f"/>
         <File path="+MATLAB/+Lang/Input.mlx" value="a26b0a5"/>
         <File path="+MATLAB/+Lang/MException.m" value="93c986d9"/>
-        <File path="+MATLAB/+Lang/MatlabException.m" value="53517739"/>
+        <File path="+MATLAB/+Lang/MatlabException.m" value="36bff0c"/>
         <File path="+MATLAB/+Lang/MexException.m" value="65550c41"/>
         <File path="+MATLAB/+Lang/Optional.m" value="589d10de"/>
-        <File path="+MATLAB/+Lang/Owner.m" value="de6aa877"/>
-        <File path="+MATLAB/+Lang/Referable.m" value="621413eb"/>
+        <File path="+MATLAB/+Lang/Owner.m" value="ad31eb07"/>
+        <File path="+MATLAB/+Lang/Referable.asv" value="4ed7c97"/>
+        <File path="+MATLAB/+Lang/Referable.m" value="f98fe4f3"/>
         <File path="+MATLAB/+Lang/WindowsErrorCode.m" value="583fc58f"/>
         <File path="+MATLAB/+Lang" value="-1"/>
-        <File path="+MATLAB/+Ops/IsMemberN.mlx" value="aaac9cc"/>
+        <File path="+MATLAB/+Ops/IsMemberN.mlx" value="d17433ec"/>
         <File path="+MATLAB/+Ops/LogicalAssign.mlx" value="fcb0c519"/>
         <File path="+MATLAB/+Ops/SetDiffN.mlx" value="504845b5"/>
         <File path="+MATLAB/+Ops/UnionN.mlx" value="137308d4"/>
@@ -1775,10 +117,12 @@
         <File path="+MATLAB/+Project" value="-1"/>
         <File path="+MATLAB/+RandFun/RandAnyDist.mlx" value="e13334bb"/>
         <File path="+MATLAB/+RandFun/RandOnSphere.mlx" value="71a396ae"/>
-        <File path="+MATLAB/+RandFun/Shuffle.mlx" value="62044d9a"/>
+        <File path="+MATLAB/+RandFun/Shuffle.mlx" value="7fa50fcd"/>
         <File path="+MATLAB/+RandFun" value="-1"/>
+        <File path="+MATLAB/+SpecFun/CountShuffles.md" value="a384a883"/>
+        <File path="+MATLAB/+SpecFun/EllipticPerimeter.mlx" value="cac28707"/>
         <File path="+MATLAB/+SpecFun/LogicalExhaustion.mlx" value="1e621ec4"/>
-        <File path="+MATLAB/+SpecFun/Subsets.mlx" value="8c3ab1d4"/>
+        <File path="+MATLAB/+SpecFun/Subsets.mlx" value="d39fec64"/>
         <File path="+MATLAB/+SpecFun" value="-1"/>
         <File path="+MATLAB/+SupportPkg/Demo.mlx" value="528ff108"/>
         <File path="+MATLAB/+SupportPkg/InstallSupportPackages.mlx" value="1e89a146"/>
@@ -1839,7 +183,7 @@
         <File path="+MATLAB/Pause.mlx" value="3812d75e"/>
         <File path="+MATLAB/Rgb2Gray.mlx" value="d8cf5dfb"/>
         <File path="+MATLAB/TtrtnWbgc.mlx" value="4e835646"/>
-        <File path="+MATLAB/Version.m" value="a77f60b"/>
+        <File path="+MATLAB/Version.m" value="9fcbb79d"/>
         <File path="+MATLAB/internal.m" value="bfb57618"/>
         <File path="+MATLAB/示例数据集.mat" value="dab2f2a0"/>
         <File path="+MATLAB" value="-1"/>
@@ -1942,7 +286,8 @@
         <File path=".vs" value="-1"/>
         <File path="Debug" value="-1"/>
         <File path="MALTAB扩展.prj" value="e0b87f15"/>
-        <File path="README.md" value="ab06b89"/>
+        <File path="README.md" value="8783667e"/>
+        <File path="Test.mlx" value="e61711a4"/>
         <File path="Windows平台.sln" value="9172634f"/>
         <File path="Windows平台/File.cpp" value="93d1ef18"/>
         <File path="Windows平台/LipZip.cpp" value="ed42c196"/>
@@ -4858,7 +3203,7 @@
         <File path="packages/libwebp.v140.redist.0.5.0.1/libwebp.v140.redist.0.5.0.1.nupkg" value="58fd1eee"/>
         <File path="packages/libwebp.v140.redist.0.5.0.1" value="-1"/>
         <File path="packages" value="-1"/>
-        <File path="resources/functionSignatures.json" value="c3fe7e1"/>
+        <File path="resources/functionSignatures.json" value="a0562cf"/>
         <File path="resources/project/-82U0V6EuxtWry7kuc6ePVZR4BY" value="-1"/>
         <File path="resources/project/1WcbQastsX0H6ACMky4GP7WU-gI" value="-1"/>
         <File path="resources/project/2ec6_pLkoJRjy3S3VqKrXJnF-Go/1rRuAs0JLa7h-gfukn8CiuQ-EAId.xml" value="fbf03ea7"/>
@@ -5189,6 +3534,8 @@
         <File path="resources/project/m-vwk9pJjTfByqOD_TJE16VI28s/cOfObw8UulMxgJQWpSFGqKyFVQsp.xml" value="79ac918f"/>
         <File path="resources/project/m-vwk9pJjTfByqOD_TJE16VI28s/f0D-jkZsS5pM5lXqsVKlJV7FyFUd.xml" value="df0217e1"/>
         <File path="resources/project/m-vwk9pJjTfByqOD_TJE16VI28s/f0D-jkZsS5pM5lXqsVKlJV7FyFUp.xml" value="a2dad8d0"/>
+        <File path="resources/project/m-vwk9pJjTfByqOD_TJE16VI28s/wI-uauon8sFM4m4we6ey29het6cd.xml" value="317cfbea"/>
+        <File path="resources/project/m-vwk9pJjTfByqOD_TJE16VI28s/wI-uauon8sFM4m4we6ey29het6cp.xml" value="2975174d"/>
         <File path="resources/project/m-vwk9pJjTfByqOD_TJE16VI28s" value="-1"/>
         <File path="resources/project/mY4dRer9ygLPYSPCTGLuplLE_3Q/Gv1d3-CbATS8vKMg1JqHtWEk2Tgd.xml" value="df0217e1"/>
         <File path="resources/project/mY4dRer9ygLPYSPCTGLuplLE_3Q/Gv1d3-CbATS8vKMg1JqHtWEk2Tgp.xml" value="2318ad3a"/>
@@ -5335,8 +3682,8 @@
         <File path="resources/project" value="-1"/>
         <File path="resources" value="-1"/>
         <File path="图标.png" value="281db068"/>
-        <File path="埃博拉酱 的 MATLAB 扩展 Extension.mltbx" value="da5f8f36"/>
-        <File path="埃博拉酱 的 MATLAB 扩展 Extension.prj" value="cbb42bdd"/>
+        <File path="埃博拉酱 的 MATLAB 扩展 Extension.mltbx" value="1339fd69"/>
+        <File path="埃博拉酱 的 MATLAB 扩展 Extension.prj" value="e33c489a"/>
         <File path="提权操作/My Project/launchSettings.json" value="21dfdceb"/>
         <File path="提权操作/My Project" value="-1"/>
         <File path="提权操作/Program.vb" value="f1340c8c"/>
@@ -5386,5 +3733,1674 @@
         <File path="提权操作/提权操作.vbproj" value="7a373e5a"/>
         <File path="提权操作" value="-1"/>
     </Files>
-    <Date value="2023年9月14日 16:07:52"/>
+    <MetadataNode>
+        <path value="ProjectData:type:Info">
+            <node name="Info">
+                <entry key="Name" value="MALTAB扩展"/>
+            </node>
+        </path>
+        <path value="Root:type:Categories">
+            <path value="FileClassCategory:type:Category">
+                <node name="Info">
+                    <entry key="DataType" value="None"/>
+                    <entry key="Name" value="分类"/>
+                    <entry key="ReadOnly" value="1"/>
+                    <entry key="SingleValued" value="1"/>
+                </node>
+                <path value="artifact:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="工件"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="convenience:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="便利"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="derived:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="派生"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="design:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="设计"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="none:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="无"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="other:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="其他"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="test:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="测试"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+            </path>
+        </path>
+        <path value="Root:type:EntryPoints"/>
+        <path value="Root:type:Extensions"/>
+        <path value="Root:type:Files">
+            <path value="+MATLAB:type:File">
+                <node name="Info"/>
+                <path value="+Containers:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="IQueue.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="IndexMap.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Queue.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Stack.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="StlQueue.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Vector.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+DataFun:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="FindGroupsN.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MaxSubs.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MeanSem.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MinSubs.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Rescale.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="XCorr.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+DataTypes:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="ArrayBuilder.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ArrayFun.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ArrayType.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="CatMode.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Cell2Mat.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Cell2Mat.png:type:File">
+                        <node name="Info"/>
+                    </path>
+                    <path value="EventLogger.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="FolderFun.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MergeStructs.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MergeTables.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="NDTable.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="OptimizeQueryGraph.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="RepeatingFun.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Select.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="TypeCast.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="cell2mat.gif:type:File">
+                        <node name="Info"/>
+                    </path>
+                    <path value="数据类型尺寸.mat:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+ElFun:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="AngleND.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="IntegerAllocate.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="NDComplex.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+ElMat:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="CutCat.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Flip.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="IsEqualN.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="LinSpace.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="OrderedDimensionSize2IndexArray.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="OrderedDimensionSize2SubsVectors.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="PadCat.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Rot90.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Transpose.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="UniformSize.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+General:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="BuiltinPaths.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="CD.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="JavaAddPath.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Load.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="PathManager.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Pointer.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Restart.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Save.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="SearchNames.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="SharedPtr.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="StaticJavaPath.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Which.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="private:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="AppendJars.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                </path>
+                <path value="+Graphics:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="FigureAspectRatio.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MultiShadowedLines.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Window.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+IO:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="CopyFile.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Delete.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="LibzipException.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="LnkShortcut.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MoveFile.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ZipFileReader.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ZipReader.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+IOFun:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="DelimitedStrings2Table.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="File.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MatVariableRename.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MemoryMapping.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="SendMeowAlert.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+ImageSci:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="ImRead.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="VP8StatusCode.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+Lang:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="BuiltinBugFix.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Capture.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Crash.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="DistributeVararginByValidation.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="GetNthOutputs.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="IEnumerableException.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Input.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MException.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MatlabException.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="MexException.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Optional.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Owner.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Referable.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="WindowsErrorCode.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+Ops:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="IsMemberN.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="LogicalAssign.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="SetDiffN.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="UnionN.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="UniqueN.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+Project:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="AssociatePrjExtension.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ListAllProjectPaths.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+RandFun:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="RandAnyDist.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="RandOnSphere.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Shuffle.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+SpecFun:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="EllipticPerimeter.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="LogicalExhaustion.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="Subsets.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+SupportPkg:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="Demo.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="InstallSupportPackages.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ProgressMonitor.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="SupportPackageDownloader.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+UITools:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="OpenFileDialog.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="SaveFileDialog.mlx:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                </path>
+                <path value="+internal:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="ElevatedOperation.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="InnerException.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ReferenceBase.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="ReferenceTemplate.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="UniLink.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="WindowsAPI.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="net7.0-windows:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="提权操作.deps.json:type:File">
+                            <node name="Info"/>
+                        </path>
+                        <path value="提权操作.dll:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="提权操作.exe:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="提权操作.runtimeconfig.json:type:File">
+                            <node name="Info"/>
+                        </path>
+                    </path>
+                    <path value="private:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="Microsoft.WindowsAppRuntime.Bootstrap.dll:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="WindowsCall.mexw64:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="libwebp.dll:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                    <path value="原文件:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="CshDocPageHandler.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="Document.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="ToolboxConfigurationReader.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="getDocumentationXML.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="getReferencePage.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="savepath.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                    <path value="安装:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="OpenEditor.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="RcAddPath.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="WebSave.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="savepath.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                    <path value="新文件:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="CshDocPageHandler.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="Document.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="ToolboxConfigurationReader.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="getDocumentationXML.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                        <path value="getReferencePage.m:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="design"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                </path>
+                <path value="1:type:DIR_SIGNIFIER">
+                    <node name="Info"/>
+                </path>
+                <path value="BrowseAddonsExplorer.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Flags.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="LineFollowingArrow.mat:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="LineFollowingArrow.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Load.mat:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Pause.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Rgb2Gray.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="TtrtnWbgc.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Version.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="internal.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="示例数据集.mat:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+            </path>
+            <path value=".gitattributes:type:File">
+                <node name="Info"/>
+            </path>
+            <path value=".gitignore:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="README.md:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="Windows平台.sln:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="doc:type:File">
+                <node name="Info"/>
+                <path value="1:type:DIR_SIGNIFIER">
+                    <node name="Info"/>
+                </path>
+                <path value="GettingStarted.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+            </path>
+            <path value="图标.png:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="埃博拉酱 的 MATLAB 扩展 Extension.prj:type:File">
+                <node name="Info"/>
+            </path>
+        </path>
+        <path value="Root:type:ProjectData"/>
+        <path value="Root:type:ProjectPath">
+            <path value="05332b89-261d-49d3-a886-ed08c22e90f3:type:Reference">
+                <node name="Info">
+                    <entry key="Ref" value=""/>
+                    <entry key="Type" value="Relative"/>
+                </node>
+            </path>
+        </path>
+        <path value="Root:type:References"/>
+    </MetadataNode>
+    <Date value="2023年10月7日 11:10:19"/>
 </Info>

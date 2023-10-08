@@ -83,6 +83,8 @@ function [Coeff,Score,Explained] = PointPca(Array,Dimension,NumComponents)
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
+%内置anovan的改版，将变量表作为分组输入
+function varargout = TabularAnovaN(Y,GroupTable,varargin)
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
 %计算组间多回合细胞向量的投影长度和夹角余弦
