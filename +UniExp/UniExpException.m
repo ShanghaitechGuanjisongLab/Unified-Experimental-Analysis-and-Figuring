@@ -79,5 +79,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Unexpected_subsref_type
 		Required_slice_empty
 		Mat_load_failed
+		Coronal_and_Sagittal_have_no_overlap
 	end
 end
