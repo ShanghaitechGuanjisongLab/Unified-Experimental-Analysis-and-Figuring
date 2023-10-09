@@ -80,5 +80,6 @@ classdef UniExpException<MATLAB.Lang.IEnumerableException
 		Required_slice_empty
 		Mat_load_failed
 		Coronal_and_Sagittal_have_no_overlap
+		Input_slices_does_not_sandwich_the_target_layer
 	end
 end

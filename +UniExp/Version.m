@@ -6,6 +6,7 @@ V.ImageProcessing=ImageProcessing.Version;
 V.Image5D=Image5D.Version;
 V.TextAnalytics=TextAnalytics.Version;
 V.ComputerVision=ComputerVision.Version;
+V.MatlabException='v17.3.0';
 V.MATLAB='R2022b';
 persistent NewVersion
 if isempty(NewVersion)
