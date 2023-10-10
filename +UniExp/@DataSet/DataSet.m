@@ -169,9 +169,16 @@ classdef DataSet<handle
 				end
 				if CheckMouse
 					for TableName=["Mice","DateTimes","Cells"]
-						if ~isempty(obj.(TableName))&&any(obj.(TableName).Mouse~=FileFields(1))
-							warning('文件“%s”中的鼠名字段似乎和数据库“%s”表内记录的不一致。如果文件名中没有鼠名字段，请忽略本条警告。',Filename,TableName);
-							break;
+						if ~isempty(obj.(TableName))
+							CheckMouse=unique(obj.(TableName).Mouse);
+							if isscalar(CheckMouse)
+								if CheckMouse~=FileFields(1)
+									warning('文件“%s”中的鼠名字段似乎和数据库“%s”表内记录的不一致。如果文件名中没有鼠名字段，请忽略本条警告。',Filename,TableName);
+									break;
+								end
+							else
+								break;
+							end
 						end
 					end
 				end
@@ -450,6 +457,36 @@ classdef DataSet<handle
 			end
 			if ~isempty(obj.Trials)
 				obj.Trials(ismember(obj.Trials.TrialUID,TrialUIDs),:)=[];
+			end
+		end
+		function CollectMice(obj)
+			%从DateTimes和Cells表中收集所有鼠，添加到Mice表
+			if isempty(obj.Mice)
+				if isempty(obj.DateTimes)
+					if ~isempty(obj.Cells)
+						obj.Mice=table(unique(obj.Cells.Mouse),'VariableNames',"Mouse");
+					end
+				else
+					if isempty(obj.Cells)
+						NewMice=unique(obj.DateTimes.Mouse);
+					else
+						NewMice=union(obj.DateTimes.Mouse,obj.Cells.Mouse);
+					end
+					obj.Mice=table(NewMice,'VariableNames',"Mouse");
+				end
+			elseif isempty(obj.DateTimes)
+				if ~isempty(obj.Cells)
+					NewMice=setdiff(obj.Cells.Mouse,obj.Mice.Mouse);
+					obj.Mice.Mouse(end+1:end+numel(NewMice))=NewMice;
+				end
+			else
+				if isempty(obj.Cells)
+					NewMice=obj.DateTimes.Mouse;
+				else
+					NewMice=[obj.DateTimes.Mouse;obj.Cells.Mouse];
+				end
+				NewMice=setdiff(NewMice,obj.Mice.Mouse);
+				obj.Mice.Mouse(end+1:end+numel(NewMice))=NewMice;
 			end
 		end
 	end
