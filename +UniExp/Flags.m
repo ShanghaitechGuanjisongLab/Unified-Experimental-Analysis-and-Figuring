@@ -5,8 +5,10 @@ classdef Flags
 
 		Real
 		Table
+		Tabular
 		Cell
 		Struct
+		Repeating
 
 		%% 无特殊操作
 		No_special_operation

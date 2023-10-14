@@ -1525,6 +1525,55 @@
 			}
 		]
 	},
+	"UniExp.NtatsCellReplenish": {
+		"inputs": [
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "CopyMode",
+							"kind": "required",
+							"type": [
+								"logical",
+								"scalar"
+							],
+							"purpose": "是否使用拷贝补全模式"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "NTATS",
+							"kind": "required",
+							"type": "tabular",
+							"purpose": "要补全的NTATS分组",
+							"repeating": true
+						}
+					],
+					[
+						{
+							"name": "GroupNtats",
+							"kind": "required",
+							"type": [
+								[
+									"cell"
+								],
+								[
+									"struct",
+									"scalar"
+								]
+							],
+							"purpose": "要补全的NTATS分组"
+						}
+					]
+				]
+			}
+		]
+	},
 	"UniExp.NtsMultiplyPcaCoeff": {
 		"inputs": [
 			{
@@ -1804,7 +1853,7 @@
 	"UniExp.TabularAnovaN": {
 		"inputs": [
 			{
-				"mutuallyExclusiveGroup":[
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "Y",

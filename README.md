@@ -75,6 +75,8 @@ function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+%将不同NATAS分组中的细胞补全
+function varargout = NtatsCellReplenish(CopyMode,varargin)
 %为NTS乘上PCA系数，得到逐回合的PCA分数
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
 %对多维数组沿某个维度执行PCA分析
