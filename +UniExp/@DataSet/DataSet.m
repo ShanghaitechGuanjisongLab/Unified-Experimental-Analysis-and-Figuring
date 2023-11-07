@@ -1,4 +1,4 @@
-classdef DataSet<handle
+classdef DataSet<handle&matlab.mixin.Copyable
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
 	%此类的属性，除Version外，是按照BC范式设计的数据库表。可以从包含这些表的结构体或另一个此类对象构造对象。每个表都可以留空。
 	%注意此类是句柄类，必须使用MakeCopy成员函数才能复制对象，直接赋值给其它变量只能取得数据集的一个引用。
@@ -76,7 +76,7 @@ classdef DataSet<handle
 			end
 		end
 	end
-	methods(Access=public)
+	methods(Access=protected)
 		function SC=GetSignalColumn(obj)
 			if istable(obj.TrialSignals)
 				if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
@@ -106,6 +106,9 @@ classdef DataSet<handle
 					end
 				end
 			end
+		end
+		function New=copyElement(Old)
+			New=UniExp.DataSet(Old);
 		end
 	end
 	methods
@@ -200,16 +203,6 @@ classdef DataSet<handle
 				VT(T)=istabular(Property)&&~isempty(Property);
 			end
 			VT=TableNames(VT);
-		end
-		function obj=MakeCopy(obj)
-			%取得对象的一个拷贝
-			%# 语法
-			% ```
-			% New=Old.MakeCopy;
-			% ```
-			%# 返回值
-			% New(1,1)UniExp.DataSet，原对象的拷贝。修改该新对象的成员不会导致原对象被修改。
-			obj=UniExp.DataSet(obj);
 		end
 		function RemoveCells(obj,CellUIDs)
 			%从数据库中移除一群细胞的一切关联数据
@@ -333,26 +326,26 @@ classdef DataSet<handle
 			%# 输入参数
 			% NormalizeTo(1,1)uint16，重采样长度，默认为所有回合信号和标的最短非零长度
 			TrialSignal=obj.TrialSignals.TrialSignal;
-			Lengths=cellfun(@numel,TrialSignal);
-			NormalizeSignal=Lengths>0;
-			Lengths=Lengths(NormalizeSignal);
+			SignalLogical1=~cellfun(@(T)isempty(T)||isequaln(T,missing),TrialSignal);
+			Lengths=cellfun(@numel,TrialSignal(SignalLogical1));
 			TrialTags=obj.Trials.TrialTags;
-			Heights=cellfun(@height,TrialTags);
-			NormalizeTags=Heights>0;
-			ValidHeights=Heights(NormalizeTags);
+			TagsLogical1=~cellfun(@(T)isempty(T)||isequaln(T,missing),TrialTags);
+			Heights=cellfun(@height,TrialTags(TagsLogical1));
 			if ~exist('NormalizeTo','var')
-				NormalizeTo=min([Lengths;ValidHeights]);
+				NormalizeTo=min([Lengths;Heights]);
 			end
-			NormalizeSignal(NormalizeSignal)=Lengths~=NormalizeTo;
-			NormalizeTags(NormalizeTags)=ValidHeights~=NormalizeTo;
-			if any(NormalizeSignal)
+			SignalLogical2=Lengths~=NormalizeTo;
+			SignalLogical1(SignalLogical1)=SignalLogical2;
+			TagsLogical2=Heights~=NormalizeTo;
+			TagsLogical1(TagsLogical1)=TagsLogical2;
+			if any(SignalLogical1)
 				Index=1:height(TrialSignal);
-				[Normalized,Index]=splitapply(@(TrialSignals,SignalIndex)TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),TrialSignal(NormalizeSignal),Index(NormalizeSignal)',findgroups(Lengths(NormalizeSignal)));
+				[Normalized,Index]=splitapply(@(TrialSignals,SignalIndex)TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo),TrialSignal(SignalLogical1),Index(SignalLogical1)',findgroups(Lengths(SignalLogical2)));
 				TrialSignal(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
-			if any(NormalizeTags)
+			if any(TagsLogical1)
 				Index=1:height(TrialTags);
-				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)TrialTagsResize(TrialTags,TrialUID,NormalizeTo),TrialTags(NormalizeTags),Index(NormalizeTags)',findgroups(Heights(NormalizeTags)));
+				[Normalized,Index]=splitapply(@(TrialTags,TrialUID)TrialTagsResize(TrialTags,TrialUID,NormalizeTo),TrialTags(TagsLogical1),Index(TagsLogical1)',findgroups(Heights(TagsLogical2)));
 				TrialTags(vertcat(Index{:}))=vertcat(Normalized{:});
 			end
 			obj.Trials.NormalizedTags=TrialTags;

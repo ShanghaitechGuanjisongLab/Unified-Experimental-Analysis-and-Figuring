@@ -1888,7 +1888,7 @@
 				"purpose": "分组变量表"
 			},
 			{
-				"name": "alpha",
+				"name": "Alpha",
 				"kind": "namevalue",
 				"type": [
 					[
@@ -1903,91 +1903,76 @@
 						">=0",
 						"<=1"
 					]
-				]
+				],
+				"purpose": "置信界限的显著性水平"
 			},
 			{
-				"name": "continuous",
+				"name": "Continuous",
 				"kind": "namevalue",
 				"type": [
 					[
-						"double",
-						"vector",
-						"integer",
-						">=0"
+						"string",
+						"vector"
 					],
 					[
-						"single",
-						"vector",
-						"integer",
-						">=0"
+						"cell",
+						"vector"
 					]
-				]
+				],
+				"purpose": "连续预测因子的指示器"
 			},
 			{
-				"name": "display",
+				"name": "Display",
 				"kind": "namevalue",
-				"type": "choices={'off', 'on'}"
+				"type": [
+					"logical",
+					"scalar"
+				],
+				"purpose": "显示方差分析表的指示器"
 			},
 			{
-				"name": "model",
+				"name": "Model",
 				"kind": "namevalue",
 				"type": [
 					[
 						"choices={'linear', 'interaction', 'full'}"
 					],
 					[
-						"numeric",
-						"integer"
+						"real",
+						"scalar"
+					],
+					[
+						"tabular"
 					]
-				]
+				],
+				"purpose": "模型的类型"
 			},
 			{
-				"name": "nested",
+				"name": "Nested",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "指示组变量之间的嵌套关系"
+			},
+			{
+				"name": "Random",
 				"kind": "namevalue",
 				"type": [
 					[
-						"double",
-						"integer",
-						">=0",
-						"<=1"
+						"string",
+						"vector"
 					],
 					[
-						"single",
-						"integer",
-						">=0",
-						"<=1"
+						"cell",
+						"vector"
 					]
-				]
+				],
+				"purpose": "随机变量的指示器"
 			},
 			{
-				"name": "random",
+				"name": "SSType",
 				"kind": "namevalue",
-				"type": [
-					[
-						"double",
-						"vector",
-						"integer",
-						">=0"
-					],
-					[
-						"single",
-						"vector",
-						"integer",
-						">=0"
-					]
-				]
-			},
-			{
-				"name": "sstype",
-				"kind": "namevalue",
-				"type": [
-					[
-						"choices={1, 2, 3}"
-					],
-					[
-						"choices={'h'}"
-					]
-				]
+				"type": "choices={1, 2, 3,'h'}",
+				"purpose": "平方和的类型"
 			}
 		]
 	},
