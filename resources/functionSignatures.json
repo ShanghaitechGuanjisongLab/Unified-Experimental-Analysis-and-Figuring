@@ -1590,6 +1590,42 @@
 			}
 		]
 	},
+	"UniExp.PcAxLabels":{
+		"inputs":[
+			{
+				"mutuallyExclusiveGroups":[
+					[
+						{
+							"name":"Explained",
+							"kind":"ordered",
+							"type":"real",
+							"purpose":"方差解释率"
+						},
+						{
+							"name":"PcIndices",
+							"kind":"ordered",
+							"type":"real",
+							"purpose":"主成分序号"
+						}
+					],
+					[
+						{
+							"name":"PcIndices",
+							"kind":"ordered",
+							"type":"real",
+							"purpose":"主成分序号"
+						},
+						{
+							"name":"Explained",
+							"kind":"ordered",
+							"type":"real",
+							"purpose":"方差解释率"
+						}
+					]
+				]
+			}
+		]
+	},
 	"UniExp.PointPca": {
 		"inputs": [
 			{
