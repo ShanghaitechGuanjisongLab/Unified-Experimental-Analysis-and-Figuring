@@ -105,7 +105,7 @@ function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %作多线阵列图，大批量展示多条线
 function Lines = LineArray(Data3D,options)
 %为PCA分析的三个坐标轴设置标签
-function PcAxLabels(Explained,PcIndices)
+function PcAxLabels(PcTable)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 %截取 OME TIFF 文件的一段，输出MP4视频
