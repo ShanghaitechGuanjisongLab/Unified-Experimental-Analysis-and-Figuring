@@ -1590,13 +1590,29 @@
 			}
 		]
 	},
-	"UniExp.PcAxLabels":{
-		"inputs":[
+	"UniExp.PcAxLabels": {
+		"inputs": [
 			{
-				"name":"PcTable",
-				"kind":"ordered",
-				"type":"tabular",
-				"purpose":"包含主成分序号和解释百分比信息的表"
+				"mutuallyExclusiveGroups": [
+					[
+						{
+							"name": "PcTable",
+							"kind": "ordered",
+							"type": "tabular",
+							"purpose": "包含主成分序号和解释百分比信息的表"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"name": "Axes",
+				"kind": "ordered",
+				"type": [
+					"scalar",
+					"matlab.graphics.Graphics"
+				],
+				"purpose": "要设置标签的坐标区"
 			}
 		]
 	},
