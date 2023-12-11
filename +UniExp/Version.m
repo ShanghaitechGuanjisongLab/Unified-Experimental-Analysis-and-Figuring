@@ -6,8 +6,8 @@ V.ImageProcessing=ImageProcessing.Version;
 V.Image5D=Image5D.Version;
 V.TextAnalytics=TextAnalytics.Version;
 V.ComputerVision=ComputerVision.Version;
-V.MatlabException='v17.3.0';
-V.MATLAB='R2022b';
+V.MatlabException='v18.0.0';
+V.MATLAB='R2023b';
 persistent NewVersion
 if isempty(NewVersion)
 	warning('off','TextAnalyticsException:Thread_parallelism_not_supported');
