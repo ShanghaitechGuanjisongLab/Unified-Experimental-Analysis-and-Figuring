@@ -24,7 +24,7 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 				obj.Writer=obj.Reader;
 			end
 			if obj.Reader.SizeZ~=numel(TransMatrix)
-				UniExp.UniExpException.ZLayers_of_the_moving_ROI_and_file_do_not_match.Throw(Filename);
+				UniExp.Exceptions.ZLayers_of_the_moving_ROI_and_file_do_not_match.Throw(Filename);
 			end
 			PieceElements=prod([uint32(obj.Reader.SizeX),obj.Reader.SizeY,obj.Reader.SizeC,obj.Reader.SizeZ]);
 			obj.PieceSize=PieceElements*uint32(obj.Reader.SizeP);

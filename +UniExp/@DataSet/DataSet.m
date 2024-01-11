@@ -85,7 +85,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					SC="TrialSignal";
 				end
 			else
-				UniExp.UniExpException.DataSet_is_missing_TrialSignals.Throw;
+				UniExp.Exceptions.DataSet_is_missing_TrialSignals.Throw;
 			end
 		end
 		function obj=saveobj(obj)
@@ -142,7 +142,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 						StructOrPath=load(Path);
 					catch ME
 						if ME.identifier=="MATLAB:load:notBinaryFile"
-							UniExp.UniExpException.Mat_load_failed.Throw(FromPath);
+							UniExp.Exceptions.Mat_load_failed.Throw(FromPath);
 						else
 							ME.rethrow;
 						end
@@ -161,9 +161,9 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					Fields=intersect(fieldnames(StructOrPath),properties(obj));
 					if isempty(Fields)
 						if InputPath
-							UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
+							UniExp.Exceptions.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
 						else
-							UniExp.UniExpException.Struct_cannot_be_parsed_to_DataSet.Throw;
+							UniExp.Exceptions.Struct_cannot_be_parsed_to_DataSet.Throw;
 						end
 					end
 					for F=1:numel(Fields)
@@ -247,7 +247,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					[~,Index]=ismember(vertcat(Index{:}),obj.Trials.TrialUID);
 					obj.Trials.TrialRI(Index)=vertcat(RepeatIndex{:});
 				else
-					UniExp.UniExpException.TrialRI_could_not_be_calculated_for_Trials_without_Stimulus.Warn;
+					UniExp.Exceptions.TrialRI_could_not_be_calculated_for_Trials_without_Stimulus.Warn;
 				end
 			end
 		end
@@ -295,7 +295,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			%# 输入参数
 			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
 			%See also UniExp.DataSet.AddBehavior
-			UniExp.UniExpException.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
+			UniExp.Exceptions.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
 			Query=MATLAB.DataTypes.Select(["TrialUID","TrialTags","SeriesInterval"],{obj.Trials,obj.Blocks,obj.DateTimes});
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
 			Query.TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
@@ -390,11 +390,11 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			% TrialIndex(1,1)uint16，新回合的序号，不能与同BlockUID下的其它回合的序号冲突
 			% Name=Value，其它名称值参数，将添加到新建回合的对应列下。
 			if ~any(obj.Blocks.BlockUID==BlockUID)
-				UniExp.UniExpException.Specified_BlockUID_does_not_exist_in_the_Blocks_table.Throw(BlockUID);
+				UniExp.Exceptions.Specified_BlockUID_does_not_exist_in_the_Blocks_table.Throw(BlockUID);
 			end
 			TrialLogical=obj.Trials.BlockUID==BlockUID;
 			if any(obj.Trials.TrialIndex(TrialLogical)==TrialIndex)
-				UniExp.UniExpException.Specified_TrialIndex_already_exists_in_the_specified_Block.Throw(TrialIndex);
+				UniExp.Exceptions.Specified_TrialIndex_already_exists_in_the_specified_Block.Throw(TrialIndex);
 			end
 			TrialUID=max(obj.Trials.TrialUID);
 			if TrialUID<intmax('uint16')

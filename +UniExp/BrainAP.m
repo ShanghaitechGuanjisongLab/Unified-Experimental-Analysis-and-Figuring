@@ -95,7 +95,7 @@ classdef BrainAP<single
 				case "."
 					obj=obj.(S.subs);
 				otherwise
-					UniExp.UniExpException.Unexpected_subsref_type.Throw;
+					UniExp.Exceptions.Unexpected_subsref_type.Throw;
 			end
 		end
 		function obj=subsasgn(obj,S,V)

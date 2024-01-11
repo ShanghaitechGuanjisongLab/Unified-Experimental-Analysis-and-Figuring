@@ -4,7 +4,7 @@ DateTimes=table;
 DateTimes.DateTime=FileTable.Time;
 DT=sort(DateTimes.DateTime);
 if any(DT(1:end-1)==DT(2:end))
-	UniExp.UniExpException.DateTime_primary_key_has_duplicate_values.Throw;
+	UniExp.Exceptions.DateTime_primary_key_has_duplicate_values.Throw;
 end
 DateTimes.Mouse=categorical(FileTable.Mouse);
 Blocks=table;
