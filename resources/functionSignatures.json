@@ -1326,6 +1326,19 @@
 			}
 		]
 	},
+	"UniExp.FindSequence": {
+		"inputs": [
+			{
+				"name": "CellTrialTimes",
+				"kind": "required",
+				"type": [
+					"2d",
+					"real"
+				],
+				"purpose": "每个细胞每个回合的发放时点"
+			}
+		]
+	},
 	"UniExp.HeatmapSort": {
 		"inputs": [
 			{
