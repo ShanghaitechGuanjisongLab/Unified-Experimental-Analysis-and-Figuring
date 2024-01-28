@@ -83,5 +83,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Input_slices_does_not_sandwich_the_target_layer
 		Ambiguous_copy_source
 		Unexpected_argument_type
+		CacheDirectory_not_empty
 	end
 end
