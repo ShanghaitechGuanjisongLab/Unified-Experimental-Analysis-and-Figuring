@@ -1336,6 +1336,13 @@
 					"real"
 				],
 				"purpose": "每个细胞每个回合的发放时点"
+			},
+			{
+				"name": "Tolerance",
+				"kind": "ordered",
+				"type": ">=0",
+				"purpose": "最多容忍几个回合不满足序列",
+				"default": 0
 			}
 		]
 	},

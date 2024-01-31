@@ -84,5 +84,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Ambiguous_copy_source
 		Unexpected_argument_type
 		CacheDirectory_not_empty
+		Tolerance_must_be_less_than_number_of_trials
 	end
 end

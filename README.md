@@ -70,7 +70,7 @@ function Performance = EventLog2Performance(EventLogs,Events)
 %截取信号中的一段作为基线，执行归一化
 function Data = F0Normalize(Data,Method,F0Index)
 %从多个回合的发放时序中寻找不变的序列
-function CellSequence = FindSequence(CellTrialTimes)
+function CellSequence = FindSequence(CellTrialTimes,Tolerance)
 %在作热图LanearHeatmap之前对细胞进行分群排序。
 function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
