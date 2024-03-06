@@ -104,7 +104,7 @@ function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
 %截取 OME TIFF 文件的一段，输出MP4视频
 function TiffVideo(TiffPath,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>17.1.1</param.version>
+    <param.version>17.2.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -132,7 +132,8 @@ function TiffVideo(TiffPath,options)</param.description>
 %
 resources/project
 .git*
-**/*.asv</param.exclude.filters>
+**/*.asv
+.vscode</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -200,7 +201,6 @@ resources/project
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\+UniExp</file>
-      <file>${PROJECT_ROOT}\.vscode</file>
       <file>${PROJECT_ROOT}\doc</file>
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
