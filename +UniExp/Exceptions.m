@@ -85,5 +85,7 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Unexpected_argument_type
 		CacheDirectory_not_empty
 		Tolerance_must_be_less_than_number_of_trials
+		Some_trials_did_not_record_a_valid_CD2
+		CD2_of_specified_trials_is_not_equal_in_length
 	end
 end

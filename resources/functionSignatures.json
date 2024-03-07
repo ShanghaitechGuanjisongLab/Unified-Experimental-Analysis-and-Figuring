@@ -221,6 +221,36 @@
 			}
 		]
 	},
+	"UniExp.DataSet.QueryBPC": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "QueryTable",
+							"kind": "required",
+							"type": "tabular",
+							"purpose": "查询表，列出数据筛选条件"
+						}
+					],
+					[
+						{
+							"name": "QueryStruct",
+							"kind": "required",
+							"type": [
+								"struct",
+								"scalar"
+							],
+							"purpose": "查询结构体，列出数据筛选条件"
+						}
+					]
+				]
+			}
+		]
+	},
 	"UniExp.DataSet.QueryNTATS": {
 		"inputs": [
 			{
