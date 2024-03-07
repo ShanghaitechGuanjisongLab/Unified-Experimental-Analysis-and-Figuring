@@ -38,7 +38,7 @@ classdef Flags
 
 		%% 累积算法和排序标准
 
-		%平均值
+		%总和
 		Mean
 		%中位数
 		Median
@@ -106,5 +106,9 @@ classdef Flags
 
 		Bregma
 		Interaural
+
+		%% HeatmapSort
+
+		Sum
 	end
 end

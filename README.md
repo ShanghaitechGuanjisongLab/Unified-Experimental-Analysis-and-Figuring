@@ -72,7 +72,7 @@ function Data = F0Normalize(Data,Method,F0Index)
 %从多个回合的发放时序中寻找不变的序列
 function CellSequence = FindSequence(CellTrialTimes,Tolerance)
 %在作热图LanearHeatmap之前对细胞进行分群排序。
-function GroupNtats = HeatmapSort(GroupNtats,SortCriteria)
+function Data = HeatmapSort(Data,varargin)
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。

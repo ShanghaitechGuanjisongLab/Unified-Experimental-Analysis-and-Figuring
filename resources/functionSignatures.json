@@ -1386,6 +1386,28 @@
 							"kind": "required",
 							"type": "table",
 							"purpose": "NTATS分组"
+						},
+						{
+							"mutuallyExclusiveGroup": [
+								[
+									{
+										"name": "SortGroups",
+										"kind": "ordered",
+										"type": [
+											[
+												"real",
+												"vector"
+											],
+											[
+												"string",
+												"vector"
+											]
+										],
+										"purpose": "参与分群排序的组名或序号"
+									}
+								],
+								[]
+							]
 						}
 					],
 					[
@@ -1394,18 +1416,58 @@
 							"kind": "required",
 							"type": "3d",
 							"purpose": "原始数组"
+						},
+						{
+							"mutuallyExclusiveGroups": [
+								[
+									{
+										"name": "SortGroups",
+										"kind": "required",
+										"type": [
+											"real",
+											"vector"
+										],
+										"purpose": "参与分群排序的组序号"
+									}
+								],
+								[]
+							]
 						}
 					]
 				]
 			},
 			{
-				"name": "SortCriteria",
-				"kind": "ordered",
-				"type": [
-					"scalar",
-					"UniExp.Flags"
-				],
-				"purpose": "指定排序标准"
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "SortCriteria",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"UniExp.Flags"
+							],
+							"purpose": "指定排序标准"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "SortDirection",
+							"kind": "required",
+							"type": [
+								"char",
+								"choices={'ascend','descend'}"
+							],
+							"default": "'descend'",
+							"purpose": "排序方向"
+						}
+					],
+					[]
+				]
 			}
 		]
 	},
