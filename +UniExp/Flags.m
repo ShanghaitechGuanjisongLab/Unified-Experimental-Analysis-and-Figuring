@@ -55,14 +55,12 @@ classdef Flags
 		%绝对最大值
 		AbsMax
 
-		%% LanearHeatmap旗帜
+		%% LanearHeatmap
 
-		%隐藏X轴
 		HideXAxis
-		%隐藏Y轴
 		HideYAxis
-		%扭曲颜色图，使得较小数值获得较大对比度
 		ScaleColor
+		SymmetricColormap
 
 		%% BatchOirRegisterTiff.Parallel
 

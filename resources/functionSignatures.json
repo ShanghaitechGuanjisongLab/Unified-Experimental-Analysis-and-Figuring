@@ -1553,6 +1553,15 @@
 				"kind": "namevalue",
 				"type": "cell",
 				"purpose": "用于显示泳道小标题的其它格式参数"
+			},
+			{
+				"name": "CLim",
+				"kind": "namevalue",
+				"type": [
+					"size=1,2",
+					"real"
+				],
+				"purpose": "颜色棒对应的数值范围"
 			}
 		]
 	},
