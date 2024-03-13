@@ -87,5 +87,7 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Tolerance_must_be_less_than_number_of_trials
 		Some_trials_did_not_record_a_valid_CD2
 		CD2_of_specified_trials_is_not_equal_in_length
+		No_need_to_replenish
+		Cannot_LME_on_only_one_group
 	end
 end
