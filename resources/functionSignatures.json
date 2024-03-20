@@ -202,6 +202,46 @@
 			}
 		]
 	},
+	"UniExp.DataSet.NewBlocks": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"mutuallyExclusiveGroups": [
+					[
+						{
+							"name": "DateTime",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"datetime"
+							],
+							"purpose": "新Block的日期时间"
+						},
+						{
+							"name": "BlockUID",
+							"kind": "namevalue",
+							"type": "positive"
+						},
+						{
+							"name": "BlockIndex",
+							"kind": "namevalue",
+							"type": "positive"
+						}
+					],
+					[
+						{
+							"name": "NewTable",
+							"kind": "required",
+							"type": "table",
+							"purpose": "包含所有新Block信息的表格"
+						}
+					]
+				]
+			}
+		]
+	},
 	"UniExp.DataSet.NewTrial": {
 		"inputs": [
 			{

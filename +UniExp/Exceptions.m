@@ -89,5 +89,9 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		CD2_of_specified_trials_is_not_equal_in_length
 		No_need_to_replenish
 		Cannot_LME_on_only_one_group
+		Specified_duplicate_BlockUID
+		Specified_duplicate_BlockIndex_and_DateTime
+		Must_specify_BlockIndex
+		Specified_DateTime_does_not_exist
 	end
 end
