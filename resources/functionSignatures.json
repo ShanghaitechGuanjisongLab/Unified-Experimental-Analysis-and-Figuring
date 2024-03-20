@@ -208,7 +208,7 @@
 				"name": "obj"
 			},
 			{
-				"mutuallyExclusiveGroups": [
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "DateTime",
