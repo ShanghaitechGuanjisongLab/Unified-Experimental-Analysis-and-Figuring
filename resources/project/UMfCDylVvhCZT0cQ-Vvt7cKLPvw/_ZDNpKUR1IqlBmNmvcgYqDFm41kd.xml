@@ -11,7 +11,6 @@
         <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA/nuiSvJrm92oDSZwfnHbsu9DZM0sd.xml" value="783989d2"/>
         <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA/nuiSvJrm92oDSZwfnHbsu9DZM0sp.xml" value="cad832c5"/>
         <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA" value="-1"/>
-        <File path="resources/project/GNMWgYwxGsjRVtgg-sSVd-xXPJc" value="-1"/>
         <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/2kj09UetkV_lru3gvSPXnY6-nM4d.xml" value="eb3f3474"/>
         <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/2kj09UetkV_lru3gvSPXnY6-nM4p.xml" value="534446ef"/>
         <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/KKyDJtbdIBOlaeHmIZd5VX6vqx8d.xml" value="6edcc189"/>
@@ -66,7 +65,6 @@
         <File path="resources" value="-1"/>
         <File path="工具箱图像.jpg" value="31e3325e"/>
         <File path="打包工具箱.prj" value="a0dac9e4"/>
-        <File path="计算机视觉.mltbx" value="33edea36"/>
         <File path="计算机视觉.prj" value="fe84b66d"/>
     </Files>
     <MetadataNode>
@@ -182,5 +180,5 @@
             </path>
         </path>
     </MetadataNode>
-    <Date value="2024年2月29日 9:40:08"/>
+    <Date value="2024年3月21日 17:32:24"/>
 </Info>
