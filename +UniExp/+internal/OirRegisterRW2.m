@@ -52,7 +52,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				obj.CacheFid=0;
 			end
 			obj.GpuLimit=floor(double(intmax('int32'))/double(PieceElements))-1;
-			obj.CollectData=struct(Sum=0,SquareSum=0,SizeT=obj.NumPieces);
+			obj.CollectData=struct(Sum=0,SquareSum=0,SizeT=repmat(obj.NumPieces,1,1,1,obj.SizeZ));
 		end
 		function [Data,PiecesRead]=Read(obj,Start,End,~)
 			if nargin>3
@@ -69,8 +69,8 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
-			obj.CollectData.Sum=obj.CollectData.Sum+uint32(Data{2});
-			obj.CollectData.SquareSum=obj.CollectData.SquareSum+uint64(Data{2}).^2;
+			obj.CollectData.Sum=obj.CollectData.Sum+Data{2};
+			obj.CollectData.SquareSum=obj.CollectData.SquareSum+Data{3};
 			Data={};
 		end
 		function delete(obj)
