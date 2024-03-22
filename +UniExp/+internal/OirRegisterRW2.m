@@ -9,6 +9,8 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 		Writer Image5D.OmeTiffRWer
 		OirPath
 		Translation
+		Transform
+		DisplacementField
 		NontagChannels
 		CacheFid
 		SizeX
@@ -20,13 +22,12 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 	end
 	properties(Access=protected)
 		Reader Image5D.OirReader
-		Sum
 	end
 	methods
-		function obj = OirRegisterRW2(OirPath,Translation,OutputDirectory,CacheDirectory)
+		function obj = OirRegisterRW2(FileArguments,OutputDirectory,CacheDirectory)
 			import Image5D.*
-			obj.OirPath=OirPath;
-			obj.Reader=OirReader(OirPath);
+			obj.OirPath=FileArguments.OirPath;
+			obj.Reader=OirReader(obj.OirPath);
 			DeviceColors=obj.Reader.DeviceColors;
 			obj.SizeX=obj.Reader.SizeX;
 			obj.SizeY=obj.Reader.SizeY;
@@ -40,7 +41,9 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			Colors=ChannelColor.FromOirColors(DeviceColors.Color(obj.NontagChannels,:));
 			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			obj.NontagChannels=obj.NontagChannels-1;
-			obj.Translation=Translation;
+			obj.Translation=FileArguments.Translation;
+			obj.Transform=FileArguments.Transform;
+			obj.DisplacementField=FileArguments.DisplacementField;
 			if exist('CacheDirectory','var')
 				[~,Filename]=fileparts(OirPath);
 				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"));
@@ -48,8 +51,8 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			else
 				obj.CacheFid=0;
 			end
-			obj.MeanWriter=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".平均值.tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,1,DimensionOrder.XYCZT);
 			obj.GpuLimit=floor(double(intmax('int32'))/double(PieceElements))-1;
+			obj.CollectData=struct(Sum=0,SquareSum=0,SizeT=obj.NumPieces);
 		end
 		function [Data,PiecesRead]=Read(obj,Start,End,~)
 			if nargin>3
@@ -62,19 +65,13 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,Start-1,End-Start+1,obj.NontagChannels);
 			end
 			PiecesRead=size(Data,5);
-			Data={Data,obj.Translation(Start:End,:,:)};
+			Data={Data,obj.Translation(Start:End,:,:),obj.Transform,obj.DisplacementField};
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
-			if isempty(obj.Sum)
-				obj.Sum=Data{2};
-			else
-				obj.Sum=obj.Sum+Data{2};
-			end
+			obj.CollectData.Sum=obj.CollectData.Sum+uint32(Data{2});
+			obj.CollectData.SquareSum=obj.CollectData.SquareSum+uint64(Data{2}).^2;
 			Data={};
-			if End==obj.NumPieces
-				obj.MeanWriter.WritePixels(uint16(obj.Sum/double(End)));
-			end
 		end
 		function delete(obj)
 			if obj.CacheFid

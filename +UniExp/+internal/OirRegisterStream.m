@@ -31,11 +31,10 @@ classdef OirRegisterStream<UniExp.internal.VerboseStream
 		end
 	end
 	methods
-		function obj = OirRegisterStream(LogLevel,OirPath,Translation,OutputDirectory,varargin)
-			Arguments=table(OirPath,Translation);
+		function obj = OirRegisterStream(LogLevel,OirPath,Arguments,OutputDirectory,varargin)
+			Arguments.OirPath=OirPath;
 			OutputDirectory=MATLAB.Lang.Optional(OutputDirectory);
-			Arguments.OutputDirectory(:)=OutputDirectory;
-			obj@UniExp.internal.VerboseStream(LogLevel,table2struct(Arguments),@(S)UniExp.internal.OirRegisterRW2(S.OirPath,S.Translation,S.OutputDirectory,varargin{:}));
+			obj@UniExp.internal.VerboseStream(LogLevel,table2struct(Arguments),@(S)UniExp.internal.OirRegisterRW2(S,OutputDirectory,varargin{:}));
 			obj.OutputDirectory=OutputDirectory;
 		end
 	end
