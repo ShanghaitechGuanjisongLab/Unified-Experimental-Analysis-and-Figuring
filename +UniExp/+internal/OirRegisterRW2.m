@@ -2,13 +2,15 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
-		CollectData
 		ProcessData={}
+	end
+	properties(SetAccess=protected)
+		CollectData
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
 		Writer Image5D.OmeTiffRWer
 		OirPath
-		Translation
+		Translations
 		Transform
 		DisplacementField
 		NontagChannels
@@ -37,15 +39,15 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			PieceElements=prod([uint32(obj.SizeX),obj.SizeY,obj.SizeC,obj.SizeZ]);
 			obj.PieceSize=2*PieceElements;
 			obj.NontagChannels=find(~startsWith(DeviceColors.Device,'CD'));
-			[~,Filename]=fileparts(OirPath);
+			[~,Filename]=fileparts(obj.OirPath);
 			Colors=ChannelColor.FromOirColors(DeviceColors.Color(obj.NontagChannels,:));
 			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			obj.NontagChannels=obj.NontagChannels-1;
-			obj.Translation=FileArguments.Translation;
+			obj.Translations=FileArguments.Translations;
 			obj.Transform=FileArguments.Transform;
 			obj.DisplacementField=FileArguments.DisplacementField;
 			if exist('CacheDirectory','var')
-				[~,Filename]=fileparts(OirPath);
+				[~,Filename]=fileparts(obj.OirPath);
 				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"));
 				obj.SizeC=numel(obj.NontagChannels);
 			else
@@ -65,7 +67,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,Start-1,End-Start+1,obj.NontagChannels);
 			end
 			PiecesRead=size(Data,5);
-			Data={Data,obj.Translation(Start:End,:,:),obj.Transform,obj.DisplacementField};
+			Data={Data,obj.Translations(Start:End,:,:),obj.Transform,obj.DisplacementField};
 		end
 		function Data=Write(obj,Data,Start,End)
 			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
