@@ -37,6 +37,13 @@ classdef BrainAP
 	%表示小鼠脑的AP坐标，支持前囟和耳间两个参照系，支持基本数学运算。
 end
 ```
+## 实验助手
+```MATLAB
+%此函数交互式帮你找到最优的脑区注射位点！
+function [Center,CoronalRanges,SagittalRanges,Exception]=CerebrumMapping(APRange,MLRange,options)
+%根据椭圆窗范围相对于注射点的XY上下界，确定窗一圈8个关键点的XY绝对坐标
+function Points8 = WindowXYFromPoint(InjectAP,InjectML,dAP,dML)
+```
 ## 原始数据预处理
 ```MATLAB
 %从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
@@ -47,8 +54,6 @@ function TransMatrix = RoiRegister(PathArray,varargin)
 function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
 %对Tiff图像批量应用变换矩阵
 function BatchTiffTransform(TiffTransTable,OutputDirectory)
-%此函数交互式帮你找到最优的脑区注射位点！
-function [Center,CoronalRanges,SagittalRanges,Exception]=CerebrumMapping(APRange,MLRange,options)
 ```
 ## 从其它数据文件格式取得UniExp
 ```MATLAB
