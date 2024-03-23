@@ -2378,47 +2378,5 @@
 				"purpose": "在回合采样时点中取截取一段求平均"
 			}
 		]
-	},
-	"UniExp.WindowXYFromPoint": {
-		"inputs": [
-			{
-				"name": "InjectAP",
-				"kind": "required",
-				"type": [
-					"real",
-					"scalar"
-				],
-				"purpose": "注射点AP(Y)坐标"
-			},
-			{
-				"name": "InjectML",
-				"kind": "required",
-				"type": [
-					"real",
-					"scalar"
-				],
-				"purpose": "注射点ML(X)坐标"
-			},
-			{
-				"name": "dAP",
-				"kind": "required",
-				"type": [
-					"numel=2",
-					"vector",
-					"real"
-				],
-				"purpose": "窗相对于注射点的AP上下界"
-			},
-			{
-				"name": "dML",
-				"kind": "required",
-				"type": [
-					"numel=2",
-					"vector",
-					"real"
-				],
-				"purpose": "窗相对于注射点的ML左右界"
-			}
-		]
 	}
 }
