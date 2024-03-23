@@ -2,8 +2,10 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
-		CollectData
 		ProcessData
+	end
+	properties(SetAccess=protected)
+		CollectData
 	end
 	properties(SetAccess=immutable,GetAccess=private)
 		OirPath
