@@ -1,0 +1,410 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Info>
+    <Files>
+        <File path="+Image5D/+internal/Image5DAPI.m" value="8342c3d5"/>
+        <File path="+Image5D/+internal/private/Image5DMex.mexw64" value="b13cb05e"/>
+        <File path="+Image5D/+internal/private" value="-1"/>
+        <File path="+Image5D/+internal" value="-1"/>
+        <File path="+Image5D/ChannelColor.m" value="cfabb8ca"/>
+        <File path="+Image5D/DimensionOrder.m" value="b9ac7318"/>
+        <File path="+Image5D/Exceptions.m" value="82ea21fb"/>
+        <File path="+Image5D/InnerExceptionType.m" value="3e882dbe"/>
+        <File path="+Image5D/OirReader.m" value="7ca0d6c4"/>
+        <File path="+Image5D/OmeTiffRWer.m" value="9508a661"/>
+        <File path="+Image5D/PixelType.m" value="cf7afc0c"/>
+        <File path="+Image5D/SafePointer.m" value="95252114"/>
+        <File path="+Image5D/Version.m" value="8f15834a"/>
+        <File path="+Image5D/XmlErrorCode.m" value="5e19b423"/>
+        <File path="+Image5D" value="-1"/>
+        <File path=".gitattributes" value="6e958f15"/>
+        <File path=".gitignore" value="b592bffe"/>
+        <File path="Image5D.prj" value="fe84b66d"/>
+        <File path="Image5D.sln" value="ade365f9"/>
+        <File path="Image5DLib/IFD5D.cpp" value="ae517fe"/>
+        <File path="Image5DLib/IFD5D.h" value="ed603b7d"/>
+        <File path="Image5DLib/IOmeTiff读写器.cpp" value="31b01e1a"/>
+        <File path="Image5DLib/Image5DLib.vcxproj.filters" value="ad75259f"/>
+        <File path="Image5DLib/Image5DLib.vcxproj.user" value="e15cef4a"/>
+        <File path="Image5DLib/Image5DLib.vcxproj" value="5cfb5374"/>
+        <File path="Image5DLib/Oir索引.cpp" value="2befb0f8"/>
+        <File path="Image5DLib/Oir读入器.cpp" value="90860f7f"/>
+        <File path="Image5DLib/OmeBigTiff5D.cpp" value="d4ab85ce"/>
+        <File path="Image5DLib/OmeBigTiff5D.h" value="5ec171b6"/>
+        <File path="Image5DLib/OmeTiff读入器.cpp" value="fdaa239"/>
+        <File path="Image5DLib/OmeTiff读入器.h" value="560a3f19"/>
+        <File path="Image5DLib/OmeXml基本解析.cpp" value="9d503efa"/>
+        <File path="Image5DLib/OmeXml基本解析.h" value="156d8645"/>
+        <File path="Image5DLib/Ome属性读入器.h" value="86d010b1"/>
+        <File path="Image5DLib/Tiff属性读入器.h" value="f989c4d8"/>
+        <File path="Image5DLib/Tiff标准.h" value="74ac9f39"/>
+        <File path="Image5DLib/Tiff读入器.cpp" value="793eca4f"/>
+        <File path="Image5DLib/Tiff读入器.h" value="790d51b6"/>
+        <File path="Image5DLib/include/IOmeTiff读写器.h" value="440821ae"/>
+        <File path="Image5DLib/include/Image5D异常.h" value="bcbf6034"/>
+        <File path="Image5DLib/include/Image5D资源.h" value="4aeafff9"/>
+        <File path="Image5DLib/include/OME标准.h" value="39d169ac"/>
+        <File path="Image5DLib/include/Oir索引.h" value="4bd6ef9f"/>
+        <File path="Image5DLib/include/Oir读入器.h" value="c436b7e0"/>
+        <File path="Image5DLib/include/TiffData模板.xml" value="89d2d446"/>
+        <File path="Image5DLib/include/XML模板.xml" value="6bb9b076"/>
+        <File path="Image5DLib/include/哈希计算器.h" value="174bc367"/>
+        <File path="Image5DLib/include/文件控制块.h" value="460704bb"/>
+        <File path="Image5DLib/include/文件映射.h" value="ad395e14"/>
+        <File path="Image5DLib/include/资源.rc" value="c2766b2d"/>
+        <File path="Image5DLib/include" value="-1"/>
+        <File path="Image5DLib/packages.config" value="c0f273e9"/>
+        <File path="Image5DLib/哈希计算器.cpp" value="73d02314"/>
+        <File path="Image5DLib/安全拷贝.h" value="a77eefc8"/>
+        <File path="Image5DLib/文件控制块.cpp" value="e9631c62"/>
+        <File path="Image5DLib/文件映射.cpp" value="5c1967c1"/>
+        <File path="Image5DLib" value="-1"/>
+        <File path="Image5DMex/Image5DMex.vcxproj.filters" value="ebb527fd"/>
+        <File path="Image5DMex/Image5DMex.vcxproj.user" value="e15cef4a"/>
+        <File path="Image5DMex/Image5DMex.vcxproj" value="f6e4dd8"/>
+        <File path="Image5DMex/MexFunction.cpp" value="a798513c"/>
+        <File path="Image5DMex/OirMex.cpp" value="248d5e64"/>
+        <File path="Image5DMex/Oir索引.h" value="d3319e45"/>
+        <File path="Image5DMex/TiffMex.cpp" value="9f3b4323"/>
+        <File path="Image5DMex/dllmain.cpp" value="827de5ff"/>
+        <File path="Image5DMex/packages.config" value="cc3c1268"/>
+        <File path="Image5DMex" value="-1"/>
+        <File path="Image5D测试/Image5D测试.cpp" value="f4f3e880"/>
+        <File path="Image5D测试/Image5D测试.vcxproj.filters" value="9f259209"/>
+        <File path="Image5D测试/Image5D测试.vcxproj.user" value="e15cef4a"/>
+        <File path="Image5D测试/Image5D测试.vcxproj" value="be5c5d21"/>
+        <File path="Image5D测试/packages.config" value="1cf2a68f"/>
+        <File path="Image5D测试" value="-1"/>
+        <File path="README.md" value="f8bdb4bf"/>
+        <File path="doc/GettingStarted.mlx" value="e1af925d"/>
+        <File path="doc" value="-1"/>
+        <File path="resources/functionSignatures.json" value="b60868ed"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ItKV4N873Ngz-G3TGOoU-sWKWoAd.xml" value="93bd9b40"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ItKV4N873Ngz-G3TGOoU-sWKWoAp.xml" value="47ccbc6d"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ucuJ8WCPIF_joGAlmGCzuuLAqkAd.xml" value="b62b63f9"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU/ucuJ8WCPIF_joGAlmGCzuuLAqkAp.xml" value="60a23a3a"/>
+        <File path="resources/project/8uaWCVqFEYabNeq48ef7X8EmMoU" value="-1"/>
+        <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA/SmR1X_5SFd7Jzp9ic5nS6K9ET9kd.xml" value="50727024"/>
+        <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA/SmR1X_5SFd7Jzp9ic5nS6K9ET9kp.xml" value="fafeffc0"/>
+        <File path="resources/project/EEtUlUb-dLAdf0KpMVivaUlztwA" value="-1"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/2kj09UetkV_lru3gvSPXnY6-nM4d.xml" value="ed72fa85"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/2kj09UetkV_lru3gvSPXnY6-nM4p.xml" value="afe046a3"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/KKyDJtbdIBOlaeHmIZd5VX6vqx8d.xml" value="68910f78"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/KKyDJtbdIBOlaeHmIZd5VX6vqx8p.xml" value="3a4507bf"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/QWNDYJD5mGW1bWYvPx9DtKnxzw4d.xml" value="b740e8c7"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/QWNDYJD5mGW1bWYvPx9DtKnxzw4p.xml" value="8739a8f2"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/R1RggVhA72agIvELiuhWPRS8F0Id.xml" value="1de60347"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/R1RggVhA72agIvELiuhWPRS8F0Ip.xml" value="28d99701"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/aEHSZBIY-yve10yGis12Zr5DLZod.xml" value="9399abc8"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/aEHSZBIY-yve10yGis12Zr5DLZop.xml" value="cd91d98b"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/j4xwF_j8iFTVayUMfxLgMnTbencd.xml" value="bc13c0d9"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/j4xwF_j8iFTVayUMfxLgMnTbencp.xml" value="e8544baf"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/r8LR4nLmg9ai3oHrW1r_-KocQzkd.xml" value="597d7215"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs/r8LR4nLmg9ai3oHrW1r_-KocQzkp.xml" value="45d239ae"/>
+        <File path="resources/project/NjSPEMsIuLUyIpr2u1Js5bVPsOs" value="-1"/>
+        <File path="resources/project/Project.xml" value="1246079c"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/cSvJV8SYECwmpOUT6v1OqSH6G28d.xml" value="ea65cf7"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/cSvJV8SYECwmpOUT6v1OqSH6G28p.xml" value="68ecbdf"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/mXCVGRnnD-Nx2c1j7zCLj-Znmgod.xml" value="b62b63f9"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0/mXCVGRnnD-Nx2c1j7zCLj-Znmgop.xml" value="60a23a3a"/>
+        <File path="resources/project/YhuPDDuEWIGe0C07ihHYccefon0" value="-1"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/8uaWCVqFEYabNeq48ef7X8EmMoUd.xml" value="b62b63f9"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/8uaWCVqFEYabNeq48ef7X8EmMoUp.xml" value="bf92b065"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/PhSw57jIfoXTQLgDQmLzbcbNEiQd.xml" value="ea65cf7"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/PhSw57jIfoXTQLgDQmLzbcbNEiQp.xml" value="9ca4f0f2"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/nxwdUUWYFDB-DZ4t5P3YuOeTYMgd.xml" value="b62b63f9"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA/nxwdUUWYFDB-DZ4t5P3YuOeTYMgp.xml" value="60a23a3a"/>
+        <File path="resources/project/fCaM-BMGhmyoAvfzSjTapkDRHvA" value="-1"/>
+        <File path="resources/project/fjRQtWiSIy7hIlj-Kmk87M7s21k/NjSPEMsIuLUyIpr2u1Js5bVPsOsd.xml" value="206f0b6"/>
+        <File path="resources/project/fjRQtWiSIy7hIlj-Kmk87M7s21k/NjSPEMsIuLUyIpr2u1Js5bVPsOsp.xml" value="9b1a20ad"/>
+        <File path="resources/project/fjRQtWiSIy7hIlj-Kmk87M7s21k" value="-1"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/QMJD9OLFzxcTTbPOoh-ahQ4zTRUd.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/QMJD9OLFzxcTTbPOoh-ahQ4zTRUp.xml" value="86f0ee0c"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/YhuPDDuEWIGe0C07ihHYccefon0d.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/YhuPDDuEWIGe0C07ihHYccefon0p.xml" value="2cf6b608"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/rHjyxu3W64YT9agZoZ_WZ2oLlIId.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/rHjyxu3W64YT9agZoZ_WZ2oLlIIp.xml" value="b5d6fbb5"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/ysJKrSeLff7wsecXWNckJ2AH34kd.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/ysJKrSeLff7wsecXWNckJ2AH34kp.xml" value="56061787"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/zYnG3qOee3j4rCLfAMuIFKG_a6Id.xml" value="b62b63f9"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ/zYnG3qOee3j4rCLfAMuIFKG_a6Ip.xml" value="2d9c98dd"/>
+        <File path="resources/project/qaw0eS1zuuY1ar9TdPn1GMfrjbQ" value="-1"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/B8CY-BgWV0DACtBWzPJ44PuBteMd.xml" value="b62b63f9"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/B8CY-BgWV0DACtBWzPJ44PuBteMp.xml" value="60a23a3a"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/OOI2PDaCdnXr4seWWgczoe2MZMMd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/OOI2PDaCdnXr4seWWgczoe2MZMMp.xml" value="d7e17f98"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/PZ2G3rFcolGJ-HQxpAvlrH5LSPQd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/PZ2G3rFcolGJ-HQxpAvlrH5LSPQp.xml" value="7869de00"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/QK17u0RRM4SAH3myTku7irSfPa8d.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/QK17u0RRM4SAH3myTku7irSfPa8p.xml" value="c071596"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/Rf2PCmJGykrZPV2RV8Nv-p8tKp0d.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/Rf2PCmJGykrZPV2RV8Nv-p8tKp0p.xml" value="c5f72f24"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/bCsycFsV7cjz0_oCEVZGK7gRUvQd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/bCsycFsV7cjz0_oCEVZGK7gRUvQp.xml" value="2e800a81"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/fCaM-BMGhmyoAvfzSjTapkDRHvAd.xml" value="b62b63f9"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/fCaM-BMGhmyoAvfzSjTapkDRHvAp.xml" value="5cc9586f"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nkdsIcZvVSbUr7_Nza1-nwUywwod.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nkdsIcZvVSbUr7_Nza1-nwUywwop.xml" value="fc94b941"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nqfp--F3-cw8IaM37R__7ROCPVod.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/nqfp--F3-cw8IaM37R__7ROCPVop.xml" value="26622e99"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/p3oFTVxKldRjrlP-kjR4m2wT-Pod.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/p3oFTVxKldRjrlP-kjR4m2wT-Pop.xml" value="bb64095f"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/piR8bEQuR1J52XnM6rJkMuzP4wgd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/piR8bEQuR1J52XnM6rJkMuzP4wgp.xml" value="cbb13f05"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/yAYH22fL5Lh5jZefomrOXbUKQ2wd.xml" value="ea65cf7"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII/yAYH22fL5Lh5jZefomrOXbUKQ2wp.xml" value="aa1c8c9a"/>
+        <File path="resources/project/rHjyxu3W64YT9agZoZ_WZ2oLlII" value="-1"/>
+        <File path="resources/project/root/6x1BhZX_fLnKpcwqra0qFwv1jIgp.xml" value="aedb31da"/>
+        <File path="resources/project/root/EEtUlUb-dLAdf0KpMVivaUlztwAp.xml" value="429cb5d6"/>
+        <File path="resources/project/root/GiiBklLgTxteCEmomM8RCvWT0nQd.xml" value="18e75cd1"/>
+        <File path="resources/project/root/GiiBklLgTxteCEmomM8RCvWT0nQp.xml" value="c5cdc4a7"/>
+        <File path="resources/project/root/KAXfQgCar2Yb8zOxgvf9hdmLP1Ep.xml" value="a7c5a64c"/>
+        <File path="resources/project/root/LUgSFhI3RPozNzNcutxrczVe6f0p.xml" value="3617466d"/>
+        <File path="resources/project/root/NmGqIpAwUJcXFyLjFAGnU9uyN5Yp.xml" value="ac054281"/>
+        <File path="resources/project/root/fjRQtWiSIy7hIlj-Kmk87M7s21kp.xml" value="dc68b16d"/>
+        <File path="resources/project/root/qaw0eS1zuuY1ar9TdPn1GMfrjbQp.xml" value="ee2fc10d"/>
+        <File path="resources/project/rootp.xml" value="b62b63f9"/>
+        <File path="resources/project/root" value="-1"/>
+        <File path="resources/project/uuid-57655949-beb6-412d-ab68-8f1972c0061a.xml" value="b62b63f9"/>
+        <File path="resources/project" value="-1"/>
+        <File path="resources" value="-1"/>
+        <File path="工具箱图像.png" value="49907278"/>
+        <File path="打包.prj" value="7211283a"/>
+    </Files>
+    <MetadataNode>
+        <path value="ProjectData:type:Info">
+            <node name="Info">
+                <entry key="Name" value="Image5D"/>
+            </node>
+        </path>
+        <path value="Root:type:Categories">
+            <path value="FileClassCategory:type:Category">
+                <node name="Info">
+                    <entry key="DataType" value="None"/>
+                    <entry key="Name" value="分类"/>
+                    <entry key="ReadOnly" value="1"/>
+                    <entry key="SingleValued" value="1"/>
+                </node>
+                <path value="artifact:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="工件"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="convenience:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="便利"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="derived:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="派生"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="design:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="设计"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="none:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="无"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="other:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="其他"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+                <path value="test:type:Label">
+                    <node name="Info">
+                        <entry key="Name" value="测试"/>
+                        <entry key="ReadOnly" value="READ_ONLY"/>
+                    </node>
+                </path>
+            </path>
+        </path>
+        <path value="Root:type:EntryPoints"/>
+        <path value="Root:type:Extensions"/>
+        <path value="Root:type:Files">
+            <path value="+Image5D:type:File">
+                <node name="Info"/>
+                <path value="+internal:type:File">
+                    <node name="Info"/>
+                    <path value="1:type:DIR_SIGNIFIER">
+                        <node name="Info"/>
+                    </path>
+                    <path value="Image5DAPI.m:type:File">
+                        <node name="Info">
+                            <node name="Category">
+                                <entry key="UUID" value="FileClassCategory"/>
+                                <node name="Label">
+                                    <entry key="UUID" value="design"/>
+                                </node>
+                            </node>
+                        </node>
+                    </path>
+                    <path value="private:type:File">
+                        <node name="Info"/>
+                        <path value="1:type:DIR_SIGNIFIER">
+                            <node name="Info"/>
+                        </path>
+                        <path value="Image5DMex.mexw64:type:File">
+                            <node name="Info">
+                                <node name="Category">
+                                    <entry key="UUID" value="FileClassCategory"/>
+                                    <node name="Label">
+                                        <entry key="UUID" value="derived"/>
+                                    </node>
+                                </node>
+                            </node>
+                        </path>
+                    </path>
+                </path>
+                <path value="1:type:DIR_SIGNIFIER">
+                    <node name="Info"/>
+                </path>
+                <path value="ChannelColor.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="DimensionOrder.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Exceptions.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="InnerExceptionType.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="OirReader.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="OmeTiffRWer.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="PixelType.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="SafePointer.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="Version.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+                <path value="XmlErrorCode.m:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+            </path>
+            <path value="README.md:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="doc:type:File">
+                <node name="Info"/>
+                <path value="1:type:DIR_SIGNIFIER">
+                    <node name="Info"/>
+                </path>
+                <path value="GettingStarted.mlx:type:File">
+                    <node name="Info">
+                        <node name="Category">
+                            <entry key="UUID" value="FileClassCategory"/>
+                            <node name="Label">
+                                <entry key="UUID" value="design"/>
+                            </node>
+                        </node>
+                    </node>
+                </path>
+            </path>
+            <path value="工具箱图像.png:type:File">
+                <node name="Info"/>
+            </path>
+            <path value="打包.prj:type:File">
+                <node name="Info"/>
+            </path>
+        </path>
+        <path value="Root:type:ProjectData"/>
+        <path value="Root:type:ProjectPath">
+            <path value="04eda8e6-4855-49a6-af8b-f64c66c1224f:type:Reference">
+                <node name="Info">
+                    <entry key="Ref" value=""/>
+                    <entry key="Type" value="Relative"/>
+                </node>
+            </path>
+        </path>
+        <path value="Root:type:References"/>
+    </MetadataNode>
+    <Date value="2024年3月23日 19:24:01"/>
+</Info>
