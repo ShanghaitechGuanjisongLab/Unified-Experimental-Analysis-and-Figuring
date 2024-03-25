@@ -42,7 +42,7 @@ end
 %从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
 function RoiCPath=ImageJRoiDiff(options)
 %根据 ImageJ RoiSet 配准图像
-function TransMatrix = RoiRegister(PathArray,varargin)
+function TransMatrix = RoiRegister(PathTable,varargin)
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
 %对Tiff图像批量应用变换矩阵

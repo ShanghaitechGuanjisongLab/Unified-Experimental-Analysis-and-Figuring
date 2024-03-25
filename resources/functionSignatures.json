@@ -1881,13 +1881,10 @@
 	"UniExp.RoiRegister": {
 		"inputs": [
 			{
-				"name": "PathArray",
+				"name": "PathTable",
 				"kind": "required",
-				"type": [
-					"string",
-					"2d"
-				],
-				"purpose": "路径矩阵"
+				"type": "table",
+				"purpose": "路径表"
 			},
 			{
 				"mutuallyExclusiveGroup": [
