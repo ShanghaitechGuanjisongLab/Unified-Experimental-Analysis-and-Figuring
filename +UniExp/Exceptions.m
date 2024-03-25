@@ -93,5 +93,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Specified_duplicate_BlockIndex_and_DateTime
 		Must_specify_BlockIndex
 		Specified_DateTime_does_not_exist
+		QueryTable_contains_duplicate_rows
 	end
 end
