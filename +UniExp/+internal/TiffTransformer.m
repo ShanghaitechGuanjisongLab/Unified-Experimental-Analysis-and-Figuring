@@ -2,8 +2,10 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize double
 		NumPieces double
-		CollectData
 		ProcessData
+	end
+	properties(SetAccess=protected)
+		CollectData
 	end
 	properties
 		Reader Image5D.OmeTiffRWer
