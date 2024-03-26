@@ -2379,24 +2379,6 @@
 	"UniExp.WindowXYFromPoint": {
 		"inputs": [
 			{
-				"name": "InjectAP",
-				"kind": "required",
-				"type": [
-					"real",
-					"scalar"
-				],
-				"purpose": "注射点AP(Y)坐标"
-			},
-			{
-				"name": "InjectML",
-				"kind": "required",
-				"type": [
-					"real",
-					"scalar"
-				],
-				"purpose": "注射点ML(X)坐标"
-			},
-			{
 				"name": "dAP",
 				"kind": "required",
 				"type": [
@@ -2415,6 +2397,24 @@
 					"real"
 				],
 				"purpose": "窗相对于注射点的ML左右界"
+			},
+			{
+				"name": "InjectAP",
+				"kind": "ordered",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "注射点AP(Y)坐标"
+			},
+			{
+				"name": "InjectML",
+				"kind": "ordered",
+				"type": [
+					"real",
+					"scalar"
+				],
+				"purpose": "注射点ML(X)坐标"
 			}
 		]
 	}
