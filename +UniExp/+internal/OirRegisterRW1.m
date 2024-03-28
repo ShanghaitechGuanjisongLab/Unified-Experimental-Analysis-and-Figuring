@@ -7,8 +7,8 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 	properties(SetAccess=protected)
 		CollectData
 	end
-	properties(SetAccess=immutable,GetAccess=private)
-		OirPath
+	properties(SetAccess=immutable,GetAccess=protected)
+		ReaderGetFun
 		BlockStarts
 		BlockSizes uint16
 		CacheFid
@@ -16,14 +16,14 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 		CacheDirectory
 		WriteToCache
 	end
-	properties(Access=private)
+	properties(Access=protected)
 		Reader Image5D.OirReader
 		BlocksRead=0
 	end
 	methods
 		function obj = OirRegisterRW1(OirPath,BlockSize,WriteToCache,CacheDirectory)
-			obj.OirPath=OirPath;
-			obj.Reader=Image5D.OirReader(OirPath);
+			obj.ReaderGetFun=@()Image5D.OirReader(OirPath);
+			obj.Reader=obj.ReaderGetFun();
 			DeviceColors=obj.Reader.DeviceColors;
 			TagLogical=startsWith(DeviceColors.Device,'CD');
 			obj.NumPieces=double(obj.Reader.SizeT);%20
@@ -45,7 +45,7 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 		end
 		function [Data,PiecesRead]=Read(obj,~,~,~)
 			obj.BlocksRead=obj.BlocksRead+1;
-			[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,obj.BlockStarts(obj.BlocksRead),obj.BlockSizes(obj.BlocksRead));
+			[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,obj.BlockStarts(obj.BlocksRead),obj.BlockSizes(obj.BlocksRead));
 			if obj.CacheFid
 				fwrite(obj.CacheFid,Data(:,:,obj.NonTagChannel,:,:),'uint16');
 			end

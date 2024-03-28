@@ -9,7 +9,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
 		Writer Image5D.OmeTiffRWer
-		OirPath
+		ReaderGetFun
 		Translation
 		NontagChannels
 		CacheFid
@@ -27,8 +27,8 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 	methods
 		function obj = OirRegisterRW2(OirPath,Translation,OutputDirectory,CacheDirectory)
 			import Image5D.*
-			obj.OirPath=OirPath;
-			obj.Reader=OirReader(OirPath);
+			obj.ReaderGetFun=@()OirReader(OirPath);
+			obj.Reader=obj.ReaderGetFun();
 			DeviceColors=obj.Reader.DeviceColors;
 			obj.SizeX=obj.Reader.SizeX;
 			obj.SizeY=obj.Reader.SizeY;
@@ -61,7 +61,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				Sizes=[obj.SizeX,obj.SizeY,obj.SizeC,obj.SizeZ,End-Start+1];
 				Data=reshape(fread(obj.CacheFid,prod(Sizes),'uint16=>uint16'),Sizes);
 			else
-				[Data,obj.Reader]=TryRead(obj.Reader,obj.OirPath,Start-1,End-Start+1,obj.NontagChannels);
+				[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,Start-1,End-Start+1,obj.NontagChannels);
 			end
 			PiecesRead=size(Data,5);
 			Data={Data,obj.Translation(Start:End,:,:)};

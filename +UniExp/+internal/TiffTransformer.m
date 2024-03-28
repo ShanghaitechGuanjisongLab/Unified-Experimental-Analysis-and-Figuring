@@ -7,23 +7,29 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 	properties(SetAccess=protected)
 		CollectData
 	end
-	properties
+	properties(Access=protected)
 		Reader Image5D.OmeTiffRWer
 		Writer Image5D.OmeTiffRWer
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
+		ReaderGetFun
 		GpuLimit
+		WriterIsReader
 	end
 	methods
 		function obj=TiffTransformer(TiffPath,TransMatrix,OutputDirectory)
 			import Image5D.*
 			[~,Filename]=fileparts(TiffPath);
 			if exist('OutputDirectory','var')
-				obj.Reader=OmeTiffRWer.OpenRead(TiffPath);
+				obj.ReaderGetFun=@()OmeTiffRWer.OpenRead(TiffPath);
+				obj.Reader=obj.ReaderGetFun();
 				obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),obj.Reader.ImageDescription);
+				obj.WriterIsReader=false;
 			else
-				obj.Reader=OmeTiffRWer.OpenRW(TiffPath);
+				obj.ReaderGetFun=@()OmeTiffRWer.OpenRW(TiffPath);
+				obj.Reader=obj.ReaderGetFun();
 				obj.Writer=obj.Reader;
+				obj.WriterIsReader=true;
 			end
 			if obj.Reader.SizeZ~=numel(TransMatrix)
 				UniExp.Exceptions.ZLayers_of_the_moving_ROI_and_file_do_not_match.Throw(Filename);
@@ -39,7 +45,10 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 			if nargin>3
 				End=min(End,Start+obj.GpuLimit);
 			end
-			Data=obj.Reader.ReadPixels(Start-1,End-Start+1);
+			[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,Start-1,End-Start+1);
+			if obj.WriterIsReader
+				obj.Writer=obj.Reader;
+			end
 			PiecesRead=size(Data,5);
 		end
 		function Data=Write(obj,Data,Start,End)
