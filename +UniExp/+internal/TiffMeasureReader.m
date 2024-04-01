@@ -2,11 +2,11 @@ classdef TiffMeasureReader<ParallelComputing.IBlockRWer
 	properties(SetAccess=immutable)
 		PieceSize double
 		NumPieces double
-		Reader Image5D.OmeTiffRWer
 		ProcessData={}
 	end
 	properties(SetAccess=protected)
 		CollectData
+		Reader
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
 		GpuLimit
