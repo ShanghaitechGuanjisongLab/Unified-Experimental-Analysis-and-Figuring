@@ -11,10 +11,11 @@ classdef VerboseStream<ParallelComputing.BlockRWStream
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			EndPiece=obj.BlockTable.EndPiece(BlockIndex);
 			NumPieces=obj.ObjectTable.RWer(ObjectIndex).NumPieces;
+			import UniExp.Flags
 			switch(obj.LogLevel)
-				case UniExp.Flags.EachBlock
+				case Flags.EachBlock
 					fprintf('%s 文件%u/%u 帧%u/%u\n',datetime,ObjectIndex,obj.NumObjects,EndPiece,NumPieces);
-				case UniExp.Flags.LinearReduce
+				case Flags.LinearReduce
 					%sqrt不接受整数，必须先转double；整数不能和single一起使用，因此也只能转double
 					if ObjectIndex>obj.LastObject
 						fprintf('%s 文件%u/%u 帧%u/%u\n',datetime,ObjectIndex,obj.NumObjects,EndPiece,NumPieces);
@@ -27,11 +28,15 @@ classdef VerboseStream<ParallelComputing.BlockRWStream
 							obj.NumLogs=NewNL;
 						end
 					end
-				case UniExp.Flags.EachFile
+				case Flags.EachFile
 					if ObjectIndex>obj.LastObject
 						fprintf('%s 文件%u/%u',datetime,ObjectIndex,obj.NumObjects);
 						obj.LastObject=ObjectIndex;
 					end
+				case {Flags.No_special_operation,Flags.NoLogs}
+				otherwise
+					UniExp.Exceptions.Unexpected_LogLevel.Throw(obj.LogLevel);
+
 			end
 			obj.LocalWriteBlock@ParallelComputing.BlockRWStream(Data,BlockIndex);
 		end

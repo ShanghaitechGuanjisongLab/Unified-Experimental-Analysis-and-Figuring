@@ -79,6 +79,8 @@ classdef Flags
 		LinearReduce
 		%每个文件输出一条日志信息
 		EachFile
+		%不输出任何日志信息
+		NoLogs
 
 		%% DataSet.AddBehavior.EventLogCheckLevel
 
