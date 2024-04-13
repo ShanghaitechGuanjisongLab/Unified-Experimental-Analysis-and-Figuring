@@ -21,7 +21,7 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 			import Image5D.*
 			[FirstDirectory,Filename,Extension]=fileparts(TiffPath);
 			switch Extension
-				case "tif"
+				case ".tif"
 					if exist('OutputDirectory','var')
 						obj.ReaderGetFun=@()OmeTiffRWer.OpenRead(TiffPath);
 						obj.Reader=obj.ReaderGetFun();
@@ -35,13 +35,13 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 					end
 					PieceElements=prod([uint32(obj.Reader.SizeX),obj.Reader.SizeY,obj.Reader.SizeC,obj.Reader.SizeZ]);
 					obj.PieceSize=PieceElements*uint32(obj.Reader.SizeP);
-				case "oir"
+				case ".oir"
 					if ~exist('OutputDirectory','var')
 						OutputDirectory=FirstDirectory;
 					end
 					obj.ReaderGetFun=@()OirReader(TiffPath);
 					obj.Reader=obj.ReaderGetFun();
-					obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,ChannelColor.FromOirColors(obj.Reader.DeviceColors.Color),obj.Reader.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
+					obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,ChannelColor.FromOirColors(obj.Reader.DeviceColors.Color),obj.Reader.SizeZ,obj.Reader.SizeT,DimensionOrder.XYCZT);
 					obj.WriterIsReader=false;
 					PieceElements=prod([uint32(obj.Reader.SizeX),obj.Reader.SizeY,obj.Reader.SizeC,obj.Reader.SizeZ]);
 					obj.PieceSize=PieceElements*2;
