@@ -41,7 +41,7 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 					end
 					obj.ReaderGetFun=@()OirReader(TiffPath);
 					obj.Reader=obj.ReaderGetFun();
-					obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,ChannelColor.FromOirColors(obj.Reader.DeviceColors.Color),obj.Reader.SizeZ,obj.Reader.SizeT,DimensionOrder.XYCZT);
+					obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,obj.Reader.ChannelColors,obj.Reader.SizeZ,obj.Reader.SizeT,DimensionOrder.XYCZT);
 					obj.WriterIsReader=false;
 					PieceElements=prod([uint32(obj.Reader.SizeX),obj.Reader.SizeY,obj.Reader.SizeC,obj.Reader.SizeZ]);
 					obj.PieceSize=PieceElements*2;
