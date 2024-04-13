@@ -39,8 +39,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 			obj.PieceSize=2*PieceElements;
 			obj.NontagChannels=find(~startsWith(DeviceColors.Device,'CD'));
 			[~,Filename]=fileparts(OirPath);
-			Colors=ChannelColor.FromOirColors(DeviceColors.Color(obj.NontagChannels,:));
-			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,Colors,obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
+			obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory.Value,Filename+".tif"),PixelType.UINT16,obj.SizeX,obj.SizeY,ChannelColor.FromOirColors(DeviceColors.Color(obj.NontagChannels,:)),obj.SizeZ,obj.NumPieces,DimensionOrder.XYCZT);
 			obj.NontagChannels=obj.NontagChannels-1;
 			obj.Translation=Translation;
 			if exist('CacheDirectory','var')

@@ -94,5 +94,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Must_specify_BlockIndex
 		Specified_DateTime_does_not_exist
 		Unexpected_LogLevel
+		Unexpected_file_extension
 	end
 end
