@@ -5,7 +5,7 @@ V.GlobalOptimization='3.1.1';
 V.ImageProcessing='3.6.0';
 V.Image5D='3.1.0';
 V.TextAnalytics='1.0.3';
-V.ComputerVision='1.0.0';
+V.ComputerVision='1.1.1';
 V.MatlabExtension='v18.3.0';
 V.MATLAB='R2024a';
 persistent NewVersion
