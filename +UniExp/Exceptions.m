@@ -95,5 +95,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Specified_DateTime_does_not_exist
 		Unexpected_LogLevel
 		Unexpected_file_extension
+		Failed_to_resolve_a_standard_file_name
 	end
 end
