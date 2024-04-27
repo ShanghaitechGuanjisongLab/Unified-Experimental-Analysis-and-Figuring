@@ -96,5 +96,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Unexpected_LogLevel
 		Unexpected_file_extension
 		Failed_to_resolve_a_standard_file_name
+		Mismatched_mouse_name_in_the_paths
 	end
 end
