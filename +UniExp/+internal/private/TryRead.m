@@ -6,7 +6,7 @@ while true
 		Data=Reader.ReadPixels(varargin{:});
 		break;
 	catch ME
-		if strcmp(ME.identifier,'Image5D:Image5DException:Memory_copy_failed')
+		if strcmp(ME.identifier,'Image5D:Exceptions:Memory_copy_failed')
 			warning('文件读入失败，可能是持有文件的设备断开了连接，请检查设备。将在%u秒后重试。',Wait);
 			pause(Wait);
 			Wait=bitshift(Wait,1);
@@ -18,7 +18,7 @@ while true
 					Reader=ReaderGetFun();
 					break;
 				catch ME
-					if strcmp(ME.identifier,'Image5D:Image5DException:File_open_failed')
+					if strcmp(ME.identifier,'Image5D:Exceptions:Memory_copy_failed')
 						warning('文件打开失败，可能是持有文件的设备断开了连接，请检查设备。将在%u秒后重试。',Wait);
 						pause(Wait);
 						Wait=bitshift(Wait,1);
