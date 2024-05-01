@@ -13,6 +13,7 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
 		ReaderGetFun
+		WriterGetFun
 		GpuLimit
 		WriterIsReader
 	end
@@ -41,7 +42,8 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 					end
 					obj.ReaderGetFun=@()OirReader(TiffPath);
 					obj.Reader=obj.ReaderGetFun();
-					obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,obj.Reader.ChannelColors,obj.Reader.SizeZ,obj.Reader.SizeT,DimensionOrder.XYCZT);
+					obj.WriterGetFun=@()OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),PixelType.UINT16,obj.Reader.SizeX,obj.Reader.SizeY,obj.Reader.ChannelColors,obj.Reader.SizeZ,obj.Reader.SizeT,DimensionOrder.XYCZT);
+					obj.Writer=obj.WriterGetFun();
 					obj.WriterIsReader=false;
 					PieceElements=prod([uint32(obj.Reader.SizeX),obj.Reader.SizeY,obj.Reader.SizeC,obj.Reader.SizeZ]);
 					obj.PieceSize=PieceElements*2;
@@ -67,7 +69,12 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 			PiecesRead=size(Data,5);
 		end
 		function Data=Write(obj,Data,Start,End)
-			obj.Writer.WritePixels(Data{1},Start-1,End-Start+1);
+			if obj.WriterIsReader
+				obj.Writer=TryWrite(obj.Writer,obj.ReaderGetFun,Data{1},Start-1,End-Start+1);
+				obj.Reader=obj.Writer;
+			else
+				obj.Writer=TryWrite(obj.Writer,obj.WriterGetFun,Data{1},Start-1,End-Start+1);
+			end
 			Data(1)=[];
 		end
 	end
