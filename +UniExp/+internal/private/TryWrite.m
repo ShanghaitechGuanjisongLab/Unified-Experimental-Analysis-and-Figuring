@@ -3,7 +3,7 @@ Wait=0x001;
 TryCount=0x1;
 while true
 	try
-		Writer.ReadPixels(Data,varargin{:});
+		Writer.WritePixels(Data,varargin{:});
 		break;
 	catch ME
 		if strcmp(ME.identifier,'Image5D:Exceptions:Memory_copy_failed')
