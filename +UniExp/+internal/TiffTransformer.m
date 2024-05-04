@@ -26,7 +26,8 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 					if exist('OutputDirectory','var')
 						obj.ReaderGetFun=@()OmeTiffRWer.OpenRead(TiffPath);
 						obj.Reader=obj.ReaderGetFun();
-						obj.Writer=OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),obj.Reader.ImageDescription);
+						obj.WriterGetFun=@()OmeTiffRWer.Create(fullfile(OutputDirectory,Filename+".变换.tif"),obj.Reader.ImageDescription);
+						obj.Writer=obj.WriterGetFun();
 						obj.WriterIsReader=false;
 					else
 						obj.ReaderGetFun=@()OmeTiffRWer.OpenRW(TiffPath);
