@@ -98,5 +98,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Failed_to_resolve_a_standard_file_name
 		Mismatched_mouse_name_in_the_paths
 		Floating_point_number_query_condition
+		PCA_Explained_not_found
 	end
 end
