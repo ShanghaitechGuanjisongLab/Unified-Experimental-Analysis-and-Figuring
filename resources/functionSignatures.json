@@ -1983,6 +1983,15 @@
 				"purpose": "关键减淡时点位置和符号标注"
 			},
 			{
+				"name": "Ax",
+				"kind": "ordered",
+				"type": [
+					"scalar",
+					"matlab.graphics.axis.Axes"
+				],
+				"purpose": "绘图目标坐标区"
+			},
+			{
 				"name": "PatchArguments",
 				"kind": "namevalue",
 				"type": "cell",

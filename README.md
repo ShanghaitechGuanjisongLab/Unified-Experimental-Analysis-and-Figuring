@@ -109,7 +109,7 @@ function Lines = LineArray(Data3D,options)
 %为PCA分析的三个坐标轴设置标签
 function PcAxLabels(PcTable)
 %绘制带有关键时点标识的渐淡线图
-function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,options)
+function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,Ax,options)
 %截取 OME TIFF 文件的一段，输出MP4视频
 function TiffVideo(TiffPath,options)
 ```
