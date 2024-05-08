@@ -1757,13 +1757,20 @@
 	"UniExp.PcaRotate": {
 		"inputs": [
 			{
-				"name": "Ax",
-				"kind": "required",
-				"type": [
-					"scalar",
-					"matlab.graphics.axis.Axes"
-				],
-				"purpose": "要执行智能旋转的坐标区"
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Ax",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"matlab.graphics.axis.Axes"
+							],
+							"purpose": "要执行智能旋转的坐标区"
+						}
+					],
+					[]
+				]
 			},
 			{
 				"name": "Explained",
