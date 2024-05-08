@@ -97,5 +97,6 @@ classdef Exceptions<MATLAB.Lang.IEnumerableException
 		Unexpected_file_extension
 		Failed_to_resolve_a_standard_file_name
 		Mismatched_mouse_name_in_the_paths
+		Floating_point_number_query_condition
 	end
 end
