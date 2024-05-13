@@ -667,6 +667,22 @@
 					],
 					[]
 				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Ax",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"matlab.graphics.axis.Axes"
+							],
+							"purpose": "绘图目标坐标区"
+						}
+					],
+					[]
+				]
 			}
 		]
 	},
