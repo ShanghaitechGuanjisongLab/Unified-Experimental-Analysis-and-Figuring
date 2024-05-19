@@ -1552,18 +1552,33 @@
 							"type": "3d",
 							"purpose": "原始数组"
 						}
+					],
+					[
+						{
+							"name": "CellData",
+							"kind": "required",
+							"type": "cell",
+							"purpose": "元胞数据"
+						}
+					],
+					[
+						{
+							"name": "StructData",
+							"kind": "required",
+							"type": [
+								"struct",
+								"scalar"
+							],
+							"purpose": "结构体数据"
+						}
 					]
 				]
 			},
 			{
 				"name": "Flags",
-				"kind": "ordered",
-				"type": [
-					"UniExp.Flags",
-					"scalar"
-				],
-				"purpose": "指定功能旗帜",
-				"repeating": true
+				"kind": "namevalue",
+				"type": "UniExp.Flags",
+				"purpose": "指定功能旗帜"
 			},
 			{
 				"name": "ImagescStyle",
