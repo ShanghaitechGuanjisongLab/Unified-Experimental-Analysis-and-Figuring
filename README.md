@@ -77,6 +77,8 @@ function Data = HeatmapSort(Data,varargin)
 function Summary=LearningSummarize(SessionTable,LearnedP)
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+%刘开元设计的峰值查询函数
+function PeakTimes = LkyFindPeaks(Data,options)
 %将不同NATAS分组中的细胞补全
 function varargout = NtatsCellReplenish(CopyMode,varargin)
 %为NTS乘上PCA系数，得到逐回合的PCA分数

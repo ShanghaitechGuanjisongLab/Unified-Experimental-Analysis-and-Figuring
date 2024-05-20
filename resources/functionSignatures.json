@@ -1720,6 +1720,34 @@
 			}
 		]
 	},
+	"UniExp.LkyFindPeaks": {
+		"inputs": [
+			{
+				"name": "Data",
+				"kind": "required",
+				"type": "real",
+				"purpose": "数据向量"
+			},
+			{
+				"name": "SampleRate",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "采样率㎐"
+			},
+			{
+				"name": "WindowRadius",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "滑窗半径"
+			},
+			{
+				"name": "AucThreshold",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "AUC阈值"
+			}
+		]
+	},
 	"UniExp.NtatsCellReplenish": {
 		"inputs": [
 			{
