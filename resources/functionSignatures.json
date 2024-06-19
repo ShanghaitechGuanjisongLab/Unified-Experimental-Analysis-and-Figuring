@@ -2450,6 +2450,53 @@
 			}
 		]
 	},
+	"UniExp.TrialwiseEventPlot": {
+		"inputs": [
+			{
+				"name": "EventLog",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "事件记录表"
+			},
+			{
+				"name": "TrialMarker",
+				"kind": "required",
+				"type": [
+					[
+						"scalar",
+						"categorical"
+					],
+					[
+						"string",
+						"scalar"
+					]
+				],
+				"purpose": "用于分割回合的事件"
+			},
+			{
+				"name": "TrialRange",
+				"kind": "required",
+				"type": [
+					"numel=2",
+					"duration"
+				],
+				"purpose": "回合开始和结束时间"
+			},
+			{
+				"name": "ExcludedEvents",
+				"kind": "ordered",
+				"type": [
+					[
+						"categorical"
+					],
+					[
+						"string"
+					]
+				],
+				"purpose": "要排除的事件"
+			}
+		]
+	},
 	"UniExp.VectorProjectCosine": {
 		"inputs": [
 			{

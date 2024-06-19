@@ -116,4 +116,6 @@ function PcAxLabels(PcTable)
 function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,Ax,options)
 %截取 OME TIFF 文件的一段，输出MP4视频
 function TiffVideo(TiffPath,options)
+%分回合展示事件记录
+function TrialwiseEventPlot(EventLog,TrialMarker,TrialRange,ExcludedEvents)
 ```
