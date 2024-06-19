@@ -2463,12 +2463,10 @@
 				"kind": "required",
 				"type": [
 					[
-						"scalar",
 						"categorical"
 					],
 					[
-						"string",
-						"scalar"
+						"string"
 					]
 				],
 				"purpose": "用于分割回合的事件"
