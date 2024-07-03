@@ -53,7 +53,14 @@
 			{
 				"name": "HitMiss",
 				"kind": "namevalue",
-				"type": "size=1,2",
+				"type": [
+					[
+						"size=1,2"
+					],
+					[
+						"tabular"
+					]
+				],
 				"purpose": "命中和错失的Event标识"
 			},
 			{
@@ -61,7 +68,7 @@
 				"kind": "namevalue",
 				"type": [
 					"size=1,2",
-					"real"
+					"duration"
 				],
 				"purpose": "响应窗秒数"
 			},
@@ -576,7 +583,7 @@
 				"kind": "required",
 				"type": [
 					"size=1,2",
-					"real"
+					"duration"
 				],
 				"purpose": "每个回合相对于刺激时点的起始时间和终止时间"
 			},
@@ -2482,7 +2489,7 @@
 			},
 			{
 				"name": "ExcludedEvents",
-				"kind": "ordered",
+				"kind": "namevalue",
 				"type": [
 					[
 						"categorical"
@@ -2492,6 +2499,15 @@
 					]
 				],
 				"purpose": "要排除的事件"
+			},
+			{
+				"name": "ExcludedTrials",
+				"kind": "namevalue",
+				"type": [
+					"real",
+					"vector"
+				],
+				"purpose": "排除的回合序数"
 			}
 		]
 	},
