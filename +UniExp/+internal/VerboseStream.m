@@ -10,7 +10,7 @@ classdef VerboseStream<ParallelComputing.BlockRWStream
 		function LocalWriteBlock(obj,Data,BlockIndex)
 			ObjectIndex=obj.BlockTable.ObjectIndex(BlockIndex);
 			EndPiece=obj.BlockTable.EndPiece(BlockIndex);
-			NumPieces=obj.ObjectTable.RWer(ObjectIndex).NumPieces;
+			NumPieces=obj.ObjectTable.RWer{ObjectIndex}.NumPieces;
 			import UniExp.Flags
 			switch(obj.LogLevel)
 				case Flags.EachBlock

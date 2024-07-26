@@ -3,11 +3,13 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 		PieceSize
 		NumPieces
 		PixelIndex
-		CollectData
 		ProcessData
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
 		GpuLimit
+	end
+	properties(SetAccess=protected)
+		CollectData
 	end
 	methods
 		function obj = VideoRoiReader(VideoRoiPath)
@@ -18,12 +20,12 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 			obj.NumPieces=obj.NumFrames;
 			[SizeY,SizeX]=size(Data,1,2);
 			RoiPath=VideoRoiPath{1}(2);
-			[Cx,Cy,Rx,Ry] = UniExp.internal.ImageJRoiReadout(RoiPath);
+			[Cxy,Rxy] = UniExp.internal.ImageJRoiReadout(RoiPath);
 			[~,RoiPath]=fileparts(RoiPath);
-			Cx=reshape(Cx,1,1,[]);
-			Cy=reshape(Cy,1,1,[]);
-			Rx=reshape(Rx,1,1,[]);
-			Ry=reshape(Ry,1,1,[]);
+			Cx=reshape(Cxy(:,1),1,1,[]);
+			Cy=reshape(Cxy(:,2),1,1,[]);
+			Rx=reshape(Rxy(:,1),1,1,[]);
+			Ry=reshape(Rxy(:,2),1,1,[]);
 			Data=((1:SizeX)-Cx).^2./Rx.^2+((1:SizeY)'-Cy).^2./Ry.^2<=1;
 			NumRois=size(Data,3);
 			[obj.PixelIndex,PixelYX]=deal(cell(NumRois,1));
@@ -41,7 +43,7 @@ classdef VideoRoiReader<ParallelComputing.IBlockRWer&VideoReader
 				End=min(End,Start+obj.GpuLimit);
 			end
 			Data=obj.read([Start,End]);
-			PiecesRead=size(Data,5);
+			PiecesRead=size(Data,4);
 		end
 	end
 end

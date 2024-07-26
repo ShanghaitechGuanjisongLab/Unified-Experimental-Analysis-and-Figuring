@@ -2,11 +2,13 @@ classdef BlockVideoReader<ParallelComputing.IBlockRWer&VideoReader
 	properties(SetAccess=immutable)
 		PieceSize
 		NumPieces
-		CollectData
 		ProcessData={}
 	end
 	properties(SetAccess=immutable,GetAccess=protected)
 		GpuLimit
+	end
+	properties(SetAccess=protected)
+		CollectData
 	end
 	methods
 		function obj = BlockVideoReader(VideoPath)
