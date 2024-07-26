@@ -1820,6 +1820,42 @@
 			}
 		]
 	},
+	"UniExp.PairedBarTest": {
+		"inputs": [
+			{
+				"name": "Data",
+				"kind": "required",
+				"type": [
+					[
+						"real",
+						"2d"
+					],
+					[
+						"table"
+					]
+				],
+				"purpose": "输入数据"
+			},
+			{
+				"name": "Comparisons",
+				"kind": "namevalue",
+				"type": "table",
+				"purpose": "要比较的多重比较对组"
+			},
+			{
+				"name": "BarStyle",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "要传递给bar的其它样式参数"
+			},
+			{
+				"name": "PatchStyle",
+				"kind": "namevalue",
+				"type": "cell",
+				"purpose": "要传递给patch的其它样式参数"
+			}
+		]
+	},
 	"UniExp.PcaRotate": {
 		"inputs": [
 			{

@@ -108,6 +108,8 @@ function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,op
 function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 %作多线阵列图，大批量展示多条线
 function Lines = LineArray(Data3D,options)
+%配对的条形图统计检验
+function [Bar,Patch,Comparisons] = PairedBarTest(Data,options)
 %对指定3D坐标区中的主成分轨迹执行智能旋转，呈现信息量最大的角度
 function PcaRotate(varargin)
 %为PCA分析的三个坐标轴设置标签

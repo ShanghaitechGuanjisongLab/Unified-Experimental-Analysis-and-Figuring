@@ -112,7 +112,7 @@ function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,Ax,options)
 %截取 OME TIFF 文件的一段，输出MP4视频
 function TiffVideo(TiffPath,options)</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>19.0.0</param.version>
+    <param.version>20.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -155,13 +155,13 @@ resources/project
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
       <requiredaddons>
-        <requiredAddOn earliest="1.0.3" fromRepository="true" id="85f2e628-cb9d-426b-b596-0a88b613d14f" include="true" latest="latest">埃博拉酱的文本分析工具箱(2)</requiredAddOn>
         <requiredAddOn earliest="3.1.0" fromRepository="true" id="c4bc2217-771b-40fa-9149-e575b3445ae3" include="true" latest="latest">Image5D(7)</requiredAddOn>
         <requiredAddOn earliest="18.3.1" fromRepository="true" id="b344599a-983e-4a6c-bd99-ed3a1bdd9626" include="true" latest="latest">埃博拉酱 的 MATLAB 扩展 Extension(2)</requiredAddOn>
         <requiredAddOn earliest="3.6.1" fromRepository="true" id="6ed47641-adca-4155-9275-8dd7a76e6f85" include="true" latest="latest">埃博拉酱的图像处理工具箱(3)</requiredAddOn>
-        <requiredAddOn earliest="8.1.0" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
+        <requiredAddOn earliest="8.1.1" fromRepository="true" id="372e4ea1-e356-4ee7-a94f-b1790b6318d9" include="true" latest="latest">并行计算</requiredAddOn>
         <requiredAddOn earliest="3.1.1" fromRepository="true" id="4d05e210-f73f-4916-9076-1c9b15718b36" include="true" latest="latest">全局优化(2)</requiredAddOn>
         <requiredAddOn earliest="1.1.1" fromRepository="true" id="284ff020-3728-4461-b14d-372da52a6944" include="true" latest="latest">计算机视觉(3)</requiredAddOn>
+        <requiredAddOn earliest="1.0.3" fromRepository="true" id="85f2e628-cb9d-426b-b596-0a88b613d14f" include="true" latest="latest">埃博拉酱的文本分析工具箱</requiredAddOn>
       </requiredaddons>
     </param.required.addons>
     <param.matlab.project.id />
@@ -211,6 +211,7 @@ resources/project
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\+UniExp</file>
       <file>${PROJECT_ROOT}\doc</file>
+      <file>${PROJECT_ROOT}\matlab.mat</file>
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>
       <file>${PROJECT_ROOT}\startup.m</file>
@@ -226,7 +227,7 @@ resources/project
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2024a</root>
+      <root>C:\Program Files\MATLAB\R2024b</root>
       <toolboxes />
     </matlab>
     <platform>
