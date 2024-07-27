@@ -85,7 +85,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					SC="TrialSignal";
 				end
 			else
-				UniExp.Exceptions.DataSet_is_missing_TrialSignals.Throw;
+				UniExp.Exception.DataSet_is_missing_TrialSignals.Throw;
 			end
 		end
 		function obj=saveobj(obj)
@@ -142,7 +142,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 						StructOrPath=load(Path);
 					catch ME
 						if ME.identifier=="MATLAB:load:notBinaryFile"
-							UniExp.Exceptions.Mat_load_failed.Throw(FromPath);
+							UniExp.Exception.Mat_load_failed.Throw(FromPath);
 						else
 							ME.rethrow;
 						end
@@ -161,9 +161,9 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					Fields=intersect(fieldnames(StructOrPath),properties(obj));
 					if isempty(Fields)
 						if InputPath
-							UniExp.Exceptions.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
+							UniExp.Exception.Struct_cannot_be_parsed_to_DataSet.Throw(Path);
 						else
-							UniExp.Exceptions.Struct_cannot_be_parsed_to_DataSet.Throw;
+							UniExp.Exception.Struct_cannot_be_parsed_to_DataSet.Throw;
 						end
 					end
 					for F=1:numel(Fields)
@@ -247,7 +247,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					[~,Index]=ismember(vertcat(Index{:}),obj.Trials.TrialUID);
 					obj.Trials.TrialRI(Index)=vertcat(RepeatIndex{:});
 				else
-					UniExp.Exceptions.TrialRI_could_not_be_calculated_for_Trials_without_Stimulus.Warn;
+					UniExp.Exception.TrialRI_could_not_be_calculated_for_Trials_without_Stimulus.Warn;
 				end
 			end
 		end
@@ -295,7 +295,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			%# 输入参数
 			% ResponseWindow(1,2)double，时间窗范围秒数，相对于回合开始（而不是刺激开始），例如[2,3]
 			%See also UniExp.DataSet.AddBehavior
-			UniExp.Exceptions.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
+			UniExp.Exception.Function_deprecated.Warn('方法已过时，请改用AddBehavior');
 			Query=MATLAB.DataTypes.Select(["TrialUID","TrialTags","SeriesInterval"],{obj.Trials,obj.Blocks,obj.DateTimes});
 			Query(cellfun(@isempty,Query.TrialTags)|isnan(Query.SeriesInterval),:)=[];
 			Query.TrialTags=cellfun(@(Table)Table.CD2,Query.TrialTags,UniformOutput=false);
@@ -325,6 +325,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			% ```
 			%# 输入参数
 			% NormalizeTo(1,1)uint16，重采样长度，默认为所有回合信号和标的最短非零长度
+			UniExp.Exception.Function_deprecated.Warn('请改用ResampleTrials');
 			TrialSignal=obj.TrialSignals.TrialSignal;
 			SignalLogical1=~cellfun(@(T)isempty(T)||isequaln(T,missing),TrialSignal);
 			Lengths=cellfun(@numel,TrialSignal(SignalLogical1));
@@ -390,11 +391,11 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			% TrialIndex(1,1)uint16，新回合的序号，不能与同BlockUID下的其它回合的序号冲突
 			% Name=Value，其它名称值参数，将添加到新建回合的对应列下。
 			if ~any(obj.Blocks.BlockUID==BlockUID)
-				UniExp.Exceptions.Specified_BlockUID_does_not_exist_in_the_Blocks_table.Throw(BlockUID);
+				UniExp.Exception.Specified_BlockUID_does_not_exist_in_the_Blocks_table.Throw(BlockUID);
 			end
 			TrialLogical=obj.Trials.BlockUID==BlockUID;
 			if any(obj.Trials.TrialIndex(TrialLogical)==TrialIndex)
-				UniExp.Exceptions.Specified_TrialIndex_already_exists_in_the_specified_Block.Throw(TrialIndex);
+				UniExp.Exception.Specified_TrialIndex_already_exists_in_the_specified_Block.Throw(TrialIndex);
 			end
 			TrialUID=max(obj.Trials.TrialUID);
 			if TrialUID<intmax('uint16')
@@ -481,6 +482,43 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				NewMice=setdiff(NewMice,obj.Mice.Mouse);
 				obj.Mice.Mouse(end+1:end+numel(NewMice))=NewMice;
 			end
+		end
+		function ResampleTrials(obj,TrialDuration,SeriesInterval)
+			%将所有回合的标和信号重采样和截断到指定参数
+			%# 语法
+			% ```
+			% obj.ResampleTrials(TrialDuration,SeriesInterval);
+			% ```
+			%# 输入参数
+			% TrialDuration(1,1)duration，每个回合要截短到的时长。不能长于所有已拆分回合的最短时长。
+			% SeriesInterval(1,1)duration，采样周期时长，即采样率的倒数
+			%# 返回值
+			% 此函数本身不返回值，而是修改对象。Trials表中将多一列ResampledTags，为处理后的TrialTags；TrialSignals表中将多一列ResampledSignal，为处理后的TrialSignal
+			TableToResample=obj.TableQuery(["TrialUID","TrialTags","SeriesInterval"]);
+			NumSamples=TrialDuration/SeriesInterval;
+			for T=1:height(TableToResample)
+				TrialTag=TableToResample.TrialTags{T};
+				IsTable=istable(TrialTag);
+				TableToResample.IsTable(T)=IsTable;
+				if IsTable
+					TrialTag=array2table(imresize(TrialTag{:,:},[height(TrialTag)*SeriesInterval/TableToResample.SeriesInterval(T),width(TrialTag)]),VariableNames=TrialTag.Properties.VariableNames);
+					TableToResample.TrialTags{T}=TrialTag(1:NumSamples,:);
+				end
+			end
+			TableToResample=TableToResample(TableToResample.IsTable,:);
+			[~,Index]=ismember(TableToResample.TrialUID,obj.Trials.TrialUID);
+			obj.Trials.ResampledTags(Index)=TableToResample.TrialTags;
+			TableToResample=obj.TableQuery(["TrialUID","CellUID","TrialSignal","SeriesInterval"]);
+			TableToResample.SampleLength=cellfun(@width,TableToResample.TrialSignal);
+			[Groups,Parameters]=findgroups(TableToResample(:,["SeriesInterval","SampleLength"]));
+			for G=1:height(Parameters)
+				Logical=Groups==G;
+				Sample=vertcat(TableToResample.TrialSignal{Logical});
+				Sample=imresize(Sample,[height(Sample),width(Sample)*SeriesInterval/Parameters.SeriesInterval(G)]);
+				TableToResample.ResampledSignal(Logical,:)=Sample(:,1:NumSamples);
+			end
+			[~,Index]=ismember(TableToResample(:,["TrialUID","CellUID"]),obj.TrialSignals(:,["TrialUID","CellUID"]));
+			obj.TrialSignals.ResampledSignal(Index,:)=TableToResample.ResampledSignal;
 		end
 	end
 end
