@@ -78,12 +78,12 @@ classdef DataSet<handle&matlab.mixin.Copyable
 	end
 	methods(Access=protected)
 		function SC=GetSignalColumn(obj)
+			persistent PossibleSignalColumns
 			if istable(obj.TrialSignals)
-				if any(obj.TrialSignals.Properties.VariableNames=="NormalizedSignal")
-					SC="NormalizedSignal";
-				else
-					SC="TrialSignal";
+				if isempty(PossibleSignalColumns)
+					PossibleSignalColumns=["ResampledSignal","NormalizedSignal","TrialSignal"];
 				end
+				SC=PossibleSignalColumns(find(ismember(PossibleSignalColumns,obj.TrialSignals.Properties.VariableNames),1));
 			else
 				UniExp.Exception.DataSet_is_missing_TrialSignals.Throw;
 			end
