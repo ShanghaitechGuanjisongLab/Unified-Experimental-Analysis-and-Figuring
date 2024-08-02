@@ -483,43 +483,6 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				obj.Mice.Mouse(end+1:end+numel(NewMice))=NewMice;
 			end
 		end
-		function ResampleTrials(obj,TrialDuration,SeriesInterval)
-			%将所有回合的标和信号重采样和截断到指定参数
-			%# 语法
-			% ```
-			% obj.ResampleTrials(TrialDuration,SeriesInterval);
-			% ```
-			%# 输入参数
-			% TrialDuration(1,1)duration，每个回合要截短到的时长。不能长于所有已拆分回合的最短时长。
-			% SeriesInterval(1,1)duration，采样周期时长，即采样率的倒数
-			%# 返回值
-			% 此函数本身不返回值，而是修改对象。Trials表中将多一列ResampledTags，为处理后的TrialTags；TrialSignals表中将多一列ResampledSignal，为处理后的TrialSignal
-			TableToResample=obj.TableQuery(["TrialUID","TrialTags","SeriesInterval"]);
-			NumSamples=TrialDuration/SeriesInterval;
-			for T=1:height(TableToResample)
-				TrialTag=TableToResample.TrialTags{T};
-				IsTable=istable(TrialTag);
-				TableToResample.IsTable(T)=IsTable;
-				if IsTable
-					TrialTag=array2table(imresize(TrialTag{:,:},[height(TrialTag)*SeriesInterval/TableToResample.SeriesInterval(T),width(TrialTag)]),VariableNames=TrialTag.Properties.VariableNames);
-					TableToResample.TrialTags{T}=TrialTag(1:NumSamples,:);
-				end
-			end
-			TableToResample=TableToResample(TableToResample.IsTable,:);
-			[~,Index]=ismember(TableToResample.TrialUID,obj.Trials.TrialUID);
-			obj.Trials.ResampledTags(Index)=TableToResample.TrialTags;
-			TableToResample=obj.TableQuery(["TrialUID","CellUID","TrialSignal","SeriesInterval"]);
-			TableToResample.SampleLength=cellfun(@width,TableToResample.TrialSignal);
-			[Groups,Parameters]=findgroups(TableToResample(:,["SeriesInterval","SampleLength"]));
-			for G=1:height(Parameters)
-				Logical=Groups==G;
-				Sample=vertcat(TableToResample.TrialSignal{Logical});
-				Sample=imresize(Sample,[height(Sample),width(Sample)*SeriesInterval/Parameters.SeriesInterval(G)]);
-				TableToResample.ResampledSignal(Logical,:)=Sample(:,1:NumSamples);
-			end
-			[~,Index]=ismember(TableToResample(:,["TrialUID","CellUID"]),obj.TrialSignals(:,["TrialUID","CellUID"]));
-			obj.TrialSignals.ResampledSignal(Index,:)=TableToResample.ResampledSignal;
-		end
 	end
 end
 function varargout=GetRepeatIndex(varargin)
