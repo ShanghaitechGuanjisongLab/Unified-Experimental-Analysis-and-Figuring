@@ -99,5 +99,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Mismatched_mouse_name_in_the_paths
 		Floating_point_number_query_condition
 		PCA_Explained_not_found
+		Unexpectedly_encountered_end_of_EventLog
 	end
 end

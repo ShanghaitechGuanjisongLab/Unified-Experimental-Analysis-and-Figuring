@@ -510,22 +510,28 @@
 				"name": "obj"
 			},
 			{
-				"name": "TrialDuration",
+				"name": "SeriesInterval",
 				"kind": "required",
+				"type": [
+					[
+						"duration",
+						"scalar"
+					],
+					[
+						"function_handle",
+						"scalar"
+					]
+				],
+				"purpose": "采样周期时长"
+			},
+			{
+				"name": "TrialDuration",
+				"kind": "ordered",
 				"type": [
 					"duration",
 					"scalar"
 				],
 				"purpose": "每个回合要截短到的时长"
-			},
-			{
-				"name": "SeriesInterval",
-				"kind": "required",
-				"type": [
-					"duration",
-					"scalar"
-				],
-				"purpose": "采样周期时长"
 			}
 		]
 	},
