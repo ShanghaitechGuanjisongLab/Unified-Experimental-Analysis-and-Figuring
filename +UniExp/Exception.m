@@ -22,7 +22,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		The_Trials_table_is_missing_the_Stimulus_column
 		Normalization_failed
 		The_number_of_MovingRois_and_MovingSamples_does_not_match
-		The_number_of_split_trials_does_not_match_the_existing_record
 		Table_not_found_in_input
 		Invalid_Flag
 		The_first_two_dimensions_of_Points_and_LineColors_are_different
@@ -56,11 +55,9 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		EventLog_has_no_Event_columns
 		Specified_BlockUID_does_not_exist_in_the_Blocks_table
 		Specified_TrialIndex_already_exists_in_the_specified_Block
-		Number_of_split_trials_does_not_match_that_of_existing_trials
 		No_signal_to_split
 		Too_many_trials_or_broken_EventLog
 		Unexpected_trial_stimulus
-		Number_of_split_trials_is_less_than_that_of_existing_trials
 		Cell_signals_vary_in_length
 		TrialRI_could_not_be_calculated_for_Trials_without_Stimulus
 		DataSet_is_missing_TrialSignals
@@ -100,5 +97,15 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Floating_point_number_query_condition
 		PCA_Explained_not_found
 		Unexpectedly_encountered_end_of_EventLog
+		Missing_BlockTags
+		Missing_Behavior
+		Missing_TrialTags
+		First_trial_too_short
+		Last_trial_too_short
+		Missing_EventLog
+		BlockUID_not_found
+		Block_lacks_BlockTag
+		Blocks_table_missing_BlockTags_column
+		Split_trials_less_than_existing_Trials
 	end
 end

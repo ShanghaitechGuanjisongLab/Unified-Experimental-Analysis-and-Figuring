@@ -651,6 +651,12 @@
 				"kind": "namevalue",
 				"type": "real",
 				"purpose": "只操作指定的BlockUID"
+			},
+			{
+				"name": "BlockBreak",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "中断时点"
 			}
 		]
 	},
