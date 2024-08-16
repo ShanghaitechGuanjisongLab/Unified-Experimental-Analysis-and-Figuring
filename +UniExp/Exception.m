@@ -107,5 +107,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Block_lacks_BlockTag
 		Blocks_table_missing_BlockTags_column
 		Split_trials_less_than_existing_Trials
+		Split_trials_more_than_existing_Trials
 	end
 end
