@@ -109,5 +109,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Split_trials_less_than_existing_Trials
 		Split_trials_more_than_existing_Trials
 		Exception_occurs_in_BatchOirRegisterTiff
+		ColumnsOfInterest_not_found
 	end
 end
