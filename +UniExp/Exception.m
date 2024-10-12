@@ -85,7 +85,7 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Some_trials_did_not_record_a_valid_CD2
 		CD2_of_specified_trials_is_not_equal_in_length
 		No_need_to_replenish
-		Cannot_LME_on_only_one_group
+		Cannot_ANOVA_on_only_one_group
 		Specified_duplicate_BlockUID
 		Specified_duplicate_BlockIndex_and_DateTime
 		Must_specify_BlockIndex
