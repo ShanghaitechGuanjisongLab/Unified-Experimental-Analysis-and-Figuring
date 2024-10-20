@@ -483,6 +483,47 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				obj.Mice.Mouse(end+1:end+numel(NewMice))=NewMice;
 			end
 		end
+		function LightLeakageProbabilities=CheckForLightLeakage(obj,LightingPeriod)
+			%检查数据库中各Block在指定回合时段发生漏光的概率
+			%确认漏光后可以使用LightLeakageInterpolation方法进行消除
+			%# 语法
+			% ```
+			% obj.CheckForLightLeakage(LightingPeriod)
+			% ```
+			%# 示例
+			% 将数据库中漏光概率最大的Block作成代表性线图
+			% ```
+			% figure;
+			% %将obj换成你的数据库变量名
+			% plot(median(vertcat(obj.TableQuery("TrialSignal",BlockUID=sortrows(obj.CheckForLightLeakage(seconds([3,3.2])),'Probability','descend').BlockUID(1)).TrialSignal{:}),1,'omitnan'));
+			% ```
+			%# 输入参数
+			% LightingPeriod(1,2)duration，给光的时间段，相对于一段TrialSignal开始的时间（而不是刺激时点）
+			%# 返回值
+			% LightLeakageProbabilities(:,2)table，包含BlockUID和Probability两列，每行标识一个Block的漏光概率。通常可以认为概率>0.95即为显著性漏光。
+			%See also UniExp.DataSet.LightLeakageInterpolation
+			arguments
+				obj
+				LightingPeriod(1,2)
+			end
+			LightLeakageProbabilities=MATLAB.DataTypes.Select(["BlockUID","SeriesInterval"],{obj.Blocks,obj.DateTimes});
+			LightingPeriod=ceil(LightingPeriod./LightLeakageProbabilities.SeriesInterval);
+			BlockTrialSignals=MATLAB.DataTypes.Select(["BlockUID","TrialSignal"],{obj.TrialSignals,obj.Trials},BlockUID=LightLeakageProbabilities.BlockUID);
+			for B=1:height(LightLeakageProbabilities)
+				MaxIndex=MATLAB.ElMat.PadCat(1,BlockTrialSignals.TrialSignal{BlockTrialSignals.BlockUID==LightLeakageProbabilities.BlockUID(B)},Padder=NaN);
+				if isempty(MaxIndex)
+					LightLeakageProbabilities.Probability(B)=NaN;
+				else
+					From=LightingPeriod(B,1);
+					To=LightingPeriod(B,2);
+					Duration=To-From;
+					[~,MaxIndex]=max(MaxIndex(:,From-1:To+1),[],2);
+					LightLeakageProbabilities.Probability(B)=binocdf(sum(isbetween(MaxIndex,2,Duration+2)),height(MaxIndex),(Duration+1)/(Duration+3));
+				end
+			end
+			LightLeakageProbabilities(isnan(LightLeakageProbabilities.Probability),:)=[];
+			LightLeakageProbabilities=LightLeakageProbabilities(:,["BlockUID","Probability"]);
+		end
 	end
 end
 function varargout=GetRepeatIndex(varargin)

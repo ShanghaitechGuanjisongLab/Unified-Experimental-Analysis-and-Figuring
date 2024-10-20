@@ -118,6 +118,22 @@
 			}
 		]
 	},
+	"UniExp.DataSet.CheckForLightLeakage": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "LightingPeriod",
+				"kind": "required",
+				"type": [
+					"duration",
+					"numel=2"
+				],
+				"purpose": "给光的时间段"
+			}
+		]
+	},
 	"UniExp.DataSet.FixHistory": {
 		"inputs": [
 			{
@@ -137,6 +153,28 @@
 				"kind": "namevalue",
 				"type": "real",
 				"purpose": "将只修改指定的Block"
+			}
+		]
+	},
+	"UniExp.DataSet.LightLeakageInterpolation": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "BlockUIDs",
+				"kind": "required",
+				"type": "real",
+				"purpose": "指定所有要插值的Block"
+			},
+			{
+				"name": "LightingPeriod",
+				"kind": "required",
+				"type": [
+					"duration",
+					"numel=2"
+				],
+				"purpose": "插值时段"
 			}
 		]
 	},
