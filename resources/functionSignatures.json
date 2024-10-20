@@ -131,6 +131,11 @@
 					"numel=2"
 				],
 				"purpose": "给光的时间段"
+			},
+			{
+				"name": "LightStimuli",
+				"kind": "ordered",
+				"purpose": "有可能漏光的刺激类型"
 			}
 		]
 	},
@@ -175,6 +180,11 @@
 					"numel=2"
 				],
 				"purpose": "插值时段"
+			},
+			{
+				"name": "LightStimuli",
+				"kind": "ordered",
+				"purpose": "要插值的刺激类型"
 			}
 		]
 	},

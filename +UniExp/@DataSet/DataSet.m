@@ -483,32 +483,46 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				obj.Mice.Mouse(end+1:end+numel(NewMice))=NewMice;
 			end
 		end
-		function LightLeakageProbabilities=CheckForLightLeakage(obj,LightingPeriod)
+		function LightLeakageProbabilities=CheckForLightLeakage(obj,LightingPeriod,LightStimuli)
 			%检查数据库中各Block在指定回合时段发生漏光的概率
 			%确认漏光后可以使用LightLeakageInterpolation方法进行消除
 			%# 语法
 			% ```
-			% obj.CheckForLightLeakage(LightingPeriod)
+			% LightLeakageProbabilities=obj.CheckForLightLeakage(LightingPeriod);
+			% %检查每个回合的指定时段内是否漏光
+			%
+			% LightLeakageProbabilities=obj.CheckForLightLeakage(LightingPeriod,LightStimuli);
+			% %仅检查具有特定刺激类型的回合，以提高性能并避免检出那些理论上不可能漏光的刺激类型
 			% ```
 			%# 示例
 			% 将数据库中漏光概率最大的Block作成代表性线图
 			% ```
 			% figure;
 			% %将obj换成你的数据库变量名
-			% plot(median(vertcat(obj.TableQuery("TrialSignal",BlockUID=sortrows(obj.CheckForLightLeakage(seconds([3,3.2])),'Probability','descend').BlockUID(1)).TrialSignal{:}),1,'omitnan'));
+			% plot(median(vertcat(obj.TableQuery("TrialSignal",BlockUID=sortrows(obj.CheckForLightLeakage(seconds([3,3.2]),"LightWater"),'Probability','descend').BlockUID(1),Stimulus="LightWater").TrialSignal{:}),1,'omitnan'));
 			% ```
 			%# 输入参数
 			% LightingPeriod(1,2)duration，给光的时间段，相对于一段TrialSignal开始的时间（而不是刺激时点）
+			% LightStimuli(1,:)categorical，有可能漏光的刺激类型。如不指定此参数，所有刺激类型都会被视为可能漏光的。除非所有刺激类型均可能漏光，否则一般应当指定此参
+			%  数，特别是存在多种刺激类型穿插的Block中，如果某些刺激类型本身不可能漏光而不被排除，则可能拉低那些可能漏光的刺激类型的漏光概率
 			%# 返回值
 			% LightLeakageProbabilities(:,2)table，包含BlockUID和Probability两列，每行标识一个Block的漏光概率。通常可以认为概率>0.95即为显著性漏光。
 			%See also UniExp.DataSet.LightLeakageInterpolation
 			arguments
 				obj
 				LightingPeriod(1,2)
+				LightStimuli
 			end
-			LightLeakageProbabilities=MATLAB.DataTypes.Select(["BlockUID","SeriesInterval"],{obj.Blocks,obj.DateTimes});
+			if nargin>2
+				LightStimuli={'Stimulus',LightStimuli};
+				LightLeakageProbabilities={obj.Blocks,obj.DateTimes,obj.Trials};
+			else
+				LightStimuli={};
+				LightLeakageProbabilities={obj.Blocks,obj.DateTimes};
+			end
+			LightLeakageProbabilities=unique(MATLAB.DataTypes.Select(["BlockUID","SeriesInterval"],LightLeakageProbabilities,LightStimuli{:}));
 			LightingPeriod=ceil(LightingPeriod./LightLeakageProbabilities.SeriesInterval);
-			BlockTrialSignals=MATLAB.DataTypes.Select(["BlockUID","TrialSignal"],{obj.TrialSignals,obj.Trials},BlockUID=LightLeakageProbabilities.BlockUID);
+			BlockTrialSignals=MATLAB.DataTypes.Select(["BlockUID","TrialSignal"],{obj.TrialSignals,obj.Trials},LightStimuli{:},BlockUID=LightLeakageProbabilities.BlockUID);
 			for B=1:height(LightLeakageProbabilities)
 				MaxIndex=MATLAB.ElMat.PadCat(1,BlockTrialSignals.TrialSignal{BlockTrialSignals.BlockUID==LightLeakageProbabilities.BlockUID(B)},Padder=NaN);
 				if isempty(MaxIndex)
