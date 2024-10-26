@@ -1546,28 +1546,6 @@
 							"kind": "required",
 							"type": "table",
 							"purpose": "NTATS分组"
-						},
-						{
-							"mutuallyExclusiveGroup": [
-								[
-									{
-										"name": "SortGroups",
-										"kind": "ordered",
-										"type": [
-											[
-												"real",
-												"vector"
-											],
-											[
-												"string",
-												"vector"
-											]
-										],
-										"purpose": "参与分群排序的组名或序号"
-									}
-								],
-								[]
-							]
 						}
 					],
 					[
@@ -1576,22 +1554,6 @@
 							"kind": "required",
 							"type": "3d",
 							"purpose": "原始数组"
-						},
-						{
-							"mutuallyExclusiveGroups": [
-								[
-									{
-										"name": "SortGroups",
-										"kind": "required",
-										"type": [
-											"real",
-											"vector"
-										],
-										"purpose": "参与分群排序的组序号"
-									}
-								],
-								[]
-							]
 						}
 					]
 				]
@@ -1624,6 +1586,28 @@
 							],
 							"default": "'descend'",
 							"purpose": "排序方向"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "SortGroups",
+							"kind": "ordered",
+							"type": [
+								[
+									"real",
+									"vector"
+								],
+								[
+									"string",
+									"vector"
+								]
+							],
+							"purpose": "参与分群排序的组名或序号"
 						}
 					],
 					[]
@@ -1674,6 +1658,18 @@
 						}
 					]
 				]
+			},
+			{
+				"name": "XData",
+				"kind": "namevalue",
+				"type": "numel=2",
+				"purpose": "X轴坐标范围"
+			},
+			{
+				"name": "YData",
+				"kind": "namevalue",
+				"type": "numel=2",
+				"purpose": "Y轴坐标范围"
 			},
 			{
 				"name": "Flags",
