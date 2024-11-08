@@ -112,5 +112,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		ColumnsOfInterest_not_found
 		Block_has_broken_trials
 		Some_trials_are_incomplete
+		OirPath_empty
 	end
 end
