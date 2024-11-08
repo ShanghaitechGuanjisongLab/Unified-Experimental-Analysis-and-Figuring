@@ -32,7 +32,7 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 			BlockSplit=uint32(linspace(0,obj.NumPieces,NumBlocks+1));
 			obj.BlockStarts=BlockSplit(1:end-1);
 			obj.BlockSizes=BlockSplit(2:end)-obj.BlockStarts;
-			obj.CollectData=struct(DeviceColors=DeviceColors,SeriesInterval=obj.Reader.SeriesInterval,LaserTransmissivity=obj.Reader.LaserTransmissivity,PmtVoltage=obj.Reader.PmtVoltage);
+			obj.CollectData=struct(DeviceColors=DeviceColors,SeriesInterval=obj.Reader.SeriesInterval,LaserTransmissivity=obj.Reader.LaserTransmissivity,PmtVoltage=obj.Reader.PmtVoltage,CreationDateTime=obj.Reader.CreationDateTime);
 			if exist('CacheDirectory','var')
 				[~,Filename]=fileparts(OirPath);
 				obj.CacheFid=fopen(fullfile(CacheDirectory,Filename+".缓存"),"w");
