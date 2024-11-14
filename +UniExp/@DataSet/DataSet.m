@@ -4,31 +4,31 @@ classdef DataSet<handle&matlab.mixin.Copyable
 	%注意此类是句柄类，必须使用MakeCopy成员函数才能复制对象，直接赋值给其它变量只能取得数据集的一个引用。
 	properties
 		%主键Mouse，鼠名。本表其它列可选，但应当是与该鼠特定的信息，如实验范式等。
-		Mice
+		Mice table
 
 		%主键DateTime，实验进行的时间日期，本表其它列可选，但应当是与该次实验特定的信息，例如鼠、拍摄采样率、元数据等
-		DateTimes
+		DateTimes table
 
 		%主键BlockUID，模块的唯一标识符；码(DateTime,BlockIndex)，因为“一次特定实验的第N个模块”应当可以唯一确定一个模块。主键和码应当一一对应且不能重复。其它可选列应
 		% 当是特定于该模块的信息，如模块设计名称、标通道值、事件日志等
-		Blocks
+		Blocks table
 
 		%主键TrialUID，回合的唯一标识符；码(BlockUID,TrialIndex)，因为“一个特定模块的第N回合”应当可以唯一确定一个回合。其它可选列应当是特定于该回合的信息，如刺激类
 		% 型、标通道值、采样时点、动物行为等。
-		Trials
+		Trials table
 
 		%主键CellUID，细胞的唯一标识符；码(Mouse,ZLayer,CellType,CellIndex)，因为“一只鼠某层某种类型的第N个细胞”应当可以唯一确定一个细胞。其它可选列应当是特定于该细
 		% 胞的信息，如像素位置等。
-		Cells
+		Cells table
 
 		%主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
-		BlockSignals
+		BlockSignals table
 
 		%主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
-		TrialSignals
+		TrialSignals table
 
 		%主键(Mouse,BrainArea)，记录每只鼠操纵了哪些脑区
-		Manipulation
+		Manipulation table
 
 		%产生此对象的UniExp版本
 		Version=UniExp.Version
