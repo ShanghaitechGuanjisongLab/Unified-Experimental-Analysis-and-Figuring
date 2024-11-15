@@ -1,5 +1,5 @@
 function [DateTimes,Blocks,Duplicate] = MteFiles2Tables(MteFilenames)
-FileTable=MATLAB.IOFun.DelimitedStrings2Table(MteFilenames,["Mouse","Design"],".",TimeField=2);
+FileTable=MATLAB.IOFun.DelimitedStringsToTable(MteFilenames,["Mouse","Design"],".",TimeField=2);
 DateTimes=table;
 DateTimes.DateTime=FileTable.Time;
 Blocks=table;
