@@ -113,5 +113,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Block_has_broken_trials
 		Some_trials_are_incomplete
 		OirPath_empty
+		MergedCellRowRule_may_have_bugs_before_R2024b
 	end
 end
