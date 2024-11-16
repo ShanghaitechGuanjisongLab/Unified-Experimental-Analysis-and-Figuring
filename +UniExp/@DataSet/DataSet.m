@@ -92,6 +92,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			end
 		end
 		function obj=saveobj(obj)
+			obj=obj.copy;%避免修改影响原本工作区中的变量
 			for TableName=["BlockSignals","TrialSignals","Trials"]
 				Table=obj.(TableName);
 				if istabular(Table)&&~isempty(Table)
