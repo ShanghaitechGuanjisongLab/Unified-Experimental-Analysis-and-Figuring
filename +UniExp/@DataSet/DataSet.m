@@ -15,17 +15,20 @@ classdef DataSet<handle&matlab.mixin.Copyable
 
 		%主键TrialUID，回合的唯一标识符；码(BlockUID,TrialIndex)，因为“一个特定模块的第N回合”应当可以唯一确定一个回合。其它可选列应当是特定于该回合的信息，如刺激类
 		% 型、标通道值、采样时点、动物行为等。
-		Trials table
+		Trials=table
+		%不能限定table类型，因为需要在saveobj中设置为结构体
 
 		%主键CellUID，细胞的唯一标识符；码(Mouse,ZLayer,CellType,CellIndex)，因为“一只鼠某层某种类型的第N个细胞”应当可以唯一确定一个细胞。其它可选列应当是特定于该细
 		% 胞的信息，如像素位置等。
 		Cells table
 
 		%主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
-		BlockSignals table
+		BlockSignals=table
+		%不能限定table类型，因为需要在saveobj中设置为结构体
 
 		%主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
-		TrialSignals table
+		TrialSignals=table
+		%不能限定table类型，因为需要在saveobj中设置为结构体
 
 		%主键(Mouse,BrainArea)，记录每只鼠操纵了哪些脑区
 		Manipulation table
@@ -89,7 +92,6 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			end
 		end
 		function obj=saveobj(obj)
-			%obj=UniExp.DataSet(obj);
 			for TableName=["BlockSignals","TrialSignals","Trials"]
 				Table=obj.(TableName);
 				if istabular(Table)&&~isempty(Table)
