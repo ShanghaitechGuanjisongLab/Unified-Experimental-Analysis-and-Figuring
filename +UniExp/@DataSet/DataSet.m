@@ -89,7 +89,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			end
 		end
 		function obj=saveobj(obj)
-			obj=UniExp.DataSet(obj);
+			%obj=UniExp.DataSet(obj);
 			for TableName=["BlockSignals","TrialSignals","Trials"]
 				Table=obj.(TableName);
 				if istabular(Table)&&~isempty(Table)
