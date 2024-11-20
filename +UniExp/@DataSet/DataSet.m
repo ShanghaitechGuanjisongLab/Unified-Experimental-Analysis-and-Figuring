@@ -472,27 +472,28 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			LightLeakageProbabilities(isnan(LightLeakageProbabilities.Probability),:)=[];
 			LightLeakageProbabilities=LightLeakageProbabilities(:,["BlockUID","Probability"]);
 		end
+		function UpdateDateTime(obj,Update)
+			%更新数据库中已存在的日期时间
+			%此方法在Blocks和DateTimes表中更新指定的日期时间。不能更新DateTimes表中不存在的日期时间。
+			%# 语法
+			% ```
+			% obj.UpdateDateTime(Update);
+			% ```
+			%# 输入参数
+			% Update(:,2)datetime，两列矩阵，第一列是已存在的日期时间，第二列更新到的日期时间
+			[Exists,Index]=ismember(Update(:,1),obj.DateTimes.DateTime);
+			if all(Exists)
+				obj.DateTimes.DateTime(Index)=Update(:,2);
+			else
+				UniExp.Exception.DateTime_not_exist.Throw(join(string(Update(~Exists,1)),' '));
+			end
+			[~,IB,IU]=intersect(obj.Blocks.DateTime,Update(:,1));
+			obj.Blocks.DateTime(IB)=Update(IU,2);
+		end
 	end
 end
 function varargout=GetRepeatIndex(varargin)
 varargout=[{{findgroups(varargin{1})}},num2cell(varargin)];
-end
-function [ResizedTT,TrialUID]=TrialTagsResize(TrialTags,TrialUID,Height)
-Sample=TrialTags{1};
-VariableNames=Sample.Properties.VariableNames;
-TrialTags=cellfun(@table2array,TrialTags,UniformOutput=false);
-TrialTags=imresize(cat(3,TrialTags{:}),[Height,width(Sample)],'bilinear');
-NumTables=size(TrialTags,3);
-ResizedTT=cell(NumTables,1);
-for T=1:NumTables
-	ResizedTT{T}=array2table(TrialTags(:,:,T),VariableNames=VariableNames);
-end
-ResizedTT={ResizedTT};
-TrialUID={TrialUID};
-end
-function [TrialSignals,SignalIndex]=TrialSignalsResize(TrialSignals,SignalIndex,NormalizeTo)
-TrialSignals={num2cell(imresize(vertcat(TrialSignals{:}),[numel(TrialSignals),NormalizeTo],'bilinear'),2)};
-SignalIndex={SignalIndex};
 end
 function Design=StimuliToDesign(Stimuli,DSTable)
 for D=1:height(DSTable)

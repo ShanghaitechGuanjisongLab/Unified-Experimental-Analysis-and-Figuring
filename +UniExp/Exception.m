@@ -116,5 +116,7 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		MergedCellRowRule_may_have_bugs_before_R2024b
 		No_TagPeaks_found
 		Bad_UID
+		DateTime_not_exist
+		FirstTrial_specified_repeatedly
 	end
 end
