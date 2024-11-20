@@ -115,5 +115,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		OirPath_empty
 		MergedCellRowRule_may_have_bugs_before_R2024b
 		No_TagPeaks_found
+		Bad_UID
 	end
 end
