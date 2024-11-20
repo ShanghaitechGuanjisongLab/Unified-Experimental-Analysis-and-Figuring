@@ -114,5 +114,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Some_trials_are_incomplete
 		OirPath_empty
 		MergedCellRowRule_may_have_bugs_before_R2024b
+		No_TagPeaks_found
 	end
 end

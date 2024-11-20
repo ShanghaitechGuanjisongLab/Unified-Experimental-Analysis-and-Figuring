@@ -689,22 +689,19 @@
 				"default": 1
 			},
 			{
-				"name": "BlockOffset",
+				"name": "BlockSpecification",
 				"kind": "namevalue",
 				"type": "tabular",
-				"purpose": "对特定的BlockUID特殊处理"
+				"purpose": "只操作指定的模块，并额外指定特殊选项"
 			},
 			{
-				"name": "BlockUIDs",
+				"name": "TrialMinimumInterval",
 				"kind": "namevalue",
-				"type": "real",
-				"purpose": "只操作指定的BlockUID"
-			},
-			{
-				"name": "BlockBreak",
-				"kind": "namevalue",
-				"type": "tabular",
-				"purpose": "中断时点"
+				"type": [
+					"duration",
+					"scalar"
+				],
+				"purpose": "回合的标高点之间的最小间隔时间"
 			}
 		]
 	},
