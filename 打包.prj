@@ -116,7 +116,7 @@ function TiffVideo(TiffPath,options)
 %分回合展示事件记录
 function TrialwiseEventPlot(EventLog,TrialMarker,TrialRange,ExcludedEvents)</param.description>
     <param.screenshot>${PROJECT_ROOT}\工具箱图像.jpg</param.screenshot>
-    <param.version>19.3.0</param.version>
+    <param.version>20.0.0</param.version>
     <param.output>${PROJECT_ROOT}\统一实验分析作图.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -212,7 +212,6 @@ resources/project
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\+UniExp</file>
-      <file>${PROJECT_ROOT}\Contents.m</file>
       <file>${PROJECT_ROOT}\doc</file>
       <file>${PROJECT_ROOT}\README.md</file>
       <file>${PROJECT_ROOT}\resources</file>

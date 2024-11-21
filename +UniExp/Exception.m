@@ -119,5 +119,7 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		DateTime_not_exist
 		FirstTrial_specified_repeatedly
 		Method_relies_on_2024b
+		Blocks_of_different_Trial_splitting_methods_or_SeriesIntervals
+		Blocks_of_different_Trial_splitting_methods
 	end
 end
