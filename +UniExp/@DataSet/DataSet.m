@@ -447,6 +447,9 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				LightingPeriod(1,2)
 				LightStimuli
 			end
+			if isMATLABReleaseOlderThan('R2024b')
+				UniExp.Exception.Method_relies_on_2024b.Throw;
+			end
 			if nargin>2
 				LightStimuli={'Stimulus',LightStimuli};
 				LightLeakageProbabilities={obj.Blocks,obj.DateTimes,obj.Trials};

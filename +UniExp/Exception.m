@@ -118,5 +118,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Bad_UID
 		DateTime_not_exist
 		FirstTrial_specified_repeatedly
+		Method_relies_on_2024b
 	end
 end
