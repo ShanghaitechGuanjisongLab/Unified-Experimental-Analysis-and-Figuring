@@ -54,6 +54,8 @@ classdef Flags
 		PeakTime
 		%绝对最大值
 		AbsMax
+		%变异系数
+		VariationCoefficient
 
 		%% LanearHeatmap
 
