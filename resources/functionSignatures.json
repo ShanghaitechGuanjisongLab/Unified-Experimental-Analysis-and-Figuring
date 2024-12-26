@@ -1975,11 +1975,11 @@
 	"UniExp.PcAxLabels": {
 		"inputs": [
 			{
-				"mutuallyExclusiveGroups": [
+				"mutuallyExclusiveGroup": [
 					[
 						{
 							"name": "PcTable",
-							"kind": "ordered",
+							"kind": "required",
 							"type": "tabular",
 							"purpose": "包含主成分序号和解释百分比信息的表"
 						}
