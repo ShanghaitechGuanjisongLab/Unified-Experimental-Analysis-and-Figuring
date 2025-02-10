@@ -1,4 +1,4 @@
-function [A, C, b, f, ID_IND] = HALS_2d(Y, A, C, b, f, params)
+function [A, C, b, f, ID_IND,Ybg] = HALS_2d(Y, A, C, b, f, params)
 %% Hierarchical alternating least square method for solving NMF problem
 % Y = A*C + b*f
 

@@ -502,7 +502,7 @@ classdef Sources2D < handle
         end
         
         %% export the result as a video
-        avi_filename = show_demixed_video(obj,save_avi, kt, frame_range, center_ac, range_ac, range_Y, multi_factor, use_craw)        %% compute the residual
+        [avi_filename,Ybg] = show_demixed_video(obj,save_avi, kt, frame_range, center_ac, range_ac, range_Y, multi_factor, use_craw)        %% compute the residual
         %         function [Y_res] = residual(obj, Yr)
         %             Y_res = Yr - obj.A*obj.C - obj.b*obj.f;
         %         end
@@ -537,7 +537,7 @@ classdef Sources2D < handle
         end
         
         %% extract DF/F signal for microendoscopic data
-        function [C_df,C_raw_df, Df] = extract_DF_F_endoscope(obj, Ybg)
+        function [C_df,C_raw_df, Df,Ybg] = extract_DF_F_endoscope(obj, Ybg)
             options_ = obj.options;
             A_ = obj.A;
             C_ = obj.C;
@@ -821,10 +821,10 @@ classdef Sources2D < handle
         end
         
         %% update A & C using HALS
-        function [obj, IDs] = HALS_AC(obj, Y)
+        function [obj, IDs,Ybg] = HALS_AC(obj, Y)
             %update A,C,b,f with HALS
             Y = obj.reshape(Y, 1);
-            [obj.A, obj.C, obj.b, obj.f, IDs] = HALS_2d(Y, obj.A, obj.C, obj.b,...
+            [obj.A, obj.C, obj.b, obj.f, IDs,Ybg] = HALS_2d(Y, obj.A, obj.C, obj.b,...
                 obj.f, obj.options);
         end
         
@@ -1734,7 +1734,7 @@ classdef Sources2D < handle
         end
         
         %% save results
-        function save_results(obj, file_nm, Ybg) %#ok<INUSD>
+        function Ybg=save_results(obj, file_nm, Ybg) %#ok<INUSD>
             warning('off', 'all');
             neuron_results = struct(obj);  %#ok<NASGU>
             if exist('Ybg', 'var')

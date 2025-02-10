@@ -1,4 +1,4 @@
-function CnmfeSaveVideo(neuron,Y,Ybg,Ysignal,save_avi,options)
+function Ybg=CnmfeSaveVideo(neuron,Y,Ybg,Ysignal,save_avi,options)
 arguments
 	neuron
 	Y

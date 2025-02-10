@@ -1,4 +1,4 @@
-function CnmfeMergeNeighbors(neuron,dmin,display_merge,view_neurons,center_method)
+function merged_ROI=CnmfeMergeNeighbors(neuron,dmin,display_merge,view_neurons,center_method)
 arguments
 	neuron
 	dmin

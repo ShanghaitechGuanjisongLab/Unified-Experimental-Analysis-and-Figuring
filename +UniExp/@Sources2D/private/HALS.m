@@ -1,4 +1,4 @@
-function [A, C, b, f] = HALS(Y, A, C, b, f, params)
+function [A, C, b, f,Ybg] = HALS(Y, A, C, b, f, params)
 %% Hierarchical alternating least square method for solving NMF problem
 % Y = A*C + b*f
 

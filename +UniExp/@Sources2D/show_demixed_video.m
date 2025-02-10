@@ -1,4 +1,4 @@
-function avi_filename = show_demixed_video(obj,save_avi, kt, frame_range, amp_ac, range_ac, range_Y, multi_factor, use_craw)
+function [avi_filename,Ybg] = show_demixed_video(obj,save_avi, kt, frame_range, amp_ac, range_ac, range_Y, multi_factor, use_craw)
 %% save the final results of source extraction.
 %% inputs:
 %   kt:  scalar, the number of frames to be skipped

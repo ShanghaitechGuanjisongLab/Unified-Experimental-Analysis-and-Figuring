@@ -1,4 +1,4 @@
-function CnmfeQuickMerge(neuron,merge_thr,display_merge,view_neurons)
+function merged_ROI=CnmfeQuickMerge(neuron,merge_thr,display_merge,view_neurons)
 neuron_bk = neuron.copy();
 [merged_ROI, newIDs] = neuron.quickMerge(merge_thr);  % merge neurons based on the correlation computed with {'A', 'S', 'C'}
 % A: spatial shapes; S: spike counts; C: calcium traces

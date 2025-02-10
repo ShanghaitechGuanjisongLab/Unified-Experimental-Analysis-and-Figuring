@@ -1,4 +1,4 @@
-function [Ybg_weights,Ysignal] = CnmfeUpdateBg(Y,neuron,bg_neuron_ratio,spatial_ds_factor,thresh)
+function [Ybg_weights,Ysignal,Ybg] = CnmfeUpdateBg(Y,neuron,bg_neuron_ratio,spatial_ds_factor,thresh)
 Ybg = Y-neuron.A*neuron.C;
 rr = ceil(neuron.options.gSiz * bg_neuron_ratio);
 active_px = []; %(sum(IND, 2)>0);  %If some missing neurons are not covered by active_px, use [] to replace IND
