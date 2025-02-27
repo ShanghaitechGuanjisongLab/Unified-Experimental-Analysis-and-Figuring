@@ -65,6 +65,8 @@ function QueryTable = ReadQueryTable(TablePath,Sheet)
 ```
 ## UniExp内部处理
 ```MATLAB
+对多维数组沿指定维度执行PCA分析
+function [Coeff,Score,Explained] = DimensionalPca(Array,Dimensions,NumComponents)
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
 %截取信号中的一段作为基线，执行归一化
