@@ -22,11 +22,12 @@
 % Exclude all top level files and folders beginning with the character "%":
 % \%example/%file.svn
 %
-**/resources/project/**/*
-resources/*
+resources/project
 **/*.prj
 **/*.prj.bak
-**/.git/**/*
+.git*
 **/.svn/**/*
 **/.buildtool/**/*
 **/*.asv
+工具箱图像.jpg
+*.mltbx
