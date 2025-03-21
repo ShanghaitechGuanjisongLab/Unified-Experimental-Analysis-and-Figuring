@@ -121,5 +121,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Method_relies_on_2024b
 		Blocks_of_different_Trial_splitting_methods_or_SeriesIntervals
 		Blocks_of_different_Trial_splitting_methods
+		No_DateTimes_to_merge
 	end
 end

@@ -257,6 +257,22 @@
 			}
 		]
 	},
+	"UniExp.DataSet.MergeVeryCloseDateTimes": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "Tolerance",
+				"kind": "ordered",
+				"type": [
+					"duration",
+					"scalar"
+				],
+				"purpose": "时间容差"
+			}
+		]
+	},
 	"UniExp.DataSet.NewBlocks": {
 		"inputs": [
 			{
@@ -481,6 +497,25 @@
 					]
 				],
 				"purpose": "需要额外返回的关联信息列名"
+			}
+		]
+	},
+	"UniExp.DataSet.RemoveBlockPeriod": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "BlockCut",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "要移除的Block的时间段"
+			},
+			{
+				"name": "TrialNote",
+				"kind": "ordered",
+				"type": "scalar",
+				"purpose": "要给受影响的Trials表行添加的标记"
 			}
 		]
 	},

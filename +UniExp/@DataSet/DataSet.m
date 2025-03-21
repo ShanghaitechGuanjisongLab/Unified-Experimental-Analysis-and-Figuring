@@ -435,6 +435,51 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			[~,IB,IU]=intersect(obj.Blocks.DateTime,Update(:,1));
 			obj.Blocks.DateTime(IB)=Update(IU,2);
 		end
+		function Removed=RemoveAllZeroBlockSignals(obj)
+			%移除全零的BlockSignals
+			%# 语法
+			% ```
+			% Removed=obj.RemoveAllZeroBlockSignals
+			% ```
+			%# 返回值
+			% Removed(:,2)table，一行一个列出被移除的BlockSignal，包含以下列：
+			% - BlockUID(:,1)uint16
+			% - CellUID(:,1)uint16
+			Logical=cellfun(@any,obj.BlockSignals.BlockSignal);
+			if nargout
+				Removed=obj.BlockSignals(~Logical,["BlockUID","CellUID"]);
+			end
+			obj.BlockSignals=obj.BlockSignals(Logical,:);
+		end
+		function RemoveBlockPeriod(obj,BlockCut,TrialNote)
+			%移除某些Block中的某些时段回合信号
+			%Block中的某些时段可能无效，例如出现过曝等问题。此方法将将在TrialSignals表中移除指定时段回合信号，可选在Trials表中将受影响的回合加上Note
+			%# 语法
+			% ```
+			% obj.RemoveBlockPeriod(BlockCut);
+			% %将指定时段的回合信号移除
+			%
+			% obj.RemoveBlockPeriod(BlockCut,TrialNote);
+			% %额外在受影响的Trials表行中添加指定的Note
+			% ```
+			%# 输入参数
+			% BlockCut table，Block剪除表，每行标识一个要剪除的时段，必须包含以下列，所有帧序号的计量以本次调用之前的状态为准，而不是每段剪除后都重新计数：
+			% - BlockUID(:,1)，要剪的Block
+			% - FrameStart(:,1)，要剪除的时段中的第一帧序号
+			% - FrameEnd(:,1)，要剪除的时段中的最后一帧序号
+			% TrialNote(1,1)，要给受影响的Trials表行添加的标记
+			TrialUID=MATLAB.Containers.Vector;
+			for B=unique(BlockCut.BlockUID).'
+				FramesRange=BlockCut{BlockCut.BlockUID==B,["FrameStart","FrameEnd"]};
+				BlockTrials=obj.Trials(obj.Trials.BlockUID==B,["TrialUID","SampleRange"]);
+				TrialUID.PushBack(BlockTrials.TrialUID(any(BlockTrials.SampleRange.Start.'<=FramesRange(:,2)&BlockTrials.SampleRange.End.'>=FramesRange(:,1),1)).');
+			end
+			TrialUID=TrialUID.Data;
+			obj.TrialSignals(ismember(obj.TrialSignals.TrialUID,TrialUID),:)=[];
+			if nargin>2
+				obj.Trials.TrialNote(ismember(obj.Trials.TrialUID,TrialUID))=TrialNote;
+			end
+		end
 	end
 end
 function varargout=GetRepeatIndex(varargin)
