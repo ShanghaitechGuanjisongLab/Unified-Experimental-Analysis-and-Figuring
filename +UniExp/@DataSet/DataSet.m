@@ -139,7 +139,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 					if startsWith(Path,'\\')
 						%Samba网络访问优化
 						Path=fullfile(tempdir,strcat(Filename,Extension));
-						copyfile(FromPath,Path);
+						copyfile(FromPath,Path,'f');
 					end
 					try
 						StructOrPath=load(Path);
