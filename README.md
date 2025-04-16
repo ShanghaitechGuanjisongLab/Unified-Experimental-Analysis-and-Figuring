@@ -116,6 +116,8 @@ function [Bar,Patch,Comparisons] = PairedBarTest(Data,options)
 function PcaRotate(varargin)
 %为PCA分析的三个坐标轴设置标签
 function PcAxLabels(PcTable)
+%绘制模块标通道折线图供审阅
+function PeekBlockTags(obj,BlockUID)
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,Ax,options)
 %截取 OME TIFF 文件的一段，输出MP4视频

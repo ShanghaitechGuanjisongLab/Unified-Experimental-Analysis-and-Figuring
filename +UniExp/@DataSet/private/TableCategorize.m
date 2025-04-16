@@ -1,7 +1,8 @@
 function Table=TableCategorize(Table)
 for C=string(Table.Properties.VariableNames)
-	if isstring(Table.(C))
-		Table.(C)=categorical(Table.(C));
+	Column=Table.(C);
+	if isstring(Column)&&all(strlength(Column)<11)
+		Table.(C)=categorical(Column);
 	end
 end
 end

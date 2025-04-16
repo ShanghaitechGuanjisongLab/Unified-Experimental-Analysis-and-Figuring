@@ -332,6 +332,21 @@
 			}
 		]
 	},
+	"UniExp.DataSet.PeekBlockTags": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "BlockUID",
+				"kind": "required",
+				"type": [
+					"positive"
+				],
+				"purpose": "模块ID"
+			}
+		]
+	},
 	"UniExp.DataSet.QueryBPC": {
 		"inputs": [
 			{

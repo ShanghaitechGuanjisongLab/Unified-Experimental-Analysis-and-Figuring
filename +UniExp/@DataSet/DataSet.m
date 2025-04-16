@@ -10,7 +10,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 		DateTimes table
 
 		%主键BlockUID，模块的唯一标识符；码(DateTime,BlockIndex)，因为“一次特定实验的第N个模块”应当可以唯一确定一个模块。主键和码应当一一对应且不能重复。其它可选列应
-		% 当是特定于该模块的信息，如模块设计名称、标通道值、事件日志等
+		% 当是特定于该模块的信息，如模块设计名称、标通道值、事件日志等。特别地，可以包含一个MustWarn列，包含有效信息的模块将会在被使用时发出警告。
 		Blocks table
 
 		%主键TrialUID，回合的唯一标识符；码(BlockUID,TrialIndex)，因为“一个特定模块的第N回合”应当可以唯一确定一个回合。其它可选列应当是特定于该回合的信息，如刺激类
@@ -479,6 +479,17 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			if nargin>2
 				obj.Trials.TrialNote(ismember(obj.Trials.TrialUID,TrialUID))=TrialNote;
 			end
+		end
+		function PeekBlockTags(obj,BlockUID)
+			%绘制模块标通道折线图供审阅
+			%# 语法
+			% ```
+			% obj.PeekBlockTags(BlockUID);
+			% ```
+			%# 输入参数
+			% BlockUID(1,1)uint16，模块ID
+			TagTable=obj.Blocks.BlockTags{obj.Blocks.BlockUID==BlockUID};
+			legend(plot(TagTable{:,:}),TagTable.Properties.VariableNames);
 		end
 	end
 end
