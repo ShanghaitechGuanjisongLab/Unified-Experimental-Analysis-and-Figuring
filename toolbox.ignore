@@ -23,6 +23,7 @@
 % \%example/%file.svn
 %
 resources/project
+resources/6*
 **/*.prj
 **/*.prj.bak
 .git*
@@ -31,3 +32,4 @@ resources/project
 **/*.asv
 工具箱图像.jpg
 *.mltbx
+deploymentLog.html
