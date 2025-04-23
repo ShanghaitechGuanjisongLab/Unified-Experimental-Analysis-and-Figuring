@@ -41,12 +41,16 @@ end
 ```MATLAB
 %从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
 function RoiCPath=ImageJRoiDiff(options)
+
 %根据 ImageJ RoiSet 配准图像
 function TransMatrix = RoiRegister(PathTable,varargin)
+
 %批量配准 Olympus OIR 文件并转码为OME-TIFF格式，自动排除电流检测（Current Detector, CD）通道
 function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
+
 %对Tiff图像批量应用变换矩阵
 function BatchTiffTransform(TiffTransTable,OutputDirectory)
+
 %此函数交互式帮你找到最优的脑区注射位点！
 function [Center,CoronalRanges,SagittalRanges,Exception]=CerebrumMapping(APRange,MLRange,options)
 ```
@@ -54,47 +58,72 @@ function [Center,CoronalRanges,SagittalRanges,Exception]=CerebrumMapping(APRange
 ```MATLAB
 %批量测量OME-TIFF，以UniExp格式存储测量结果
 function BatchTiffMeasure(TiffPaths,ImageJRoiPaths,ScatterRadius,MeanTiff,Quantile,options)
+
 %为多个视频批量输出平均图
 function BatchVideoMean(VideoPaths,Output)
+
 %将多个视频文件按照 ImageJ ROI 测量后输出到UniExp数据库
 function BatchVideoMeasure(VideoPaths,ImageJRoiPaths,RoiName,Algorithm,options)
+
 %从Rdc2格式转换为UniExp规范DataSet格式
 function DataSet = Rdc2DataSet(Rdc2DataPaths)
+
 %从表格文件读入查询表（R2024b之前可能存在bug）
 function QueryTable = ReadQueryTable(TablePath,Sheet)
 ```
 ## UniExp内部处理
 ```MATLAB
-对多维数组沿指定维度执行PCA分析
+%对多维数组沿指定维度执行PCA分析
 function [Coeff,Score,Explained] = DimensionalPca(Array,Dimensions,NumComponents)
+
 %从事件记录取得表现分数
 function Performance = EventLog2Performance(EventLogs,Events)
+
 %截取信号中的一段作为基线，执行归一化
 function Data = F0Normalize(Data,Method,F0Index)
+
+%寻找周期性序列
+function [Sequence,PLV] = FindPeriodicSequence(Signal)
+
 %从多个回合的发放时序中寻找不变的序列
 function CellSequence = FindSequence(CellTrialTimes,Tolerance)
+
 %在作热图LanearHeatmap之前对细胞进行分群排序。
 function Data = HeatmapSort(Data,varargin)
+
 %生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
 function Summary=LearningSummarize(SessionTable,LearnedP)
+
 %对NTATS数据，将所有参与细胞的信号主成分分析，生成主成分空间中的典型时间曲线图。主成分是细胞的加权和。
 function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
+
 %刘开元设计的峰值查询函数
 function PeakTimes = LkyFindPeaks(Data,options)
+
 %将不同NATAS分组中的细胞补全
 function varargout = NtatsCellReplenish(CopyMode,varargin)
+
 %为NTS乘上PCA系数，得到逐回合的PCA分数
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)
+
+%计算两个周期性序列之间的锁相值
+function PLV = PeriodicSequencePLV(SignalA,SignalB)
+
 %对多维数组沿某个维度执行PCA分析
 function [Coeff,Score,Explained] = PointPca(Array,Dimension,NumComponents)
+
 %设置或取得Rdc2全局忽略关键词
 function IgnoreKeywords = Rdc2IgnoreKeywords(IgnoreKeywords)
+
 %根据信号拆分回合
 function [Trials,TrialSignals] = SignalSplitTrial(Query,TimeRange,SplitType,StdCutoff)
+
 %内置anovan的改版，将变量表作为分组输入
 function varargout = TabularAnovaN(Y,GroupTable,options)
+
 %根据回合信号判断行为
 function Behavior = TrialSignal2Behavior(TrialSignal,SampleRate,CStartTime,CEndTime,UStartTime,SignalType,ReferenceType,options)
+
 %计算组间多回合细胞向量的投影长度和夹角余弦
 function ProjectCosine = VectorProjectCosine(GroupCtt,options)
 ```
@@ -102,26 +131,37 @@ function ProjectCosine = VectorProjectCosine(GroupCtt,options)
 ```MATLAB
 %用误差条形图和散点对两组采样数据进行比较，并显示 t test p 值
 function BarScatterCompare(DataA,DataB,varargin)
+
 %从TIFF中截取一段展示细胞活动的视频
 function Video=CellTrialVideo(TiffPath,options)
+
 %作异形彩色标记线条图
 function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
+
 %绘制分泳道的热图
 function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
+
 %作多线阵列图，大批量展示多条线
 function Lines = LineArray(Data3D,options)
+
 %配对的条形图统计检验
 function [Bar,Patch,Comparisons] = PairedBarTest(Data,options)
+
 %对指定3D坐标区中的主成分轨迹执行智能旋转，呈现信息量最大的角度
 function PcaRotate(varargin)
+
 %为PCA分析的三个坐标轴设置标签
 function PcAxLabels(PcTable)
+
 %绘制模块标通道折线图供审阅
 function PeekBlockTags(obj,BlockUID)
+
 %绘制带有关键时点标识的渐淡线图
 function [Lines,Scatters]=SegmentFadePlot(LinesPC,Markers,Ax,options)
+
 %截取 OME TIFF 文件的一段，输出MP4视频
 function TiffVideo(TiffPath,options)
+
 %分回合展示事件记录
 function TrialwiseEventPlot(EventLog,TrialMarker,TrialRange,ExcludedEvents)
 ```

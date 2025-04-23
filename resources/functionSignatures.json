@@ -1585,6 +1585,19 @@
 			}
 		]
 	},
+	"UniExp.FindPeriodicSequence": {
+		"inputs": [
+			{
+				"name": "Signal",
+				"kind": "required",
+				"type": [
+					"3d",
+					"real"
+				],
+				"purpose": "信号张量"
+			}
+		]
+	},
 	"UniExp.FindSequence": {
 		"inputs": [
 			{
@@ -2067,6 +2080,26 @@
 					"matlab.graphics.Graphics"
 				],
 				"purpose": "要设置标签的坐标区"
+			}
+		]
+	},
+	"UniExp.PeriodicSequencePLV": {
+		"inputs": [
+			{
+				"name": "SignalA",
+				"kind": "required",
+				"type": [
+					"3d",
+					"real"
+				]
+			},
+			{
+				"name": "SignalB",
+				"kind": "required",
+				"type": [
+					"3d",
+					"real"
+				]
 			}
 		]
 	},
