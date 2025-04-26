@@ -6,7 +6,7 @@ V.ImageProcessing='3.6.1';
 V.Image5D='3.2.2';
 V.TextAnalytics='1.0.3';
 V.ComputerVision='1.1.1';
-V.MatlabExtension='v19.5.0';
+V.MatlabExtension='v19.6.0';
 V.MATLAB='R2024b';
 persistent NewVersion
 if isempty(NewVersion)
