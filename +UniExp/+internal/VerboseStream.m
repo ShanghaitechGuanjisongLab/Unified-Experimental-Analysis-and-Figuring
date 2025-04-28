@@ -2,7 +2,7 @@ classdef VerboseStream<ParallelComputing.BlockRWStream
 	properties
 		LogLevel
 	end
-	properties(Access=private)
+	properties(Access=protected)
 		LastObject=0
 		NumLogs
 	end
