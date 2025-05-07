@@ -124,5 +124,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		No_DateTimes_to_merge
 		Block_must_warn
 		Design_is_not_of_two_categories
+		WatchDogMinutes_deprecated
 	end
 end
