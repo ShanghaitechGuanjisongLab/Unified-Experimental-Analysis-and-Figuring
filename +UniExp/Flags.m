@@ -9,6 +9,9 @@ classdef Flags
 		Cell
 		Struct
 		Repeating
+		HitMiss_Unified
+		HitMiss_ByDesign
+		HitMiss_ByStimulus
 
 		%% 无特殊操作
 		No_special_operation

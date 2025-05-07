@@ -139,6 +139,19 @@
 			}
 		]
 	},
+	"UniExp.DataSet.ConcatenateBlocks": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "BlockUID",
+				"kind": "required",
+				"type": "real",
+				"purpose": "要串联的会话ID"
+			}
+		]
+	},
 	"UniExp.DataSet.FixHistory": {
 		"inputs": [
 			{

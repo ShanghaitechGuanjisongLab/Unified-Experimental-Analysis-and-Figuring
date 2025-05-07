@@ -123,5 +123,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Blocks_of_different_Trial_splitting_methods
 		No_DateTimes_to_merge
 		Block_must_warn
+		Design_is_not_of_two_categories
 	end
 end
