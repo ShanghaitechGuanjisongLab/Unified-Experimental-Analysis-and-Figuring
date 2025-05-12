@@ -20,7 +20,8 @@ classdef DataSet<handle&matlab.mixin.Copyable
 
 		%主键CellUID，细胞的唯一标识符；码(Mouse,ZLayer,CellType,CellIndex)，因为“一只鼠某层某种类型的第N个细胞”应当可以唯一确定一个细胞。其它可选列应当是特定于该细
 		% 胞的信息，如像素位置等。
-		Cells table
+		Cells
+		%不能限定table类型，因为需要在saveobj中设置为结构体
 
 		%主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
 		BlockSignals=table
@@ -227,7 +228,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			if ~isempty(obj.BlockSignals)%空表可能缺少CellUID列
 				obj.BlockSignals(ismember(obj.BlockSignals.CellUID,CellUIDs),:)=[];
 			end
-			if istabular(obj.TrialSignals)
+			if ~isempty(obj.TrialSignals)
 				obj.TrialSignals(ismember(obj.TrialSignals.CellUID,CellUIDs),:)=[];
 			end
 		end

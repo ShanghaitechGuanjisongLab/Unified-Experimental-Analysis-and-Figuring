@@ -1,6 +1,6 @@
 function V = Version
 V.Me='v20.2.0';
-V.ParallelComputing='8.1.3';
+V.ParallelComputing='8.1.4';
 V.GlobalOptimization='3.1.2';
 V.ImageProcessing='3.6.1';
 V.Image5D='3.2.2';

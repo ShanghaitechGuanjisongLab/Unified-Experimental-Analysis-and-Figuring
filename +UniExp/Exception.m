@@ -125,5 +125,7 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Block_must_warn
 		Design_is_not_of_two_categories
 		WatchDogMinutes_deprecated
+		DataSet_does_not_provide_necessary_UID
+		UpdateMerge_found_conflict_values
 	end
 end
