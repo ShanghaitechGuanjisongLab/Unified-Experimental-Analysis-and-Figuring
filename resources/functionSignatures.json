@@ -286,6 +286,19 @@
 			}
 		]
 	},
+	"UniExp.DataSet.NeutralizeBlockPeriod": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "BlockCut",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "要无效的会话时段"
+			}
+		]
+	},
 	"UniExp.DataSet.NewBlocks": {
 		"inputs": [
 			{

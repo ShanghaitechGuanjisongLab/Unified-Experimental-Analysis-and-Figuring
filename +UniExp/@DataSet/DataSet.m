@@ -453,8 +453,9 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			obj.BlockSignals=obj.BlockSignals(Logical,:);
 		end
 		function RemoveBlockPeriod(obj,BlockCut,TrialNote)
-			%移除某些Block中的某些时段回合信号
-			%Block中的某些时段可能无效，例如出现过曝等问题。此方法将将在TrialSignals表中移除指定时段回合信号，可选在Trials表中将受影响的回合加上Note
+			%移除某些会话中的某些时段回合信号
+			%会话中的某些时段可能无效，例如出现过曝等问题。此方法在TrialSignals表中移除指定时段回合信号，可选在Trials表中将受影响的回合加上Note。此方法仅操作回合
+			% 信号，不影响会话信号。
 			%# 语法
 			% ```
 			% obj.RemoveBlockPeriod(BlockCut);
@@ -464,8 +465,8 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			% %额外在受影响的Trials表行中添加指定的Note
 			% ```
 			%# 输入参数
-			% BlockCut table，Block剪除表，每行标识一个要剪除的时段，必须包含以下列，所有帧序号的计量以本次调用之前的状态为准，而不是每段剪除后都重新计数：
-			% - BlockUID(:,1)，要剪的Block
+			% BlockCut table，会话剪除表，每行标识一个要剪除的时段，必须包含以下列，所有帧序号的计量以本次调用之前的状态为准，而不是每段剪除后都重新计数：
+			% - BlockUID(:,1)，要剪的会话
 			% - FrameStart(:,1)，要剪除的时段中的第一帧序号
 			% - FrameEnd(:,1)，要剪除的时段中的最后一帧序号
 			% TrialNote(1,1)，要给受影响的Trials表行添加的标记
@@ -479,6 +480,26 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			obj.TrialSignals(ismember(obj.TrialSignals.TrialUID,TrialUID),:)=[];
 			if nargin>2
 				obj.Trials.TrialNote(ismember(obj.Trials.TrialUID,TrialUID))=TrialNote;
+			end
+		end
+		function NeutralizeBlockPeriod(obj,BlockCut)
+			%将某些会话时段的信号无效化
+			%会话中的某些时段可能无效，例如出现过曝等问题。此方法将指定时段的会话信号设为NaN。不会影响回合信号。
+			%# 语法
+			% ```
+			% obj.NeutralizeBlockPeriod(BlockCut);
+			% %将指定时段的回合信号无效化
+			% ```
+			%# 输入参数
+			% BlockCut table，会话无效表，每行标识一个要无效的时段，必须包含以下列，所有帧序号的计量以本次调用之前的状态为准，而不是每段无效后都重新计数：
+			% - BlockUID(:,1)，要无效的会话
+			% - FrameStart(:,1)，要无效的时段中的第一帧序号
+			% - FrameEnd(:,1)，要无效的时段中的最后一帧序号
+			[Exist,Index]=ismember(obj.BlockSignals.BlockUID,BlockCut.BlockUID);
+			IndexA=find(Exist);
+			IndexB=Index(Exist);
+			for I=1:numel(IndexA)
+				obj.BlockSignals.BlockSignal{IndexA(I)}(BlockCut.FrameStart(IndexB(I)):BlockCut.FrameEnd(IndexB(I)))=NaN;
 			end
 		end
 		function PeekBlockTags(obj,BlockUID)
