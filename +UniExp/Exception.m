@@ -127,5 +127,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		WatchDogMinutes_deprecated
 		DataSet_does_not_provide_necessary_UID
 		UpdateMerge_found_conflict_values
+		Unexpected_TransferPhase
 	end
 end

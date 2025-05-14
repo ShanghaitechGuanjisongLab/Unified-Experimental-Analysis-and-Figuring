@@ -513,38 +513,6 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			TagTable=obj.Blocks.BlockTags{obj.Blocks.BlockUID==BlockUID};
 			legend(plot(TagTable{:,:}),TagTable.Properties.VariableNames);
 		end
-		function AddTransferPhase(obj)
-			%为数据库添加迁移Phase
-			%此方法不返回值，直接在DateTimes表中添加Phase列，根据DateTime和Design，自动设置 Naive Learned Transfer Final Recall 五种不同的阶段。此方法要求数据库中
-			% 恰包含两种Design，否则报错。
-			%# 语法
-			% ```
-			% obj.AddTransferPhase;
-			% ```
-			if numel(unique(obj.Blocks.Design))~=2
-				UniExp.Exception.Design_is_not_of_two_categories.Throw;
-			end
-			BlocksView=sortrows(MATLAB.DataTypes.Select(["Mouse","DateTime","Design"],{obj.DateTimes,obj.Blocks}),["Mouse","DateTime"]);
-			DesignChanged=BlocksView.Design(1:end-1)~=BlocksView.Design(2:end);
-			MouseChanged=BlocksView.Mouse(1:end-1)~=BlocksView.Mouse(2:end);
-			B=1;
-			while true
-				BlocksView.Phase(B)=categorical("Naive");
-				B=B+find(DesignChanged(B:end),1);
-				BlocksView.Phase(B-1)="Learned";
-				BlocksView.Phase(B)="Transfer";
-				B=B+find(DesignChanged(B:end),1);
-				BlocksView.Phase(B-1)="Final";
-				ToNextMouse=find(MouseChanged(B-1:end),1);
-				if isempty(ToNextMouse)
-					BlocksView.Phase(B:end)="Recall";
-					break;
-				end
-				BlocksView.Phase(B:B+ToNextMouse-2)="Recall";
-				B=B+ToNextMouse-1;
-			end
-			obj.DateTimes=MATLAB.DataTypes.MergeTables("DateTime",obj.DateTimes,BlocksView(:,["DateTime","Phase"]));
-		end
 		function ConcatenateBlocks(obj,BlockUID)
 			%将几个会话的所有回合串联起来
 			%此方法将自动正确串联 BlockIndex EventLog TrialIndex。但是，不能串联信号和标，后续会话的信号和标会丢失；也不会自动设置TrialRI。
@@ -569,6 +537,24 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			[~,Index]=ismember(ToConcatenate.TrialUID,obj.Trials.TrialUID);
 			obj.Trials.TrialIndex(Index)=ToConcatenate.TrialIndex;
 			obj.Trials.BlockUID(Index)=BlockUID(1);
+		end
+		function GlobalParadigm(obj,Paradigm)
+			%为数据库中所有鼠设置相同的范式
+			% 此方法将在Mice表中添加Paradigm列（如果没有）并为每只鼠设置指定的范式。
+			%# 语法
+			% ```
+			% obj.GlobalParadigm(Paradigm);
+			% ```
+			%# 输入参数
+			% Paradigm(1,1)categorical，所有鼠的范式
+			MouseParadigm=table;
+			MouseParadigm.Mouse=unique(obj.DateTimes.Mouse);
+			MouseParadigm.Paradigm(:)=categorical(Paradigm);
+			if isempty(obj.Mice)
+				obj.Mice=MouseParadigm;
+			else
+				obj.Mice=MATLAB.DataTypes.MergeTables("Mouse",obj.Mice,MouseParadigm);
+			end
 		end
 	end
 end
