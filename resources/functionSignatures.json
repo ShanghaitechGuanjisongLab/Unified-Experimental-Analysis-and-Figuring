@@ -1509,6 +1509,19 @@
 			}
 		]
 	},
+	"UniExp.CircSort": {
+		"inputs": [
+			{
+				"name": "Signal",
+				"kind": "required",
+				"type": [
+					"real",
+					"3d"
+				],
+				"purpose": "回合细胞时间序列信号"
+			}
+		]
+	},
 	"UniExp.ColorfulMarkerPlot": {
 		"inputs": [
 			{
