@@ -128,5 +128,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		DataSet_does_not_provide_necessary_UID
 		UpdateMerge_found_conflict_values
 		Unexpected_TransferPhase
+		Bad_table_keys
 	end
 end
