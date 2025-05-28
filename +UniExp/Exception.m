@@ -129,5 +129,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		UpdateMerge_found_conflict_values
 		Unexpected_TransferPhase
 		Bad_table_keys
+		Unexpected_GroupName_from_QueryTable
 	end
 end
