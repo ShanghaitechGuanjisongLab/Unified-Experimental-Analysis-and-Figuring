@@ -138,6 +138,9 @@ function Video=CellTrialVideo(TiffPath,options)
 %作异形彩色标记线条图
 function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
 
+%上方热图，下方统计线图
+function [Layout,Axes,Lines,ColorBar]=HeatmapLine(Data,TimeRange,options)
+
 %绘制分泳道的热图
 function [Layout,Axes]=LanearHeatmap(NTATS,Flags,options)
 

@@ -1679,6 +1679,50 @@
 			}
 		]
 	},
+	"UniExp.HeatmapLine": {
+		"inputs": [
+			{
+				"name": "Data",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "作图数据"
+			},
+			{
+				"name": "TimeRange",
+				"kind": "required",
+				"type": [
+					"duration",
+					"size=1,2"
+				],
+				"purpose": "时间范围"
+			},
+			{
+				"name": "XLine",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "X轴常数线"
+			},
+			{
+				"name": "YLine",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "Y轴常数线"
+			},
+			{
+				"name": "EnsembleSubtitles",
+				"kind": "namevalue",
+				"type": [
+					[
+						"string"
+					],
+					[
+						"cell"
+					]
+				],
+				"purpose": "亚群标题"
+			}
+		]
+	},
 	"UniExp.HeatmapSort": {
 		"inputs": [
 			{
