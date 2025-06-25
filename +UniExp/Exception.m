@@ -130,5 +130,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Unexpected_TransferPhase
 		Bad_table_keys
 		Unexpected_GroupName_from_QueryTable
+		Nonexistent_comparison_groups
 	end
 end

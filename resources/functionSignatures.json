@@ -1571,6 +1571,19 @@
 			}
 		]
 	},
+	"UniExp.CorrelationSort": {
+		"inputs": [
+			{
+				"name": "Matrix",
+				"kind": "required",
+				"type": [
+					"real",
+					"2d"
+				],
+				"purpose": "要排序的矩阵"
+			}
+		]
+	},
 	"UniExp.DimensionalPca": {
 		"inputs": [
 			{

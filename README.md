@@ -73,6 +73,9 @@ function QueryTable = ReadQueryTable(TablePath,Sheet)
 ```
 ## UniExp内部处理
 ```MATLAB
+%对自相关矩阵进行排序，使得高相关性群体尽可能聚集成模块
+function SortIndex = CorrelationSort(Matrix)
+
 %对多维数组沿指定维度执行PCA分析
 function [Coeff,Score,Explained] = DimensionalPca(Array,Dimensions,NumComponents)
 
