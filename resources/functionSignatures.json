@@ -2610,6 +2610,12 @@
 				"kind": "namevalue",
 				"type": "choices={1, 2, 3,'h'}",
 				"purpose": "平方和的类型"
+			},
+			{
+				"name": "Comparison",
+				"kind": "namevalue",
+				"type": "tabular",
+				"purpose": "多重比较对组"
 			}
 		]
 	},
