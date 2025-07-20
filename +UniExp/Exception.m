@@ -131,5 +131,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Bad_table_keys
 		Unexpected_GroupName_from_QueryTable
 		Nonexistent_comparison_groups
+		Parameter_cannot_be_parsed
 	end
 end

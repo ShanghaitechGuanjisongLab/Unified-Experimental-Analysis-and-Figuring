@@ -870,6 +870,18 @@
 					],
 					[]
 				]
+			},
+			{
+				"name": "AsteriskThreshold",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "星号阈值"
+			},
+			{
+				"name": "CapSize",
+				"kind": "namevalue",
+				"type": "positive",
+				"purpose": "误差线帽的大小"
 			}
 		]
 	},
