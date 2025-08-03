@@ -33,7 +33,12 @@ if iscell(Var)
 		Var=Var(end);
 	end
 elseif isinteger(Var)
-	Var=Var(find(Var,1,'last'));
+	Index=find(Var,1,'last');
+	if isempty(Index)
+		Var=Var(end);
+	else
+		Var=Var(Index);
+	end
 else
 	%兼容表格和列向量的写法，ismissing对表格操作的结果是二维数组
 	if WarnConflict
