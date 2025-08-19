@@ -132,5 +132,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Unexpected_GroupName_from_QueryTable
 		Nonexistent_comparison_groups
 		Parameter_cannot_be_parsed
+		AnovaN_model_invalid
 	end
 end
