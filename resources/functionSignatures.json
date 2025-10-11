@@ -152,6 +152,21 @@
 			}
 		]
 	},
+	"UniExp.DataSet.ExtractDateTimes": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "DateTimes",
+				"kind": "required",
+				"type": [
+					"datetime"
+				],
+				"purpose": "要提取的日期时间"
+			}
+		]
+	},
 	"UniExp.DataSet.FixHistory": {
 		"inputs": [
 			{
