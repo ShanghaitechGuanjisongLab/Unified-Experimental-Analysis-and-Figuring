@@ -432,13 +432,17 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			% ```
 			%# 输入参数
 			% Update(:,2)datetime，两列矩阵，第一列是已存在的日期时间，第二列更新到的日期时间
-			[Exists,Index]=ismember(Update(:,1),obj.DateTimes.DateTime);
+			arguments
+				obj
+				Update(:,2)string
+			end
+			[Exists,Index]=ismember(Update(:,1),string(obj.DateTimes.DateTime));
 			if all(Exists)
 				obj.DateTimes.DateTime(Index)=Update(:,2);
 			else
 				UniExp.Exception.DateTime_not_exist.Throw(join(string(Update(~Exists,1)),' '));
 			end
-			[~,IB,IU]=intersect(obj.Blocks.DateTime,Update(:,1));
+			[~,IB,IU]=intersect(string(obj.Blocks.DateTime),Update(:,1));
 			obj.Blocks.DateTime(IB)=Update(IU,2);
 		end
 		function Removed=RemoveAllZeroBlockSignals(obj)
