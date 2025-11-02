@@ -1,5 +1,5 @@
 %[text] 生成带有平均值和标准误的学习曲线数据（不作图）和学会天数的总结表
-%[text] 本函数可以从命中率得到学习曲线的鼠间平均值、标准误，并自动分组。每只鼠的会话数应当相同；如果不同，将以次数最多的鼠为准，其它鼠缺少的会话数，命中率全部填充最后一个会话的命中率，然后始终在所有鼠之间计算平均
+%[text] 本函数可以从命中率得到学习曲线的鼠间平均值、标准误，并自动分组。每只鼠的会话数应当相同；如果不同，将以次数最多的鼠为准，其它鼠缺少的会话数，命中率全部填充那只鼠的最高命中率，然后始终在所有鼠之间计算平均
 %[text] ## 语法
 %[text] ```matlabCodeExample
 %[text] import UniExp.LearningSummarize
@@ -84,7 +84,7 @@ for M=1:NumMice
 	NumSessions(M)=Days;
 	MouseNumBlocks=numel(MousePerformance);
 	PerformanceMatrix(M,1:MouseNumBlocks)=MousePerformance;
-	PerformanceMatrix(M,MouseNumBlocks+1:end)=MousePerformance(end); %填充最后一个会话的命中率
+	PerformanceMatrix(M,MouseNumBlocks+1:end)=max(MousePerformance); %填充所有会话中最高的命中率
 end
 [MeanCurve,SemCurve]=MATLAB.DataFun.MeanSem(PerformanceMatrix,1);
 MeanCurve={MeanCurve};
