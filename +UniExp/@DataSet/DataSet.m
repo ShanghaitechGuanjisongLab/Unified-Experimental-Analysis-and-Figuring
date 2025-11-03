@@ -520,7 +520,9 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			%# 输入参数
 			% BlockUID(1,1)uint16，模块ID
 			TagTable=obj.Blocks.BlockTags{obj.Blocks.BlockUID==BlockUID};
+			Fig=figure;
 			legend(plot(TagTable{:,:}),TagTable.Properties.VariableNames);
+			Fig.Visible=true;
 		end
 		function ConcatenateBlocks(obj,BlockUID)
 			%将几个会话的所有回合串联起来
