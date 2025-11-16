@@ -191,8 +191,8 @@ if ShowScatter
 		case Flags.Cell
 			ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
 		case Flags.Struct
-			Data=struct2cell(Data);
-			ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
+			ScatterLines=struct2cell(Data);
+			ScatterLines=swarmchart(Ax,repelem(1:numel(ScatterLines),cellfun(@numel,ScatterLines)),vertcat(ScatterLines{:}),[],ScatterColor,'filled');
 	end
 end
 NoCompareGroups=isempty(CompareGroup);
