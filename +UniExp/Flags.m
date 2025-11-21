@@ -5,6 +5,7 @@ classdef Flags
 
 		Real
 		Table
+		Table2D
 		Tabular
 		Cell
 		Struct

@@ -40,13 +40,18 @@
 %[text] ## 输入参数
 %[text] Data，分组采样数据，可以是：
 %[text] - 实数矩阵，每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用数字标识组序数。
-%[text] - table，每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用表列名标识组名。
+%[text] - table，可以是：
+%[text]     - 每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用表列名标识组名。
+%[text]     - 二维分组，维度顺序参考内置bar函数，行名和列名对应该维度上的组名。每列都是(:,1)cell，元胞内是(:,1)，该组的所有样本。如果使用此语法，将取行名作为X轴，列名作为图例。如果要指定CompareGroup，通常还应当指定table的DimensionNames。
 %[text] - (1,:)cell，每组一个元胞，元胞里是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用数字标识组序数。
 %[text] - (1,1)struct，每组一个字段，字段值是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用字段名标识组名。 \
 %[text] ShowScatter(1,1)logical=true，是否显示散点。若设为false，不能输出ScatterLines。
 %[text] CompareGroup table=table.empty，分组配对比较表，标识要将哪些分组配对计算P值，每行一对。默认不显示P值。
-%[text] - GroupPair(:,2)，必需，为每个比较配对指定要比较的两个分组。如果Data中指定了组名，GroupPair可以指定为字符串；否则只能为组序数。
-%[text] - PLineOffset(:,1)，可选。为每个配对计算的P值将显示在图上，有时这些显示字符可能发生重叠。使用此参数，为每个比较配对指定一个向上偏移值，手动垫高特定配对的P值显示位置，避免与其它P值重叠 \
+%[text] - GroupPair(:,2)，必需，为每个比较配对指定要比较的两个分组。类型可以是：
+%[text]     - 如果Data使用table二维分组语法，此列必须是table，两列名对应Data的DimensionNames，每列内又是(:,2)，每行是该比较对组在该维度上的两个组名。此语法与TabularAnovaN的Comparison参数语法相同。
+%[text]     - 如果Data中仅指定了一维组名，GroupPair可以指定为字符串或组序数
+%[text]     - 如果Data未指定任何组名，GroupPair只能为组序数。
+%[text] - PLineOffset(:,1)，可选。为每个配对计算的P值将显示在图上，有时这些显示字符可能发生重叠。使用此参数，为每个比较配对指定一个向上偏移值，手动垫高特定配对的P值显示位置，避免与其它P值重叠。数值单位与Y轴一致。 \
 %[text] Ax(1,1)matlab.graphics.axis.Axes=gca，绘图目标坐标区
 %[text] #### Colors(:,3)table
 %[text] 必须包含以下列：
@@ -54,28 +59,30 @@
 %[text] - G(:,1)double，绿色通道
 %[text] - B(:,1)double，蓝色通道 \
 %[text] 可选包含具有以下名称的行：
-%[text] - Bar，指示填充条形的颜色，默认为白色
+%[text] - Bar，可以用此行指示填充条形的颜色，默认为白色。如果Data采用二维分组语法，此行设置无效。
 %[text] - ErrorBar，指示误差帽的颜色，默认为黑色
 %[text] - Scatter，指示散点的颜色，默认为\[1,0,1\]
-%[text] - Link，指示散点连接线的颜色，默认与散点颜色相同 \
+%[text] - Link，指示散点连接线的颜色，默认与散点颜色相同
+%[text] - 如果Data采用二维分组语法，还可以将行名指定为第二维度的分组名，以对不同的第二维分组使用不同的颜色。未指定的分组将自动分配颜色。 \
 %[text] ### 名称值参数
 %[text] AsteriskThreshold(1,1)=0，小于该阈值的P不会显示值，而是标记为星号\*
-%[text] CapSize(1,1)，误差帽的宽度，详见matlab.graphics.chart.primitive.errorbar属性
+%[text] CapSize(1,1)=0.5，误差帽的宽度，相对于条形，例如设为1表示和条形等宽
 %[text] ## 返回值
 %[text] P(1,1)double，所有组的总体P值
-%[text] MultiCompare(:,2)table，对应CompareGroup，每行一个分组对，包含以下列：
-%[text] - GroupPair(:,2)，计算P值的分组对。如果Data中包含组名，将用组名表示分组对，否则用组序数。
-%[text] - PValue，该分组对两两比较的P值 \
-%[text] ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。
-%[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>)
-function [P,MultiCompare,ScatterLines]=BarScatterCompare(Data,varargin)
+%[text] Optional(1,1)struct，可选输出，可选包含以下字段：
+%[text] - MultiCompare(:,2)table，如果CompareGroup不为空，则此输出对应CompareGroup，每行一个分组对，包含以下列：
+%[text]     - GroupPair(:,2)，保留CompareGroup的同名列不变
+%[text]     - PValue，该分组对两两比较的P值
+%[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。 \
+%[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>)
+function [P,Optional]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
 ShowScatter=true;
 CompareGroup=table.empty;
 Colors=table.empty;
 Ax={};
 AsteriskThreshold=0;
-CapSize=NaN;
+CapSize=0.5;
 for V=1:numel(varargin)
 	Arg=varargin{V};
 	if islogical(Arg)
@@ -102,97 +109,120 @@ for V=1:numel(varargin)
 		break;
 	end
 end
-LackRows=~ismember(["Bar","ErrorBar","Scatter","Link"],Colors.Properties.RowNames);
-if LackRows(1)
-	Colors{"Bar",["R","G","B"]}=[1,1,1];
-end
-if LackRows(2)
-	Colors{"ErrorBar",["R","G","B"]}=[0,0,0];
-end
-if LackRows(3)
-	Colors{"Scatter",["R","G","B"]}=[1,0,1];
-end
-if LackRows(4)
-	Colors("Link",:)=Colors("Scatter",:);
-end
+Table2D=false;
 if isreal(Data)
 	DataType=Flags.Real;
+	[Mean,Sem]=MATLAB.DataFun.MeanSem(Data,1);
+	[NumRepeats,NumGroups]=size(Data);
+	HasGroupNames=false;
 elseif istabular(Data)
-	DataType=Flags.Table;
-elseif iscell(Data)
-	DataType=Flags.Cell;
-elseif isstruct(Data)
-	DataType=Flags.Struct;
-end
-switch DataType
-	case Flags.Real
-		[Mean,Sem]=MATLAB.DataFun.MeanSem(Data,1);
-		[NumRepeats,NumGroups]=size(Data);
-	case Flags.Table
+	if iscell(Data{1,1})
+		DataType=Flags.Table2D;
+		Table2D=true;
+		[Mean,Sem]=cellfun(@MATLAB.DataFun.MeanSem,Data{:,:});
+		NumGroups=height(Data);
+		HasGroupNames=true;
+		GroupNames=Data.Properties.RowNames;
+	else
+		DataType=Flags.Table;
 		[Mean,Sem]=MATLAB.DataFun.MeanSem(Data{:,:},1);
 		[NumRepeats,NumGroups]=size(Data);
-	case Flags.Cell
-		[Mean,Sem]=cellfun(@MATLAB.DataFun.MeanSem,Data);
-		NumGroups=numel(Data);
-	case Flags.Struct
-		[Mean,Sem]=structfun(@MATLAB.DataFun.MeanSem,Data);
-		NumGroups=numel(Mean);
+		HasGroupNames=true;
+		GroupNames=Data.Properties.VariableNames;
+	end
+elseif iscell(Data)
+	DataType=Flags.Cell;
+	[Mean,Sem]=cellfun(@MATLAB.DataFun.MeanSem,Data);
+	NumGroups=numel(Data);
+	HasGroupNames=false;
+elseif isstruct(Data)
+	DataType=Flags.Struct;
+	[Mean,Sem]=structfun(@MATLAB.DataFun.MeanSem,Data);
+	NumGroups=numel(Mean);
+	HasGroupNames=true;
+	GroupNames=fieldnames(Data);
 end
-Positive=Mean>=0;
-Negative=~Positive;
-Xs=(1:NumGroups)';
-Bars=bar(Ax{:},Mean,FaceColor=Colors{"Bar",["R","G","B"]},LineWidth=2);
+BarPositive=Mean>0;
+BarZero=Mean==0;
+BarNegative=Mean<0;
+if~any(BarPositive)
+	BarNegative=BarNegative|BarZero;
+elseif~any(BarNegative)
+	BarPositive=BarPositive|BarZero;
+end
+LackRows=~ismember(["ErrorBar","Scatter","Link"],Colors.Properties.RowNames);
+persistent RGB
+if isempty(RGB)
+	RGB=["R","G","B"];
+end
+if LackRows(1)
+	Colors{"ErrorBar",RGB}=[0,0,0];
+end
+if LackRows(2)&&ShowScatter
+	Colors{"Scatter",RGB}=[1,0,1];
+end
+if LackRows(3)&&ShowScatter
+	Colors("Link",:)=Colors("Scatter",:);
+end
+if Table2D
+	HasRows=ismember(Data.Properties.VariableNames,Colors.Properties.RowNames);
+	Colors{Data.Properties.VariableNames(~HasRows),RGB}=GlobalOptimization.ColorAllocate(nnz(~HasRows),Colors{[Colors.Properties.RowNames(HasRows);intersect(["Scatter","Link"],Colors.Properties.RowNames)],RGB});
+	CData=Colors{Data.Properties.VariableNames,["R","G","B"]};
+elseif any(Colors.Properties.RowNames=="Bar")
+	CData=Colors{"Bar",["R","G","B"]};
+else
+	CData=[1,1,1];
+end
+Bars=bar(Ax{:},Mean,CData=CData,FaceColor='flat',LineWidth=2);%FaceColor默认不是flat，而是一个自动分配的颜色
+if Table2D
+	legend(Bars,Data.Properties.VariableNames,Location=MATLAB.Graphics.OptimizedLegendLocation(Bars));
+end
 if isempty(Ax)
 	Ax=gca;
 else
 	Ax=Ax{1};
 end
 Ax.TickLabelInterpreter='none';
-switch DataType
-	case Flags.Table
-		HasGroupNames=true;
-		GroupNames=Data.Properties.VariableNames;
-		xticks(Ax,1:NumGroups);
-		xticklabels(Ax,GroupNames);
-	case Flags.Struct
-		HasGroupNames=true;
-		GroupNames=fieldnames(Data);
-		xticks(Ax,1:NumGroups);
-		xticklabels(Ax,GroupNames);
-	otherwise
-		HasGroupNames=false;
+XTickGroups=1:NumGroups;
+if HasGroupNames
+	xticks(Ax,XTickGroups);
+	xticklabels(Ax,GroupNames);
 end
 HoldState=ishold;
 hold(Ax,'on');
-ErrorBars=gobjects(NumGroups,1);
-EBIndex=zeros(NumGroups,1);
-if ismissing(CapSize)
-	Ax.Units='points';
-	CapSize=Ax.Position(3)*Bars.BarWidth/(diff(xlim)*2);
+AxUnits=Ax.Units;
+Ax.Units='points';
+CommonArguments={'Color',Colors{"ErrorBar",["R","G","B"]},'LineStyle','none','LineWidth',2,'CapSize',Ax.Position(3)*Bars.BarWidth/diff(xlim)*CapSize};
+Ax.Units=AxUnits;
+Xs=[Bars.XEndPoints];
+ErrorBars=table;
+if any(BarPositive)
+	ErrorBars.Object(BarPositive)=errorbar(Ax,Xs(BarPositive),Mean(BarPositive),[],Sem(BarPositive),CommonArguments{:});
+	ErrorBars.Index(BarPositive)=1:sum(BarPositive);
 end
-if any(Positive)
-	ErrorBars(Positive)=errorbar(Ax,Xs(Positive),Mean(Positive),[],Sem(Positive),Color=Colors{"ErrorBar",["R","G","B"]},LineStyle='none',LineWidth=2);
-	EBIndex(Positive)=1:sum(Positive);
+if any(BarNegative)
+	ErrorBars.Object(BarNegative)=errorbar(Ax,Xs(BarNegative),Mean(BarNegative),Sem(BarNegative),[],CommonArguments{:});
+	ErrorBars.Index(BarNegative)=1:sum(BarNegative);
 end
-if any(Negative)
-	ErrorBars(Negative)=errorbar(Ax,Xs(Negative),Mean(Negative),Sem(Negative),[],Color=Colors{"ErrorBar",["R","G","B"]},LineStyle='none',LineWidth=2);
-	EBIndex(Negative)=1:sum(Negative);
+if any(BarZero)
+	ErrorBars.Object(BarZero)=errorbar(Ax,Xs(BarZero),Mean(BarZero),Sem(BarZero),CommonArguments{:});
+	ErrorBars.Index(BarZero)=1:sum(BarZero);
 end
-for EB=unique(ErrorBars).'
-	EB.CapSize=CapSize;
-end
+Optional=struct;
 if ShowScatter
 	ScatterColor=Colors{"Scatter",["R","G","B"]};
 	switch DataType
 		case Flags.Real
-			ScatterLines=plot(Ax,repmat(Xs,1,NumRepeats),Data','-o',Color=Colors{"Link",["R","G","B"]},MarkerFaceColor=ScatterColor);
+			Optional.ScatterLines=plot(Ax,repmat(Xs.',1,NumRepeats),Data','-o',Color=Colors{"Link",["R","G","B"]},MarkerFaceColor=ScatterColor);
 		case Flags.Table
-			ScatterLines=plot(Ax,repmat(Xs,1,NumRepeats),Data{:,:}','-o',Color=Colors{"Link",["R","G","B"]},MarkerFaceColor=ScatterColor);
+			Optional.ScatterLines=plot(Ax,repmat(Xs.',1,NumRepeats),Data{:,:}','-o',Color=Colors{"Link",["R","G","B"]},MarkerFaceColor=ScatterColor);
 		case Flags.Cell
-			ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
+			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
 		case Flags.Struct
 			Data=struct2cell(Data);
-			ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
+			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
+		case Flags.Table2D
+			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data{:,:}),cellfun(@numel,Data{:,:})),vertcat(Data{:,:}{:}),[],ScatterColor,'filled');
 	end
 end
 NoCompareGroups=isempty(CompareGroup);
@@ -210,7 +240,7 @@ if nargout||~NoCompareGroups
 			end
 			[P,~,Stats]=anova1(Data,repelem(GroupNames,1,NumRepeats),'off');
 		case Flags.Cell
-			Groups=arrayfun(@(Group,G)repmat(G,numel(Group{1}),1),Data,1:NumGroups,UniformOutput=false);
+			Groups=arrayfun(@(Group,G)repmat(G,numel(Group{1}),1),Data,XTickGroups,UniformOutput=false);
 			Data=vertcat(Data{:});
 			if isduration(Data)
 				Data=seconds(Data);
@@ -224,10 +254,17 @@ if nargout||~NoCompareGroups
 				Y=seconds(Y);
 			end
 			[P,~,Stats]=anova1(Y,vertcat(Groups{:}),'off');
+		case Flags.Table2D
+			[Columns,Rows]=meshgrid(Data.Properties.VariableNames,Data.Properties.RowNames);
+			if NoCompareGroups
+				P=UniExp.TabularAnovaN(vertcat(Data{:,:}{:}),table(Columns{:},Rows{:},'VariableNames',Data.Properties.DimensionNames),Display=false,Model='full');
+			else
+				[Optional.MultiCompare,P]=UniExp.TabularAnovaN(vertcat(Data{:,:}{:}),table(Columns{:},Rows{:},'VariableNames',Data.Properties.DimensionNames),Display=false,Model='full',Comparison=CompareGroup.GroupPair);
+			end
 	end
 end
 if NoCompareGroups
-	if nargout>1
+	if nargout>1&&~Table2D
 		if HasGroupNames
 			MultiCompare=table('Size',[0,2],'VariableTypes',["string","double"],'VariableNames',["GroupPair","PValue"]);
 		else
@@ -236,34 +273,52 @@ if NoCompareGroups
 		MultiCompare.Properties.DimensionNames(1)="分组对";
 	end
 else
-	if HasGroupNames
-		[MultiCompare,~,~,CompareGN]=multcompare(Stats,Display='off');
-		if isreal(CompareGroup.GroupPair)
-			NumericGroupPair=CompareGroup.GroupPair;
-			GroupPair=GroupNames(NumericGroupPair);
-		else
-			GroupPair=CompareGroup.GroupPair;
-			[~,NumericGroupPair]=ismember(GroupPair,GroupNames);
+	if Table2D
+		Descriptors=CompareGroup.GroupPair(:,Data.DimensionNames);
+		ErrorBars.Object=array2table(reshape(ErrorBars.Object,size(Data)),VariableNames=Data.Properties.VariableNames,RowNames=Data.Properties.RowNames);
+		ErrorBars.Index=array2table(reshape(ErrorBars.Index,size(Data)),VariableNames=Data.Properties.VariableNames,RowNames=Data.Properties.RowNames);
+		for P=1:height(Descriptors)
+			Descriptors.ObjectA(P)=ErrorBars.Object{Descriptors{P,1}(P,1),Descriptors{P,2}(P,1)};
+			Descriptors.ObjectB(P)=ErrorBars.Object{Descriptors{P,1}(P,2),Descriptors{P,2}(P,2)};
+			Descriptors.IndexA(P)=ErrorBars.Index{Descriptors{P,1}(P,1),Descriptors{P,2}(P,1)};
+			Descriptors.IndexB(P)=ErrorBars.Index{Descriptors{P,1}(P,2),Descriptors{P,2}(P,2)};
 		end
-		[~,GroupRow]=ismember(GroupPair,CompareGN);
-		[~,GroupRow]=ismember(sort(GroupRow,2),MultiCompare(:,1:2),'rows');
 	else
-		MultiCompare=multcompare(Stats,Display='off');
-		GroupPair=CompareGroup.GroupPair;
-		[~,GroupRow]=ismember(sort(GroupPair,2),MultiCompare(:,1:2),'rows');
-		NumericGroupPair=GroupPair;
+		if HasGroupNames
+			[MultiCompare,~,~,CompareGN]=multcompare(Stats,Display='off');
+			if isreal(CompareGroup.GroupPair)
+				NumericGroupPair=CompareGroup.GroupPair;
+				GroupPair=GroupNames(NumericGroupPair);
+			else
+				GroupPair=CompareGroup.GroupPair;
+				[~,NumericGroupPair]=ismember(GroupPair,GroupNames);
+			end
+			[~,GroupRow]=ismember(GroupPair,CompareGN);
+			[~,GroupRow]=ismember(sort(GroupRow,2),MultiCompare(:,1:2),'rows');
+		else
+			MultiCompare=multcompare(Stats,Display='off');
+			GroupPair=CompareGroup.GroupPair;
+			[~,GroupRow]=ismember(sort(GroupPair,2),MultiCompare(:,1:2),'rows');
+			NumericGroupPair=GroupPair;
+		end
+		PValue=MultiCompare(GroupRow,6);
+		MultiCompare=table(GroupPair,PValue);
+		MultiCompare.Properties.DimensionNames(1)="分组对";
+		Descriptors=table;
+		Descriptors{:,["ObjectA","ObjectB"]}=[ErrorBars.Object(NumericGroupPair(:,1)),ErrorBars.Object(NumericGroupPair(:,2))];
+		Descriptors{:,["IndexA","IndexB"]}=[ErrorBars.Index(NumericGroupPair(:,1)),ErrorBars.Index(NumericGroupPair(:,2))];
 	end
-	PValue=MultiCompare(GroupRow,6);
-	MultiCompare=table(GroupPair,PValue);
-	MultiCompare.Properties.DimensionNames(1)="分组对";
-	Descriptors=table;
-	Descriptors{:,["ObjectA","ObjectB"]}=[ErrorBars(NumericGroupPair(:,1)),ErrorBars(NumericGroupPair(:,2))];
-	Descriptors{:,["IndexA","IndexB"]}=[EBIndex(NumericGroupPair(:,1)),EBIndex(NumericGroupPair(:,2))];
 	Logical=PValue<AsteriskThreshold;
 	Descriptors.Text(Logical)="*";
 	Logical=~Logical;
 	Descriptors.Text(Logical)="p="+MATLAB.SignificantFixedpoint(PValue(Logical),2);
-	MATLAB.Graphics.PLine(Descriptors);
+	[Lines,Texts]=MATLAB.Graphics.PLine(Descriptors);
+	if any(CompareGroup.Properties.VariableNames=="PLineOffset")
+		for P=1:height(CompareGroup)
+			Lines(P).YData=Lines(P).YData+CompareGroup.PLineOffset(P);
+			Texts(P).Position(2)=Texts(P).Position(2)+CompareGroup.PLineOffset(P);
+		end
+	end
 end
 if ~HoldState
 	hold(Ax,'off');
