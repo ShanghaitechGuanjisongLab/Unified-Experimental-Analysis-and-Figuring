@@ -219,8 +219,8 @@ if ShowScatter
 		case Flags.Cell
 			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
 		case Flags.Struct
-			Data=struct2cell(Data);
-			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data),cellfun(@numel,Data)),vertcat(Data{:}),[],ScatterColor,'filled');
+			DataCell=struct2cell(Data);
+			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(DataCell),cellfun(@numel,DataCell)),vertcat(DataCell{:}),[],ScatterColor,'filled');
 		case Flags.Table2D
 			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data{:,:}),cellfun(@numel,Data{:,:})),vertcat(Data{:,:}{:}),[],ScatterColor,'filled');
 	end
