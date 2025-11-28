@@ -41,16 +41,16 @@
 %[text] Data，分组采样数据，可以是：
 %[text] - 实数矩阵，每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用数字标识组序数。
 %[text] - table，可以是：
-%[text]     - 每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用表列名标识组名。
-%[text]     - 二维分组，维度顺序参考内置bar函数，行名和列名对应该维度上的组名。每列都是(:,1)cell，元胞内是(:,1)，该组的所有样本。如果使用此语法，将取行名作为X轴，列名作为图例。如果要指定CompareGroup，通常还应当指定table的DimensionNames。
+%[text] -    - 每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用表列名标识组名。
+%[text] -    - 二维分组，维度顺序参考内置bar函数，行名和列名对应该维度上的组名。每列都是(:,1)cell，元胞内是(:,1)，该组的所有样本。如果使用此语法，将取行名作为X轴，列名作为图例。如果要指定CompareGroup，通常还应当指定table的DimensionNames。
 %[text] - (1,:)cell，每组一个元胞，元胞里是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用数字标识组序数。
 %[text] - (1,1)struct，每组一个字段，字段值是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用字段名标识组名。 \
 %[text] ShowScatter(1,1)logical=true，是否显示散点。若设为false，不能输出ScatterLines。
 %[text] CompareGroup table=table.empty，分组配对比较表，标识要将哪些分组配对计算P值，每行一对。默认不显示P值。
 %[text] - GroupPair(:,2)，必需，为每个比较配对指定要比较的两个分组。类型可以是：
-%[text]     - 如果Data使用table二维分组语法，此列必须是table，两列名对应Data的DimensionNames，每列内又是(:,2)，每行是该比较对组在该维度上的两个组名。此语法与TabularAnovaN的Comparison参数语法相同。
-%[text]     - 如果Data中仅指定了一维组名，GroupPair可以指定为字符串或组序数
-%[text]     - 如果Data未指定任何组名，GroupPair只能为组序数。
+%[text] -    - 如果Data使用table二维分组语法，此列必须是table，两列名对应Data的DimensionNames，每列内又是(:,2)，每行是该比较对组在该维度上的两个组名。此语法与TabularAnovaN的Comparison参数语法相同。
+%[text] -    - 如果Data中仅指定了一维组名，GroupPair可以指定为字符串或组序数
+%[text] -    - 如果Data未指定任何组名，GroupPair只能为组序数。
 %[text] - PLineOffset(:,1)，可选。为每个配对计算的P值将显示在图上，有时这些显示字符可能发生重叠。使用此参数，为每个比较配对指定一个向上偏移值，手动垫高特定配对的P值显示位置，避免与其它P值重叠。数值单位与Y轴一致。 \
 %[text] Ax(1,1)matlab.graphics.axis.Axes=gca，绘图目标坐标区
 %[text] #### Colors(:,3)table
@@ -71,8 +71,8 @@
 %[text] P(1,1)double，所有组的总体P值
 %[text] Optional(1,1)struct，可选输出，可选包含以下字段：
 %[text] - MultiCompare(:,2)table，如果CompareGroup不为空，则此输出对应CompareGroup，每行一个分组对，包含以下列：
-%[text]     - GroupPair(:,2)，保留CompareGroup的同名列不变
-%[text]     - PValue，该分组对两两比较的P值
+%[text] -    - GroupPair(:,2)，保留CompareGroup的同名列不变
+%[text] -    - PValue，该分组对两两比较的P值
 %[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。 \
 %[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>)
 function [P,Optional]=BarScatterCompare(Data,varargin)
@@ -294,6 +294,10 @@ else
 				[~,NumericGroupPair]=ismember(GroupPair,GroupNames);
 			end
 			[~,GroupRow]=ismember(GroupPair,CompareGN);
+			Unfound=GroupPair(~GroupRow);
+			if~isempty(Unfound)
+				UniExp.Exception.Group_name_not_found.Throw(Unfound);
+			end
 			[~,GroupRow]=ismember(sort(GroupRow,2),MultiCompare(:,1:2),'rows');
 		else
 			MultiCompare=multcompare(Stats,Display='off');

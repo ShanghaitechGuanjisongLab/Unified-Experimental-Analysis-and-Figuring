@@ -133,5 +133,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Nonexistent_comparison_groups
 		Parameter_cannot_be_parsed
 		AnovaN_model_invalid
+		Group_name_not_found
 	end
 end
