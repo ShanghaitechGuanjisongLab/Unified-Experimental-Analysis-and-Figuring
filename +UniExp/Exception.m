@@ -134,5 +134,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Parameter_cannot_be_parsed
 		AnovaN_model_invalid
 		Group_name_not_found
+        Unrecognized_queries_discarded
 	end
 end
