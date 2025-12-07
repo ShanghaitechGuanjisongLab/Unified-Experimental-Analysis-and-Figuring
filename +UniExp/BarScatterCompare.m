@@ -21,8 +21,11 @@
 %[text] BarScatterCompare(___,Name=Value);
 %[text] %与上述任意语法组合使用，额外指定名称值参数
 %[text] 
-%[text] [P,MultiCompare]=BarScatterCompare(___);
-%[text] %与上述任意语法组合使用，返回方差分析的总体P值和多重比较的组间P值
+%[text] [___,Optional]=BarScatterCompare(___);
+%[text] %与上述任意语法组合使用，返回可选的多重比较和图形对象
+%[text] 
+%[text] [___,PLines]=BarScatterCompare(___);
+%[text] %与上述任意语法组合使用，返回P值线对象
 %[text] ```
 %[text] ## 示例
 %[text] ```matlabCodeExample
@@ -74,8 +77,9 @@
 %[text] -    - GroupPair(:,2)，保留CompareGroup的同名列不变
 %[text] -    - PValue，该分组对两两比较的P值
 %[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。 \
+%[text] PLines(:,2)matlab.graphics.Graphics，P值线图形对象，一行一个P值线。第1列是横线，第2列是文本。
 %[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>)
-function [P,Optional]=BarScatterCompare(Data,varargin)
+function [P,Optional,PLines]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
 ShowScatter=true;
 CompareGroup=table.empty;
@@ -272,6 +276,7 @@ if NoCompareGroups
 		end
 		MultiCompare.Properties.DimensionNames(1)="分组对";
 	end
+	PLines=gobjects(0,2);
 else
 	if Table2D
 		Descriptors=CompareGroup.GroupPair(:,Data.DimensionNames);
@@ -323,6 +328,7 @@ else
 			Texts(P).Position(2)=Texts(P).Position(2)+CompareGroup.PLineOffset(P);
 		end
 	end
+	PLines=[Lines,Texts];
 end
 if ~HoldState
 	hold(Ax,'off');
