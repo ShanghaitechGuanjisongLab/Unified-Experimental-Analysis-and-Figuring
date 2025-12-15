@@ -253,7 +253,15 @@ if nargout||~NoCompareGroups
 		case Flags.Struct
 			Y=struct2cell(Data);
 			Groups=arrayfun(@(Group,Name)repmat(Name,numel(Group{1}),1),Y,GroupNames,UniformOutput=false);
-			Y=vertcat(Y{:});
+			try
+				Y=vertcat(Y{:});
+			catch ME
+				if ME.identifier=="MATLAB:catenate:dimensionMismatch"
+					UniExp.Exception.Struct_fields_not_column_vectors.Throw;
+				else
+					ME.rethrow;
+				end
+			end
 			if isduration(Y)
 				Y=seconds(Y);
 			end

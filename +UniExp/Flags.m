@@ -7,9 +7,11 @@ classdef Flags
 		Table
 		Table2D
 		Tabular
+		Tensor
 		Cell
 		Struct
 		Repeating
+		NDTable
 		HitMiss_Unified
 		HitMiss_ByDesign
 		HitMiss_ByStimulus
