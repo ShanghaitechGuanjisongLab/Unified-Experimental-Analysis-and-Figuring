@@ -103,8 +103,14 @@ function [PcaLines,Explained,Coeff] = LinearPca(NTATS,NumComponents)
 %刘开元设计的峰值查询函数
 function PeakTimes = LkyFindPeaks(Data,options)
 
-%将不同NATAS分组中的细胞补全
+%将不同NTATS分组中的细胞补全
 function varargout = NtatsCellReplenish(CopyMode,varargin)
+
+%将不同NTATS分组中的细胞交集
+function GroupNtats = NtatsCellStrip(GroupNtats)
+
+%将不同NTS分组中的细胞交集
+function GroupNts = NtsCellStrip(GroupNts)
 
 %为NTS乘上PCA系数，得到逐回合的PCA分数
 function TrialwisePca = NtsMultiplyPcaCoeff(NTS,PcaCoeff)

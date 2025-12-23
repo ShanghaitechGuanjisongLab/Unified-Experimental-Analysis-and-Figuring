@@ -2121,6 +2121,42 @@
 			}
 		]
 	},
+	"UniExp.NtatsCellStrip": {
+		"inputs": [
+			{
+				"name": "GroupNtats",
+				"kind": "required",
+				"type": [
+					[
+						"cell"
+					],
+					[
+						"struct",
+						"scalar"
+					]
+				],
+				"purpose": "要清理的NTATS分组"
+			}
+		]
+	},
+	"UniExp.NtsCellStrip": {
+		"inputs": [
+			{
+				"name": "GroupNts",
+				"kind": "required",
+				"type": [
+					[
+						"cell"
+					],
+					[
+						"struct",
+						"scalar"
+					]
+				],
+				"purpose": "要清理的NTS分组"
+			}
+		]
+	},
 	"UniExp.NtsMultiplyPcaCoeff": {
 		"inputs": [
 			{

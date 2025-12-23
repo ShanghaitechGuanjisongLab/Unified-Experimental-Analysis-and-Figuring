@@ -1,5 +1,5 @@
 function V = Version
-V.Me='v20.6.0';
+V.Me='v20.7.0';
 V.ParallelComputing='8.1.4';
 V.GlobalOptimization='3.1.2';
 V.ImageProcessing='3.6.1';

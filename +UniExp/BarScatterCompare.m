@@ -21,8 +21,11 @@
 %[text] BarScatterCompare(___,Name=Value);
 %[text] %与上述任意语法组合使用，额外指定名称值参数
 %[text] 
-%[text] [P,MultiCompare]=BarScatterCompare(___);
-%[text] %与上述任意语法组合使用，返回方差分析的总体P值和多重比较的组间P值
+%[text] [___,Optional]=BarScatterCompare(___);
+%[text] %与上述任意语法组合使用，返回可选的多重比较和图形对象
+%[text] 
+%[text] [___,PLines]=BarScatterCompare(___);
+%[text] %与上述任意语法组合使用，返回P值线对象
 %[text] ```
 %[text] ## 示例
 %[text] ```matlabCodeExample
@@ -45,7 +48,7 @@
 %[text] -    - 二维分组，维度顺序参考内置bar函数，行名和列名对应该维度上的组名。每列都是(:,1)cell，元胞内是(:,1)，该组的所有样本。如果使用此语法，将取行名作为X轴，列名作为图例。如果要指定CompareGroup，通常还应当指定table的DimensionNames。
 %[text] - (1,:)cell，每组一个元胞，元胞里是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用数字标识组序数。
 %[text] - (1,1)struct，每组一个字段，字段值是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用字段名标识组名。 \
-%[text] ShowScatter(1,1)logical=true，是否显示散点。若设为false，不能输出ScatterLines。
+%[text] ShowScatter(1,1)logical，是否显示散点，默认true。若设为false，也不能输出ScatterLines。如果Data是二维分组table，该参数始终视为false。
 %[text] CompareGroup table=table.empty，分组配对比较表，标识要将哪些分组配对计算P值，每行一对。默认不显示P值。
 %[text] - GroupPair(:,2)，必需，为每个比较配对指定要比较的两个分组。类型可以是：
 %[text] -    - 如果Data使用table二维分组语法，此列必须是table，两列名对应Data的DimensionNames，每列内又是(:,2)，每行是该比较对组在该维度上的两个组名。此语法与TabularAnovaN的Comparison参数语法相同。
@@ -73,9 +76,10 @@
 %[text] - MultiCompare(:,2)table，如果CompareGroup不为空，则此输出对应CompareGroup，每行一个分组对，包含以下列：
 %[text] -    - GroupPair(:,2)，保留CompareGroup的同名列不变
 %[text] -    - PValue，该分组对两两比较的P值
-%[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。 \
-%[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>)
-function [P,Optional]=BarScatterCompare(Data,varargin)
+%[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。
+%[text] - Legend(1,1)matlab.graphics.illustration.Legend，仅在输入二维分组table时存在，指向一个自动添加的图例 \
+%[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>) [matlab.graphics.illustration.Legend](<matlab:doc matlab.graphics.illustration.Legend>)
+function [P,Optional,PLines]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
 ShowScatter=true;
 CompareGroup=table.empty;
@@ -167,16 +171,13 @@ end
 if Table2D
 	HasRows=ismember(Data.Properties.VariableNames,Colors.Properties.RowNames);
 	Colors{Data.Properties.VariableNames(~HasRows),RGB}=GlobalOptimization.ColorAllocate(nnz(~HasRows),Colors{[Colors.Properties.RowNames(HasRows);intersect(["Scatter","Link"],Colors.Properties.RowNames)],RGB});
-	CData=Colors{Data.Properties.VariableNames,["R","G","B"]};
+	colororder(Colors{Data.Properties.VariableNames,["R","G","B"]});
 elseif any(Colors.Properties.RowNames=="Bar")
-	CData=Colors{"Bar",["R","G","B"]};
+	colororder(Colors{"Bar",["R","G","B"]});
 else
-	CData=[1,1,1];
+	colororder([1,1,1]);
 end
-Bars=bar(Ax{:},Mean,CData=CData,FaceColor='flat',LineWidth=2);%FaceColor默认不是flat，而是一个自动分配的颜色
-if Table2D
-	legend(Bars,Data.Properties.VariableNames,Location=MATLAB.Graphics.OptimizedLegendLocation(Bars));
-end
+Bars=bar(Ax{:},Mean,LineWidth=2);%FaceColor默认不是flat，而是一个自动分配的颜色
 if isempty(Ax)
 	Ax=gca;
 else
@@ -192,21 +193,21 @@ HoldState=ishold;
 hold(Ax,'on');
 AxUnits=Ax.Units;
 Ax.Units='points';
-CommonArguments={'Color',Colors{"ErrorBar",["R","G","B"]},'LineStyle','none','LineWidth',2,'CapSize',Ax.Position(3)*Bars.BarWidth/diff(xlim)*CapSize};
+CommonArguments={'Color',Colors{"ErrorBar",["R","G","B"]},'LineStyle','none','LineWidth',2,'CapSize',Ax.Position(3)*Bars(1).BarWidth*Bars(1).GroupWidth*CapSize/(diff(xlim)*numel(Bars))};
 Ax.Units=AxUnits;
 Xs=[Bars.XEndPoints];
 ErrorBars=table;
 if any(BarPositive)
 	ErrorBars.Object(BarPositive)=errorbar(Ax,Xs(BarPositive),Mean(BarPositive),[],Sem(BarPositive),CommonArguments{:});
-	ErrorBars.Index(BarPositive)=1:sum(BarPositive);
+	ErrorBars.Index(BarPositive)=1:sum(BarPositive,'all');
 end
 if any(BarNegative)
 	ErrorBars.Object(BarNegative)=errorbar(Ax,Xs(BarNegative),Mean(BarNegative),Sem(BarNegative),[],CommonArguments{:});
-	ErrorBars.Index(BarNegative)=1:sum(BarNegative);
+	ErrorBars.Index(BarNegative)=1:sum(BarNegative,'all');
 end
 if any(BarZero)
 	ErrorBars.Object(BarZero)=errorbar(Ax,Xs(BarZero),Mean(BarZero),Sem(BarZero),CommonArguments{:});
-	ErrorBars.Index(BarZero)=1:sum(BarZero);
+	ErrorBars.Index(BarZero)=1:sum(BarZero,'all');
 end
 Optional=struct;
 if ShowScatter
@@ -221,8 +222,6 @@ if ShowScatter
 		case Flags.Struct
 			DataCell=struct2cell(Data);
 			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(DataCell),cellfun(@numel,DataCell)),vertcat(DataCell{:}),[],ScatterColor,'filled');
-		case Flags.Table2D
-			Optional.ScatterLines=swarmchart(Ax,repelem(1:numel(Data{:,:}),cellfun(@numel,Data{:,:})),vertcat(Data{:,:}{:}),[],ScatterColor,'filled');
 	end
 end
 NoCompareGroups=isempty(CompareGroup);
@@ -249,20 +248,36 @@ if nargout||~NoCompareGroups
 		case Flags.Struct
 			Y=struct2cell(Data);
 			Groups=arrayfun(@(Group,Name)repmat(Name,numel(Group{1}),1),Y,GroupNames,UniformOutput=false);
-			Y=vertcat(Y{:});
+			try
+				Y=vertcat(Y{:});
+			catch ME
+				if ME.identifier=="MATLAB:catenate:dimensionMismatch"
+					UniExp.Exception.Struct_fields_not_column_vectors.Throw;
+				else
+					ME.rethrow;
+				end
+			end
 			if isduration(Y)
 				Y=seconds(Y);
 			end
 			[P,~,Stats]=anova1(Y,vertcat(Groups{:}),'off');
 		case Flags.Table2D
-			[Columns,Rows]=meshgrid(Data.Properties.VariableNames,Data.Properties.RowNames);
+			SampleNumbers=cellfun(@numel,Data{:,:});
+			Columns=repelem(Data.Properties.VariableNames,1,sum(SampleNumbers,1));
+			NumColumns=width(Data);
+			Rows=cell(1,NumColumns);
+			for C=1:NumColumns
+				Rows{C}=repelem(Data.Properties.RowNames,SampleNumbers(:,C));
+			end
+			Rows=vertcat(Rows{:});
 			if NoCompareGroups
-				P=UniExp.TabularAnovaN(vertcat(Data{:,:}{:}),table(Columns{:},Rows{:},'VariableNames',Data.Properties.DimensionNames),Display=false,Model='full');
+				P=UniExp.TabularAnovaN(vertcat(Data{:,:}{:}),table(Columns(:),Rows(:),'VariableNames',Data.Properties.DimensionNames),Display=false,Model='full');
 			else
-				[Optional.MultiCompare,P]=UniExp.TabularAnovaN(vertcat(Data{:,:}{:}),table(Columns{:},Rows{:},'VariableNames',Data.Properties.DimensionNames),Display=false,Model='full',Comparison=CompareGroup.GroupPair);
+				[MultiCompare,P]=UniExp.TabularAnovaN(vertcat(Data{:,:}{:}),table(Rows(:),Columns(:),'VariableNames',Data.Properties.DimensionNames),Display=false,Model='full',Comparison=CompareGroup.GroupPair);
 			end
 	end
 end
+LegendAvoid=Bars;
 if NoCompareGroups
 	if nargout>1&&~Table2D
 		if HasGroupNames
@@ -272,16 +287,18 @@ if NoCompareGroups
 		end
 		MultiCompare.Properties.DimensionNames(1)="分组对";
 	end
+	PLines=gobjects(0,2);
 else
 	if Table2D
-		Descriptors=CompareGroup.GroupPair(:,Data.DimensionNames);
-		ErrorBars.Object=array2table(reshape(ErrorBars.Object,size(Data)),VariableNames=Data.Properties.VariableNames,RowNames=Data.Properties.RowNames);
-		ErrorBars.Index=array2table(reshape(ErrorBars.Index,size(Data)),VariableNames=Data.Properties.VariableNames,RowNames=Data.Properties.RowNames);
+		Descriptors=CompareGroup.GroupPair(:,Data.Properties.DimensionNames);
+		Descriptors.Object=array2table(reshape(ErrorBars.Object,size(Data)),VariableNames=Data.Properties.VariableNames);
+		Descriptors.Index=array2table(reshape(ErrorBars.Index,size(Data)),VariableNames=Data.Properties.VariableNames);
+		Descriptors.Properties.RowNames=Data.Properties.RowNames;
 		for P=1:height(Descriptors)
-			Descriptors.ObjectA(P)=ErrorBars.Object{Descriptors{P,1}(P,1),Descriptors{P,2}(P,1)};
-			Descriptors.ObjectB(P)=ErrorBars.Object{Descriptors{P,1}(P,2),Descriptors{P,2}(P,2)};
-			Descriptors.IndexA(P)=ErrorBars.Index{Descriptors{P,1}(P,1),Descriptors{P,2}(P,1)};
-			Descriptors.IndexB(P)=ErrorBars.Index{Descriptors{P,1}(P,2),Descriptors{P,2}(P,2)};
+			Descriptors.ObjectA(P)=Descriptors.Object{Descriptors{P,1}(1),Descriptors{P,2}(1)};
+			Descriptors.ObjectB(P)=Descriptors.Object{Descriptors{P,1}(2),Descriptors{P,2}(2)};
+			Descriptors.IndexA(P)=Descriptors.Index{Descriptors{P,1}(1),Descriptors{P,2}(1)};
+			Descriptors.IndexB(P)=Descriptors.Index{Descriptors{P,1}(2),Descriptors{P,2}(2)};
 		end
 	else
 		if HasGroupNames
@@ -312,10 +329,10 @@ else
 		Descriptors{:,["ObjectA","ObjectB"]}=[ErrorBars.Object(NumericGroupPair(:,1)),ErrorBars.Object(NumericGroupPair(:,2))];
 		Descriptors{:,["IndexA","IndexB"]}=[ErrorBars.Index(NumericGroupPair(:,1)),ErrorBars.Index(NumericGroupPair(:,2))];
 	end
-	Logical=PValue<AsteriskThreshold;
+	Logical=MultiCompare.PValue<AsteriskThreshold;
 	Descriptors.Text(Logical)="*";
 	Logical=~Logical;
-	Descriptors.Text(Logical)="p="+MATLAB.SignificantFixedpoint(PValue(Logical),2);
+	Descriptors.Text(Logical)="p="+MATLAB.SignificantFixedpoint(MultiCompare.PValue(Logical),2);
 	[Lines,Texts]=MATLAB.Graphics.PLine(Descriptors);
 	if any(CompareGroup.Properties.VariableNames=="PLineOffset")
 		for P=1:height(CompareGroup)
@@ -323,6 +340,13 @@ else
 			Texts(P).Position(2)=Texts(P).Position(2)+CompareGroup.PLineOffset(P);
 		end
 	end
+	PLines=[Lines,Texts];
+	MultiCompare{:,["PLine","PText"]}=PLines;
+	Optional.MultiCompare=MultiCompare;
+	LegendAvoid=[LegendAvoid(:);PLines(:)];
+end
+if Table2D
+	Optional.Legend=legend(Bars,Data.Properties.VariableNames,Location=MATLAB.Graphics.OptimizedLegendLocation(LegendAvoid));
 end
 if ~HoldState
 	hold(Ax,'off');

@@ -135,5 +135,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		AnovaN_model_invalid
 		Group_name_not_found
         Unrecognized_queries_discarded
+		Struct_fields_not_column_vectors
 	end
 end
