@@ -63,7 +63,7 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 			if nargin>3
 				End=min(End,Start+obj.GpuLimit);
 			end
-			[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,Start-1,End-Start+1);
+			[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,'ReadPixels',Start-1,End-Start+1);
 			if obj.WriterIsReader
 				obj.Writer=obj.Reader;
 			end

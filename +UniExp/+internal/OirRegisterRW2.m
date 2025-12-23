@@ -62,7 +62,7 @@ classdef OirRegisterRW2<ParallelComputing.IBlockRWer
 				Sizes=[obj.SizeX,obj.SizeY,obj.SizeC,obj.SizeZ,End-Start+1];
 				Data=reshape(fread(obj.CacheFid,prod(Sizes),'uint16=>uint16'),Sizes);
 			else
-				[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,Start-1,End-Start+1,obj.NontagChannels);
+				[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,'ReadPixels',Start-1,End-Start+1,obj.NontagChannels);
 			end
 			PiecesRead=size(Data,5);
 			Data={Data,obj.Translation(Start:End,:,:)};

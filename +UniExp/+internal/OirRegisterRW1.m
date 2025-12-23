@@ -45,7 +45,7 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 		end
 		function [Data,PiecesRead]=Read(obj,~,~,~)
 			obj.BlocksRead=obj.BlocksRead+1;
-			[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,obj.BlockStarts(obj.BlocksRead),obj.BlockSizes(obj.BlocksRead));
+			[Data,obj.Reader]=TryRead(obj.Reader,obj.ReaderGetFun,'ReadPixels',obj.BlockStarts(obj.BlocksRead),obj.BlockSizes(obj.BlocksRead));
 			if obj.CacheFid
 				fwrite(obj.CacheFid,Data(:,:,obj.NonTagChannel,:,:),'uint16');
 			end
