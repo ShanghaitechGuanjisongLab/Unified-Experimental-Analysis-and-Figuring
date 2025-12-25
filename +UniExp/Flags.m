@@ -120,5 +120,10 @@ classdef Flags
 		%% HeatmapSort
 
 		Sum
+
+		%% CellTrialsVideo.Window
+
+		Auto
+		Full
 	end
 end

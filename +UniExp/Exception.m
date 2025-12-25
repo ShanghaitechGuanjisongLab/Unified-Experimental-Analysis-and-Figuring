@@ -136,5 +136,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Group_name_not_found
         Unrecognized_queries_discarded
 		Struct_fields_not_column_vectors
+		No_ROI_specified_for_Auto_Window
 	end
 end

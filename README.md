@@ -142,7 +142,7 @@ function ProjectCosine = VectorProjectCosine(GroupCtt,options)
 function BarScatterCompare(DataA,DataB,varargin)
 
 %从TIFF中截取一段展示细胞活动的视频
-function Video=CellTrialVideo(TiffPath,options)
+function Video=CellTrialsVideo(TiffPath,varargin)
 
 %作异形彩色标记线条图
 function Scatters = ColorfulMarkerPlot(Points,LineColors,Markers,MarkerColors,options)
