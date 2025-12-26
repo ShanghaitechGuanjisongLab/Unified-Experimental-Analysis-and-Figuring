@@ -118,6 +118,66 @@
 			}
 		]
 	},
+	"UniExp.DataSet.CellTrialsVideo": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "CellUID",
+				"kind": "required",
+				"type": "real",
+				"purpose": "细胞UID"
+			},
+			{
+				"name": "TrialUID",
+				"kind": "required",
+				"type": "real",
+				"purpose": "回合UID"
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "OutputPath",
+							"kind": "required",
+							"type": [
+								[
+									"string",
+									"scalar"
+								],
+								[
+									"char",
+									"row"
+								],
+								[
+									"file"
+								]
+							],
+							"purpose": "输出视频路径"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "ZLayer",
+							"kind": "required",
+							"type": [
+								"real",
+								"scalar"
+							],
+							"purpose": "Tiff文件中的Z层号，从0开始"
+						}
+					],
+					[]
+				]
+			}
+		]
+	},
 	"UniExp.DataSet.CheckForLightLeakage": {
 		"inputs": [
 			{

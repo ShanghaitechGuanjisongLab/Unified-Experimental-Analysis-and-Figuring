@@ -35,10 +35,10 @@
 %[text] 多个细胞的ROI圆心和半径，第1维细胞，第2维XY，第3维圆心/半径。如果不指定此参数，将不标注细胞圈。
 %[text] #### ShowSeconds(1,1)struct
 %[text] 要在视频中显示的计时读秒。包含以下字段：
-%[text] - Range(1,2)，必需，秒数范围，两个元素分别是起始秒数和终止秒数。
+%[text] - Range(1,2)，必需，回合时间偏移范围，两个元素分别是起始和终止时间偏移。如果指定为非duration类型，则单位为秒。
 %[text] - Size(1,1)=mean2(ROI(:,:,2))，字体大小。此值大致等于单行文本高度将会占据的像素数，但不同字体的渲染结果可能有所不同。如果未指定ROI，此字段为必需。
 %[text] - Font(1,1)string="Microsoft YaHei"，渲染字体。可用listTrueTypeFonts查看所有可用的字体。
-%[text] - Location(1,1)UniExp.Flags=UniExp.Flags.NorthWest，显示位置，可选：NorthWest，显示在左上角；NorthEast，显示在右上角；SouthWest，显示在左下角；SouthEast，显示在右下角。 \
+%[text] - Location(1,1)UniExp.Flags，显示位置，可选：NorthWest，显示在左上角；NorthEast，显示在右上角；SouthWest，显示在左下角；SouthEast，显示在右下角。如不指定此参数，将自动选择一个离所有ROI最远的角落；如果未指定ROI，默认为左上角。 \
 %[text] 计时读秒将仅显示整数秒数，并加后缀单位“s”，右对齐。如果不指定此参数，将不显示计时读秒。
 %[text] #### Color(1,3)
 %[text] ROI和秒数标注所使用的RGB颜色，使用\[0,1\]范围内的single或\[0,255\]范围内的uint8值表示RGB分量。如果不指定此参数，将根据TIFF的通道颜色自动分配一个尽可能形成高对比的颜色。
@@ -57,18 +57,19 @@
 %[text] Z(1,1)，要截取的Z层，从0开始。对于多Z层TIFF，必须指定此参数。
 %[text] FrameRate(1,1)，视频帧率，一秒几帧。如果指定了OutputPath，但未指定ShowSeconds，则此参数为必需。
 %[text] ## 返回值
-%[text] Video(:,:,3,:)，生成的视频像素数组。第1维X，第2维Y，第3维RGB，第4维时间。注意维度顺序为XYCT，而MATLAB内置图像/视频处理函数的维度顺序通常为YXCT，使用pagetranspose在这两种维度顺序之间转换。
-%[text] **See also** [listTrueTypeFonts](matlab:listTrueTypeFonts) [VideoWriter](<matlab:doc VideoWriter>) [insertText](<matlab:doc insertText>) [pagetranspose](<matlab:doc pagetranspose>)
+%[text] Video(:,:,3,:)uint8，生成的视频像素数组。第1维Y，第2维X，第3维RGB，第4维时间。
+%[text] **See also** [listTrueTypeFonts](matlab:listTrueTypeFonts) [VideoWriter](<matlab:doc VideoWriter>) [insertText](<matlab:doc insertText>) [pagetranspose](<matlab:doc pagetranspose>) [UniExp.DataSet.CellTrialsVideo](<matlab:doc UniExp.DataSet.CellTrialsVideo>)
 function Video=CellTrialsVideo(TiffPath,varargin)
+import UniExp.Flags;
 
 % -------- Parse inputs (positional + Name=Value) --------
 
-HasTStartsSize=false;
-HasColor=false;
-HasWindow=false;
+TSize=[];
+Color=[];
+Window=[];
 HasROI=false;
-HasShowSeconds=false;
-HasOutputPath=false;
+ShowSeconds=[];
+OutputPath=[];
 V=1;
 while true
 	Arg=varargin{V};
@@ -78,16 +79,13 @@ while true
 				TStarts=Arg;
 				TSize=Arg{V+1};
 				V=V+2;
-				HasTStartsSize=true;
 				continue;
 			else
 				Color=Arg;
-				HasColor=true;
 			end
 		else
 			if ismatrix(Arg)
 				Window=Arg;
-				HasWindow=true;
 			else
 				ROI=Arg;
 				HasROI=true;
@@ -96,23 +94,20 @@ while true
 	else
 		if isstruct(Arg)
 			ShowSeconds=Arg;
-			HasShowSeconds=true;
 		elseif isa(Arg,'UniExp.Flags')
 			Window=Arg;
-			HasWindow=true;
 		elseif any(Arg==["C","Z","FrameRate"])
 			% Name=Value pair, stop positional parsing
 			break;
 		else
 			OutputPath=Arg;
-			HasOutputPath=true;
 		end
 	end
 	V=V+1;
 end
 HasChannel=false;
 HasZLayer=false;
-HasFrameRate=false;
+FrameRate=[];
 for V=V:2:numel(varargin)
 	Arg=varargin{V+1};
 	switch varargin{V}
@@ -124,7 +119,6 @@ for V=V:2:numel(varargin)
 			HasZLayer=true;
 		case "FrameRate"
 			FrameRate=Arg;
-			HasFrameRate=true;
 	end
 end
 
@@ -146,7 +140,7 @@ else
 end
 
 % -------- Read + build RGB video (XYCT) --------
-if~HasTStartsSize
+if isempty(TSize)
 	TStarts=0;
 	TSize=Reader.SizeT;
 end
@@ -154,46 +148,46 @@ Video=arrayfun(@(Start)Reader.ReadPixels(Start,TSize,ZCArguments{:}),TStarts,'Un
 Video=gpuArray(cat(6,Video{:}));
 
 ChColor=Reader.ChannelColors(C+1);
-Video=reshape(Video,[size(Video,1:2),1,TSize,size(Video,6)]).*single(cat(3,ChColor.R,ChColor.G,ChColor.B))/255;
+Video=uint8(rescale(reshape(Video,[size(Video,1:2),1,TSize,size(Video,6)]).*single(cat(3,ChColor.R,ChColor.G,ChColor.B))/255,0,255));
 
 % -------- Resolve annotation color --------
-if HasColor
-	if isa(Color,'uint8')||any(Color>1)
-		Color=single(Color)/255;
-	end
+if isempty(Color)
+	Color=GlobalOptimization.ColorAllocate(1,[ChColor.R,ChColor.G,ChColor.B;0,0,0])*255;
 else
-	Color=GlobalOptimization.ColorAllocate(1,[ChColor.R,ChColor.G,ChColor.B;0,0,0]);
+	if isfloat(Color)&&all(Color<=1)
+		Color=Color*255;
+	end
 end
 Color=reshape(Color,1,1,3);
 
 % -------- ROI overlay (before cropping) --------
-VideoSize=size(Video,1:2);
+PlaneSize=size(Video,1:2);
 if HasROI
 	% 维度顺序：Xs Ys 细胞 XY 圆心半径
 	ROI5=reshape(ROI,[1,1,size(ROI)]);
 	ROI5(:,:,:,:,2)=ROI5(:,:,:,:,2)+1;
-	Video=MATLAB.Ops.LogicalAssign(Video,edge(all((((1:VideoSize(1))'-ROI5(:,:,:,1,1))./ROI5(:,:,:,1,2)).^2+((1:VideoSize(2)-ROI5(:,:,:,2,1))./ROI5(:,:,:,2,2)).^2>1,3)),Color);
+	Video=MATLAB.Ops.LogicalAssign(Video,edge(all((((1:PlaneSize(1))'-ROI5(:,:,:,1,1))./ROI5(:,:,:,1,2)).^2+((1:PlaneSize(2)-ROI5(:,:,:,2,1))./ROI5(:,:,:,2,2)).^2>1,3)),Color);
 end
 
 % -------- Window cropping --------
-if~HasWindow
+if isempty(Window)
 	if HasROI
-		Window=UniExp.Flags.Auto;
+		Window=Flags.Auto;
 	else
-		Window=UniExp.Flags.Full;
+		Window=Flags.Full;
 	end
 end
 
 if isscalar(Window)
 	switch Window
-		case UniExp.Flags.Full
+		case Flags.Full
 			% no-op
-		case UniExp.Flags.Auto
+		case Flags.Auto
 			Window=zeros(2);
 			[Window(1,:),Window(2,:)]=bounds(ROI(:,:,1),1);
 			Padding=mean(ROI(:,:,2),1:2)*3;
 			Window(:,1)=max(Window(:,1)-Padding,1);
-			Window(:,2)=min(Window(:,2)+Padding,VideoSize.');
+			Window(:,2)=min(Window(:,2)+Padding,PlaneSize.');
 			Window=uint16(Window);
 			Video=Video(Window(1,1):Window(1,2),Window(2,1):Window(2,2),:,:);
 	end
@@ -203,8 +197,12 @@ else
 end
 
 % -------- ShowSeconds overlay --------
-if HasShowSeconds
-	[Index,TextMasks]=findgroups(floor(linspace(ShowSeconds.Range(1),ShowSeconds.Range(2),TSize)));
+persistent LocationOrder
+if~isempty(ShowSeconds)
+	if isduration(ShowSeconds.Range)
+		ShowSeconds.Range=seconds(ShowSeconds.Range);
+	end
+	[Start,TextMasks]=findgroups(floor(linspace(ShowSeconds.Range(1),ShowSeconds.Range(2),TSize)));
 	if isfield(ShowSeconds,'Size')
 		TextSize=ShowSeconds.Size;
 	else
@@ -219,6 +217,13 @@ if HasShowSeconds
 	TextMasks=pagetranspose(MATLAB.ElMat.PadCat(4,TextMasks{:},Padder=false,Alignment=[1,2,-2,0]));
 	if isfield(ShowSeconds,'Location')
 		Start=ShowSeconds.Location;
+	elseif HasROI
+		Start=cat(3,ROI(:,:,1),PlaneSize-ROI(:,:,1)).^2;
+		[~,Start]=max(min(Start(:,1,:)+reshape(Start(:,2,:),[],2,1),[],1),[],'all');
+		if isempty(LocationOrder)
+			LocationOrder=[Flags.NorthWest,Flags.NorthEast,Flags.SouthWest,Flags.SouthEast];
+		end
+		Start=LocationOrder(Start);
 	else
 		Start=Flags.NorthWest;
 	end
@@ -227,26 +232,27 @@ if HasShowSeconds
 		case Flags.NorthWest
 			Start=[0,0];
 		case Flags.NorthEast
-			Start=[VideoSize(1)-Subs(1),0];
+			Start=[PlaneSize(1)-Subs(1),0];
 		case Flags.SouthWest
-			Start=[0,VideoSize(2)-Subs(2)];
+			Start=[0,PlaneSize(2)-Subs(2)];
 		case Flags.SouthEast
-			Start=(VideoSize-Subs);
+			Start=(PlaneSize-Subs);
 	end
 	Subs=arrayfun(@colon,Start+1,Start+Subs,UniformOutput=false);
-	Video(Subs{:},:,:)=MATLAB.Ops.LogicalAssign(Video(Subs{:},:,:),TextMasks(:,:,:,Index),Color);
+	Video(Subs{:},:,:)=MATLAB.Ops.LogicalAssign(Video(Subs{:},:,:),TextMasks(:,:,:,Start),Color);
 end
+Video=pagetranspose(Video);
 
 % -------- Optional file output --------
-if HasOutputPath
+if~isempty(OutputPath)
 	Writer=VideoWriter(OutputPath,'MPEG-4');
-	if HasFrameRate
-		Writer.FrameRate=FrameRate;
-	else
+	if isemtpy(FrameRate)
 		Writer.FrameRate=single(TSize)/(ShowSeconds.Range(2)-ShowSeconds.Range(1));
+	else
+		Writer.FrameRate=FrameRate;
 	end
 	Writer.open;
-	Writer.writeVideo(gather(pagetranspose(Video)));
+	Writer.writeVideo(gather(Video));
 	Writer.close;
 end
 

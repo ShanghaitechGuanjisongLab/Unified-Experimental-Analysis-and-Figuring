@@ -137,5 +137,10 @@ classdef Exception<MATLAB.Lang.IEnumerableException
         Unrecognized_queries_discarded
 		Struct_fields_not_column_vectors
 		No_ROI_specified_for_Auto_Window
+		No_TiffPath_found_for_specified_CellUID_and_TrialUID
+		Cells_have_different_ZLayers
+		Trials_have_different_Start_and_End_offsets
+		Trials_Block_information_not_found
+		Trials_come_from_different_Blocks
 	end
 end
