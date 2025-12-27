@@ -144,5 +144,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Trials_come_from_different_Blocks
 		Channel_not_specified_for_multi_channel_TIFF
 		ZLayer_not_specified_for_multi_Z_TIFF
+		Empty_event_log
 	end
 end
