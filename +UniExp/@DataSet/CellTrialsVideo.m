@@ -29,10 +29,10 @@ for V=1:numel(varargin)
 		OutputPath=varargin(V);
 	end
 end
-TrialsSharedInfo=unique(obj.TableQuery(["TiffPath","SeriesInterval"],TrialUID=TrialUID));
+TrialsSharedInfo=unique(obj.TableQuery(["TiffPath","SeriesInterval"],TrialUID=TrialUID,CellUID=CellUID));
 switch height(TrialsSharedInfo)
 	case 0
-		UniExp.Exception.Trials_Block_information_not_found.Throw;
+		UniExp.Exception.Trials_and_cells_not_found_or_from_different_mice.Throw;
 	case 1
 		%正常情况
 	otherwise
@@ -40,14 +40,14 @@ switch height(TrialsSharedInfo)
 end
 SelectedCells=obj.Cells(ismember(obj.Cells.CellUID,CellUID),["Center","Radius","ZLayer"]);
 if~isscalar(MATLAB.Ops.UniqueN(SelectedCells.ZLayer))
-	UniExp.Exception.Cells_have_different_ZLayers.Throw;
+	UniExp.Exception.Cells_have_different_ZLayers.Throw(SelectedCells);
 end
 SampleRange=obj.Trials.SampleRange(ismember(obj.Trials.TrialUID,TrialUID),:);
 Range=MATLAB.Ops.UniqueN(SampleRange{:,["Start","End"]}-SampleRange.Tag,1);
 if~isrow(Range)
 	UniExp.Exception.Trials_have_different_Start_and_End_offsets.Throw(Range);
 end
-Video=UniExp.CellTrialsVideo(TrialsSharedInfo.TiffPath,OutputPath{:},reshape([SelectedCells.Center{:,["X","Y"]},SelectedCells.Radius{:,["X","Y"]}],[],2,2),sort(SampleRange.Start)-1,Range(2)-Range(1)+1,struct(Range=Range.*TrialsSharedInfo.SeriesInterval),ZLayer{:});
+Video=UniExp.CellTrialsVideo(TrialsSharedInfo.TiffPath,OutputPath{:},reshape([SelectedCells.Center{:,["X","Y"]},SelectedCells.Radius{:,["X","Y"]}],[],2,2),sort(SampleRange.Start)-1,Range(2)-Range(1)+1,struct(Range=double(Range).*TrialsSharedInfo.SeriesInterval),ZLayer{:});
 end
 
 %[appendix]{"version":"1.0"}

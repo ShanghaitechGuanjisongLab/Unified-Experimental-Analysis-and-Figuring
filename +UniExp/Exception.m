@@ -140,7 +140,9 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		No_TiffPath_found_for_specified_CellUID_and_TrialUID
 		Cells_have_different_ZLayers
 		Trials_have_different_Start_and_End_offsets
-		Trials_Block_information_not_found
+		Trials_and_cells_not_found_or_from_different_mice
 		Trials_come_from_different_Blocks
+		Channel_not_specified_for_multi_channel_TIFF
+		ZLayer_not_specified_for_multi_Z_TIFF
 	end
 end

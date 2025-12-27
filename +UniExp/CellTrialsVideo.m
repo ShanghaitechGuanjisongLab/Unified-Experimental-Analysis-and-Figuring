@@ -49,7 +49,7 @@
 %[text] #### Window
 %[text] 要截取的窗口范围。可以是：
 %[text] - (1,1)UniExp.Flags。可选枚举项UniExp.Flags.Auto以根据ROI位置确定窗口范围，此时必须指定ROI参数；或UniExp.Flags.Full以包含整个图面不作截取。
-%[text] - (2,2)，手动指定窗口范围，4项分别是【左边距，宽度；顶边距，高度】 \
+%[text] - (2,2)，手动指定窗口范围，4项分别是【左索引，顶索引；右索引，底索引】，即最终窗口将截取为(Window(1,1):Window(2,1),Window(1,2):Window(2,2) \
 %[text] 如果指定了ROI，此参数默认是UniExp.Flags.Auto；否则默认是UniExp.Flags.Full。
 %[text] ### 名称值参数
 %[text] 名称值参数并非都是可选的。在某些条件下，可能是必需的。
@@ -71,13 +71,14 @@ HasROI=false;
 ShowSeconds=[];
 OutputPath=[];
 V=1;
-while true
+NumVarargin=numel(varargin);
+while V<=NumVarargin
 	Arg=varargin{V};
 	if isnumeric(Arg)
 		if isvector(Arg)
 			if any(Arg>1)
 				TStarts=Arg;
-				TSize=Arg{V+1};
+				TSize=varargin{V+1};
 				V=V+2;
 				continue;
 			else
@@ -121,19 +122,24 @@ for V=V:2:numel(varargin)
 			FrameRate=Arg;
 	end
 end
-
 Reader=Image5D.OmeTiffRWer.OpenRead(TiffPath);
 
 % -------- Resolve channel / Z (0-based, consistent with ReadPixels convention) --------
 if HasZLayer
 	if HasChannel
 		ZCArguments={ZLayer,1,Channel,1};
+	elseif Reader.SizeC>1
+		UniExp.Exception.Channel_not_specified_for_multi_channel_TIFF.Throw;
 	else
 		ZCArguments={ZLayer,1,0,1};
 	end
+elseif Reader.SizeZ>1
+	UniExp.Exception.ZLayer_not_specified_for_multi_Z_TIFF.Throw;
 else
 	if HasChannel
 		ZCArguments={0,1,Channel,1};
+	elseif Reader.SizeC>1
+		UniExp.Exception.Channel_not_specified_for_multi_channel_TIFF.Throw;
 	else
 		ZCArguments={};
 	end
@@ -146,9 +152,12 @@ if isempty(TSize)
 end
 Video=arrayfun(@(Start)Reader.ReadPixels(Start,TSize,ZCArguments{:}),TStarts,'UniformOutput',false);
 Video=gpuArray(cat(6,Video{:}));
-
-ChColor=Reader.ChannelColors(C+1);
-Video=uint8(rescale(reshape(Video,[size(Video,1:2),1,TSize,size(Video,6)]).*single(cat(3,ChColor.R,ChColor.G,ChColor.B))/255,0,255));
+if HasChannel
+	ChColor=Reader.ChannelColors(Channel+1);
+else
+	ChColor=Reader.ChannelColors;
+end
+Video=uint8(rescale(single(reshape(Video,[size(Video,1:2),1,TSize,size(Video,6)])).*single(cat(3,ChColor.R,ChColor.G,ChColor.B))/255,0,255));
 
 % -------- Resolve annotation color --------
 if isempty(Color)
@@ -166,7 +175,7 @@ if HasROI
 	% 维度顺序：Xs Ys 细胞 XY 圆心半径
 	ROI5=reshape(ROI,[1,1,size(ROI)]);
 	ROI5(:,:,:,:,2)=ROI5(:,:,:,:,2)+1;
-	Video=MATLAB.Ops.LogicalAssign(Video,edge(all((((1:PlaneSize(1))'-ROI5(:,:,:,1,1))./ROI5(:,:,:,1,2)).^2+((1:PlaneSize(2)-ROI5(:,:,:,2,1))./ROI5(:,:,:,2,2)).^2>1,3)),Color);
+	Video=MATLAB.Ops.LogicalAssign(Video,edge(all((((1:PlaneSize(1))'-ROI5(:,:,:,1,1))./ROI5(:,:,:,1,2)).^2+(((1:PlaneSize(2))-ROI5(:,:,:,2,1))./ROI5(:,:,:,2,2)).^2>1,3)),Color);
 end
 
 % -------- Window cropping --------
@@ -186,15 +195,14 @@ if isscalar(Window)
 			Window=zeros(2);
 			[Window(1,:),Window(2,:)]=bounds(ROI(:,:,1),1);
 			Padding=mean(ROI(:,:,2),1:2)*3;
-			Window(:,1)=max(Window(:,1)-Padding,1);
-			Window(:,2)=min(Window(:,2)+Padding,PlaneSize.');
-			Window=uint16(Window);
-			Video=Video(Window(1,1):Window(1,2),Window(2,1):Window(2,2),:,:);
+			Window(1,:)=max(Window(1,:)-Padding,1);
+			Window(2,:)=min(Window(2,:)+Padding,PlaneSize);
+			Video=Video(Window(1,1):Window(2,1),Window(1,2):Window(2,2),:,:);
 	end
 else
-	Window(:,2)=Window(:,1)+Window(:,2)-1;
-	Video=Video(Window(1,1):Window(1,2),Window(2,1):Window(2,2),:,:);
+	Video=Video(Window(1,1):Window(2,1),Window(1,2):Window(2,2),:,:);
 end
+PlaneSize=size(Video,1:2);
 
 % -------- ShowSeconds overlay --------
 persistent LocationOrder
@@ -202,11 +210,11 @@ if~isempty(ShowSeconds)
 	if isduration(ShowSeconds.Range)
 		ShowSeconds.Range=seconds(ShowSeconds.Range);
 	end
-	[Start,TextMasks]=findgroups(floor(linspace(ShowSeconds.Range(1),ShowSeconds.Range(2),TSize)));
+	[Index,TextMasks]=findgroups(floor(linspace(ShowSeconds.Range(1),ShowSeconds.Range(2),TSize)));
 	if isfield(ShowSeconds,'Size')
 		TextSize=ShowSeconds.Size;
 	else
-		TextSize=mean2(ROI(:,:,2));
+		TextSize=mean2(ROI(:,:,2))*2;
 	end
 	if isfield(ShowSeconds,'Font')
 		Var={ShowSeconds.Font};
@@ -239,19 +247,21 @@ if~isempty(ShowSeconds)
 			Start=(PlaneSize-Subs);
 	end
 	Subs=arrayfun(@colon,Start+1,Start+Subs,UniformOutput=false);
-	Video(Subs{:},:,:)=MATLAB.Ops.LogicalAssign(Video(Subs{:},:,:),TextMasks(:,:,:,Start),Color);
+	Video(Subs{:},:,:)=MATLAB.Ops.LogicalAssign(Video(Subs{:},:,:),TextMasks(:,:,:,Index),Color);
 end
 Video=pagetranspose(Video);
 
 % -------- Optional file output --------
 if~isempty(OutputPath)
 	Writer=VideoWriter(OutputPath,'MPEG-4');
-	if isemtpy(FrameRate)
-		Writer.FrameRate=single(TSize)/(ShowSeconds.Range(2)-ShowSeconds.Range(1));
+	if isempty(FrameRate)
+		Writer.FrameRate=double(TSize)/(ShowSeconds.Range(2)-ShowSeconds.Range(1));
 	else
 		Writer.FrameRate=FrameRate;
 	end
+	Writer.Quality=100;
 	Writer.open;
+	warning off MATLAB:audiovideo:VideoWriter:mp4FramePadded
 	Writer.writeVideo(gather(Video));
 	Writer.close;
 end
