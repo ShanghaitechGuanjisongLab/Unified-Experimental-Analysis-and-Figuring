@@ -125,5 +125,12 @@ classdef Flags
 
 		Auto
 		Full
+
+		%% ImageJRoiSetOperations
+
+		Union
+		Intersect
+		ADiffB
+		BDiffA
 	end
 end

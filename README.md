@@ -42,6 +42,9 @@ end
 %从一群ImageJ ROI中减去另一群ImageJ ROI，即作差集。仅比较每个ROI的文件名，文件名相同即认为ROI相同。
 function RoiCPath=ImageJRoiDiff(options)
 
+%对两组 ImageJ RoiSet 进行集合运算
+function Operations = ImageJRoiSetOperations(RoiAPath, RoiBPath, Operations)
+
 %根据 ImageJ RoiSet 配准图像
 function TransMatrix = RoiRegister(PathTable,varargin)
 

@@ -1952,6 +1952,52 @@
 			}
 		]
 	},
+	"UniExp.ImageJToiSetOperations": {
+		"inputs": [
+			{
+				"name": "RoiAPath",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.zip,*.roi"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"scalar"
+					]
+				],
+				"purpose": "第一个 ROI/ZIP 文件路径（左侧集合）"
+			},
+			{
+				"name": "RoiBPath",
+				"kind": "required",
+				"type": [
+					[
+						"file=*.zip,*.roi"
+					],
+					[
+						"char",
+						"row"
+					],
+					[
+						"string",
+						"scalar"
+					]
+				],
+				"purpose": "第二个 ROI/ZIP 文件路径（右侧集合）"
+			},
+			{
+				"name": "Operations",
+				"kind": "required",
+				"type": "tabular",
+				"purpose": "要执行的操作"
+			}
+		]
+	},
 	"UniExp.LanearHeatmap": {
 		"inputs": [
 			{
