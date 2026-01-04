@@ -1,16 +1,23 @@
 %[text] 对两组 ImageJ RoiSet 进行集合运算
 %[text] 设两 ROI 的圆心距离为 $d$；每个 ROI 的半轴由其外接矩形得到：
-%[text] $r=\\sqrt{a,b}$（$a,b$ 为长/短半轴）；若 $d \< \\sqrt{r\_1 r\_2}$，视为相同。
+%[text] $r=\\sqrt{a,b}$（$a,b$ 为长/短半轴）；若 $d \< \\sqrt{r\_1 r\_2}$，视为相同。因此，可能会有来自两边的多个ROI被视为相同。
 %[text] ## 语法
 %[text] ```matlabCodeExample
 %[text] Operations=UniExp.ImageJRoiSetOperations(RoiAPath,RoiBPath,Operations);
 %[text] ```
 %[text] ## 输入参数
-%[text] RoiAPath(1,1)string：第一个 ROI/ZIP 文件路径（左侧集合）
-%[text] RoiBPath(1,1)string：第二个 ROI/ZIP 文件路径（右侧集合）
-%[text] Operations table，要执行的操作，包含以下列：
-%[text] - Operation(:,1)UniExp.Flags，必须，可以是 Union Intersect ADiffB（从A中排除与B相同的） BDiffA（从B中排除与A相同的）
-%[text] - OutputPath，可选，该操作输出的文件路径。如不指定，将输出到当前目录下并使用默认文件名。 \
+%[text] #### RoiAPath(1,1)string
+%[text] 第一个 ROI/ZIP 文件路径（左侧集合）
+%[text] #### RoiBPath(1,1)string
+%[text] 第二个 ROI/ZIP 文件路径（右侧集合）
+%[text] #### Operations table
+%[text] 要执行的操作，包含以下列：
+%[text] Operation(:,1)UniExp.Flags，必须，可以是
+%[text] - Union，输出两个ROI集合的并集。相同的ROI会被合并，输出ROI的圆心是所有相同ROI圆心的均值点，XY半轴是对应半轴在所有相同ROI中的的较大值
+%[text] - Intersect，输出两个ROI集合的交集。相同的ROI会被合并，输出ROI的圆心是所有相同ROI圆心的中点，XY半轴是对应半轴在所有相同ROI中的的较大值
+%[text] - ADiffB，从A中排除与B相同的ROI
+%[text] - BDiffA，中排除与A相同的ROI \
+%[text] OutputPath，可选，该操作输出的文件路径。如不指定，将输出RoiAPath同目录下，下并使用默认文件名。
 %[text] ## 返回值
 %[text] Operations table，与输入相同，但如果输入未指定OutputPath，则输出时会附加这一列，包含每个操作输出的路径信息。
 %[text] **See also** [union](<matlab:doc union>) [intersect](<matlab:doc intersect>) [setdiff](<matlab:doc setdiff>)
@@ -23,6 +30,12 @@ Operations.OutputPath = string(Operations.OutputPath);
 [~, aStem] = fileparts(RoiAPath);
 [~, bStem] = fileparts(RoiBPath);
 baseName = aStem + "_vs_" + bStem;
+
+% 默认输出目录：RoiAPath 所在目录（若为空则回退到 pwd）
+roiADir = string(fileparts(RoiAPath));
+if roiADir==""
+	roiADir = string(pwd);
+end
 
 % 读取几何信息（通过 internal.ImageJRoiReadout 间接使用 ReadImageJROI）
 % 注意：本函数忽略 Z，统一按单层处理。
@@ -43,19 +56,16 @@ end
 ArEff = effectiveRadius(Ar);
 BrEff = effectiveRadius(Br);
 
-% 构建所有满足阈值的候选匹配对，然后做一对一贪心匹配（按归一化距离从小到大）
-[aToB, bToA] = greedyMatch(Ac, ArEff, Bc, BrEff);
+% 构建所有满足阈值的候选匹配对，并允许多对多：按阈值关系构造二部图，取连通分量作为“相同 ROI 组”。
+[grpA, grpB, isAHit, isBHit] = componentGroups(Ac, ArEff, Bc, BrEff);
 
-isAHit = aToB ~= 0;
-isBHit = bToA ~= 0;
 idxAOnly = find(~isAHit);
 idxBOnly = find(~isBHit);
-idxAMatched = find(isAHit);
 
 for row = 1:height(Operations)
 	op = Operations.Operation(row);
 	defaultFile = defaultFilenameFor(op, baseName);
-	outPath = defaultOutputPath(Operations.OutputPath(row), defaultFile);
+	outPath = defaultOutputPath(Operations.OutputPath(row), defaultFile, roiADir);
 	
 	switch op
 		case UniExp.Flags.ADiffB
@@ -63,9 +73,9 @@ for row = 1:height(Operations)
 		case UniExp.Flags.BDiffA
 			[names, bytesCell] = buildOvalPayload(Bmeta.Name, Bc, Br, idxBOnly, "B");
 		case UniExp.Flags.Intersect
-			[names, bytesCell] = buildMergedPayload(Ac, Ar, Bc, Br, idxAMatched, aToB, "intersect_");
+			[names, bytesCell] = buildMergedPayload(Ac, Ar, Bc, Br, grpA, grpB, "intersect_");
 		case UniExp.Flags.Union
-			[names, bytesCell] = buildUnionPayload(Ameta.Name, Ac, Ar, idxAOnly, Bmeta.Name, Bc, Br, idxBOnly, idxAMatched, aToB);
+			[names, bytesCell] = buildUnionPayload(Ameta.Name, Ac, Ar, idxAOnly, Bmeta.Name, Bc, Br, idxBOnly, grpA, grpB);
 	end
 	
 	Operations.OutputPath(row) = writeZipBytesOrEmpty(outPath, names, bytesCell);
@@ -100,9 +110,12 @@ end
 		end
 	end
 
-	function outPath = defaultOutputPath(userPath, defaultFile)
+	function outPath = defaultOutputPath(userPath, defaultFile, baseDir)
+		if baseDir==""
+			baseDir = string(pwd);
+		end
 		if userPath==""
-			outPath = fullfile(string(pwd), defaultFile);
+			outPath = fullfile(baseDir, defaultFile);
 			return;
 		end
 		[dirPart, ~, extPart] = fileparts(userPath);
@@ -116,121 +129,129 @@ end
 			return;
 		end
 		if dirPart==""
-			outPath = fullfile(string(pwd), userPath);
+			outPath = fullfile(baseDir, userPath);
 		else
 			outPath = userPath;
 		end
 	end
 
-	function [aToB, bToA] = greedyMatch(Acxy, ArE, Bcxy, BrE)
+	function [grpA, grpB, isAHitLocal, isBHitLocal] = componentGroups(Acxy, ArE, Bcxy, BrE)
 		nA = size(Acxy,1);
 		nB = size(Bcxy,1);
-		aToB = zeros(nA,1,'int32');
-		bToA = zeros(nB,1,'int32');
+		grpA = cell(0,1);
+		grpB = cell(0,1);
+		isAHitLocal = false(nA,1);
+		isBHitLocal = false(nB,1);
 		if nA==0 || nB==0
 			return;
 		end
 		
-		% 生成候选对
-		pairsA = zeros(0,1,'int32');
-		pairsB = zeros(0,1,'int32');
-		score = zeros(0,1);
-		
-		for i = 1:nA
-			ai = Acxy(i,:);
-			for j = 1:nB
-				d = hypot(ai(1)-Bcxy(j,1), ai(2)-Bcxy(j,2));
-				thr = sqrt(max(ArE(i),0) * max(BrE(j),0));
-				if thr<=0
-					continue;
-				end
-				if d < thr
-					pairsA(end+1,1) = int32(i);
-					pairsB(end+1,1) = int32(j);
-					score(end+1,1) = d / thr;
-				end
-			end
-		end
-		
-		if isempty(score)
+		% 张量化计算候选关系：mask(i,j)=true 表示 A(i) 与 B(j) 被视为“相同”。
+		Ax = double(Acxy(:,1));
+		Ay = double(Acxy(:,2));
+		Bx = double(Bcxy(:,1)).';
+		By = double(Bcxy(:,2)).';
+		D = hypot(Ax - Bx, Ay - By); % nA x nB
+		T = sqrt(max(double(ArE),0) .* max(double(BrE),0).'); % nA x nB
+		mask = (T > 0) & (D < T);
+		if ~any(mask, 'all')
 			return;
 		end
-		
-		[~, order] = sort(score, 'ascend');
-		for k = 1:numel(order)
-			i = pairsA(order(k));
-			j = pairsB(order(k));
-			if aToB(i)==0 && bToA(j)==0
-				aToB(i) = j;
-				bToA(j) = i;
-			end
+
+		% 多对多：用阈值关系构造二部图，连通分量即为“相同 ROI 组”。
+		[iA, iB] = find(mask);
+		s = double(iA);
+		t = double(nA + iB);
+		G = graph(s, t, [], nA+nB);
+		bins = conncomp(G); % 1 x (nA+nB)
+		bins = bins(:);
+		cidA = bins(1:nA);
+		cidB = bins(nA+1:end);
+		k = max(bins);
+		hasA = accumarray(cidA, true, [k,1], @any, false);
+		hasB = accumarray(cidB, true, [k,1], @any, false);
+		both = hasA & hasB;
+
+		isAHitLocal = both(cidA);
+		isBHitLocal = both(cidB);
+		compIds = find(both);
+		if isempty(compIds)
+			return;
 		end
+		grpA = arrayfun(@(id) int32(find(cidA==id)), compIds, 'UniformOutput', false);
+		grpB = arrayfun(@(id) int32(find(cidB==id)), compIds, 'UniformOutput', false);
 	end
 
-	function [names, bytesCell] = buildUnionPayload(aNames, Acxy, Arxy, idxAOnlyLocal, bNames, Bcxy, Brxy, idxBOnlyLocal, idxAMatchedLocal, aToBLocal)
+	function [names, bytesCell] = buildUnionPayload(aNames, Acxy, Arxy, idxAOnlyLocal, bNames, Bcxy, Brxy, idxBOnlyLocal, grpALocal, grpBLocal)
 		% 所有输出 ROI 一律生成为椭圆（Oval）。
-		% Union: (A-only oval) + (B-only oval) + (matched pair -> merged oval)
+		% Union: (A-only oval) + (B-only oval) + (same-group -> merged oval)
 		nameSet = containers.Map('KeyType','char','ValueType','logical');
-		names = strings(0,1);
-		bytesCell = cell(0,1);
+		nTotal = numel(idxAOnlyLocal) + numel(idxBOnlyLocal) + numel(grpALocal);
+		names = strings(nTotal,1);
+		bytesCell = cell(nTotal,1);
+		p = 0;
 		
 		for ii = 1:numel(idxAOnlyLocal)
 			idx = idxAOnlyLocal(ii);
 			[entryName, roiBytes] = ovalEntryFromIndex(aNames, Acxy, Arxy, idx, "A", nameSet);
-			names(end+1,1) = entryName; %#ok<AGROW>
-			bytesCell{end+1,1} = roiBytes; %#ok<AGROW>
+			p = p + 1;
+			names(p,1) = entryName;
+			bytesCell{p,1} = roiBytes;
 		end
 		for ii = 1:numel(idxBOnlyLocal)
 			idx = idxBOnlyLocal(ii);
 			[entryName, roiBytes] = ovalEntryFromIndex(bNames, Bcxy, Brxy, idx, "B", nameSet);
-			names(end+1,1) = entryName; %#ok<AGROW>
-			bytesCell{end+1,1} = roiBytes; %#ok<AGROW>
+			p = p + 1;
+			names(p,1) = entryName;
+			bytesCell{p,1} = roiBytes;
 		end
-		for ii = 1:numel(idxAMatchedLocal)
-			iA = idxAMatchedLocal(ii);
-			iB = aToBLocal(iA);
-			roiBytes = makeMergedOvalRoiBytesForMatch(Acxy, Arxy, Bcxy, Brxy, iA, iB);
+		for ii = 1:numel(grpALocal)
+			roiBytes = makeMergedOvalRoiBytesForGroup(Acxy, Arxy, Bcxy, Brxy, grpALocal{ii}, grpBLocal{ii});
 			base = "union_" + ii + ".roi";
 			entryName = makeUniqueRoiEntryName(base, nameSet);
-			names(end+1,1) = entryName; %#ok<AGROW>
-			bytesCell{end+1,1} = roiBytes; %#ok<AGROW>
+			p = p + 1;
+			names(p,1) = entryName;
+			bytesCell{p,1} = roiBytes;
 		end
 	end
 
-	function [names, bytesCell] = buildMergedPayload(Acxy, Arxy, Bcxy, Brxy, idxAMatchedLocal, aToBLocal, prefix)
-		% 对每个匹配对生成一个合并椭圆 ROI。
+	function [names, bytesCell] = buildMergedPayload(Acxy, Arxy, Bcxy, Brxy, grpALocal, grpBLocal, prefix)
+		% 对每个“相同 ROI 组”生成一个合并椭圆 ROI。
 		nameSet = containers.Map('KeyType','char','ValueType','logical');
-		names = strings(0,1);
-		bytesCell = cell(0,1);
-		for ii = 1:numel(idxAMatchedLocal)
-			iA = idxAMatchedLocal(ii);
-			iB = aToBLocal(iA);
-			roiBytes = makeMergedOvalRoiBytesForMatch(Acxy, Arxy, Bcxy, Brxy, iA, iB);
+		n = numel(grpALocal);
+		names = strings(n,1);
+		bytesCell = cell(n,1);
+		for ii = 1:n
+			roiBytes = makeMergedOvalRoiBytesForGroup(Acxy, Arxy, Bcxy, Brxy, grpALocal{ii}, grpBLocal{ii});
 			base = prefix + ii + ".roi";
 			entryName = makeUniqueRoiEntryName(base, nameSet);
-			names(end+1,1) = entryName; %#ok<AGROW>
-			bytesCell{end+1,1} = roiBytes; %#ok<AGROW>
+			names(ii,1) = entryName;
+			bytesCell{ii,1} = roiBytes;
 		end
 	end
 
-	function roiBytes = makeMergedOvalRoiBytesForMatch(Acxy, Arxy, Bcxy, Brxy, iA, iB)
+	function roiBytes = makeMergedOvalRoiBytesForGroup(Acxy, Arxy, Bcxy, Brxy, idxAGroup, idxBGroup)
 		% “相同 ROI”的合并规则（Union/Intersect 完全一致）：
-		% 圆心取中点；XY 半轴长取对应半轴的较大值。
-		newC = (Acxy(iA,:) + Bcxy(iB,:)) / 2;
-		newSemiY = max(Arxy(iA,1), Brxy(iB,1));
-		newSemiX = max(Arxy(iA,2), Brxy(iB,2));
+		% 圆心取所有相同 ROI 圆心的中点（用均值实现）；XY 半轴长取对应半轴在组内的较大值。
+		idxAGroup = idxAGroup(:);
+		idxBGroup = idxBGroup(:);
+		allC = [Acxy(double(idxAGroup),:); Bcxy(double(idxBGroup),:)];
+		newC = mean(allC, 1);
+		newSemiY = max([Arxy(double(idxAGroup),1); Brxy(double(idxBGroup),1)]);
+		newSemiX = max([Arxy(double(idxAGroup),2); Brxy(double(idxBGroup),2)]);
 		roiBytes = makeOvalRoiBytes(newC, [newSemiY, newSemiX], 1);
 	end
 
 	function [names, bytesCell] = buildOvalPayload(originalNames, CxyAll, RxyAll, indices, prefix)
 		nameSet = containers.Map('KeyType','char','ValueType','logical');
-		names = strings(0,1);
-		bytesCell = cell(0,1);
-		for ii = 1:numel(indices)
+		n = numel(indices);
+		names = strings(n,1);
+		bytesCell = cell(n,1);
+		for ii = 1:n
 			idx = indices(ii);
 			[entryName, roiBytes] = ovalEntryFromIndex(originalNames, CxyAll, RxyAll, idx, prefix, nameSet);
-			names(end+1,1) = entryName; %#ok<AGROW>
-			bytesCell{end+1,1} = roiBytes; %#ok<AGROW>
+			names(ii,1) = entryName;
+			bytesCell{ii,1} = roiBytes;
 		end
 	end
 
@@ -382,14 +403,15 @@ end
 		zis = ZipInputStream(FileInputStream(char(zipPath)));
 		cleanup = onCleanup(@() zis.close());
 		entry = zis.getNextEntry();
-		names = strings(0,1);
+		builder = MATLAB.DataTypes.ArrayBuilder(1);
 		while (entry ~= 0)
 			name = string(entry.getName());
 			if endsWith(lower(name), ".roi") && ~startsWith(name, "__MACOSX")
-				names(end+1,1) = name; %#ok<AGROW>
+				builder.Append(name);
 			end
 			entry = zis.getNextEntry();
 		end
+		names = builder.Harvest();
 	end
 
 	function outPath = writeZipBytesOrEmpty(outPath, names, bytesCell)
@@ -404,33 +426,41 @@ end
 		if outDirLocal~="" && ~isfolder(outDirLocal)
 			mkdir(outDirLocal);
 		end
+
+		% 统一使用 Java 写入 ZIP（避免混用 .NET 与 Java）。
+		import java.io.FileOutputStream
+		import java.util.zip.ZipOutputStream
+		import java.util.zip.ZipEntry
 		
-		NET.addAssembly("System.IO.Compression");
-		fs = System.IO.FileStream(char(outPath), System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
-		archive = System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Create);
-		try
-			for kk = 1:numel(names)
-				entryName = names(kk);
-				bytes = bytesCell{kk};
-				newEntry = archive.CreateEntry(char(entryName));
-				stream = newEntry.Open();
-				try
-					ba = NET.convertArray(uint8(bytes(:)), 'System.Byte');
-					stream.Write(ba, int32(0), int32(numel(bytes)));
-				catch ME
-					stream.Dispose();
-					rethrow(ME);
-				end
-				stream.Dispose();
-			end
-		catch ME
-			% 尽量释放句柄，避免文件锁死
-			try archive.Dispose(); catch, end %#ok<CTCH>
-			try fs.Dispose(); catch, end %#ok<CTCH>
-			rethrow(ME);
+		fos = FileOutputStream(char(outPath));
+		zos = ZipOutputStream(fos);
+		cleanup = onCleanup(@() localCloseZip(zos, fos));
+		
+		for kk = 1:numel(names)
+			entryName = names(kk);
+			bytes = uint8(bytesCell{kk});
+			ze = ZipEntry(char(entryName));
+			zos.putNextEntry(ze);
+			b = int8(bytes(:));
+			zos.write(b, 0, numel(b));
+			zos.closeEntry();
 		end
-		try archive.Dispose(); catch, end %#ok<CTCH>
-		try fs.Dispose(); catch, end %#ok<CTCH>
+	end
+
+	function localCloseZip(zos, fos)
+		% 尽量释放句柄，避免文件锁死
+		try
+			if ~isempty(zos)
+				zos.close();
+			end
+		catch
+		end
+		try
+			if ~isempty(fos)
+				fos.close();
+			end
+		catch
+		end
 	end
 
 	function defaultFile = defaultFilenameFor(op, base)
