@@ -23,10 +23,10 @@ classdef OirRegisterRW1<ParallelComputing.IBlockRWer
 	methods
 		function obj = OirRegisterRW1(OirPath,BlockSize,WriteToCache,CacheDirectory)
 			obj.ReaderGetFun=@()Image5D.OirReader(OirPath);
-			obj.Reader=obj.ReaderGetFun();
+			obj.Reader=TryAndTry(obj.ReaderGetFun,'Image5D:Exception:File_creation_failed');
 			DeviceColors=obj.Reader.DeviceColors;
 			TagLogical=startsWith(DeviceColors.Device,'CD');
-			obj.NumPieces=double(obj.Reader.SizeT);%20
+			obj.NumPieces=double(obj.Reader.SizeT);
 			obj.ProcessData=TagLogical;
 			NumBlocks=ceil(obj.NumPieces/BlockSize);
 			BlockSplit=uint32(linspace(0,obj.NumPieces,NumBlocks+1));
