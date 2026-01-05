@@ -1,9 +1,9 @@
 function V = Version
-V.Me='v20.7.0';
+V.Me='v20.7.1';
 V.ParallelComputing='v8.1.4';
 V.GlobalOptimization='v3.1.2';
 V.ImageProcessing='v3.6.1';
-V.Image5D='v3.2.4';
+V.Image5D='v3.3.0';
 V.TextAnalytics='v1.0.3';
 V.ComputerVision='v1.1.1';
 V.MatlabExtension='v20.0.0';
