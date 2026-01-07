@@ -50,8 +50,8 @@
 %[text] FixedRoi(1,1)string，固定图的ROI路径。如果PathTable中未指定FixedRoi列，则必须指定本参数；否则不允许指定本参数。
 %[text] OutputDirectory(1,1)string="."，输出目录
 %[text] ## 返回值
-%[text] TransMatrix(:,1)cell，变换矩阵。每个元胞对应一个晃动图，元胞内是(1,:)affinetform2d，对应每个Z层。
-%[text] **See also** [UniExp.BatchOirRegisterTiff](<matlab:doc UniExp.BatchOirRegisterTiff>) [UniExp.OirSampleMean](<matlab:doc UniExp.OirSampleMean>)
+%[text] TransMatrix(:,1)cell，变换矩阵。每个元胞对应一个晃动图，元胞内是(1,:)cell，对应每个Z层。元胞内是images.geotrans.internal.GeometricTransformation
+%[text] **See also** [UniExp.BatchOirRegisterTiff](<matlab:doc UniExp.BatchOirRegisterTiff>) [UniExp.OirSampleMean](<matlab:doc UniExp.OirSampleMean>) [images.geotrans.internal.GeometricTransformation](<matlab:doc images.geotrans.internal.GeometricTransformation>)
 function TransMatrix = RoiRegister(PathTable,varargin)
 ManyFixed=any(PathTable.Properties.VariableNames=="FixedRoi");
 OutputDirectory='.';
