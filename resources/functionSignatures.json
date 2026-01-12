@@ -1245,6 +1245,12 @@
 					]
 				],
 				"purpose": "输出目录"
+			},
+			{
+				"name":"UseGpu",
+				"kind":"namevalue",
+				"type":"real",
+				"purpose":"指定要使用的GPU"
 			}
 		]
 	},

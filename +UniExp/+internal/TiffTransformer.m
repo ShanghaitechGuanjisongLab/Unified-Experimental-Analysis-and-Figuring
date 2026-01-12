@@ -55,7 +55,10 @@ classdef TiffTransformer<ParallelComputing.IBlockRWer
 				UniExp.Exceptions.ZLayers_of_the_moving_ROI_and_file_do_not_match.Throw(Filename);
 			end
 			obj.NumPieces=obj.Reader.SizeT;
-			obj.ProcessData=TransMatrix;
+
+			%TransMatrix本身是元胞，必须再套一层，否则会被SpmdRun展开
+			obj.ProcessData={TransMatrix};
+
 			obj.CollectData=obj.NumPieces;
 			obj.GpuLimit=floor(double(intmax('int32'))/double(PieceElements));
 		end

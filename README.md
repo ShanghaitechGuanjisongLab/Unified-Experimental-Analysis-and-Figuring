@@ -52,7 +52,7 @@ function TransMatrix = RoiRegister(PathTable,varargin)
 function BatchOirRegisterTiff(OirPaths,OutputDirectory,TransMatrix,options)
 
 %对Tiff图像批量应用变换矩阵
-function BatchTiffTransform(TiffTransTable,OutputDirectory)
+function BatchTiffTransform(TiffTransTable,OutputDirectory,options)
 
 %此函数交互式帮你找到最优的脑区注射位点！
 function [Center,CoronalRanges,SagittalRanges,Exception]=CerebrumMapping(APRange,MLRange,options)
