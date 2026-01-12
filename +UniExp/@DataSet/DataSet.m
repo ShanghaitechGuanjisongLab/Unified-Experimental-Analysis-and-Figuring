@@ -600,8 +600,8 @@ classdef DataSet<handle&matlab.mixin.Copyable
 			if~isempty(objA.TrialSignals)
 				objB.TrialSignals=objA.TrialSignals(ismember(objA.TrialSignals.TrialUID,objB.Trials.TrialUID)&ismember(objA.TrialSignals.CellUID,objB.Cells.CellUID),:);
 			end
-			if~isempty(objA.Manipulations)
-				objB.Manipulations=objA.Manipulations(ismember(objA.Manipulations.Mouse,Mice),:);
+			if~isempty(objA.Manipulation)
+				objB.Manipulation=objA.Manipulation(ismember(objA.Manipulation.Mouse,Mice),:);
 			end
 		end
 	end

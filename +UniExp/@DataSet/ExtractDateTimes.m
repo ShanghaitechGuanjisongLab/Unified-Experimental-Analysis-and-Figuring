@@ -35,8 +35,8 @@ if~isempty(objA.DateTimes)
 	if~isempty(objA.TrialSignals)
 		objB.TrialSignals=objA.TrialSignals(ismember(objA.TrialSignals.TrialUID,objB.Trials.TrialUID)&ismember(objA.TrialSignals.CellUID,objB.Cells.CellUID),:);
 	end
-	if~isempty(objA.Manipulations)
-		objB.Manipulations=objA.Manipulations(ismember(objA.Manipulations.Mouse,obj.DateTimes.Mouse),:);
+	if~isempty(objA.Manipulation)
+		objB.Manipulation=objA.Manipulation(ismember(objA.Manipulation.Mouse,obj.DateTimes.Mouse),:);
 	end
 end
 end
