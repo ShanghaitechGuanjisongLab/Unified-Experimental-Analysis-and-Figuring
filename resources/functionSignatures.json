@@ -227,6 +227,26 @@
 			}
 		]
 	},
+	"UniExp.DataSet.ExtractMice": {
+		"inputs": [
+			{
+				"name": "obj"
+			},
+			{
+				"name": "Mice",
+				"kind": "required",
+				"type": [
+					[
+						"string"
+					],
+					[
+						"categorical"
+					]
+				],
+				"purpose": "要提取的鼠"
+			}
+		]
+	},
 	"UniExp.DataSet.FixHistory": {
 		"inputs": [
 			{
@@ -1247,10 +1267,10 @@
 				"purpose": "输出目录"
 			},
 			{
-				"name":"UseGpu",
-				"kind":"namevalue",
-				"type":"real",
-				"purpose":"指定要使用的GPU"
+				"name": "UseGpu",
+				"kind": "namevalue",
+				"type": "real",
+				"purpose": "指定要使用的GPU"
 			}
 		]
 	},

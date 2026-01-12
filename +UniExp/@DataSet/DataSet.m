@@ -567,6 +567,43 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				obj.Mice=MATLAB.DataTypes.MergeTables("Mouse",obj.Mice,MouseParadigm);
 			end
 		end
+		function objB=ExtractMice(objA,Mice)
+			%从数据集中提取一些鼠，形成一个新的数据集
+			%# 语法
+			% ```
+			% objB=objA.ExtractMice(Mice);
+			% ```
+			%# 输入参数
+			% Mice(:,1)categorical，要提取的鼠。例如"vtf0353"
+			%# 返回值
+			% objB(1,1)UniExp.DataSet，包含指定鼠的一个新数据集
+			%See also UniExp.DataSet.ExtractDateTimes
+			objB=UniExp.DataSet;
+			if~isempty(objA.Mice)
+				objB.Mice=objA.Mice(ismember(objA.Mice.Mouse,Mice),:);
+			end
+			if~isempty(objA.DateTimes)
+				objB.DateTimes=objA.DateTimes(ismember(objA.DateTimes.Mouse,Mice),:);
+				if~isempty(objA.Blocks)
+					objB.Blocks=objA.Blocks(ismember(objA.Blocks.DateTime,objB.DateTimes.DateTime),:);
+					if~isempty(objA.Trials)
+						objB.Trials=objA.Trials(ismember(objA.Trials.BlockUID,objB.Blocks.BlockUID),:);
+					end
+				end
+			end
+			if~isempty(objA.Cells)
+				objB.Cells=objA.Cells(ismember(objA.Cells.Mouse,Mice),:);
+			end
+			if~isempty(objA.BlockSignals)
+				objB.BlockSignals=objA.BlockSignals(ismember(objA.BlockSignals.BlockUID,objB.Blocks.BlockUID)&ismember(objA.BlockSignals.CellUID,objB.Cells.CellUID),:);
+			end
+			if~isempty(objA.TrialSignals)
+				objB.TrialSignals=objA.TrialSignals(ismember(objA.TrialSignals.TrialUID,objB.Trials.TrialUID)&ismember(objA.TrialSignals.CellUID,objB.Cells.CellUID),:);
+			end
+			if~isempty(objA.Manipulations)
+				objB.Manipulations=objA.Manipulations(ismember(objA.Manipulations.Mouse,Mice),:);
+			end
+		end
 	end
 end
 function varargout=GetRepeatIndex(varargin)

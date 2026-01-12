@@ -7,6 +7,7 @@
 %[text] DateTimes(:,1)datetime，要提取的日期时间。例如`datetime('2022-11-01 10:33:16')`
 %[text] ## 返回值
 %[text] objB(1,1)UniExp.DataSet，包含指定日期时间的一个新数据集
+%[text] **See also** [UniExp.DataSet.ExtractMice](<matlab:helpwin UniExp.DataSet.ExtractMice>)
 function objB=ExtractDateTimes(objA,DateTimes)
 arguments
     objA
@@ -14,43 +15,29 @@ arguments
     DateTimes(:,1)string
 end
 objB=UniExp.DataSet;
-HasTables=ismember(["DateTimes","Blocks","Trials","BlockSignals","TrialSignals","Cells","Mice"],objA.ValidTableNames);
-if HasTables(1)
-    Logical=ismember(string(objA.DateTimes.DateTime),DateTimes);
-    objB.DateTimes=objA.DateTimes(Logical,:);
-    if HasTables(2)
-        Logical=ismember(string(objA.Blocks.DateTime),DateTimes);
-        BlockUIDs=objA.Blocks.BlockUID(Logical);
-        objB.Blocks=objA.Blocks(Logical,:);
-        if HasTables(3)
-            Logical=ismember(objA.Trials.BlockUID,BlockUIDs);
-            TrialUIDs=objA.Trials.TrialUID(Logical);
-            objB.Trials=objA.Trials(Logical,:);
-            if HasTables(5)
-                objB.TrialSignals=objA.TrialSignals(ismember(objA.TrialSignals.TrialUID,TrialUIDs),:);
-            end
-        end
-        if HasTables(4)
-            objB.BlockSignals=objA.BlockSignals(ismember(objA.BlockSignals.BlockUID,BlockUIDs),:);
-        end
-    end
-end
-if HasTables(6)
-    CellUID=objA.Cells.CellUID([]);
-    if HasTables(4)
-        CellUID=union(CellUID,objB.BlockSignals.CellUID);
-    end
-    if HasTables(5)
-        CellUID=union(CellUID,objB.TrialSignals.CellUID);
-    end
-    objB.Cells=objA.Cells(ismember(objA.Cells.CellUID,CellUID),:);
-end
-if HasTables(7)
-    ExtractMice=objB.DateTimes.Mouse;
-    if HasTables(6)
-        ExtractMice=union(ExtractMice,objB.Cells.Mouse);
-    end
-    objB.Mice=objA.Mice(ismember(objA.Mice.Mouse,ExtractMice),:);
+if~isempty(objA.DateTimes)
+	objB.DateTimes=objA.DateTimes(ismember(string(objA.DateTimes.DateTime),DateTimes),:);
+	if~isempty(objA.Blocks)
+		objB.Blocks=objA.Blocks(ismember(string(objA.Blocks.DateTime),DateTimes),:);
+		if~isempty(objA.Trials)
+			objB.Trials=objA.Trials(ismember(objA.Trials.BlockUID,objB.Blocks.BlockUID),:);
+		end
+	end
+	if~isempty(objA.Mice)
+		objB.Mice=objA.Mice(ismember(objA.Mice.Mouse,objB.DateTimes.Mouse),:);
+	end
+	if~isempty(objA.Cells)
+		objB.Cells=objA.Cells(ismember(objA.Cells.Mouse,obj.DateTimes.Mouse),:);
+	end
+	if~isempty(objA.BlockSignals)
+		objB.BlockSignals=objA.BlockSignals(ismember(objA.BlockSignals.BlockUID,objB.Blocks.BlockUID)&ismember(objA.BlockSignals.CellUID,objB.Cells.CellUID),:);
+	end
+	if~isempty(objA.TrialSignals)
+		objB.TrialSignals=objA.TrialSignals(ismember(objA.TrialSignals.TrialUID,objB.Trials.TrialUID)&ismember(objA.TrialSignals.CellUID,objB.Cells.CellUID),:);
+	end
+	if~isempty(objA.Manipulations)
+		objB.Manipulations=objA.Manipulations(ismember(objA.Manipulations.Mouse,obj.DateTimes.Mouse),:);
+	end
 end
 end
 
