@@ -574,13 +574,36 @@
 				]
 			},
 			{
-				"name": "Accumulate",
-				"kind": "ordered",
-				"type": [
-					"scalar",
-					"UniExp.Flags"
-				],
-				"purpose": "回合累积方法"
+				"mutuallyExclusiveGroup":
+				[
+					[
+						{
+							"name": "Accumulate",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"UniExp.Flags"
+							],
+							"purpose": "回合累积方法"
+						}
+					]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup":
+				[
+					[
+						{
+							"name": "Memoize",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"logical"
+							],
+							"purpose": "是否使用记住的查询结果"
+						}
+					]
+				]
 			}
 		]
 	},
@@ -635,6 +658,22 @@
 						}
 					],
 					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup":
+				[
+					[
+						{
+							"name": "Memoize",
+							"kind": "required",
+							"type": [
+								"scalar",
+								"logical"
+							],
+							"purpose": "是否使用记住的查询结果"
+						}
+					]
 				]
 			},
 			{

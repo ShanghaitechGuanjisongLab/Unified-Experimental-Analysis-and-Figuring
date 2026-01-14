@@ -1,5 +1,6 @@
 %[text] 使用查询表，查询多组归一化回合累积信号值 (Normalized Trial-Accumulated Trial Signals, NTATS)
 %[text] 如果TrialSignals表中包含NormalizedSignal列，将优先从此列取得数据，否则从TrialSignal列取得数据。NormalizedSignal一般从SampleNormalize方法生成，保证所有回合信号长度相同。
+%[text] 此函数会记住查询结果。如果数据库发生更新，查询结果不会自动更新，请将Memoize设为false，或者清理返回的Memoizer。
 %[text] ## 语法
 %[text] ```matlabCodeExample
 %[text] GroupNtats=obj.QueryNTATS(QueryStruct);
@@ -13,6 +14,12 @@
 %[text] 
 %[text] GroupNtats=obj.QueryNTATS(___,Accumulate);
 %[text] %与上述任意语法组合使用，额外指定累积方法
+%[text] 
+%[text] [___,Memoizer]=obj.QueryNTATS(___);
+%[text] %与上述任意语法组合使用，额外返回记忆对象
+%[text] 
+%[text] [___]=obj.QueryNTATS(___,Memoize);
+%[text] %与上述任意语法组合使用，额外指定是否使用记住的查询结果
 %[text] ```
 %[text] ## 输入参数
 %[text] QueryStruct(1,1)struct，查询结构体，此函数调用TableQuery方法执行表查询，此参数将被直接传递给TableQuery，详见TableQuery文档。
@@ -24,25 +31,30 @@
 %[text] - Median，中位数
 %[text] - Std，标准差
 %[text] - VariationCoefficient，变异系数（标准差除以算术平均） \
+%[text] Memoize(1,1)logical=true，是否使用记住的查询结果（如果有）。
 %[text] ## 返回值
-%[text] GroupNtats，查询结果。
-%[text] 如果各组查询出的细胞群体（CellUID）完全相同或只有一个查询组，将返回table，表的每一行对应一个细胞。包含以下列：
+%[text] #### GroupNtats
+%[text] 查询结果。如果各组查询出的细胞群体（CellUID）完全相同或只有一个查询组，将返回table，表的每一行对应一个细胞。包含以下列：
 %[text] - NTATS(:,:,:)MATLAB.DataTypes.NDTable，第2维时间，第3维分组。如果指定了各组名称（GroupName），将会作为第3维的索引。
 %[text] - CellUID(:,1)uint16，每个细胞的UID \
 %[text] 如果各组查询出的细胞群体不完全相同，将为每组返回一个结果表table。如果指定了各组名称，将返回(1,1)struct，每个字段对应每个组名，字段值是该组的结果表。如果未指定各组名称，将返回(:,1)cell，每个元胞对应一个分组，元胞内是该组的结果表。每组的结果表每行对应一个细胞，均包含以下列：
 %[text] - NTATS(:,:)，第2维时间
 %[text] - CellUID(:,1)uint16，每个细胞的UID \
-%[text] **See also** [UniExp.Flags](<matlab:edit UniExp.Flags>) [UniExp.DataSet.TableQuery](matlab:MATLAB.Doc('UniExp.DataSet.TableQuery');) [UniExp.F0Normalize](<matlab:doc UniExp.F0Normalize>) [UniExp.DataSet.QueryNTS](<matlab:doc UniExp.DataSet.QueryNTS>) [MATLAB.DataTypes.NDTable](<matlab:doc MATLAB.DataTypes.NDTable>) [UniExp.DataSet.SampleNormalize](<matlab:doc UniExp.DataSet.SampleNormalize>)
-function GroupNtats = QueryNTATS(obj,Query,varargin)
+%[text] #### Memoizer
+%[text] (1,1)matlab.lang.MemoizedFunction，记忆对象，可用于控制记住查询结果的刷新。如果Memoize设为false，不会返回此值。使用clearCache方法清理记住的查询结果。此对象可以重复使用，不必每次调用QueryNTATS都收集此对象。
+%[text] **See also** [UniExp.Flags](<matlab:edit UniExp.Flags>) [UniExp.DataSet.TableQuery](matlab:MATLAB.Doc('UniExp.DataSet.TableQuery');) [UniExp.F0Normalize](<matlab:doc UniExp.F0Normalize>) [UniExp.DataSet.QueryNTS](<matlab:doc UniExp.DataSet.QueryNTS>) [MATLAB.DataTypes.NDTable](<matlab:doc MATLAB.DataTypes.NDTable>) [UniExp.DataSet.SampleNormalize](<matlab:doc UniExp.DataSet.SampleNormalize>) [matlab.lang.MemoizedFunction](<matlab:doc matlab.lang.MemoizedFunction>)
+function [GroupNtats,Memoizer] = QueryNTATS(obj,Query,varargin)
 import UniExp.Flags
 Normalize=Flags.No_special_operation;
 F0Samples=[];
 Accumulate=@median;
-for V=varargin
-	if isenum(V{1})
-		switch V{1}
+Memoize=true;
+for V=numel(varargin)
+	Arg=varargin{V};
+	if isenum(Arg)
+		switch Arg
 			case {Flags.dFdF0,Flags.log2FdF0,Flags.ZScore,Flags.DeltaF}
-				Normalize=V{1};
+				Normalize=Arg;
 			case Flags.Mean
 				Accumulate=@mean;
 			case Flags.Std
@@ -50,10 +62,45 @@ for V=varargin
 			case Flags.VariationCoefficient
 				Accumulate=@(Data,Dimension,MissingFlag)mean(Data,Dimension,MissingFlag)./std(Data,0,Dimension,MissingFlag);
 		end
+	elseif islogical(Arg)
+		Memoize=Arg;
 	else
-		F0Samples=V{1};
+		F0Samples=Arg;
 	end
 end
+persistent PersistentMemoizer
+if isempty(PersistentMemoizer)||~isvalid(PersistentMemoizer)
+	PersistentMemoizer=memoize(@RealQueryNtats);
+end
+if Memoize
+	Memoizer=PersistentMemoizer;
+else
+	PersistentMemoizer.clearCache;
+end
+GroupNtats=PersistentMemoizer(obj,Query,Accumulate,F0Samples,Normalize);
+end
+%%
+function [NTAT,Incomplete]=GroupAccumulate(Data,Accumulate,Normalize,F0Samples)
+if iscell(Data)
+	if any(cellfun(@isempty,Data))
+		UniExp.Exception.Found_an_empty_signal.Throw;
+	end
+	try
+		Data=vertcat(Data{:});
+		Incomplete=false;
+	catch ME
+		if ME.identifier~="MATLAB:catenate:dimensionMismatch"
+			ME.rethrow;
+		end
+		Incomplete=true;
+		Data=MATLAB.ElMat.PadCat(1,Data{:},NaN);
+	end
+else
+	Incomplete=false;
+end
+NTAT=Accumulate(UniExp.F0Normalize(Data,Normalize,F0Samples),1,'omitmissing');
+end
+function GroupNtats = RealQueryNtats(obj,Query,Accumulate,F0Samples,Normalize)
 SignalColumn=obj.GetSignalColumn;
 Query=obj.TableQuery([SignalColumn,"CellUID"],Query);
 HasGroupNames=isstruct(Query);
@@ -130,27 +177,6 @@ else
 		GroupNtats=cell2struct(GroupNtats,FieldNames);
 	end
 end
-end
-%%
-function [NTAT,Incomplete]=GroupAccumulate(Data,Accumulate,Normalize,F0Samples)
-if iscell(Data)
-	if any(cellfun(@isempty,Data))
-		UniExp.Exception.Found_an_empty_signal.Throw;
-	end
-	try
-		Data=vertcat(Data{:});
-		Incomplete=false;
-	catch ME
-		if ME.identifier~="MATLAB:catenate:dimensionMismatch"
-			ME.rethrow;
-		end
-		Incomplete=true;
-		Data=MATLAB.ElMat.PadCat(1,Data{:},NaN);
-	end
-else
-	Incomplete=false;
-end
-NTAT=Accumulate(UniExp.F0Normalize(Data,Normalize,F0Samples),1,'omitmissing');
 end
 
 %[appendix]{"version":"1.0"}
