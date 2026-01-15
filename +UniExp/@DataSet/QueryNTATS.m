@@ -49,7 +49,7 @@ Normalize=Flags.No_special_operation;
 F0Samples=[];
 Accumulate=@median;
 Memoize=true;
-for V=numel(varargin)
+for V=1:numel(varargin)
 	Arg=varargin{V};
 	if isenum(Arg)
 		switch Arg
