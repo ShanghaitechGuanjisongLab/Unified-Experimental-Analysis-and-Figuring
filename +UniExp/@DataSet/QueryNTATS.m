@@ -24,7 +24,7 @@
 %[text] ## 输入参数
 %[text] QueryStruct(1,1)struct，查询结构体，此函数调用TableQuery方法执行表查询，此参数将被直接传递给TableQuery，详见TableQuery文档。
 %[text] QueryTable tabular，查询条件，此函数调用TableQuery方法执行表查询，此参数将被直接传递给TableQuery，详见TableQuery文档。特别地，如果使用GroupName设置分组名，不允许有名为“CellUID”的组名。
-%[text] Normalize(1,1)UniExp.Flags=UniExp.Flags.No\_special\_operation，归一化方法，默认不做归一化，可选 dFdF0 log2FdF0 ZScore，详见UniExp.F0Normalize的Method参数
+%[text] Normalize(1,1)UniExp.Flags=UniExp.Flags.No\_special\_operation，归一化方法，默认不做归一化，可选 dFdF0 log2FdF0 ZScore DeltaF，详见UniExp.F0Normalize的Method参数
 %[text] F0Samples(1,:)uint16，用作基线的信号索引。例如采样率为8、回合前2s作为基线时，F0Samples设为1:16。详见UniExp.F0Normalize的F0Index参数
 %[text] Accumulate(1,1)UniExp.Flags=UniExp.Flags.Median，回合累积方法，可选：
 %[text] - Mean，算术平均
