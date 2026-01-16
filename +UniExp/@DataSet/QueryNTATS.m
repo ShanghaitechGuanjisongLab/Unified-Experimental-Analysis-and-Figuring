@@ -71,6 +71,7 @@ end
 persistent PersistentMemoizer
 if isempty(PersistentMemoizer)||~isvalid(PersistentMemoizer)
 	PersistentMemoizer=memoize(@RealQueryNtats);
+	PersistentMemoizer.CacheSize=50;
 end
 if Memoize
 	Memoizer=PersistentMemoizer;
