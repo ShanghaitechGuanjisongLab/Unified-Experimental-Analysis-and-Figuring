@@ -74,15 +74,17 @@
 %[text] P(1,1)double，所有组的总体P值
 %[text] Optional(1,1)struct，可选输出，可选包含以下字段：
 %[text] - MultiCompare(:,2)table，如果CompareGroup不为空，则此输出对应CompareGroup，每行一个分组对，包含以下列：
-%[text]     - GroupPair(:,2)，保留CompareGroup的同名列不变
-%[text]     - PValue，该分组对两两比较的P值
-%[text]     - PLine(:,1)matlab.graphics.primitive.Line，P值标注线
-%[text]     - PText(:,1)matlab.graphics.primitive.Text，P值标注文本
+%[text] -    - GroupPair(:,2)，保留CompareGroup的同名列不变
+%[text] -    - PValue，该分组对两两比较的P值
+%[text] -    - PLine(:,1)matlab.graphics.primitive.Line，P值标注线
+%[text] -    - PText(:,1)matlab.graphics.primitive.Text，P值标注文本
 %[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。
 %[text] - Legend(1,1)matlab.graphics.illustration.Legend，仅在输入二维分组table时存在，指向一个自动添加的图例 \
 %[text] Bars(:,1)matlab.graphics.chart.primitive.Bar，绘制的条形对象
+%[text] ErrorBars table，误差条对象，包含与图上每个条形（而不是Bar对象，因为一个Bar对象可能在图上绘制多个条形）的对应关系，按顺序排列，一行一个条形，包含以下列：
+%[text] - Object(:,1) \
 %[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>) [matlab.graphics.illustration.Legend](<matlab:doc matlab.graphics.illustration.Legend>) [matlab.graphics.chart.primitive.Bar](<matlab:doc matlab.graphics.chart.primitive.Bar>)
-function [P,Optional,Bars]=BarScatterCompare(Data,varargin)
+function [P,Optional,Bars,ErrorBars]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
 ShowScatter=true;
 CompareGroup=table.empty;
