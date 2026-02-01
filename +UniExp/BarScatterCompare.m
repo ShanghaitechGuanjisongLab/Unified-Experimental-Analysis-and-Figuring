@@ -82,8 +82,9 @@
 %[text] - Legend(1,1)matlab.graphics.illustration.Legend，仅在输入二维分组table时存在，指向一个自动添加的图例 \
 %[text] Bars(:,1)matlab.graphics.chart.primitive.Bar，绘制的条形对象
 %[text] ErrorBars table，误差条对象，包含与图上每个条形（而不是Bar对象，因为一个Bar对象可能在图上绘制多个条形）的对应关系，按顺序排列，一行一个条形，包含以下列：
-%[text] - Object(:,1) \
-%[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.errorbar](<matlab:doc matlab.graphics.chart.primitive.errorbar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>) [matlab.graphics.illustration.Legend](<matlab:doc matlab.graphics.illustration.Legend>) [matlab.graphics.chart.primitive.Bar](<matlab:doc matlab.graphics.chart.primitive.Bar>)
+%[text] - Object(:,1)matlab.graphics.chart.primitive.ErrorBar，该条形上的误差条对象
+%[text] - Index(:,1)，该条形对应误差条对象的第几个数据点 \
+%[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.ErrorBar](<matlab:doc matlab.graphics.chart.primitive.ErrorBar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>) [matlab.graphics.illustration.Legend](<matlab:doc matlab.graphics.illustration.Legend>) [matlab.graphics.chart.primitive.Bar](<matlab:doc matlab.graphics.chart.primitive.Bar>)
 function [P,Optional,Bars,ErrorBars]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
 ShowScatter=true;
