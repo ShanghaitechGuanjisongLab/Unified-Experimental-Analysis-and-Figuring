@@ -40,6 +40,12 @@
 %[text] UniExp.BarScatterCompare(array2table([Days{:}],VariableNames=CompareGroup.GroupPair),CompareGroup);
 %[text] ```
 %[text] ## ![](text:image:6ba7)
+%[text] 如果未使用CompareGroup自动画P值线，可将此表的Object和Index列分别对应MATLAB.Graphics.PLine的ObjectA/ObjectB和IndexA/IndexB手动画线。例如比较第1和第2个条形：
+%[text] ```matlabCodeExample
+%[text] Desc = table(ErrorBars.Object(1), ErrorBars.Object(2), ErrorBars.Index(1), ErrorBars.Index(2), "*", 0, ...
+%[text]     'VariableNames', {'ObjectA','ObjectB','IndexA','IndexB','Text','ExtraOffset'});
+%[text] MATLAB.Graphics.PLine(Desc);
+%[text] ```
 %[text] ## 输入参数
 %[text] Data，分组采样数据，可以是：
 %[text] - 实数矩阵，每组一列。如果显示散点，同一行的散点将被匹配连接起来。每组的条形下方将用数字标识组序数。
