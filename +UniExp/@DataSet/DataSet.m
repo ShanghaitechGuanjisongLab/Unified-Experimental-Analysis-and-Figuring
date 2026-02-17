@@ -1,4 +1,4 @@
-classdef DataSet<handle&matlab.mixin.Copyable
+classdef DataSet<handle&matlab.mixin.Copyable&matlab.mixin.CustomElementSerialization
 	%UniExp数据集大类，包含多种处理、分析方法，是实现统一实验分析作图的通用数据集类型。
 	%此类的属性，除Version外，是按照BC范式设计的数据库表。可以从包含这些表的结构体或另一个此类对象构造对象。每个表都可以留空。
 	%注意此类是句柄类，必须使用MakeCopy成员函数才能复制对象，直接赋值给其它变量只能取得数据集的一个引用。
@@ -15,21 +15,21 @@ classdef DataSet<handle&matlab.mixin.Copyable
 
 		%主键TrialUID，回合的唯一标识符；码(BlockUID,TrialIndex)，因为“一个特定模块的第N回合”应当可以唯一确定一个回合。其它可选列应当是特定于该回合的信息，如刺激类
 		% 型、标通道值、采样时点、动物行为等。
-		Trials=table
-		%不能限定table类型，因为需要在saveobj中设置为结构体
+		Trials
+		%不能限定table类型，因为序列化时可能为结构体
 
 		%主键CellUID，细胞的唯一标识符；码(Mouse,ZLayer,CellType,CellIndex)，因为“一只鼠某层某种类型的第N个细胞”应当可以唯一确定一个细胞。其它可选列应当是特定于该细
 		% 胞的信息，如像素位置等。
 		Cells
-		%不能限定table类型，因为需要在saveobj中设置为结构体
+		%不能限定table类型，因为序列化时可能为结构体
 
 		%主键(CellUID,BlockUID)，用模块和细胞的组合唯一标识该细胞在该模块的活动，可选列如BlockSignal等
-		BlockSignals=table
-		%不能限定table类型，因为需要在saveobj中设置为结构体
+		BlockSignals
+		%不能限定table类型，因为序列化时可能为结构体
 
 		%主键(CellUID,TrialUID)，用回合和细胞的组合唯一标识该细胞在该回合的活动，可选列如TrialSignal等
-		TrialSignals=table
-		%不能限定table类型，因为需要在saveobj中设置为结构体
+		TrialSignals
+		%不能限定table类型，因为序列化时可能为结构体
 
 		%主键(Mouse,BrainArea)，记录每只鼠操纵了哪些脑区
 		Manipulation table
@@ -55,31 +55,52 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				CM=Value;
 			end
 		end
-	end
-	methods(Static,Access=protected)
-		function obj=loadobj(obj)
-			for StructName=["BlockSignals","TrialSignals","Trials"]
-				Struct=obj.(StructName);
-				if isstruct(Struct)&&~isempty(Struct)
-					ColumnNames=fieldnames(Struct);
-					for C=1:numel(ColumnNames)
-						Column=Struct.(ColumnNames{C});
-						if iscell(Column)
-							Column=arrayfun(@(V,NumSplit)mat2cell(V{1},repmat(height(V{1})/NumSplit,NumSplit,1)),Column,Struct.NumSplit,UniformOutput=false);
-							Column=vertcat(Column{:});
-							Struct.(ColumnNames{C})=Column;
-						end
+		function modifyOutgoingSerializationContent(sObj,obj)
+			for TableName=["BlockSignals","TrialSignals","Trials"]
+				Table=obj.(TableName);
+				if ~isempty(Table)
+					Logical=varfun(@iscell,Table,OutputFormat='uniform');
+					if any(Logical)
+						[~,~,Groups]=unique(cell2mat(cellfun(@size,Table{:,Logical},UniformOutput=false)),'rows');
+						StructValues=cell(1,width(Table));
+						[StructValues{:}]=splitapply(@(varargin)LogicalColumnsCat(Logical,varargin),Table,Groups);
+						Logical=~Logical;
+						StructValues(Logical)=cellfun(@(V)vertcat(V{:}),StructValues(Logical),UniformOutput=false);
+						Table=cell2struct(StructValues,Table.Properties.VariableNames,2);
+						Table.NumSplit=groupcounts(Groups);
+						sObj.updateValue(TableName,Table);
 					end
-					obj.(StructName)=struct2table(rmfield(Struct,'NumSplit'));
 				end
 			end
-			Struct=obj.Cells;
-			if isstruct(Struct)&&~isempty(Struct)
-				Struct.PixelXY=mat2cell(Struct.PixelXY,Struct.NumPixels);
-				obj.Cells=struct2table(rmfield(Struct,'NumPixels'));
+		end
+		function modifyIncomingSerializationContent(sObj)
+			for StructName=["BlockSignals","TrialSignals","Trials"]
+				if sObj.hasNameValue(StructName)
+					Struct=sObj.getValue(StructName);
+					if isstruct(Struct)&&~isempty(Struct)
+						ColumnNames=fieldnames(Struct);
+						for C=1:numel(ColumnNames)
+							Column=Struct.(ColumnNames{C});
+							if iscell(Column)
+								Column=arrayfun(@(V,NumSplit)mat2cell(V{1},repmat(height(V{1})/NumSplit,NumSplit,1)),Column,Struct.NumSplit,UniformOutput=false);
+								Column=vertcat(Column{:});
+								Struct.(ColumnNames{C})=Column;
+							end
+						end
+						sObj.updateValue(StructName,struct2table(rmfield(Struct,'NumSplit')));
+					end
+				end
+			end
+			if sObj.hasNameValue("Cells")
+				Struct=sObj.getValue("Cells");
+				if isstruct(Struct)&&~isempty(Struct)&&isfield(Struct,'NumPixels')
+					Struct.PixelXY=mat2cell(Struct.PixelXY,Struct.NumPixels);
+					sObj.updateValue("Cells",struct2table(rmfield(Struct,'NumPixels')));
+				end
 			end
 		end
 	end
+
 	methods(Access=protected)
 		function SC=GetSignalColumn(obj)
 			persistent PossibleSignalColumns
@@ -92,25 +113,7 @@ classdef DataSet<handle&matlab.mixin.Copyable
 				UniExp.Exception.DataSet_is_missing_TrialSignals.Throw;
 			end
 		end
-		function obj=saveobj(obj)
-			obj=obj.copy;%避免修改影响原本工作区中的变量
-			for TableName=["BlockSignals","TrialSignals","Trials"]
-				Table=obj.(TableName);
-				if istabular(Table)&&~isempty(Table)
-					Logical=varfun(@iscell,Table,OutputFormat='uniform');
-					if any(Logical)
-						[~,~,Groups]=unique(cell2mat(cellfun(@size,Table{:,Logical},UniformOutput=false)),'rows');
-						StructValues=cell(1,width(Table));
-						[StructValues{:}]=splitapply(@(varargin)LogicalColumnsCat(Logical,varargin),Table,Groups);
-						Logical=~Logical;
-						StructValues(Logical)=cellfun(@(V)vertcat(V{:}),StructValues(Logical),UniformOutput=false);
-						Table=cell2struct(StructValues,Table.Properties.VariableNames,2);
-						Table.NumSplit=groupcounts(Groups);
-						obj.(TableName)=Table;
-					end
-				end
-			end
-		end
+
 		function New=copyElement(Old)
 			New=UniExp.DataSet(Old);
 		end
