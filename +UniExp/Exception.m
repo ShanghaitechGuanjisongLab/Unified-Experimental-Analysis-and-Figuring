@@ -145,5 +145,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Channel_not_specified_for_multi_channel_TIFF
 		ZLayer_not_specified_for_multi_Z_TIFF
 		Empty_event_log
+		Attempt_to_merge_non_standard_filename
 	end
 end
