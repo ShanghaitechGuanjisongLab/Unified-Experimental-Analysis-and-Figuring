@@ -18,6 +18,9 @@
 %[text] BarScatterCompare(___,Ax);
 %[text] %与上述任意语法组合使用，额外指定绘图目标坐标区
 %[text] 
+%[text] BarScatterCompare(___,Flags);
+%[text] %与上述任意语法组合使用，额外指定绘图功能旗帜
+%[text] 
 %[text] BarScatterCompare(___,Name=Value);
 %[text] %与上述任意语法组合使用，额外指定名称值参数
 %[text] 
@@ -54,7 +57,7 @@
 %[text] -    - 二维分组，维度顺序参考内置bar函数，行名和列名对应该维度上的组名。每列都是(:,1)cell，元胞内是(:,1)，该组的所有样本。如果使用此语法，将取行名作为X轴，列名作为图例。如果要指定CompareGroup，通常还应当指定table的DimensionNames。
 %[text] - (1,:)cell，每组一个元胞，元胞里是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用数字标识组序数。
 %[text] - (1,1)struct，每组一个字段，字段值是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用字段名标识组名。 \
-%[text] ShowScatter(1,1)logical，是否显示散点，默认true。若设为false，也不能输出ScatterLines。如果Data是二维分组table，该参数始终视为false。
+%[text] ShowScatter(1,1)logical，是否显示散点，默认true。若设为true，等效于设置 ShowScatter Flags
 %[text] CompareGroup table=table.empty，分组配对比较表，标识要将哪些分组配对计算P值，每行一对。默认不显示P值。
 %[text] - GroupPair(:,2)，必需，为每个比较配对指定要比较的两个分组。类型可以是：
 %[text] -    - 如果Data使用table二维分组语法，此列必须是table，两列名对应Data的DimensionNames，每列内又是(:,2)，每行是该比较对组在该维度上的两个组名。此语法与TabularAnovaN的Comparison参数语法相同。
@@ -62,6 +65,9 @@
 %[text] -    - 如果Data未指定任何组名，GroupPair只能为组序数。
 %[text] - PLineOffset(:,1)，可选。为每个配对计算的P值将显示在图上，有时这些显示字符可能发生重叠。使用此参数，为每个比较配对指定一个向上偏移值，手动垫高特定配对的P值显示位置，避免与其它P值重叠。数值单位与Y轴一致。 \
 %[text] Ax(1,1)matlab.graphics.axis.Axes=gca，绘图目标坐标区
+%[text] Flags(1,:)UniExp.Flags，可选附加以下功能旗帜：
+%[text] - ShowScatter，显示散点。
+%[text] - IndividualErrorbars \
 %[text] #### Colors(:,3)table
 %[text] 必须包含以下列：
 %[text] - R(:,1)double，红色通道
@@ -84,7 +90,7 @@
 %[text] -    - PValue，该分组对两两比较的P值
 %[text] -    - PLine(:,1)matlab.graphics.primitive.Line，P值标注线
 %[text] -    - PText(:,1)matlab.graphics.primitive.Text，P值标注文本
-%[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果ShowScatter设为false，不输出此返回值。
+%[text] - ScatterLines(:,1)，散点和连接线图形对象。如果Data是实数或一维分组table，返回matlab.graphics.chart.primitive.Line；如果Data是cell或struct或二维分组table，返回matlab.graphics.chart.primitive.Scatter；如果不指定ShowScatter旗帜，不输出此返回值。
 %[text] - Legend(1,1)matlab.graphics.illustration.Legend，仅在输入二维分组table时存在，指向一个自动添加的图例 \
 %[text] Bars(:,1)matlab.graphics.chart.primitive.Bar，绘制的条形对象
 %[text] ErrorBars table，误差条对象，包含与图上每个条形（而不是Bar对象，因为一个Bar对象可能在图上绘制多个条形）的对应关系，按顺序排列，一行一个条形，包含以下列：
