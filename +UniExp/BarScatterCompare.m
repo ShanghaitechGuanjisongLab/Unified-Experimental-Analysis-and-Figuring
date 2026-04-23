@@ -2,28 +2,28 @@
 %[text] ## 语法
 %[text] ```matlabCodeExample
 %[text] import UniExp.BarScatterCompare
-%[text]
+%[text] 
 %[text] BarScatterCompare(Data);
 %[text] %对两组数据采样点作两个条形进行比较，显示误差条、样本点
-%[text]
+%[text] 
 %[text] BarScatterCompare(___,CompareGroup);
 %[text] %与上述任意语法组合使用，额外指定要多重比较计算P值的分组对
-%[text]
+%[text] 
 %[text] BarScatterCompare(___,Colors);
 %[text] %与上述任意语法组合使用，额外指定条形和散点的颜色
-%[text]
+%[text] 
 %[text] BarScatterCompare(___,Ax);
 %[text] %与上述任意语法组合使用，额外指定绘图目标坐标区
-%[text]
+%[text] 
 %[text] BarScatterCompare(___,Flags);
 %[text] %与上述任意语法组合使用，额外指定绘图功能旗帜
-%[text]
+%[text] 
 %[text] BarScatterCompare(___,Name=Value);
 %[text] %与上述任意语法组合使用，额外指定名称值参数
-%[text]
+%[text] 
 %[text] [___,Optional]=BarScatterCompare(___);
 %[text] %与上述任意语法组合使用，返回可选的多重比较和图形对象
-%[text]
+%[text] 
 %[text] [___,PLines]=BarScatterCompare(___);
 %[text] %与上述任意语法组合使用，返回P值线对象
 %[text] ```
@@ -92,7 +92,7 @@
 %[text] Bars(:,1)matlab.graphics.chart.primitive.Bar，绘制的条形对象
 %[text] ErrorBars table，误差条对象，包含与图上每个条形（而不是Bar对象，因为一个Bar对象可能在图上绘制多个条形）的对应关系，按顺序排列，一行一个条形，包含以下列：
 %[text] - Object(:,1)matlab.graphics.chart.primitive.ErrorBar，该条形上的误差条对象
-%[text] - Index(:,1)，该条形对应误差条对象的第几个数据点。如果设置了 IndividualErrorbars Flag，不返回此列。 \
+%[text] - Index(:,1)，该条形对应误差条对象的第几个数据点。如果设置了 IndividualErrorbars Flag，此列全为1 \
 %[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.ErrorBar](<matlab:doc matlab.graphics.chart.primitive.ErrorBar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>) [matlab.graphics.illustration.Legend](<matlab:doc matlab.graphics.illustration.Legend>) [matlab.graphics.chart.primitive.Bar](<matlab:doc matlab.graphics.chart.primitive.Bar>)
 function [P,Optional,Bars,ErrorBars]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
@@ -242,6 +242,7 @@ else
 	if any(BarZero)
 		ErrorBars.Object(BarZero)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,CommonArguments{:}), Xs(BarZero), Mean(BarZero), Sem(BarZero));
 	end
+	ErrorBars.Index(:)=1;
 end
 Optional=struct;
 if ShowScatter
@@ -380,9 +381,6 @@ else
 end
 if Table2D
 	Optional.Legend=legend(Bars,Data.Properties.VariableNames,Location=MATLAB.Graphics.OptimizedLegendLocation(LegendAvoid));
-end
-if ~HoldState
-	hold(Ax,'off');
 end
 end
 

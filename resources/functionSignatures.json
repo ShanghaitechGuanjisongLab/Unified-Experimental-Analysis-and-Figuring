@@ -948,22 +948,6 @@
 				"mutuallyExclusiveGroup": [
 					[
 						{
-							"name": "ShowScatter",
-							"kind": "required",
-							"type": [
-								"logical",
-								"scalar"
-							],
-							"purpose": "是否显示散点"
-						}
-					],
-					[]
-				]
-			},
-			{
-				"mutuallyExclusiveGroup": [
-					[
-						{
 							"name": "CompareGroup",
 							"kind": "required",
 							"type": "tabular",
@@ -1000,6 +984,19 @@
 								"matlab.graphics.axis.Axes"
 							],
 							"purpose": "绘图目标坐标区"
+						}
+					],
+					[]
+				]
+			},
+			{
+				"mutuallyExclusiveGroup": [
+					[
+						{
+							"name": "Flags",
+							"kind": "required",
+							"type": "UniExp.Flags",
+							"purpose": "额外功能旗帜"
 						}
 					],
 					[]
