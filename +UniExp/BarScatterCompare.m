@@ -2,31 +2,28 @@
 %[text] ## 语法
 %[text] ```matlabCodeExample
 %[text] import UniExp.BarScatterCompare
-%[text] 
+%[text]
 %[text] BarScatterCompare(Data);
 %[text] %对两组数据采样点作两个条形进行比较，显示误差条、样本点
-%[text] 
-%[text] BarScatterCompare(Data,ShowScatter);
-%[text] %额外指定是否要显示采样散点
-%[text] 
+%[text]
 %[text] BarScatterCompare(___,CompareGroup);
 %[text] %与上述任意语法组合使用，额外指定要多重比较计算P值的分组对
-%[text] 
+%[text]
 %[text] BarScatterCompare(___,Colors);
 %[text] %与上述任意语法组合使用，额外指定条形和散点的颜色
-%[text] 
+%[text]
 %[text] BarScatterCompare(___,Ax);
 %[text] %与上述任意语法组合使用，额外指定绘图目标坐标区
-%[text] 
+%[text]
 %[text] BarScatterCompare(___,Flags);
 %[text] %与上述任意语法组合使用，额外指定绘图功能旗帜
-%[text] 
+%[text]
 %[text] BarScatterCompare(___,Name=Value);
 %[text] %与上述任意语法组合使用，额外指定名称值参数
-%[text] 
+%[text]
 %[text] [___,Optional]=BarScatterCompare(___);
 %[text] %与上述任意语法组合使用，返回可选的多重比较和图形对象
-%[text] 
+%[text]
 %[text] [___,PLines]=BarScatterCompare(___);
 %[text] %与上述任意语法组合使用，返回P值线对象
 %[text] ```
@@ -57,7 +54,7 @@
 %[text] -    - 二维分组，维度顺序参考内置bar函数，行名和列名对应该维度上的组名。每列都是(:,1)cell，元胞内是(:,1)，该组的所有样本。如果使用此语法，将取行名作为X轴，列名作为图例。如果要指定CompareGroup，通常还应当指定table的DimensionNames。
 %[text] - (1,:)cell，每组一个元胞，元胞里是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用数字标识组序数。
 %[text] - (1,1)struct，每组一个字段，字段值是实数列向量。如果显示散点，将不会匹配连接，而是均匀分布在各个高度上。每组的条形下方将用字段名标识组名。 \
-%[text] ShowScatter(1,1)logical，是否显示散点，默认true。若设为true，等效于设置 ShowScatter Flags
+%[text] ShowScatter(1,1)logical=false，是否显示散点。若设为true，等效于设置 ShowScatter Flags。此参数已弃用，将在未来版本删除，请改为设置旗帜。
 %[text] CompareGroup table=table.empty，分组配对比较表，标识要将哪些分组配对计算P值，每行一对。默认不显示P值。
 %[text] - GroupPair(:,2)，必需，为每个比较配对指定要比较的两个分组。类型可以是：
 %[text] -    - 如果Data使用table二维分组语法，此列必须是table，两列名对应Data的DimensionNames，每列内又是(:,2)，每行是该比较对组在该维度上的两个组名。此语法与TabularAnovaN的Comparison参数语法相同。
@@ -65,9 +62,9 @@
 %[text] -    - 如果Data未指定任何组名，GroupPair只能为组序数。
 %[text] - PLineOffset(:,1)，可选。为每个配对计算的P值将显示在图上，有时这些显示字符可能发生重叠。使用此参数，为每个比较配对指定一个向上偏移值，手动垫高特定配对的P值显示位置，避免与其它P值重叠。数值单位与Y轴一致。 \
 %[text] Ax(1,1)matlab.graphics.axis.Axes=gca，绘图目标坐标区
-%[text] Flags(1,:)UniExp.Flags，可选附加以下功能旗帜：
+%[text] Flags(1,:)UniExp.Flags=\[\]，可选附加以下功能旗帜：
 %[text] - ShowScatter，显示散点。
-%[text] - IndividualErrorbars \
+%[text] - IndividualErrorbars，各误差条使用独立对象 \
 %[text] #### Colors(:,3)table
 %[text] 必须包含以下列：
 %[text] - R(:,1)double，红色通道
@@ -95,20 +92,22 @@
 %[text] Bars(:,1)matlab.graphics.chart.primitive.Bar，绘制的条形对象
 %[text] ErrorBars table，误差条对象，包含与图上每个条形（而不是Bar对象，因为一个Bar对象可能在图上绘制多个条形）的对应关系，按顺序排列，一行一个条形，包含以下列：
 %[text] - Object(:,1)matlab.graphics.chart.primitive.ErrorBar，该条形上的误差条对象
-%[text] - Index(:,1)，该条形对应误差条对象的第几个数据点 \
+%[text] - Index(:,1)，该条形对应误差条对象的第几个数据点。如果设置了 IndividualErrorbars Flag，不返回此列。 \
 %[text] **See also** [anova1](<matlab:doc anova1>) [multcompare](<matlab:doc multcompare>) [matlab.graphics.chart.primitive.Line](<matlab:doc matlab.graphics.chart.primitive.Line>) [matlab.graphics.chart.primitive.Scatter](<matlab:doc matlab.graphics.chart.primitive.Scatter>) [matlab.graphics.chart.primitive.ErrorBar](<matlab:doc matlab.graphics.chart.primitive.ErrorBar>) [bar](<matlab:doc bar>) [UniExp.TabularAnovaN](<matlab:doc UniExp.TabularAnovaN>) [matlab.graphics.illustration.Legend](<matlab:doc matlab.graphics.illustration.Legend>) [matlab.graphics.chart.primitive.Bar](<matlab:doc matlab.graphics.chart.primitive.Bar>)
 function [P,Optional,Bars,ErrorBars]=BarScatterCompare(Data,varargin)
 import UniExp.Flags
-ShowScatter=true;
+ShowScatter=false;
 CompareGroup=table.empty;
 Colors=table.empty;
 Ax={};
 AsteriskThreshold=0;
 CapSize=0.5;
+PNErrorbars=false;
 for V=1:numel(varargin)
 	Arg=varargin{V};
 	if islogical(Arg)
 		ShowScatter=Arg;
+		UniExp.Exception.Arguments_deprecated.Warn('ShowScatter参数已弃用，将在未来版本删除，请改用Flags参数');
 	elseif isa(Arg,'matlab.graphics.axis.Axes')
 		Ax={Arg};
 	elseif istabular(Arg)
@@ -117,6 +116,10 @@ for V=1:numel(varargin)
 		else
 			Colors=Arg;
 		end
+	elseif isa(Arg,'UniExp.Flags')
+		HasFlags=ismember([UniExp.Flags.ShowScatter,UniExp.Flags.IndividualErrorbars],Arg);
+		ShowScatter=ShowScatter||HasFlags(1);
+		PNErrorbars=~HasFlags(2);
 	else
 		for NV=V:2:numel(varargin)
 			switch varargin{NV}
@@ -207,7 +210,8 @@ if HasGroupNames
 	xticks(Ax,XTickGroups);
 	xticklabels(Ax,GroupNames);
 end
-HoldState=ishold;
+HoldState=ishold(Ax);
+HoldState=onCleanup(@()hold(Ax,HoldState));
 hold(Ax,'on');
 AxUnits=Ax.Units;
 Ax.Units='points';
@@ -215,17 +219,29 @@ CommonArguments={'Color',Colors{"ErrorBar",["R","G","B"]},'LineStyle','none','Li
 Ax.Units=AxUnits;
 Xs=[Bars.XEndPoints];
 ErrorBars=table;
-if any(BarPositive)
-	ErrorBars.Object(BarPositive)=errorbar(Ax,Xs(BarPositive),Mean(BarPositive),[],Sem(BarPositive),CommonArguments{:});
-	ErrorBars.Index(BarPositive)=1:sum(BarPositive,'all');
-end
-if any(BarNegative)
-	ErrorBars.Object(BarNegative)=errorbar(Ax,Xs(BarNegative),Mean(BarNegative),Sem(BarNegative),[],CommonArguments{:});
-	ErrorBars.Index(BarNegative)=1:sum(BarNegative,'all');
-end
-if any(BarZero)
-	ErrorBars.Object(BarZero)=errorbar(Ax,Xs(BarZero),Mean(BarZero),Sem(BarZero),CommonArguments{:});
-	ErrorBars.Index(BarZero)=1:sum(BarZero,'all');
+if PNErrorbars
+	if any(BarPositive)
+		ErrorBars.Object(BarPositive)=errorbar(Ax,Xs(BarPositive),Mean(BarPositive),[],Sem(BarPositive),CommonArguments{:});
+		ErrorBars.Index(BarPositive)=1:sum(BarPositive,'all');
+	end
+	if any(BarNegative)
+		ErrorBars.Object(BarNegative)=errorbar(Ax,Xs(BarNegative),Mean(BarNegative),Sem(BarNegative),[],CommonArguments{:});
+		ErrorBars.Index(BarNegative)=1:sum(BarNegative,'all');
+	end
+	if any(BarZero)
+		ErrorBars.Object(BarZero)=errorbar(Ax,Xs(BarZero),Mean(BarZero),Sem(BarZero),CommonArguments{:});
+		ErrorBars.Index(BarZero)=1:sum(BarZero,'all');
+	end
+else
+	if any(BarPositive)
+		ErrorBars.Object(BarPositive)=arrayfun(@(X,M,S)errorbar(Ax,X,M,[],S,CommonArguments{:}), Xs(BarPositive), Mean(BarPositive), Sem(BarPositive));
+	end
+	if any(BarNegative)
+		ErrorBars.Object(BarNegative)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,[],CommonArguments{:}), Xs(BarNegative), Mean(BarNegative), Sem(BarNegative));
+	end
+	if any(BarZero)
+		ErrorBars.Object(BarZero)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,CommonArguments{:}), Xs(BarZero), Mean(BarZero), Sem(BarZero));
+	end
 end
 Optional=struct;
 if ShowScatter

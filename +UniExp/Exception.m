@@ -146,5 +146,6 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		ZLayer_not_specified_for_multi_Z_TIFF
 		Empty_event_log
 		Attempt_to_merge_non_standard_filename
+        Arguments_deprecated
 	end
 end

@@ -132,5 +132,10 @@ classdef Flags
 		Intersect
 		ADiffB
 		BDiffA
+
+        %% BarScatterCompare
+
+        ShowScatter
+        IndividualErrorbars
 	end
 end
