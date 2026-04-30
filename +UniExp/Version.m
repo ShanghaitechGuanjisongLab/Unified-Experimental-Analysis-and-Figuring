@@ -1,12 +1,12 @@
 function V = Version
-V.Me='v20.9.0';
+V.Me='v20.10.0';
 V.ParallelComputing='v8.1.4';
 V.GlobalOptimization='v3.1.2';
 V.ImageProcessing='v3.10.0';
 V.Image5D='v3.3.0';
 V.TextAnalytics='v1.0.3';
 V.ComputerVision='v1.1.1';
-V.MatlabExtension='v20.0.0';
+V.MatlabExtension='v20.0.4';
 V.MATLAB='R2026a';
 persistent NewVersion
 if isempty(NewVersion)
