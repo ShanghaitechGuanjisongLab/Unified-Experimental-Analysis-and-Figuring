@@ -214,10 +214,12 @@ HoldState=ishold(Ax);
 HoldState=onCleanup(@()hold(Ax,HoldState));
 hold(Ax,'on');
 AxUnits=Ax.Units;
+
 Ax.Units='points';
+%使坐标轴的单位和errorbar的CapSize一样都是points
+
 CommonArguments={'Color',Colors{"ErrorBar",["R","G","B"]},'LineStyle','none','LineWidth',2,'CapSize',Ax.Position(3)*Bars(1).BarWidth*Bars(1).GroupWidth*CapSize/(diff(xlim)*numel(Bars))};
-Ax.Units=AxUnits;
-Xs=[Bars.XEndPoints];
+Xs=reshape([Bars.XEndPoints],[],1);
 ErrorBars=table;
 if PNErrorbars
 	if any(BarPositive)
@@ -244,6 +246,7 @@ else
 	end
 	ErrorBars.Index(:)=1;
 end
+Ax.Units=AxUnits;
 Optional=struct;
 if ShowScatter
 	ScatterColor=Colors{"Scatter",["R","G","B"]};
@@ -364,15 +367,18 @@ else
 		Descriptors{:,["IndexA","IndexB"]}=[ErrorBars.Index(NumericGroupPair(:,1)),ErrorBars.Index(NumericGroupPair(:,2))];
 	end
 	Logical=MultiCompare.PValue<AsteriskThreshold;
-	Descriptors.Text(Logical)="*";
+	Descriptors.Text(Logical)="＊";
 	Logical=~Logical;
 	Descriptors.Text(Logical)="p="+MATLAB.SignificantFixedpoint(MultiCompare.PValue(Logical),2);
 	[Lines,Texts]=MATLAB.Graphics.PLine(Descriptors);
-	if any(CompareGroup.Properties.VariableNames=="PLineOffset")
-		for P=1:height(CompareGroup)
+	HasPLineOffset=any(CompareGroup.Properties.VariableNames=="PLineOffset");
+	for P=1:height(CompareGroup)
+		if HasPLineOffset
 			Lines(P).YData=Lines(P).YData+CompareGroup.PLineOffset(P);
 			Texts(P).Position(2)=Texts(P).Position(2)+CompareGroup.PLineOffset(P);
 		end
+		%＊符号需要特殊字体才能正确显示
+		Texts(P).FontName='Microsoft YaHei';
 	end
 	PLines=[Lines,Texts];
 	MultiCompare{:,["PLine","PText"]}=PLines;
