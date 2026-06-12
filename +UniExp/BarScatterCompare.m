@@ -219,7 +219,7 @@ Ax.Units='points';
 %使坐标轴的单位和errorbar的CapSize一样都是points
 
 CommonArguments={'Color',Colors{"ErrorBar",["R","G","B"]},'LineStyle','none','LineWidth',2,'CapSize',Ax.Position(3)*Bars(1).BarWidth*Bars(1).GroupWidth*CapSize/(diff(xlim)*numel(Bars))};
-Xs=reshape([Bars.XEndPoints],[],1);
+Xs=[Bars.XEndPoints];
 ErrorBars=table;
 if PNErrorbars
 	if any(BarPositive)
@@ -236,13 +236,13 @@ if PNErrorbars
 	end
 else
 	if any(BarPositive)
-		ErrorBars.Object(BarPositive)=arrayfun(@(X,M,S)errorbar(Ax,X,M,[],S,CommonArguments{:}), Xs(BarPositive), Mean(BarPositive), Sem(BarPositive));
+		ErrorBars.Object(BarPositive)=arrayfun(@(X,M,S)errorbar(Ax,X,M,[],S,CommonArguments{:}), reshape(Xs(BarPositive),[],1), reshape(Mean(BarPositive),[],1), reshape(Sem(BarPositive),[],1));
 	end
 	if any(BarNegative)
-		ErrorBars.Object(BarNegative)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,[],CommonArguments{:}), Xs(BarNegative), Mean(BarNegative), Sem(BarNegative));
+		ErrorBars.Object(BarNegative)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,[],CommonArguments{:}), reshape(Xs(BarNegative),[],1), reshape(Mean(BarNegative),[],1), reshape(Sem(BarNegative),[],1));
 	end
 	if any(BarZero)
-		ErrorBars.Object(BarZero)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,CommonArguments{:}), Xs(BarZero), Mean(BarZero), Sem(BarZero));
+		ErrorBars.Object(BarZero)=arrayfun(@(X,M,S)errorbar(Ax,X,M,S,CommonArguments{:}), reshape(Xs(BarZero),[],1), reshape(Mean(BarZero),[],1), reshape(Sem(BarZero),[],1));
 	end
 	ErrorBars.Index(:)=1;
 end

@@ -44,9 +44,9 @@ classdef Flags
 		%仅仅减去基线
 		DeltaF
 
-		%% 累积算法
+		%% 累积算法和排序标准
 
-		%
+		%平均值
 		Mean
 		%中位数
 		Median
