@@ -58,7 +58,7 @@
 %[text] #### WatchDogTimeout(1,1)duration=Inf
 %[text] 并行池看门狗忍耐时长。如果设为Inf，则不使用看门狗。看门狗监控并行池，一旦卡死超过指定忍耐时长，就会强行终止并行池，但不会终止整个程序，仍然继续往下执行。如果不使用并行池，此项设置无效。如果使用CPU计算，建议此项设置不少于3min。
 %[text] #### LogDirectory(1,1)string
-%[text] 如果指定此目录，将向该目录下为每个
+%[text] 如果指定此目录，将向该目录下为每个工作单元输出一个日志文件，可用于调试目的
 %[text] ## 输出文件
 %[text] **此函数不返回值，而是向OutputDirectory输出以下文件：**
 %[text] 所有OIR文件内部配准后对应的TIFF，文件名【Oir文件名.tif】，XYCZ尺寸与参照图相同，T与对应OIR文件相同，不含CD通道
@@ -149,7 +149,7 @@ else
 	end
 end
 disp('初级配准并收集Tags……');
-[CollectData,Metadata]=UniExp.internal.VerboseStream(options.LogLevel,OirPaths,@(Path)UniExp.internal.OirRegisterRW1(Path,options.BlockSize,BaseRegisterToDisk,CacheDirectory{:}),WatchDogOptions{:}).SpmdRun(@BlockProcess1,options.MovingChannel,options.MaxTranslationStep,options.LogDirectory,NArgOut=3,NumGpuArguments=1,Parallel=Parallel,BlockSize=options.BlockSize,UseGpu=options.UseGpu);
+[CollectData,Metadata]=UniExp.internal.VerboseStream(options.LogLevel,OirPaths,@(Path)UniExp.internal.OirRegisterRW1(Path,options.BlockSize,BaseRegisterToDisk,CacheDirectory{:}),WatchDogOptions{:}).SpmdRun(@BlockProcess1,options.MovingChannel,options.MaxTranslationStep,NArgOut=3,NumGpuArguments=1,Parallel=Parallel,BlockSize=options.BlockSize,UseGpu=options.UseGpu,LogDirectory=options.LogDirectory);
 [Translations,Data]=deal(cell(NumFiles,1));
 NonstandardOrDuplicate=~StandardFilename||Duplicate;
 for F=1:NumFiles
@@ -294,14 +294,16 @@ Translation1=SRImpl(Block,1);
 Block=mean(DoTranslation(Block,Translation1),5);
 Translation=Translation2+Translation1;
 end
-function [Tags,Translation,Data]=BlockProcess1(Data,TagLogical,RegisterChannel,MaxTranslationStep,LogDirectory)
-Fid=fopen(LogDirectory,'at');
-RAII=onCleanup(@()fclose(Fid));
-fprintf(Fid,'%s 标通道切片……',datetime);
+function [Tags,Translation,Data]=BlockProcess1(Data,TagLogical,RegisterChannel,MaxTranslationStep,LogFid)
+if nargin<5
+	LogFid=0;
+end
+MATLAB.IO.LogF(LogFid,'标通道切片……');
 Data=single(Data);
 Tags=gather(permute(mean(Data(:,:,TagLogical,:,:),[1 2 4]),[5,3,1,2,4]));
-fprintf(Fid,'%s 标通道切片……',datetime);
-[Data,Translation]=SelfRegister(Data(:,:,RegisterChannel,:,:),MaxTranslationStep);
+MATLAB.IO.LogF(LogFid,'块内自配准……');
+[Data,Translation]=SelfRegister(Data(:,:,RegisterChannel,:,:),MaxTranslationStep,LogFid);
+MATLAB.IO.LogF(LogFid,'收集结果……');
 Data=gather(Data);
 Translation=gather(Translation);
 end
