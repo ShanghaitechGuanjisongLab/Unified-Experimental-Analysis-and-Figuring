@@ -397,19 +397,18 @@ end
 
 	function names = listZipRoiEntryNames(zipPath)
 		% 复刻 ReadImageJROI 内部 listzipcontents_rois 的行为：
-		% 用 Java ZipInputStream 顺序遍历，过滤 .roi 且排除 __MACOSX。
-		import java.util.zip.ZipInputStream
-		import java.io.FileInputStream
-		zis = ZipInputStream(FileInputStream(char(zipPath)));
-		cleanup = onCleanup(@() zis.close());
-		entry = zis.getNextEntry();
+		% 用 .NET ZipArchive 遍历条目，过滤 .roi 且排除 __MACOSX（不再依赖 Java）。
+		NET.addAssembly("System.IO.Compression");
+		fsZip = System.IO.File.OpenRead(char(zipPath));
+		archive = System.IO.Compression.ZipArchive(fsZip);
+		cleanup = onCleanup(@() disposeQuietly(archive, fsZip));
 		builder = MATLAB.DataTypes.ArrayBuilder(1);
-		while (entry ~= 0)
-			name = string(entry.getName());
+		zipEntries = archive.Entries;
+		for kk = 0:zipEntries.Count-1
+			name = string(zipEntries.Item(kk).FullName);
 			if endsWith(lower(name), ".roi") && ~startsWith(name, "__MACOSX")
 				builder.Append(name);
 			end
-			entry = zis.getNextEntry();
 		end
 		names = builder.Harvest();
 	end
@@ -427,39 +426,36 @@ end
 			mkdir(outDirLocal);
 		end
 
-		% 统一使用 Java 写入 ZIP（避免混用 .NET 与 Java）。
-		import java.io.FileOutputStream
-		import java.util.zip.ZipOutputStream
-		import java.util.zip.ZipEntry
-		
-		fos = FileOutputStream(char(outPath));
-		zos = ZipOutputStream(fos);
-		cleanup = onCleanup(@() localCloseZip(zos, fos));
+		% 统一使用 .NET ZipArchive 写入 ZIP（不再依赖 Java）。
+		NET.addAssembly("System.IO.Compression");
+		fs = System.IO.File.OpenWrite(char(outPath));
+		archive = System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Create);
+		cleanup = onCleanup(@() disposeQuietly(archive, fs));
 		
 		for kk = 1:numel(names)
 			entryName = names(kk);
 			bytes = uint8(bytesCell{kk});
-			ze = ZipEntry(char(entryName));
-			zos.putNextEntry(ze);
-			b = int8(bytes(:));
-			zos.write(b, 0, numel(b));
-			zos.closeEntry();
+			newEntry = archive.CreateEntry(char(entryName));
+			stream = newEntry.Open();
+			streamCleanup = onCleanup(@() disposeQuietly(stream));
+			ba = NET.convertArray(uint8(bytes(:)), 'System.Byte');
+			stream.Write(ba, int32(0), int32(numel(bytes)));
+			clear streamCleanup;
 		end
+		
+		% 立即释放，避免文件锁死
+		disposeQuietly(archive, fs);
 	end
 
-	function localCloseZip(zos, fos)
-		% 尽量释放句柄，避免文件锁死
-		try
-			if ~isempty(zos)
-				zos.close();
+	function disposeQuietly(varargin)
+		% 尽量释放 .NET 句柄，吞掉异常，避免文件锁死或清理阶段报错。
+		for kk = 1:numel(varargin)
+			try
+				if ~isempty(varargin{kk})
+					varargin{kk}.Dispose();
+				end
+			catch
 			end
-		catch
-		end
-		try
-			if ~isempty(fos)
-				fos.close();
-			end
-		catch
 		end
 	end
 
