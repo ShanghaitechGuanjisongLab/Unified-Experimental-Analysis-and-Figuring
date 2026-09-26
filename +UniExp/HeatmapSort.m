@@ -64,7 +64,9 @@ if isempty(SCDict)
 		Flags.PeakTime,@MaxIndex,...
 		Flags.AbsMax,@(A)max(abs(A),[],2));
 end
-SortCriteria=Flags.Sum;
+SortCriteria=@(A)sum(A,2);
+%这里不能用枚举值，否则如果没指定此参数结果还是变成枚举值，无法运算；也不能事后再套字典，因为可能会被用户指定成自定义函数
+
 SortDirection='descend';
 for V=1:numel(varargin)
 	Arg=varargin{V};

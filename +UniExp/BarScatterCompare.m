@@ -378,7 +378,7 @@ else
 			Texts(P).Position(2)=Texts(P).Position(2)+CompareGroup.PLineOffset(P);
 		end
 		%＊符号需要特殊字体才能正确显示
-		Texts(P).FontName='Microsoft YaHei';
+		Texts(P).FontName='Arial';
 	end
 	PLines=[Lines,Texts];
 	MultiCompare{:,["PLine","PText"]}=PLines;
