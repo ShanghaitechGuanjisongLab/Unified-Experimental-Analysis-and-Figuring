@@ -1,5 +1,5 @@
 %[text] 使用查询表，查询多组归一化回合信号值 (Normalized Trial Signals, NTS)
-%[text] 不同于UniExp.DataSet.QueryNTATS，此函数不检查各组细胞是否相同。如果TrialSignals表中包含NormalizedSignal列，将优先从此列取得数据，否则从TrialSignal列取得数据。NormalizedSignal一般从SampleNormalize方法生成，保证所有回合信号长度相同。
+%[text] 不同于DataSet.QueryNTATS，此函数不检查各组细胞是否相同。此函数从、DataSet.GetSignalColumn获取列名，然后查TrialSignals的该列。
 %[text] 此函数会记住查询结果。如果数据库发生更新，查询结果不会自动更新，请将Memoize设为false，或者清理返回的Memoizer。
 %[text] ## 语法
 %[text] ```matlabCodeExample
@@ -55,12 +55,12 @@
 %[text] 为每个组返回一个查询结果table，包含以下列：
 %[text] - CellUID(:,1)uint16
 %[text] - TrialUID(:,1)uint16
-%[text] - TrialSignal(:,:)，要求每组所有细胞回合信号长度相同，否则出错。第2维是时间。注意，即使数据来自NormalizedSignal列，此返回表仍然将数据列命名为TrialSignal，因此不能通过此列名称判断数据来源。
+%[text] - TrialSignal(:,:)，要求每组所有细胞回合信号长度相同，否则出错。第2维是时间。注意，此返回表总是将数据列命名为TrialSignal，而不一定是DataSet.GetSignalColumn取到的列名，因此不能通过此列名称判断数据来源。
 %[text] - ExtraColumns要求的其它列 \
 %[text] 如果查询表中指定了各组名称（GroupName），将返回(1,1)struct，每个字段对应组名，字段值为该组的查询结果表；否则，返回(:,1)cell，按照GroupIndex顺序排列，元胞内是该组的查询结果表。
 %[text] #### Memoizer
 %[text] (1,1)matlab.lang.MemoizedFunction，记忆对象，可用于控制记住查询结果的刷新。如果Memoize设为false，不会返回此值。使用clearCache方法清理记住的查询结果。此对象可以重复使用，不必每次调用QueryNTS都收集此对象。
-%[text] **See also** [UniExp.Flags](<matlab:edit UniExp.Flags>) [UniExp.DataSet.TableQuery](matlab:MATLAB.Doc('UniExp.DataSet.TableQuery');) [UniExp.F0Normalize](<matlab:doc UniExp.F0Normalize>) [UniExp.DataSet.QueryNTATS](<matlab:doc UniExp.DataSet.QueryNTATS>) [matlab.lang.MemoizedFunction](<matlab:doc matlab.lang.MemoizedFunction>)
+%[text] **See also** [UniExp.Flags](<matlab:edit UniExp.Flags>) [UniExp.DataSet.TableQuery](matlab:MATLAB.Doc('UniExp.DataSet.TableQuery');) [UniExp.F0Normalize](<matlab:doc UniExp.F0Normalize>) [UniExp.DataSet.QueryNTATS](<matlab:doc UniExp.DataSet.QueryNTATS>) [matlab.lang.MemoizedFunction](<matlab:doc matlab.lang.MemoizedFunction>) [UniExp.DataSet.GetSignalColumn](<matlab:doc UniExp.DataSet.GetSignalColumn>)
 function [Query,Memoizer] = QueryNTS(obj,Query,varargin)
 Normalize=UniExp.Flags.No_special_operation;
 F0Samples=[];
