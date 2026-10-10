@@ -147,5 +147,7 @@ classdef Exception<MATLAB.Lang.IEnumerableException
 		Empty_event_log
 		Attempt_to_merge_non_standard_filename
         Arguments_deprecated
+		Lack_dependence
+		Dependence_version_too_low
 	end
 end
