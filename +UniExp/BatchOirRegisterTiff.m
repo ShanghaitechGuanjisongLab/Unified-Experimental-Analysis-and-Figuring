@@ -287,7 +287,7 @@ for T=1:SizeT
 	end
 end
 end
-function [Block,Translation]=SelfRegister(Block,MaxTranslationStep)
+function [Block,Translation]=SelfRegister(Block,MaxTranslationStep,LogFid)
 Translation2=SRImpl(imresize(Block,1/2),MaxTranslationStep/2)*2;
 Block=DoTranslation(Block,Translation2);
 Translation1=SRImpl(Block,1);
