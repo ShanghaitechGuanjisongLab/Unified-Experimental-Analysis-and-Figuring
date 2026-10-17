@@ -216,10 +216,10 @@ for F=1:NumFiles
 				end
 			end
 		else
-			if isempty(options.UseGpu)&&gpuDeviceCount
-				gpuDevice([])
-			else
+			if numel(options.UseGpu)>1
 				gpuDevice(randsample(options.UseGpu,1));
+			else
+				gpuDevice(options.UseGpu);
 			end
 			for B=1:NumBlocks
 				[LevelData{B},LevelTranslations{B}]=LevelRegister(LevelData{B},MaxTranslationStep);
