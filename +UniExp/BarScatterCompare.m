@@ -328,15 +328,11 @@ if NoCompareGroups
 else
 	if Table2D
 		Descriptors=CompareGroup.GroupPair(:,Data.Properties.DimensionNames);
-		Descriptors.Object=array2table(reshape(ErrorBars.Object,size(Data)),VariableNames=Data.Properties.VariableNames);
-		Descriptors.Index=array2table(reshape(ErrorBars.Index,size(Data)),VariableNames=Data.Properties.VariableNames);
-		Descriptors.Properties.RowNames=Data.Properties.RowNames;
-		for P=1:height(Descriptors)
-			Descriptors.ObjectA(P)=Descriptors.Object{Descriptors{P,1}(1),Descriptors{P,2}(1)};
-			Descriptors.ObjectB(P)=Descriptors.Object{Descriptors{P,1}(2),Descriptors{P,2}(2)};
-			Descriptors.IndexA(P)=Descriptors.Index{Descriptors{P,1}(1),Descriptors{P,2}(1)};
-			Descriptors.IndexB(P)=Descriptors.Index{Descriptors{P,1}(2),Descriptors{P,2}(2)};
-		end
+		[~,Index1]=ismember(Descriptors{:,1},Data.Properties.RowNames);
+		[~,Index2]=ismember(Descriptors{:,2},Data.Properties.VariableNames);
+		IndexAB=Index1+(Index2-1)*height(Data);
+		Descriptors{:,["ObjectA","ObjectB"]}=ErrorBars.Object(IndexAB);
+		Descriptors{:,["IndexA","IndexB"]}=ErrorBars.Index(IndexAB);
 	else
 		if HasGroupNames
 			[MultiCompare,~,~,CompareGN]=multcompare(Stats,Display='off');
