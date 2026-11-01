@@ -127,9 +127,9 @@ for Q=1:NumQueries
 		end
 	end
 	NTS=UniExp.F0Normalize(SignalData,Normalize,F0Samples);
-	NanIndex=find(any(isnan(NTS),2));
-	if ~isempty(NanIndex)
-		UniExp.Exception.NaN_appears_after_normalization.Throw(sprintf('%s：归一化数据出现NaN，这通常是因为细胞圈出了配准范围之外，导致基线信号为0。涉事细胞UID：%s',GroupID(Q),join(string(Query{Q}.CellUID(NanIndex)),',')));
+	NanRows=Query{Q}(any(isnan(NTS),2),["CellUID","TrialUID"]);
+	if ~isempty(NanRows)
+		UniExp.Exception.NaN_appears_after_normalization.Throw(sprintf('%s：归一化数据出现NaN，这通常是因为细胞圈出了配准范围之外，导致基线信号为0。涉事细胞：%s；涉事回合：%s',GroupID(Q),join(string(unique(NanRows.CellUID)),','),join(string(unique(NanRows.TrialUID)),',')));
 	end
 	Query{Q}.TrialSignal=NTS;
 	if SignalColumn~="TrialSignal"
