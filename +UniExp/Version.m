@@ -1,7 +1,7 @@
 function V = Version
 persistent pVersion
 if isempty(pVersion)
-	pVersion.Me=matlab.mpm.Version('20.12.0');
+	pVersion.Me=matlab.mpm.Version('20.12.1');
 	if~isempty(metafunction('TextAnalytics.CheckUpdateFromGitHub'))
 		warning('off','TextAnalyticsException:Thread_parallelism_not_supported');
 		TextAnalytics.CheckUpdateFromGitHub('https://github.com/ShanghaitechGuanjisongLab/Unified-Experimental-Analysis-and-Figuring/releases','统一实验分析作图',pVersion.Me);
