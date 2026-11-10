@@ -35,7 +35,7 @@ classdef DataSet<handle&matlab.mixin.Copyable&matlab.mixin.CustomElementSerializ
 		Manipulation table
 
 		%产生此对象的UniExp版本
-		Version=UniExp.Version
+		Version=UniExp.Version().Me
 
 		%其它额外备注信息
 		Note(:,1)string

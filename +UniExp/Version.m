@@ -16,6 +16,7 @@ if isempty(pVersion)
 		],VariableNames=["Namespace","Version","URL"]);
 	pVersion.Dependencies.Version=matlab.mpm.Version(pVersion.Dependencies.Version);
 	pVersion.MATLAB='R2026a';
+	warning off backtrace;
 	for D=1:height(pVersion.Dependencies)
 		Namespace=pVersion.Dependencies.Namespace(D);
 		MpmVersion=Namespace+".Version";

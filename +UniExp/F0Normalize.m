@@ -43,7 +43,14 @@ for T=1:numel(InfIndex)
 	Logical=Insane(Index,:);
 	xq=find(Logical);
 	Logical=~Logical;
-	Data(Index,xq)=interp1(find(Logical),Data(Index,Logical),xq);
+	try
+		Data(Index,xq)=interp1(find(Logical),Data(Index,Logical),xq);
+	catch ME
+		if ME.identifier~="MATLAB:badsubscript"
+			ME.rethrow;
+		end
+		%badsubscript意味着该行全员missing，无需处理，后续累积步骤自然忽略或报错，不会存在一半有数据一半missing的情况
+	end
 end
 end
 
